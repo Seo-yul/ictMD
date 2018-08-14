@@ -20,7 +20,15 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	<beans:bean id="MVCInterceptor"	class="com.sesoc.ictmd.interceptor.MVCInterceptor">
+	</beans:bean>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/이름" />
+			<beans:ref bean="MVCInterceptor" />
+		</interceptor>
+	</interceptors>
 	<context:component-scan base-package="com.sesoc.ictmd" />
 	
 	
