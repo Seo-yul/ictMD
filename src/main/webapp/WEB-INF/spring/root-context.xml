@@ -32,8 +32,7 @@
 	<!-- sqlSession -->
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" name="sqlSessionFactory"
-			ref="sqlSessionFactory" />
+		<constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 
 	<!-- file I/O -->
