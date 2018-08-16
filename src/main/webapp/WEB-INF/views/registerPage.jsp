@@ -4,14 +4,11 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Multi Step Form with Progress Bar using jQuery and CSS3</title>
-  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
-  
-      <link rel="stylesheet" href="./resources/css/registerPage.css">
-
+	<meta charset="UTF-8">
+	<title>ハンサムLoginPage</title>
+ 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+	<link rel="stylesheet" href="./resources/css/registerPage.css">
   
 </head>
 
@@ -29,9 +26,10 @@
   <fieldset>
     <h2 class="fs-title">Create your account</h2>
     <h3 class="fs-subtitle">This is step 1</h3>
-    <input type="text" name="email" placeholder="Email" />
-    <input type="password" name="pass" placeholder="Password" />
-    <input type="password" name="cpass" placeholder="Confirm Password" />
+    <input type="text" name="email" placeholder="Email"/>
+    <input type="password" name="pass" placeholder="Password"/>
+    <input type="password" name="cpass" placeholder="Confirm Password"/>
+    <input type="text" name="userName" placeHolder="User Name"/>
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
   <fieldset>
@@ -54,12 +52,9 @@
     <input type="submit" name="submit" class="submit action-button" value="Submit" />
   </fieldset>
 </form>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-
-  
-
-    <script  src="./resource/js/registerPage.js"></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+    <script src="./resources/js/registerPage.js"></script>
 
 
 

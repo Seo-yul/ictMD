@@ -164,9 +164,8 @@ body {
     
     <footer>
       <div class="right form-actions">
-      	<button id="submit">Login</button>
-        <a href="#login" class="ui-button inactive login">Login</a>
-        <a href="/ictmd" class="ui-button inactive register">Register</a>
+        <a href="/ictmd" class="ui-button inactive login">Login</a>
+        <a href="/ictmd/registerPage" id="goRegister" class="ui-button inactive register">Register</a>
       </div>
     </footer>
   </div>
