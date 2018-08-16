@@ -3,10 +3,11 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!--     <typeAliases> -->
-<!-- 		<typeAlias type="cf.yul.apoint.vo.이름" alias="알리아스" /> -->
-<!-- 	</typeAliases> -->
-<!-- 	<mappers> -->
-<!-- 		<mapper resource="맵퍼.xml" /> -->
-<!-- 	</mappers> -->
+	<typeAliases>
+		<typeAlias type="com.sesoc.ictmd.VO.UserBase" alias="userBase"/>
+		<typeAlias type="com.sesoc.ictmd.VO.UserDetail" alias="userDetail"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="UserMapper.xml"/>
+	</mappers>
 </configuration>
