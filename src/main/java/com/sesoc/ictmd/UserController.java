@@ -24,7 +24,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="loginCheck", method=RequestMethod.POST)
-	public @ResponseBody Integer loginCheck(UserBase ub) {
+	public @ResponseBody Integer loginCheck(UserBase ub, HttpSession hsession) {
 		
 		System.out.println("ub = " + ub);
 		
@@ -32,7 +32,11 @@ public class UserController {
 		
 		UserBase result = uDAO.checkUser(ub);
 		
-		if(result != null) 	return 1;		
+		if(result != null) {
+			hsession.setAttribute("userId", result.getUserId());
+			hsession.setAttribute("userName", result.getUserName());
+			return 1;		
+		}
 		else return 0;
 	}
 	
@@ -41,13 +45,17 @@ public class UserController {
 		return "registerPage";
 	}
 	
+	@RequestMapping(value = "/imsi", method = RequestMethod.GET)
+	public String imsi() {
+		return "imsi";
+	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession hsession) {
+	public @ResponseBody void logout(HttpSession hsession) {
 		
 		hsession.invalidate();
 		
-		//return "home";
-		return "loginPage";
+		return;
 	}
 	
 	

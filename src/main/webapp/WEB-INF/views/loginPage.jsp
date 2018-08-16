@@ -163,7 +163,7 @@ body {
     <div class="login-form">
       <div class="subtitle">로그인하세여!</div>
       <input type="text" id="userId" placeholder="UserID"　required="required" />
-      <input type="text" id="userPwd" placeholder="Password" required="required"/>
+      <input type="password" id="userPwd" placeholder="Password" required="required"/>
     </div>
     
     <footer>
