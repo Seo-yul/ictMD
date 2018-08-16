@@ -1,5 +1,7 @@
 package com.sesoc.ictmd;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,15 @@ public class UserController {
 	@RequestMapping(value = "/registerPage", method = RequestMethod.GET)
 	public String registerPage() {
 		return "registerPage";
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession hsession) {
+		
+		hsession.invalidate();
+		
+		//return "home";
+		return "loginPage";
 	}
 	
 	

@@ -5,6 +5,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.sesoc.ictmd.Interface.UserDAO">
 	
+	<insert id="insertUserBase" parameterType="userBase">
+		insert into userbase (
+			userid,
+			userpwd,
+			username
+		) values (
+			#{userid},
+			#{userpwd},
+			#{username}
+		)
+	</insert>
 	
+	<insert id="insertUserDetail" parameterType="userDetail">
+		insert into userdetail(
+			userid
+			<if test="birth != null">
+			, birth
+			</if>
+			<if test="model != null">
+			, model
+			</if>
+			<if test="favorite != null">
+			, favorite
+			</if>
+		) values (
+			#{userid}
+			<if test="birth != null">
+			, #{birth}
+			</if>
+			<if test="model != null">
+			, #{model}
+			</if>
+			<if test="favorite != null">
+			, #{favorite}
+			</if>
+		)
+	</insert>
+	
+	<select id="checkUser" parameterType="userBase" resultType="userBase">
+		select
+			userid,
+			username
+		from userbase
+		where userid=#{userid} and userpwd=#{userpwd}
+	
+	</select>
 </mapper>
 
