@@ -11,9 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			userpwd,
 			username
 		) values (
-			#{userid},
-			#{userpwd},
-			#{username}
+			#{userId},
+			#{userPwd},
+			#{userName}
 		)
 	</insert>
 	
@@ -45,10 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="checkUser" parameterType="userBase" resultType="userBase">
 		select
-			userid,
-			username
-		from userbase
-		where userid=#{userid} and userpwd=#{userpwd}
+			userId,
+			userName
+		from userBase
+		where userId=#{userId} and userPwd=#{userPwd}
 	
 	</select>
 </mapper>
