@@ -17,7 +17,7 @@
 body {
   font-family: "proxima-nova",sans-serif;
   font-size: 16px;
-  background-color: red;
+  background-image: url("./resources/img/loginSpace.png");
 }
 body a {
   color: inherit;
