@@ -40,7 +40,25 @@ $(".next").click(function(){
 		//this comes from the custom easing plugin
 		easing: 'easeInOutBack'
 	});
+	
+	$("#usercheck").html("");
+	
+	//checkbox에서 check된 값 가지고 오기
+	var check = "";
+	$("input[name=favorite]:checked").each(function(){
+		check += $(this).val() + " ";
+	});
+	var table = "";
+	table += "<tr><td align='left'>EMAIL : </td><td align='left'>" +  $("#email").val() + "</td></tr>";
+	table += "<tr><td align='left'>NAME  : </td><td align='left'>" +  $("#name").val() + "</td></tr>";
+	table += "<tr><td align='left'>BIRTH : </td><td align='left'>" +  $("#birth").val() + "</td></tr>";
+	table += "<tr><td align='left'>FAVORITE : </td><td align='left'>" + check + "</td></tr>";
+	table += "<tr><td align='left'>CAMERA : </td><td align='left'>" +  $("#camera").val() + "</td></tr>";
+	$("#usercheck").html(table);
+	
 });
+
+
 
 $(".previous").click(function(){
 	if(animating) return false;
