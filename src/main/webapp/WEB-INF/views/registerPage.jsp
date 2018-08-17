@@ -16,7 +16,7 @@
 
 <script>
  $(function (){
-	$("#next1").attr("disabled", true); //next버튼 비활성화
+	$("#next1").attr("disabled", "disabled"); //next버튼 비활성화
 	$("#email").keyup(emailcheck);
 	$("#pass").keyup(passcheck);
 	$("#confirmPassChk").keyup(confirmPassChk);
@@ -35,10 +35,10 @@
 				success:function(data){
 					if(data){
 						$("#emailcheck").text("중복된 email입니다.");
-						$("#next1").attr("disabled", true);
+						$("#next1").attr("disabled", "disabled");
 					}else{
 						$("#emailcheck").text("사용가능한 email입니다.");
-						$("#next1").attr("disabled", false);
+						$("#next1").removeAttr("disabled");
 					}
 				}
 			});

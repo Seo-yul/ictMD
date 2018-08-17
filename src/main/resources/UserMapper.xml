@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where userId=#{userId} and userPwd=#{userPwd}
 	</select>
 	
-		<select id="checkEmail" parameterType="userBase" resultType="userBase">
+	<select id="checkEmail" parameterType="userBase" resultType="userBase">
 		select
 			userId
 		from userBase
