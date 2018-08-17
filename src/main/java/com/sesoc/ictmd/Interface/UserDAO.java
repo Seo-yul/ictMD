@@ -11,4 +11,6 @@ public interface UserDAO {
 	
 	public UserBase checkUser(UserBase ub);
 	
+	public UserBase checkEmail(UserBase ub);
+	
 }

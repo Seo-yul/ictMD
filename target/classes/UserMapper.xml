@@ -49,7 +49,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			userName
 		from userBase
 		where userId=#{userId} and userPwd=#{userPwd}
+<<<<<<< HEAD
 	
+=======
+	</select>
+	
+		<select id="checkEmail" parameterType="userBase" resultType="userBase">
+		select
+			userId
+		from userBase
+		where userId=#{userId}
+>>>>>>> a7d2d2dd766a9c00c9e00baaa430e124d772f6a7
 	</select>
 </mapper>
 
