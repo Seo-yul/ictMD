@@ -45,6 +45,11 @@ public class UserController {
 		return "registerPage";
 	}
 	
+	@RequestMapping(value = "/secesionPage", method = RequestMethod.GET)
+	public String secesionPage() {
+		return "secesionPage";
+	}
+	
 	@RequestMapping(value = "/imsi", method = RequestMethod.GET)
 	public String imsi() {
 		return "imsi";
@@ -56,6 +61,24 @@ public class UserController {
 		hsession.invalidate();
 		
 		return;
+	}
+	
+	@RequestMapping(value = "/secesionCheck", method = RequestMethod.POST)
+	public @ResponseBody Integer secessionCheck(HttpSession hsession, UserBase ub) {
+
+		System.out.println("넘어온값 : " + ub);
+		UserDAO uDAO = session.getMapper(UserDAO.class);
+		
+		UserBase result = uDAO.checkUser(ub);
+		if(result != null) {
+			uDAO.secesionUser(ub);
+			hsession.invalidate();
+			return 1;
+		} else {
+			return 0;
+			
+		}
+		
 	}
 	
 	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)

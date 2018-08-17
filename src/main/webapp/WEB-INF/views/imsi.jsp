@@ -23,6 +23,33 @@
 		$("#fixUser").click(function(){
 			alert("아직 안만듬 ㅋ");
 		});
+		
+		$("#secession").click(function(){
+			var result1 = confirm("정말 회원탈퇴를 하시겠습니까?");
+			if(result1){
+				var userPwd = prompt("탈퇴절차를 위하여 귀하의 비밀번호 입력해주세요");
+				$.ajax({
+					url:"secesionCheck",
+					type:"post",
+					data:{
+						userPwd:userPwd
+					},
+					success:function(data){
+						if(data == 1){
+							alert("슬프지만 이젠 안녕....");
+							location.href="/ictmd"
+						} else {
+							alert("응 너 비번틀림 ㅅㄱ");
+							return;
+						}
+					}
+				});
+				
+			} else{
+				alert("탈퇴취소했네? ㄳㄳ");
+				return;
+			}
+		})
 	});
 </script>
 </head>
@@ -30,9 +57,12 @@
 <h1>뀨뀨 로그인성공 ㅊㅋㅊㅋ</h1>
 <h1>${sessionScope.userId }님 안녕?</h1>
 <h1>${sessionScope.userName }님 ㅎㅇㅎㅇ</h1>
-<a id="logout">로그인하고싶으면 이거눌러 ㅋ</a>
+<a id="logout">로그아웃하고싶으면 이거눌러 ㅋ</a>
 <br>
 <br>
 <a id="fixUser">아니면 회원정보수정하고싶은 이거 누르고 ㅋㅋ</a>
+<br>
+<br>
+<a href="secesionPage">회원탈퇴</a>
 </body>
 </html>

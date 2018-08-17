@@ -13,4 +13,6 @@ public interface UserDAO {
 	
 	public UserBase checkEmail(UserBase ub);
 	
+	public int secesionUser(UserBase ub);
+	
 }

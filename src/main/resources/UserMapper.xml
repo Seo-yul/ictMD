@@ -57,5 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from userBase
 		where userId=#{userId}
 	</select>
+	
+	<delete id="secesionUser" parameterType="userBase">
+		delete from userBase where userId=#{userId}
+	</delete>
 </mapper>
 
