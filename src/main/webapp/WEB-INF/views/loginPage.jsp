@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Bananaplate Login Panel</title>
+  <title>ハンサムLoginPage</title>
   
   <!-- jquery cdn -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -58,6 +58,10 @@ header:after, .login-form:after, footer:after {
   margin-left: -181px;
   top: 50%;
   left: 50%;
+}
+
+#goLogin:hover{
+	cursor:pointer;
 }
 
 header {
@@ -159,12 +163,12 @@ body {
     <div class="login-form">
       <div class="subtitle">로그인하세여!</div>
       <input type="text" id="userId" placeholder="UserID"　required="required" />
-      <input type="text" id="userPwd" placeholder="Password" required="required"/>
+      <input type="password" id="userPwd" placeholder="Password" required="required"/>
     </div>
     
     <footer>
       <div class="right form-actions">
-        <a href="/ictmd" class="ui-button inactive login">Login</a>
+        <a id="goLogin" class="ui-button inactive login">Login</a>
         <a href="/ictmd/registerPage" id="goRegister" class="ui-button inactive register">Register</a>
       </div>
     </footer>
