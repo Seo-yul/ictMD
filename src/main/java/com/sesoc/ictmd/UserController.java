@@ -45,6 +45,14 @@ public class UserController {
 		return "registerPage";
 	}
 	
+	@RequestMapping(value = "/fixPage", method = RequestMethod.GET)
+	public String fixPage() {
+		
+		
+		
+		return "fixPage";
+	}
+	
 	@RequestMapping(value = "/secesionPage", method = RequestMethod.GET)
 	public String secesionPage() {
 		return "secesionPage";
@@ -93,6 +101,24 @@ public class UserController {
 			return true;
 		}
 		return false;
+	}
+	
+	@RequestMapping(value = "/userCheck", method = RequestMethod.GET)
+	public @ResponseBody Boolean userCheck(HttpSession hsession, UserBase ub) {
+		
+		UserDAO uDAO = session.getMapper(UserDAO.class);
+
+		ub.setUserId((String)hsession.getAttribute("userId"));
+		System.out.println(ub);
+		
+		UserBase result = uDAO.checkUser(ub);
+		if(result == null) {
+			return false;
+		} else {
+			return true;
+		}
+		
+		
 	}
 	
 	

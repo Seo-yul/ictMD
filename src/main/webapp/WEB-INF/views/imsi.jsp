@@ -60,7 +60,7 @@
 <a id="logout">로그아웃하고싶으면 이거눌러 ㅋ</a>
 <br>
 <br>
-<a id="fixUser">아니면 회원정보수정하고싶은 이거 누르고 ㅋㅋ</a>
+<a href="fixPage">아니면 회원정보수정하고싶은 이거 누르고 ㅋㅋ</a>
 <br>
 <br>
 <a href="secesionPage">회원탈퇴</a>
