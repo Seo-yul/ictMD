@@ -16,6 +16,7 @@
 
 <script>
  $(function (){
+	$("#next1").attr("disabled", true); //next버튼 비활성화
 	$("#email").keyup(emailcheck);
 	$("#pass").keyup(passcheck);
 	$("#confirmPassChk").keyup(confirmPassChk);
@@ -25,22 +26,23 @@
 			$("#emailcheck").text("골뱅이쳐라");
 		}else{
 			$("#emailcheck").text("");
-		}
-		
-		$.ajax({
-			type : "get",
-			url : "emailCheck",
-			data : {
-				userid : email
-			},
-			success:function(data){
-				if(data){
-					$("#emailcheck").text("중복된 email입니다.");
-				}else{
-					$("#emailcheck").text("사용가능한 email입니다.");
+			$.ajax({
+				type : "get",
+				url : "emailCheck",
+				data : {
+					userId : email
+				},
+				success:function(data){
+					if(data){
+						$("#emailcheck").text("중복된 email입니다.");
+						$("#next1").attr("disabled", true);
+					}else{
+						$("#emailcheck").text("사용가능한 email입니다.");
+						$("#next1").attr("disabled", false);
+					}
 				}
-			}
-		});
+			});
+		}
 	};
 	
 	function passcheck(){
@@ -107,7 +109,7 @@
 			<p id="confirmResult" style="font-size: 10px; color: red;" align="left"></p>
 			<br> <input type="text" id="name" name="userName"
 				placeHolder="User Name" /><br> <input type="button" id="next1"
-				name="next" class="next action-button" value="Next" /><br>
+				name="next" class="next action-button" value="Next"  disabled=""/><br>
 		</fieldset>
 		<fieldset>
 

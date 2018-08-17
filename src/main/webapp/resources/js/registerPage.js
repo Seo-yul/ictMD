@@ -56,6 +56,10 @@ $(".next").click(function(){
 	table += "<tr><td align='left'>CAMERA : </td><td align='left'>" +  $("#camera").val() + "</td></tr>";
 	$("#usercheck").html(table);
 	
+	if($("#next1").getAttribute("disabled") == true){
+		alert("????????????????");
+	}
+	
 });
 
 

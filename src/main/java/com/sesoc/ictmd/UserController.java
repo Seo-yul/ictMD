@@ -58,6 +58,20 @@ public class UserController {
 		return;
 	}
 	
+	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
+	public @ResponseBody Boolean emailCheck(UserBase userbase) {
+		System.out.println("ajaxㄴㅁ어온값:"+userbase);
+		UserDAO dao = session.getMapper(UserDAO.class);
+		
+		UserBase data = dao.checkEmail(userbase);
+		System.out.println("db갔다온값 : "  + data);
+		
+		if(data != null) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	
 	
