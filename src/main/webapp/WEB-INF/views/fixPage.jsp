@@ -32,6 +32,8 @@
 			success:function(data){
 				if(data){
 					currentCheck = true;
+					$("#curcheck").text("확인완료");
+
 				} else{
 					currentCheck = false;
 					$("#curcheck").text("현재 비번이랑 다름 ㅇㅇ");
@@ -45,7 +47,7 @@
 	
 	$("#newPwd").keyup(function(){
 		var newPwd = $("#newPwd").val();
-		if(newPwd.length < 3 || newPwd.length > 16){
+		if((newPwd.length < 3 || newPwd.length > 16) && newPwd.length != 0){
 			$("#passcheck").text("Password의 길이는 3자~16자로 설정해주셈!!");
 			newCheck = false;
 		} else if(newPwd == $("#currentPwd").val()) {
@@ -59,7 +61,7 @@
 	
 	$("#confirmNewPwd").keyup(function(){
 		var confirmNewPwd = $("#confirmNewPwd").val();
-		if(newPwd.length < 3 || newPwd.length > 16){
+		if((confirmNewPwd.length < 3 || confirmNewPwd.length > 16) && confirmNewPwd.length != 0){
 			$("#passcheck").text("Password의 길이는 3자~16자로 설정해주셈!!");
 			confirmNewCheck = false;
 		} else if(confirmNewPwd != $("#newPwd").val()) {
@@ -71,9 +73,50 @@
 		}
 	});
 	
+	setInterval(function(){
 	if(confirmNewCheck && newCheck && currentCheck){
 		$("#next1").removeAttr("disabled");
 	}
+		
+	}, 1000);
+	
+	$("#goFix").on('click',function(){
+		var newPwd = $("#newPwd").val();
+		var userName = $("#name").val();
+		var birth = $("#birth").val();
+		var check = "";
+		$("input[name=favorite]:checked").each(function(){
+			check += $(this).val() + " ";
+		});
+		var camera = $("#camera").val();
+		
+		$.ajax({
+			url : "fixUserBase",
+			type : "post",
+			data : {
+				userPwd : newPwd,
+				userName : userName
+			}
+		});
+		
+		$.ajax({
+			url : "fixUserDetail",
+			type : "post",
+			data : {
+				birth : birth,
+				model : camera,
+				favorite : check
+			},
+			success:function(data){
+				location.href="/ictmd/imsi";
+			}
+		});
+		
+
+		
+		
+		
+	})
 	
 	
  });
@@ -156,7 +199,7 @@
 			<!--  js에서 가지고 옴 -->
 			</table>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
-			<input type="submit" name="submit" class="submit action-button" value="Submit" />
+			<input type="button" id="goFix" class="submit action-button" value="Submit" />
 		</fieldset>
 	</form>
 	<script	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

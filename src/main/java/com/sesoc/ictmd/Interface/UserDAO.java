@@ -15,4 +15,8 @@ public interface UserDAO {
 	
 	public int secesionUser(UserBase ub);
 	
+	public int fixUserBase(UserBase ub);
+
+	public int fixUserDetail(UserDetail ud);
+	
 }

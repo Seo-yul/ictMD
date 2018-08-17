@@ -61,5 +61,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="secesionUser" parameterType="userBase">
 		delete from userBase where userId=#{userId}
 	</delete>
+	
+	<update id="fixUserBase" parameterType="userBase">
+			update userbase set userId = #{userId}
+			<if test="userPwd != null">
+				, userPwd=#{userPwd}
+			</if> 
+			<if test="userName != null">
+				, userName=#{userName}
+			</if>
+			where userId = #{userId}
+	</update>
+	
+	<update id="fixUserDetail" parameterType="userDetail">
+		update userdetail set userId = #{userId}
+			<if test="birth != null">
+				, birth=#{birth}
+			</if> 
+			<if test="favorite != null">
+				, favorite=#{favorite}
+			</if>
+			<if test="model != null">
+				, model=#{model}
+			</if>
+			where userId = #{userId}
+	</update>
 </mapper>
 

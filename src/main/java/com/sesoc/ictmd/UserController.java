@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sesoc.ictmd.Interface.UserDAO;
 import com.sesoc.ictmd.VO.UserBase;
+import com.sesoc.ictmd.VO.UserDetail;
 
 @Controller
 public class UserController {
@@ -47,9 +48,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/fixPage", method = RequestMethod.GET)
 	public String fixPage() {
-		
-		
-		
 		return "fixPage";
 	}
 	
@@ -89,6 +87,28 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value = "/fixUserBase", method = RequestMethod.POST)
+	public @ResponseBody void fixUserBase(HttpSession hsession, UserBase ub) {
+		
+		System.out.println("넘어온값 : " + ub);
+		UserDAO uDAO = session.getMapper(UserDAO.class);
+		ub.setUserId((String)hsession.getAttribute("userId"));
+		uDAO.fixUserBase(ub);
+		
+		return;
+	}
+	
+	@RequestMapping(value = "/fixUserDetail", method = RequestMethod.POST)
+	public @ResponseBody void fixUserDetail(HttpSession hsession, UserDetail ud) {
+		
+		System.out.println("넘어온값 : " + ud);
+		UserDAO uDAO = session.getMapper(UserDAO.class);
+		ud.setUserId((String)hsession.getAttribute("userId"));
+		uDAO.fixUserDetail(ud);
+		
+		return;
+	}
+	
 	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
 	public @ResponseBody Boolean emailCheck(UserBase userbase) {
 		System.out.println("ajaxㄴㅁ어온값:"+userbase);
@@ -103,7 +123,7 @@ public class UserController {
 		return false;
 	}
 	
-	@RequestMapping(value = "/userCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/userCheck", method = RequestMethod.POST)
 	public @ResponseBody Boolean userCheck(HttpSession hsession, UserBase ub) {
 		
 		UserDAO uDAO = session.getMapper(UserDAO.class);
