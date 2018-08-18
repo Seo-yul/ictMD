@@ -1,25 +1,26 @@
+var arr;
 $(function() {
 	$("#button").on("click", function() {
-		var str = $("#text").val();
-		var strarr = str.split(',');
+		var tagstr = $("#text").val();
+		var tags = tagstr.split(',');
 		
 		jQuery.ajaxSettings.traditional = true;
 
 		$.ajax({
 			data : {
-				tags : strarr
+				tags : tags
 			}
 			, method : "POST"
-			, url : "list"
+			, url : "search"
 			, success : function(resp) {
-				$("img").remove();
-				$("br").remove();
-				var a = 0;
-				for (var i in resp) {
-					var url = resp[i];
-					$("div").append("<img src='" + url + "' style='width:300px;height:300px;'>");
-					if (++a%3 == 0) {
-						$("div").append("<br>");
+				$("#result >").remove();
+				var list = resp["list"];
+				for (var i in list) {
+					var id = list[i].id;
+					var url = list[i].squareImageUrl;
+					$("#result").append("<img alt='" + id + "' src='" + url + "' style='width:300px;height:300px;'>");
+					if ((i+1)%3 == 0) {
+						$("#result").append("<br>");
 					}
 				}
 			}
