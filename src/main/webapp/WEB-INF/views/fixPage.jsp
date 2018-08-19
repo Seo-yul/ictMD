@@ -108,6 +108,7 @@
 				favorite : check
 			},
 			success:function(data){
+				alert("수정완료!!");
 				location.href="/ictmd/imsi";
 			}
 		});
