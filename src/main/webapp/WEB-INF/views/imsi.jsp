@@ -38,7 +38,7 @@
 						location.href = "/ictmd"
 					}
 				});
-			}
+			});
 	
 			$("#fixUser").click(function() {
 				alert("아직 안만듬 ㅋ");
@@ -68,10 +68,9 @@
 					alert("탈퇴취소했네? ㄳㄳ");
 					return;
 				}
-			});
+			})
 		});
-	});
-</script>
+	</script>
 </head>
 <body>
 
