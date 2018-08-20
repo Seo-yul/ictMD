@@ -74,21 +74,20 @@
 	});
 	
 	setInterval(function(){
-	if(confirmNewCheck && newCheck && currentCheck){
-		$("#next1").removeAttr("disabled");
-	}
-		
+		if(confirmNewCheck && newCheck && currentCheck){
+			$("#next1").removeAttr("disabled");
+		}
 	}, 1000);
 	
 	$("#goFix").on('click',function(){
 		var newPwd = $("#newPwd").val();
-		var userName = $("#name").val();
+		var userName = $("#userName").val();
 		var birth = $("#birth").val();
 		var check = "";
 		$("input[name=favorite]:checked").each(function(){
 			check += $(this).val() + " ";
 		});
-		var camera = $("#camera").val();
+		var camera = $("#model").val();
 		
 		$.ajax({
 			url : "fixUserBase",
@@ -112,25 +111,12 @@
 				location.href="/ictmd/imsi";
 			}
 		});
-		
-
-		
-		
-		
 	})
-	
-	
- });
- 
- 
-
- 
- </script>
-
+});
+</script>
 </head>
 
 <body>
-
 	<!-- multistep form -->
 	<form id="msform">
 		<!-- progressbar -->
@@ -145,6 +131,7 @@
 			<h3>변경하실 부분만 입력해주세요</h3>
 			<br>
 			<p align="left">Email : ${sessionScope.userId }</h3>
+			<input type="hidden" id="userId" value="${sessionScope.userId }" />
 			<br> <input type="password" id="currentPwd" name="cpass" placeholder="Current Password" />
 			<p id="curcheck" style="font-size: 10px; color: red;" align="left"></p>
 			<br> <input type="password" id="newPwd" name="npass" placeholder="New Password" />

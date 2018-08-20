@@ -4,7 +4,6 @@ import com.sesoc.ictmd.VO.UserBase;
 import com.sesoc.ictmd.VO.UserDetail;
 
 public interface UserDAO {
-
 	public int insertUserBase(UserBase ub);
 	
 	public int insertUserDetail(UserDetail ud);
@@ -18,5 +17,4 @@ public interface UserDAO {
 	public int fixUserBase(UserBase ub);
 
 	public int fixUserDetail(UserDetail ud);
-	
 }

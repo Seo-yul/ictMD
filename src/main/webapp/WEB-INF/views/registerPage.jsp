@@ -3,6 +3,7 @@
 <html>
 
 <head>
+
 <meta charset="UTF-8">
 <title>ハンサムLoginPage</title>
 
@@ -57,11 +58,23 @@
 			
 			if(confirmPassChk != userPwd){
 				$("#passcheck").text("password를 정확히 입력하세요");
+
 			}else{
 				$("#passcheck").text("");
-				$("#confirmResult").text("");
+				
+				var confirmPassChk=$("#confirmPassChk").val();
+				console.log("password : " + userPwd);
+				console.log("컨펌 : " + $("#confirmPassChk").val());
+				
+				if(confirmPassChk != userPwd){
+					$("#passcheck").text("password를 정확히 입력하세요");
+				}else{
+					$("#passcheck").text("");
+					$("#confirmResult").text("");
+				}
 			}
 		}
+
 	}
 	
 	function confirmPassChk(){
@@ -115,10 +128,10 @@
 
  </script>
 
+
 </head>
 
 <body>
-
 	<!-- multistep form -->
 	<form id="msform" action="submit" method="post">
 		<!-- progressbar -->
@@ -132,23 +145,27 @@
 			<h2 class="fs-title">기본정보 입력</h2>
 			<input type="text" id="userId" name="userId" placeholder="Email" />
 			<p id="emailcheck" style="font-size: 10px; color: red;" align="left"></p>
-			
 			<br> <input type="password" id="userPwd" name="userPwd" placeholder="Password" />
 			<p id="passcheck" style="font-size: 10px; color: red;" align="left"></p>
-			<br> <input type="password" id="confirmPassChk" name="cpass"	placeholder="Confirm Password" />
+			<br>
+			<input type="password" id="confirmPassChk" name="cpass" placeholder="Confirm Password" />
 			<p id="confirmResult" style="font-size: 10px; color: red;" align="left"></p>
+
 			<br> <input type="text" id="userName" name="userName" placeHolder="User Name" /><br> 
 			<input type="button" id="next1"	name="next" class="next action-button" value="Next"  disabled=""/><br>
 		</fieldset>
 		<fieldset>
-
 			<h2 class="fs-title">상세정보 입력</h2>
 			<table style="width: 100%">
 				<tr>
-					<td colspan="3"><input type="date" id="birth" name="birth" /></td>
+					<td colspan="3">
+						<input type="date" id="birth" name="birth" />
+					</td>
 				</tr>
 				<tr>
-					<td colspan="3"><p style="color: grey;" align="left">[Favorite]</p></td>
+					<td colspan="3">
+						<p style="color: grey;" align="left">[Favorite]</p>
+					</td>
 				</tr>
 				<tr style="height: 50px;">
 					<td>
@@ -178,16 +195,15 @@
 		</fieldset>
 		<fieldset>
 			<h2 class="fs-title">입력정보확인</h2>
-			<table id="usercheck" align="left" style='width:100%'>
-			<!--  js에서 가지고 옴 -->
+			<table id="usercheck" align="left" style='width: 100%'>
+				<!--  js에서 가지고 옴 -->
 			</table>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" id="submit" name="submit" class="submit action-button" value="Submit" />
 		</fieldset>
 	</form>
-	<script	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
 	<script src="./resources/js/registerPage.js"></script>
-
 </body>
 </html>
