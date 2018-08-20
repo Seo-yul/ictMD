@@ -35,13 +35,13 @@
 					type : "get",
 					success : function(data) {
 						alert("bye~");
-						location.href = "/ictmd"
+						location.href = "/ictmd";
 					}
 				});
 			});
 	
-			$("#fixUser").click(function() {
-				alert("아직 안만듬 ㅋ");
+			$("#goWeather").click(function() {
+				location.href = "/ictmd/goWeather";
 			});
 	
 			$("#secession").click(function() {

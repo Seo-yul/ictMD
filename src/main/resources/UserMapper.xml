@@ -5,10 +5,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.sesoc.ictmd.Interface.UserDAO">
 	<insert id="insertUserBase" parameterType="userBase">
-		insert into userbase (
-			userid,
-			userpwd,
-			username
+		insert into userBase (
+			userId,
+			userPwd,
+			userName
 		) values (
 			#{userId},
 			#{userPwd},
@@ -17,8 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<insert id="insertUserDetail" parameterType="userDetail">
-		insert into userdetail(
-			userid
+		insert into userDetail(
+			userId
 			<if test="birth != null">
 			, birth
 			</if>
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<update id="fixUserBase" parameterType="userBase">
-			update userbase set userId = #{userId}
+			update userBase set userId = #{userId}
 			<if test="userPwd != null">
 				, userPwd=#{userPwd}
 			</if> 
@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="fixUserDetail" parameterType="userDetail">
-		update userdetail set userId = #{userId}
+		update userDetail set userId = #{userId}
 			<if test="birth != null">
 				, birth=#{birth}
 			</if> 

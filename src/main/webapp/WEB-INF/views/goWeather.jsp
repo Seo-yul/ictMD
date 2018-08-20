@@ -34,13 +34,24 @@
 				}
 			});
 			
-			var foreUrl = "api.openweathermap.org/data/2.5/forecast?q="+cityName+"&appid=8d9df8e528baa07108cb74b3776716c3";
+			var foreUrl = "http:////api.openweathermap.org/data/2.5/forecast?q="+cityName+"&mode=xml&appid=8d9df8e528baa07108cb74b3776716c3";
 			$.ajax({
 				url:foreUrl,
 				type:"get",
-				dataType:"data/list.xml",
+				dataType:"xml",
 				success:function(data){
+					console.log("지금부터는 앞으로의예보");
 					console.log(data);
+					$(data).find("time").each(function(){
+						var s = "";
+						s += $(this).attr("from")+"의 예상강수량 : ";
+						if($(this).find("precipitation").attr("value") != null)
+						s += $(this).find("precipitation").attr("value") + "mm";
+						else
+						s += "0mm";
+						console.log(s);
+						//console.log($(this).find("precipitation").attr("value"));
+					});
 				}
 			});
 		});
