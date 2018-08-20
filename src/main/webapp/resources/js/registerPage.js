@@ -15,7 +15,7 @@ $(".next").click(function(){
 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 	
 	//show the next fieldset
-	next_fs.show(); 
+	next_fs.show();
 	//hide the current fieldset with style
 	current_fs.animate({opacity: 0}, {
 		step: function(now, mx) {
@@ -29,7 +29,7 @@ $(".next").click(function(){
 			current_fs.css({
         'transform': 'scale('+scale+')',
         'position': 'absolute'
-      });
+    });
 			next_fs.css({'left': left, 'opacity': opacity});
 		}, 
 		duration: 800, 
@@ -56,9 +56,6 @@ $(".next").click(function(){
 	table += "<tr><td align='left'>FAVORITE : </td><td align='left'>" + check + "</td></tr>";
 	table += "<tr><td align='left'>CAMERA : </td><td align='left'>" +  $("#model").val() + "</td></tr>";
 	$("#usercheck").html(table);
-	
-	
-	
 });
 
 
