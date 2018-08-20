@@ -183,6 +183,7 @@
 		</fieldset>
 		<fieldset>
 			<h2 class="fs-title">입력정보확인</h2>
+			<input type="hidden" id="userId" value="${sessionScope.userId }"/>
 			<table id="usercheck" align="left" style='width:100%'>
 			<!--  js에서 가지고 옴 -->
 			</table>
