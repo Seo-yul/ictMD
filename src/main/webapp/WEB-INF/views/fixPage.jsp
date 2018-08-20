@@ -152,7 +152,7 @@
 			<br> <input type="password" id="confirmNewPwd" name="cnpass"	placeholder="Confirm New Password" />
 			<p id="confirmResult" style="font-size: 10px; color: red;" align="left"></p>
 			<br> 
-			<input type="text" id="name" name="userName" placeHolder="User Name" />
+			<input type="text" id="userName" name="userName" placeHolder="User Name" />
 			<br> 
 			<input type="button" id="next1" name="next" class="next action-button" value="Next"  disabled=""/><br>
 		</fieldset>
@@ -187,7 +187,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-					<input type="text" id="camera" name="camera" placeholder="Camera Model" /></td>
+					<input type="text" id="model" name="camera" placeholder="Camera Model" /></td>
 				</tr>
 			</table>
 			<input type="button" name="previous" class="previous action-button"
@@ -196,6 +196,7 @@
 		</fieldset>
 		<fieldset>
 			<h2 class="fs-title">입력정보확인</h2>
+			<input type="hidden" id="userId" value="${sessionScope.userId }"/>
 			<table id="usercheck" align="left" style='width:100%'>
 			<!--  js에서 가지고 옴 -->
 			</table>

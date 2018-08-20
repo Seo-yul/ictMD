@@ -30,7 +30,8 @@
 					var sunsetTime = new Date(sunset*1000).toLocaleTimeString();
 					console.log("일출시간 : " + sunriseTime);
 					console.log("일몰시간 : " + sunsetTime);
-					console.log("흐림정도 : " + data.clouds.all + "%")
+					console.log("흐림정도 : " + data.clouds.all + "%");
+					console.log("강수량? : " + data.rain[0].3h);
 				}
 			});
 			
