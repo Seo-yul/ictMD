@@ -31,10 +31,18 @@
 					console.log("일출시간 : " + sunriseTime);
 					console.log("일몰시간 : " + sunsetTime);
 					console.log("흐림정도 : " + data.clouds.all + "%");
-					console.log("강수량? : " + data.rain[0].3h);
 				}
 			});
 			
+			var foreUrl = "api.openweathermap.org/data/2.5/forecast?q="+cityName+"&appid=8d9df8e528baa07108cb74b3776716c3";
+			$.ajax({
+				url:foreUrl,
+				type:"get",
+				dataType:"data/list.xml",
+				success:function(data){
+					console.log(data);
+				}
+			});
 		});
 	});
 </script>

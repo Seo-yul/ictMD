@@ -4,7 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sesoc.ictmd.Interface.UserDAO">
-	
 	<insert id="insertUserBase" parameterType="userBase">
 		insert into userbase (
 			userid,
@@ -86,5 +85,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			where userId = #{userId}
 	</update>
+<<<<<<< HEAD
 </mapper>
 
+=======
+</mapper>
+>>>>>>> e74eb05533b7faa307bd438774a839207211a672
