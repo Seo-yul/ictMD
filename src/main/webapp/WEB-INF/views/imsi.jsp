@@ -20,8 +20,8 @@
 			});
 		});
 		
-		$("#fixUser").click(function(){
-			alert("아직 안만듬 ㅋ");
+		$("#goWeather").click(function(){
+			location.href="/ictmd/goWeather"
 		});
 		
 		$("#secession").click(function(){
@@ -57,6 +57,9 @@
 <h1>뀨뀨 로그인성공 ㅊㅋㅊㅋ</h1>
 <h1>${sessionScope.userId }님 안녕?</h1>
 <h1>${sessionScope.userName }님 ㅎㅇㅎㅇ</h1>
+<a id="goWeather">날씨검색하러가자 ㅎㅎ</a>
+<br>
+<br>
 <a id="logout">로그아웃하고싶으면 이거눌러 ㅋ</a>
 <br>
 <br>
