@@ -14,6 +14,6 @@
 	<h1>검색</h1>
 	<input id="text" type="text">
 	<input id="button" type="button" value="Search">
-	<div id="result"></div>
+	<div id="list"></div>
 </body>
 </html>
