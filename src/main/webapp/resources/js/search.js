@@ -2,6 +2,10 @@ var arr;
 $(function() {
 	$("#button").on("click", function() {
 		var tagstr = $("#text").val();
+		if (tagstr.length <= 0) {
+			alert("!");
+			return;
+		}
 		var tags = tagstr.split(',');
 		
 		jQuery.ajaxSettings.traditional = true;
@@ -28,18 +32,29 @@ $(function() {
 					}
 				}
 				$("#list").on("click", function(e) {
-					var num = e.target.getAttribute("alt");
-					$.ajax({
-						  data : {
-							id : arr[num]
-						}
-						, method : "POST"
-						, url : "detail"
-						, success : function(resp) {
-							var photo = resp["photo"];
-							console.log(JSON.stringify(photo));
-						}
-					});
+					if ($(e.target).is("img")) {
+						var num = e.target.getAttribute("alt");
+						$.ajax({
+							  data : {
+								id : arr[num]
+							}
+							, method : "POST"
+							, url : "detail"
+							, success : function(resp) {
+								var photo = resp["photo"];
+								/*console.log(JSON.stringify(photo));*/
+								$("body").append("<div id='overlay_t'></div>");
+								$("body").append("<div id='popup_layer'></div>");
+								$("#popup_layer").css("top", Math.max(0, $(window).scrollTop() + 60) + "px");
+								$("#popup_layer").append("<img src='" + photo["url"] + "' align='center'>");
+								$("#overlay_t").on("click", function() {
+									$("#popup_layer").remove();
+									$("#overlay_t").remove();
+								})
+							}
+						});
+					}
+					
 				});
 			}
 		});

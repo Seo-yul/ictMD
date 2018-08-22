@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Search</title>
-	<style type="text/css"></style>
+	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
 	<script src="./resources/js/jquery-3.3.1.min.js"></script>
 	<script src="./resources/js/search.js"></script>
 </head>

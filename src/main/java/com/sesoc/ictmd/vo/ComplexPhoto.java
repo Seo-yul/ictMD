@@ -2,6 +2,7 @@ package com.sesoc.ictmd.vo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import com.flickr4java.flickr.photos.Exif;
 
@@ -11,14 +12,14 @@ public class ComplexPhoto {
 	private ArrayList<String> tags;
 	private float latitude;
 	private float longitude;
-	private Collection<Exif> exifs;
+	private HashMap<String, String> exifs;
 	
 	public ComplexPhoto() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ComplexPhoto(String id, String url, ArrayList<String> tags, float latitude, float longitude,
-			Collection<Exif> exifs) {
+			HashMap<String, String> exifs) {
 		super();
 		this.id = id;
 		this.url = url;
@@ -68,11 +69,11 @@ public class ComplexPhoto {
 		this.longitude = longitude;
 	}
 
-	public Collection<Exif> getExifs() {
+	public HashMap<String, String> getExifs() {
 		return exifs;
 	}
 
-	public void setExifs(Collection<Exif> exifs) {
+	public void setExifs(HashMap<String, String> exifs) {
 		this.exifs = exifs;
 	}
 

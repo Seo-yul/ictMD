@@ -23,11 +23,13 @@ public class SearchController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	// 검색 페이지로 연결해주는 메소드.
 	@RequestMapping(value = "/toSearch", method = RequestMethod.GET)
 	public String toSearch() {
 		return "search";
 	}
 	
+	// 검색을 요청했을 경우 호출되는 메소드.
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> list(String[] tags) {
 		api = new SearchAPI();
@@ -41,6 +43,7 @@ public class SearchController {
 		return result;
 	}
 	
+	// 특정 사진에 대해 상세 정보를 요청했을 경우 호출되는 메소드.
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> detail(String id) {
 		api = new SearchAPI();
