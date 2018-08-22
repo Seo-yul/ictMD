@@ -26,6 +26,10 @@
 			location.href = "/ictmd/goWeather";
 		});
 
+		$("#goShopping").click(function() {
+			location.href = "/ictmd/goShopping";
+		});
+
 		$("#secesion").click(function() {
 			var result1 = confirm("정말 회원탈퇴를 하시겠습니까?");
 			if (result1) {
@@ -60,6 +64,9 @@
 	<h1>${sessionScope.userId }님안녕?</h1>
 	<h1>${sessionScope.userName }님ㅎㅇㅎㅇ</h1>
 	<a id="goWeather">날씨검색하러가자 ㅎㅎ</a>
+	<br>
+	<br>
+	<a id="goShopping">쇼핑하러갈랭?? ㅋㅋ</a>
 	<br>
 	<br>
 	<a id="logout">로그아웃하고싶으면 이거눌러 ㅋ</a>
