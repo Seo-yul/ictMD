@@ -1,10 +1,7 @@
 package com.sesoc.ictmd.vo;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-
-import com.flickr4java.flickr.photos.Exif;
 
 public class ComplexPhoto {
 	private String id;

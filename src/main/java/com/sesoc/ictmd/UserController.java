@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sesoc.ictmd.Interface.UserDAO;
-import com.sesoc.ictmd.VO.UserBase;
-import com.sesoc.ictmd.VO.UserDetail;
+import com.sesoc.ictmd.vo.UserBase;
+import com.sesoc.ictmd.vo.UserDetail;
 
 @Controller
 public class UserController {

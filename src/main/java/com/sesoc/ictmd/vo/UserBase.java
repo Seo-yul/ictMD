@@ -1,4 +1,4 @@
-package com.sesoc.ictmd.VO;
+package com.sesoc.ictmd.vo;
 
 public class UserBase {
 
