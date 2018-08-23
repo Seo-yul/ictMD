@@ -1,0 +1,77 @@
+package com.sesoc.ictmd.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class NaverChatbotController {
+	static final String Channel_SECRET="5e2f096e82c7adb9c8c7687fdd5ddc44";
+	static final String USER_ID="Ub921d38db10576c26befbd863df9bb35";
+	
+//	function send(channelAccessToken, replyToken_, messages_) {
+//	var headers = {
+//			'Content-type':'application/json',
+//			'Authorization':'Bearer ' + channelAccessToken
+//		};
+//
+//		var options = {
+//			url: 'https://api.line.me/v2/bot/message/reply',
+//			method: 'POST',
+//			headers: headers,
+//			json: {
+//				replyToken : replyToken_,
+//				messages : messages_
+//			}
+//		};
+//
+//		request(options, function(error, response, body) {
+//			console.log('error:', error); // Print the error if one occurred 
+//			console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+//	  console.log('body:', body); // Print the HTML for the Google homepage. 
+//			console.log('response', response.statusCode);
+//		});
+//	};
+//
+//	app.set('port', process.env.PORT || 3000);
+//
+//	var https_server = app.listen(app.get('port'), function() {
+//		console.log('Express https server listening on port ' + https_server.address().port);
+//	});
+//
+//	app.get('/', (req, res) => {
+//		console.log('[GET]/');
+//		res.writeHead(200, {'Content-Type' : 'text/html'});
+//		res.end('<h1><a href="http://8ctci.weebly.com">Hello, I\'m the Master of Time!</a><h1>');
+//	});
+//
+//	const CHANNEL_ACCESS_TOKEN="usq0Hmgsj9WKsylWof0LljzxyMgc+m3Iik58g+Fix804lEaLQrJzdN9JSFBq2n4d+7tPBEJKiRWg/taM23fyYMrcnbWllEl8W9eiw0I5bsn4P94cA9l4IVebW015f/YYExSGpeEbrY1i756i++HlygdB04t89/1O/w1cDnyilFU=";
+//
+//	app.post('/webhook', (req, res) => {
+//		var eventObj = req.body.events[0];
+//		var source = eventObj.source;
+//		var message = eventObj.message;
+//		console.log('======================', new Date() ,'======================');
+//		console.log('[request]', req.body);
+//		console.log('[request source] ', source);
+//		console.log('[request message]', message);
+//		console.log('[request text]', message.text);
+//		if(message.type == "text") {
+//			var message = [{"type": "text", "text" : message.text}];
+//			send(CHANNEL_ACCESS_TOKEN, eventObj.replyToken, message);
+//		}
+//		res.sendStatus(200);
+//	});
+//
+//	module.exports = app;
+	
+	@RequestMapping(value ="/helo", method=RequestMethod.GET, produces = "application/json; charset=utf8")
+	public String go() {
+		
+		return null;
+	}
+	
+}
