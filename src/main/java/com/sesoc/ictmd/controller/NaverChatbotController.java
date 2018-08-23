@@ -6,24 +6,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sesoc.ictmd.api.NaverChatbot;
+
 @RestController
 public class NaverChatbotController {
 			
-	@RequestMapping(value = "/webhook", method = RequestMethod.GET)
-	public String webhook(HttpServletRequest request, HttpServletResponse response) {
-		
-		return null;
+	@RequestMapping(value ="/webhook", method=RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String webhook(HttpServletRequest request, HttpServletResponse response,JSONArray events) {
+		System.out.println(events.get(0));
+		return "redirect:/imgtest";
 	}
-	
-	
-	
-	
-	
 	
 //	function send(channelAccessToken, replyToken_, messages_) {
 //	var headers = {
@@ -67,10 +65,6 @@ public class NaverChatbotController {
 //
 //	module.exports = app;
 	
-	@RequestMapping(value ="/helo", method=RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String go() {
-		
-		return null;
-	}
+	
 	
 }
