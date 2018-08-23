@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#overlay_t {
+#dim {
 	background-color: #000;
 	bottom: 0;
 	left: 0;
@@ -13,7 +13,7 @@
 	z-index: 99;
 }
 
-#popup_layer {
+#layer {
 	width: 1024px;
 	margin-bottom: 30px;
 	background: #fff;
@@ -22,7 +22,20 @@
 	top: 260px;
 	left: 50%;
 	margin-left: -512px;
-	box-shadow: 0px 1px 20px #333;
+	box-shadow: 0px 10px 20px #333;
 	z-index: 100;
 	text-align: center;
+}
+
+#close {
+	color: #fff;
+	position: absolute;
+	top: -25px;
+	right: 50%;
+	margin-right: -512px;
+	z-index: 100;
+}
+
+.tags {
+	display: inline-block;
 }

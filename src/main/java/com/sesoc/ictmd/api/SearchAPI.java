@@ -80,7 +80,7 @@ public class SearchAPI {
 		ArrayList<SimplePhoto> result = new ArrayList<SimplePhoto>();
 		p.setTags(tags);
 		try {
-			PhotoList<Photo> l = i.search(p, 100, 0);
+			PhotoList<Photo> l = i.search(p, 99, 0);
 			for (Photo p : l) {
 				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl()));
 			}
@@ -100,12 +100,11 @@ public class SearchAPI {
 			c.setId(id);
 			
 			// 사진 URL을 가져온다.
-			/*if (p.getOriginalSecret().trim().length() == 0) {
+			if (p.getOriginalSecret().trim().length() == 0) {
 				c.setUrl(p.getLargeUrl());
 			} else {
 				c.setUrl(p.getOriginalUrl());
-			}*/
-			c.setUrl(p.getLargeUrl());
+			}
 			
 			// 사진 태그를 가져온다.
 			ArrayList<String> l = new ArrayList<String>();

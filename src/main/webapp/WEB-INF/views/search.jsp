@@ -8,12 +8,15 @@
 	<title>Search</title>
 	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
 	<script src="./resources/js/jquery-3.3.1.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 	<script src="./resources/js/search.js"></script>
 </head>
 <body>
 	<h1>검색</h1>
 	<input id="text" type="text">
 	<input id="button" type="button" value="Search">
+	<div>',' 구분자로 복수 태그 검색 가능 ex) dog,cat,bird,sheep</div>
+	<br>
 	<div id="list"></div>
 </body>
 </html>
