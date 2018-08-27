@@ -8,13 +8,13 @@
 </head>
 <body>
 <h1>
- 안녕하세요
+ 이미지 분석
 </h1>
-
 <form action="./imageRekognition" method="post">
-<input name ='imgurl' type="text">
+<input name ='imgurl' >
 <input type="submit" value="제출">
 </form>
+
 
 </body>
 </html>

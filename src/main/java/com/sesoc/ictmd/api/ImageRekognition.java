@@ -74,6 +74,7 @@ public class ImageRekognition {
 					+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
 			String response = httpConnection.getResponseMessage();
+			System.out.println(response);
 			if (httpConnection.getInputStream() == null) {
 				System.out.println("No stream");
 				return null;
