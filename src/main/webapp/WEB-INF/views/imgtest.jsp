@@ -11,15 +11,7 @@
  이미지 분석
 </h1>
 <form action="./imageRekognition" method="post">
-<input name ='imgurl' type="text">
-<input type="submit" value="제출">
-</form>
-
-<h1>
- POST webhook
-</h1>
-<form action="./webhook" method="post">
-<input name ='events' type="text">
+<input name ='imgurl' >
 <input type="submit" value="제출">
 </form>
 
