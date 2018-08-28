@@ -44,6 +44,11 @@
 				contentType:"application/json;charset=UTF-8;",
 				success:function(data){
 					var items = data.findItemsByKeywordsResponse[0].searchResult[0].item || [];
+					if(items.length == 0){
+						alert("찾는 데이터가 없넹 ㅠ");
+						$("#product").val('');
+						return;
+					}
 					var html = [];
 					var head = "<table><tr><th>사진</th><th>제목</th><th>가격(USD)</th>"
 					  
@@ -54,7 +59,6 @@
 					    var price    = item.sellingStatus[0].currentPrice[0].__value__;
 					    var pic      = item.galleryURL;
 					    var viewitem = item.viewItemURL;
-					    console.log(price);
 					    if (null != title && null != viewitem) {
 					      html.push('<tr><td>' + '<img src="' + pic + '" border="0">' + '</td>' +
 					      '<td><a href="' + viewitem + '" target="_blank">' + title + '</a></td><td>'
