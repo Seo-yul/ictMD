@@ -46,8 +46,7 @@
 				s.parentNode.insertBefore(script, s);
 			})();
 		}
-		
-		$("#searchWeather").on('click',function() {
+		function showWeather(){
 			var cityName = $("#city").val();
 			var urlAddr = "http:////api.openweathermap.org/data/2.5/weather?q="+ cityName+ "&appid=8d9df8e528baa07108cb74b3776716c3";
 			
@@ -109,7 +108,14 @@
 				$("#foreTable").html(ft);
 				}
 			});
-			
+		}
+		$("#searchWeather").on('click',function() {
+			showWeather();
+		});
+		$("#city").keydown(function(key) {
+			if (key.keyCode == 13) {
+				showWeather();
+			}
 		});
 	});
 </script>
