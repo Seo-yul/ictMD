@@ -18,17 +18,17 @@ import com.sesoc.ictmd.vo.ComplexPhoto;
 import com.sesoc.ictmd.vo.SimplePhoto;
 
 public class SearchAPI {
-	// API ½ÇÇàÀ» À§ÇÑ ±âº» °ªµé.
+	// API ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½.
 	private static final String apiKey = "b36b464c2e46a7313fadee937e6a6c16";
 	private static final String sharedSecret = "75bc08daeb7fc1dd";
 	private static final Transport transport = new REST();
 	
-	// API¸¦ ±¸¼ºÇÏ´Â ½ÇÁúÀûÀÎ °´Ã¼µé.
+	// APIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½.
 	private static Flickr f;
 	private static PhotosInterface i;
 	private static SearchParameters p;
 	
-	// »ç¿ëÇÒ EXIF µ¥ÀÌÅÍ Ç×¸ñµé. Æ¯Á¤ »çÁø¿¡ ´ëÇØ °¡Á®¿Â EXIF µ¥ÀÌÅÍ¿Í ºñ±³ÇÏ±â À§ÇØ ¹Ì¸® ÃÊ±âÈ­ÇØµÐ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ EXIF ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½. Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ EXIF ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½Ê±ï¿½È­ï¿½ØµÐ´ï¿½.
 	private static final ArrayList<String> l = new ArrayList<String>();
 	{
 		l.add("Image Width");
@@ -63,19 +63,19 @@ public class SearchAPI {
 		l.add("Format");
 	}
 	
-	// »ý¼ºÀÚ°¡ È£ÃâµÇ¸é ÀÚµ¿À¸·Î °´Ã¼µéÀ» ÃÊ±âÈ­.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ È£ï¿½ï¿½Ç¸ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­.
 	public SearchAPI() {
 		init();
 	}
 	
-	// °´Ã¼µéÀ» ÃÊ±âÈ­ÇÏ´Â ¸Þ¼Òµå.
+	// ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½.
 	private void init() {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
 		p = new SearchParameters();
 	}
 
-	// ÀÏ¹Ý °Ë»ö ¸Þ¼Òµå.
+	// ï¿½Ï¹ï¿½ ï¿½Ë»ï¿½ ï¿½Þ¼Òµï¿½.
 	public ArrayList<SimplePhoto> search(String[] tags) {
 		ArrayList<SimplePhoto> result = new ArrayList<SimplePhoto>();
 		p.setTags(tags);
@@ -90,23 +90,23 @@ public class SearchAPI {
 		return result;
 	}
 
-	// Æ¯Á¤ »çÁø¿¡ ´ëÇÑ »ó¼¼ Á¤º¸¸¦ ¿äÃ»ÇßÀ» °æ¿ì È£ÃâµÇ´Â ¸Þ¼Òµå1. »çÁø ÁÖ¼Ò, ÅÂ±× ¸ñ·Ï, À§µµ ¹× °æµµ Á¤º¸¸¦ °¡Á®¿Â´Ù.
+	// Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼Òµï¿½1. ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½, ï¿½Â±ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½æµµ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 	public ComplexPhoto getInfo(String id) {
 		ComplexPhoto c = new ComplexPhoto();
 		try {
-			// »çÁø °´Ã¼¸¦ °¡Á®¿À°í ID¸¦ ¼³Á¤ÇÑ´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 			Photo p = i.getInfo(id, "");
 			System.out.println("URL : " + p.getUrl());
 			c.setId(id);
 			
-			// »çÁø URLÀ» °¡Á®¿Â´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ URLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 			if (p.getOriginalSecret().trim().length() == 0) {
 				c.setUrl(p.getLargeUrl());
 			} else {
 				c.setUrl(p.getOriginalUrl());
 			}
 			
-			// »çÁø ÅÂ±×¸¦ °¡Á®¿Â´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 			ArrayList<String> l = new ArrayList<String>();
 			Iterator<Tag> it = p.getTags().iterator();
 			while (it.hasNext()) {
@@ -114,7 +114,7 @@ public class SearchAPI {
 			}
 			c.setTags(l);
 			
-			// À§µµ ¹× °æµµ¸¦ °¡Á®¿Â´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½æµµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 			if (p.hasGeoData()) {
 				c.setLatitude(p.getGeoData().getLatitude());
 				c.setLongitude(p.getGeoData().getLongitude());
@@ -125,7 +125,7 @@ public class SearchAPI {
 		return c;
 	}
 	
-	// Æ¯Á¤ »çÁø¿¡ ´ëÇÑ »ó¼¼ Á¤º¸¸¦ ¿äÃ»ÇßÀ» °æ¿ì È£ÃâµÇ´Â ¸Þ¼Òµå2. EXIF Á¤º¸¸¦ °¡Á®¿Â´Ù.
+	// Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ È£ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼Òµï¿½2. EXIF ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 	public HashMap<String, String> getExif(String id) {
 		HashMap<String, String> result = new HashMap<String, String>();
 		try {

@@ -43,30 +43,5 @@ public class HomeController {
 		return "goWeather";
 	}
 	
-	@RequestMapping(value = "/imgtest", method = RequestMethod.GET)
-	public String imgtest(){
-	
-		return "imgtest";	
-	}
-	
-	
-	@RequestMapping(value = "/imageRekognition", method = RequestMethod.POST)
-	public String imageRekognition(String imgurl, HttpServletRequest request) {
-		ImageRekognition i = new ImageRekognition(imgurl, request);
-
-		System.out.println("======요소찾기=======\n");
-		i.doLabelDetection();
-		System.out.println("======랜드마크=======\n");
-		i.doLandmarkDetection();
-		System.out.println("======관련검색어=======\n");
-		i.doWebDetection();
-		i.fileClear();
-		return "redirect:/imgtest";
-	}
-	
-	
-	
-	
-	
 	
 }
