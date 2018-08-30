@@ -31,7 +31,7 @@ public class ImageRekognition {
 
 	private static final String TARGET_URL = "https://vision.googleapis.com/v1/images:annotate?"; // REST API TARGET URL
 	private static final String API_KEY = "key=AIzaSyCV2X6B5-Di_ubLyaMALNBSg4pBH3LkN2k"; // API사용을 위한키
-	private static final String OUR_DOMAIN = "http://203.233.199.203"; // 우리의 도메인입니다.
+	private static final String OUR_DOMAIN = "http://203.233.199.202"; // 우리의 도메인입니다.
 	private String imageFile = null; // 사용자로부터 이미지 경로를 얻는다.
 	private String imageTmp = null; // 얻은 이미지가 저장된 서버의 웹에서의 임시 경로
 	private String imageTmpFile = null;
@@ -59,7 +59,7 @@ public class ImageRekognition {
 			fis.close();
 			os.close();
 
-			imgResize();
+			// imgResize();
 
 			imageTmp = OUR_DOMAIN + request.getContextPath() + "/resources/img/" + uid + ".png";
 			System.out.println(imageTmp);
@@ -141,7 +141,6 @@ public class ImageRekognition {
 	 * 가져온 값을 String 타입으로 줄줄 써서 나열
 	 * return resp;
 	 */
-	
 	public String doLabelDetection() {
 		try {
 			URL serverUrl = new URL(TARGET_URL + API_KEY);
@@ -155,7 +154,7 @@ public class ImageRekognition {
 			httpRequestBodyWriter.write("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\",\"maxResults\": \"2\"	}],"
 					+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
-			String response = httpConnection.getResponseMessage();
+//			String response = httpConnection.getResponseMessage();
 //			System.out.println(response); //ok
 			if (httpConnection.getInputStream() == null) {
 				System.out.println("No stream");
@@ -164,7 +163,7 @@ public class ImageRekognition {
 
 			Scanner httpResponseScanner = new Scanner(httpConnection.getInputStream());
 			String resp = "";
-			ArrayList<String> descriptionList = new ArrayList<String>();
+//			ArrayList<String> descriptionList = new ArrayList<String>();
 			while (httpResponseScanner.hasNext()) {
 				String line = httpResponseScanner.nextLine();
 				resp += line;
@@ -192,7 +191,7 @@ public class ImageRekognition {
 					"{\"requests\":  [{ \"features\":  [ {\"type\": \"LANDMARK_DETECTION\",\"maxResults\": \"2\"	}],"
 							+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
-			String response = httpConnection.getResponseMessage();
+//			String response = httpConnection.getResponseMessage();
 			if (httpConnection.getInputStream() == null) {
 				System.out.println("No stream");
 				return null;
@@ -227,7 +226,7 @@ public class ImageRekognition {
 					.write("{ \"requests\": [ { \"features\": [ { \"type\": \"WEB_DETECTION\", \"maxResults\": 1 } ],"
 							+ " \"image\": { \"source\": { \"imageUri\": \"" + imageTmp + "\" } } } ] }");
 			httpRequestBodyWriter.close();
-			String response = httpConnection.getResponseMessage();
+//			String response = httpConnection.getResponseMessage();
 			if (httpConnection.getInputStream() == null) {
 				System.out.println("No stream");
 				return null;
@@ -247,7 +246,5 @@ public class ImageRekognition {
 		} catch (Exception e) {
 			return null;
 		}
-
 	}
-
 }

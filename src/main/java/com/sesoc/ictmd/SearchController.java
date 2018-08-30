@@ -30,13 +30,7 @@ public class SearchController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	// search.jsp이동
-	@RequestMapping(value = "/toSearch", method = RequestMethod.GET)
-	public String toSearch() {
-		return "search";
-	}
-
-	// keyword 입력시 검색어를 스트링배열로 가져와서 처리
+	// 검색어를 문자열 배열로 입력받아 검색 후 결과를 반환하는 메소드
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> list(String[] tags) {
 		api = new SearchAPI();
@@ -50,18 +44,24 @@ public class SearchController {
 		return result;
 	}
 
-	// 하나를 클릭했을때 사진에 대한 모든 정보를 가져옴.
+	// 임의의 사진 하나를 클릭했을 때 해당 사진에 대한 모든 정보를 가져오는 메소드
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> detail(String id, HttpServletRequest request) {
+	public @ResponseBody Map<String, Object> detail(String id) {
 		api = new SearchAPI();
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		ComplexPhoto photo = api.getInfo(id);
-		photo.setExifs(api.getExif(id));
-
+		HashMap<String, String> exifs = api.getExif(id);
+		
+		result.put("photo", photo);
+		result.put("exifs", exifs);
+		return result;
+	}
+	
+	@RequestMapping(value = "/recognize", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> recognize(HttpServletRequest request) {
 		// 이미지 인식 ---
-
-		ImageRekognition imgRekog = new ImageRekognition(photo.getUrl(), request); // api콜
+		ImageRekognition imgRekog = new ImageRekognition("사진주소", request); // api콜
 		JSONParser pJson = new JSONParser();
 		// 요소인식
 		System.out.println("======탐지된 요소=======");
@@ -125,9 +125,8 @@ public class SearchController {
 		} else {
 			System.out.println("없음");
 		}
-		 imgRekog.fileClear();
+		imgRekog.fileClear();
 		// 이미지 인식 끝
-		result.put("photo", photo);
-		return result;
+		return null;
 	}
 }

@@ -18,17 +18,17 @@ import com.sesoc.ictmd.vo.ComplexPhoto;
 import com.sesoc.ictmd.vo.SimplePhoto;
 
 public class SearchAPI {
-	// API ������ ���� �⺻ ����.
+	// API를 초기화하여 작동시키는데 필요한 데이터
 	private static final String apiKey = "b36b464c2e46a7313fadee937e6a6c16";
 	private static final String sharedSecret = "75bc08daeb7fc1dd";
 	private static final Transport transport = new REST();
 	
-	// API�� �����ϴ� �������� ��ü��.
+	// API를 구성하는 객체들
 	private static Flickr f;
 	private static PhotosInterface i;
 	private static SearchParameters p;
 	
-	// ����� EXIF ������ �׸��. Ư�� ������ ���� ������ EXIF �����Ϳ� ���ϱ� ���� �̸� �ʱ�ȭ�صд�.
+	// 사용할 EXIF 데이터 목록
 	private static final ArrayList<String> l = new ArrayList<String>();
 	{
 		l.add("Image Width");
@@ -63,19 +63,19 @@ public class SearchAPI {
 		l.add("Format");
 	}
 	
-	// �����ڰ� ȣ��Ǹ� �ڵ����� ��ü���� �ʱ�ȭ.
+	// 생성자가 호출되면 객체를 초기화하는 메소드를 실행한다.
 	public SearchAPI() {
 		init();
 	}
 	
-	// ��ü���� �ʱ�ȭ�ϴ� �޼ҵ�.
+	// 객체를 초기화하는 메소드
 	private void init() {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
 		p = new SearchParameters();
 	}
 
-	// �Ϲ� �˻� �޼ҵ�.
+	// 사진 검색 메소드
 	public ArrayList<SimplePhoto> search(String[] tags) {
 		ArrayList<SimplePhoto> result = new ArrayList<SimplePhoto>();
 		p.setTags(tags);
@@ -90,42 +90,37 @@ public class SearchAPI {
 		return result;
 	}
 
-	// Ư�� ������ ���� �� ������ ��û���� ��� ȣ��Ǵ� �޼ҵ�1. ���� �ּ�, �±� ���, ���� �� �浵 ������ �����´�.
+	// 임의의 사진 하나를 클릭했을 때 EXIF 데이터를 제외한 해당 사진에 대한 모든 정보를 가져오는 메소드
 	public ComplexPhoto getInfo(String id) {
-		ComplexPhoto c = new ComplexPhoto();
+		ComplexPhoto result = new ComplexPhoto();
 		try {
-			// ���� ��ü�� �������� ID�� �����Ѵ�.
+			// 사진 고유의 ID를 입력받아 사진 정보를 담은 객체를 가져온다.
 			Photo p = i.getInfo(id, "");
-			System.out.println("URL : " + p.getUrl());
-			c.setId(id);
+			System.out.println("선택한 사진의 원본 글 주소 : " + p.getUrl());
+			result.setId(id);
 			
-			// ���� URL�� �����´�.
-			if (p.getOriginalSecret().trim().length() == 0) {
-				c.setUrl(p.getLargeUrl());
-			} else {
-				c.setUrl(p.getOriginalUrl());
-			}
+			// 사진 주소를 가져온다.
+			result.setUrl(p.getLargeUrl());
 			
-			// ���� �±׸� �����´�.
+			// 태그 목록을 가져온다.
 			ArrayList<String> l = new ArrayList<String>();
 			Iterator<Tag> it = p.getTags().iterator();
 			while (it.hasNext()) {
 				l.add(it.next().getRaw());
 			}
-			c.setTags(l);
+			result.setTags(l);
 			
-			// ���� �� �浵�� �����´�.
+			// 위도 및 경도 정보가 있을 경우 가져온다.
 			if (p.hasGeoData()) {
-				c.setLatitude(p.getGeoData().getLatitude());
-				c.setLongitude(p.getGeoData().getLongitude());
+				result.setLatitude(p.getGeoData().getLatitude());
+				result.setLongitude(p.getGeoData().getLongitude());
 			}
 		} catch (FlickrException e) {
 			System.out.println("Unexpected error occured when getting info.");
 		}
-		return c;
+		return result;
 	}
 	
-	// Ư�� ������ ���� �� ������ ��û���� ��� ȣ��Ǵ� �޼ҵ�2. EXIF ������ �����´�.
 	public HashMap<String, String> getExif(String id) {
 		HashMap<String, String> result = new HashMap<String, String>();
 		try {
