@@ -3,11 +3,13 @@ var arr;
 // 5. 서버로부터 가져온 상세 사진 정보를 그리는 함수
 var popup = function(resp) {
 	var photo = resp["photo"];
+	var exifs = JSON.stringify(resp["exifs"]);
 	$("body").append("<div id='dim'></div>");
 	$("body").append("<div id='layer'></div>");
-	$("#layer").css("top", Math.max(0, $(window).scrollTop() + 60) + "px");
-	$("#layer").append("<div id='close'>X</div>");
-	$("#layer").append("<img id='pic' src='" + photo["url"] + "' align='center'>");
+	var layer = $("#layer");
+	layer.css("top", Math.max(0, $(window).scrollTop() + 60) + "px");
+	layer.append("<div id='close'>X</div>");
+	layer.append("<img id='pic' src='" + photo["url"] + "' align='center'>");
 	var pic = $("#pic");
 	pic.on("load", function() {
 		if (this.naturalWidth > 1024) {
@@ -15,20 +17,20 @@ var popup = function(resp) {
 			pic.css("height", (this.naturalHeight * 1024 / this.naturalWidth) + "px");
 		}
 	});
-	$("#layer").append("<div>Tags: </div>");
+	layer.append("<div>Tags: </div>");
 	$.each(photo["tags"], function(index, item) {
-		$("#layer").append("<div class='tags'>#" + item + "　</div>");
+		layer.append("<div class='tags'>#" + item + "　</div>");
 	});
 	if (photo["latitude"] !== 0) {
-		$("#layer").append("<div>latitude : " + photo["latitude"] + "</div>");
-		$("#layer").append("<div>longitude : " + photo["longitude"] + "</div>");
+		layer.append("<div>latitude : " + photo["latitude"] + "</div>");
+		layer.append("<div>longitude : " + photo["longitude"] + "</div>");
 	}
-	if (JSON.stringify(photo["exifs"]).length > 2) {
-		$("#layer").append("<div>exif : </div>");
-		$("#layer").append("<div>" + JSON.stringify(photo["exifs"]) + "</div>");
+	if (exifs.length > 2) {
+		layer.append("<div>EXIF : </div>");
+		layer.append("<div>" + exifs + "</div>");
 	}
 	$("#dim, #close").on("click", function() {
-		$("#layer").remove();
+		layer.remove();
 		$("#dim").remove();
 	});
 }
@@ -71,9 +73,10 @@ var listup = function(resp) {
 
 // 2. 검색 이벤트가 발생할 경우 호출되는 함수. 서버에서 사진 목록을 가져오고, 화면에 그리는 함수를 호출함.
 var search = function() {
-	var tagstr = $("#text").val();
+	var tagstr = $("#text").val().trim();
 	if (tagstr.length <= 0) {
-		alert("Please insert any tag.");
+		alert("Please insert any tags.");
+		$("#text").focus();
 		return;
 	}
 	var tags = tagstr.split(',');
