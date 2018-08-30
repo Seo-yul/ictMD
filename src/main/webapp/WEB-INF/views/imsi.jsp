@@ -22,8 +22,8 @@
 			});
 		});
 
-		$("#goWeather").click(function() {
-			location.href = "/ictmd/goWeather";
+		$("#wNs").click(function() {
+			location.href = "/ictmd/weatherNshopping";
 		});
 
 		$("#secesion").click(function() {
@@ -38,7 +38,7 @@
 					},
 					success : function(data) {
 						if (data == 1) {
-							alert("슬프지만 이젠 안녕....");
+							alert("슬프지만 이젠 안녕....");   
 							location.href = "/ictmd"
 						} else {
 							alert("응 너 비번틀림 ㅅㄱ");
@@ -59,7 +59,7 @@
 	<h1>뀨뀨 로그인성공 ㅊㅋㅊㅋ</h1>
 	<h1>${sessionScope.userId }님안녕?</h1>
 	<h1>${sessionScope.userName }님ㅎㅇㅎㅇ</h1>
-	<a id="goWeather">날씨검색하러가자 ㅎㅎ</a>
+	<a id="wNs">날씨와 쇼핑</a>
 	<br>
 	<br>
 	<a id="logout">로그아웃하고싶으면 이거눌러 ㅋ</a>

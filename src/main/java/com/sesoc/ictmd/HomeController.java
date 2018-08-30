@@ -38,9 +38,9 @@ public class HomeController {
 		return "loginPage";
 	}
 	
-	@RequestMapping(value = "/goWeather", method = RequestMethod.GET)
+	@RequestMapping(value = "/weatherNshopping", method = RequestMethod.GET)
 	public String goWeather() {
-		return "goWeather";
+		return "weatherNshopping";
 	}
 	
 	
