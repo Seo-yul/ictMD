@@ -38,14 +38,4 @@ public class HomeController {
 	public String goWeather() {
 		return "weatherNshopping";
 	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		return "loginPage";
-	}
-	
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join() {
-		return "registerPage";
-	}
 }

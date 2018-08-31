@@ -9,11 +9,15 @@
 <body>
 	<h1>메인 화면</h1>
 	<c:if test="${userId == null}">
-		<a href="login">로그인</a>
+		<a href="loginPage">로그인</a>
 		<span> / </span>
-		<a href="join">회원가입</a>
+		<a href="registerPage">회원가입</a>
 	</c:if>
 	<c:if test="${userId != null}">
+		<a href="fixPage">회원 정보 수정</a>
+		<span> / </span>
+		<a href="secesionPage">회원 탈퇴</a>
+		<span> / </span>
 		<a href="logout">로그아웃</a>
 	</c:if>
 	<br>

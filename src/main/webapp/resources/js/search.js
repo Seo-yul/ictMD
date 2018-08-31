@@ -1,9 +1,9 @@
 var arr;
 
-// 5. 서버로부터 가져온 상세 사진 정보를 그리는 함수
+// 5. 서버로부터 가져온 상세 사진 정보를 화면에 그리는 함수
 var popup = function(resp) {
 	var photo = resp["photo"];
-	var exifs = JSON.stringify(resp["exifs"]);
+	var exif = JSON.stringify(resp["exif"]);
 	$("body").append("<div id='dim'></div>");
 	$("body").append("<div id='layer'></div>");
 	var layer = $("#layer");
@@ -25,9 +25,9 @@ var popup = function(resp) {
 		layer.append("<div>latitude : " + photo["latitude"] + "</div>");
 		layer.append("<div>longitude : " + photo["longitude"] + "</div>");
 	}
-	if (exifs.length > 2) {
+	if (exif.length > 2) {
 		layer.append("<div>EXIF : </div>");
-		layer.append("<div>" + exifs + "</div>");
+		layer.append("<div>" + exif + "</div>");
 	}
 	$("#dim, #close").on("click", function() {
 		layer.remove();

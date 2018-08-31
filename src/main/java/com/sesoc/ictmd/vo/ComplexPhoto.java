@@ -1,7 +1,6 @@
 package com.sesoc.ictmd.vo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ComplexPhoto {
 	private String id;

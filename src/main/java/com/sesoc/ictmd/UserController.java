@@ -18,7 +18,7 @@ public class UserController {
 
 	@Autowired
 	SqlSession session;
-
+	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String loginPage() {
 		return "loginPage";
@@ -60,11 +60,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public @ResponseBody void logout(HttpSession hsession) {
+	public String logout(HttpSession hsession) {
 
 		hsession.invalidate();
 
-		return;
+		return "redirect:/main";
 	}
 
 	@RequestMapping(value = "/secesionCheck", method = RequestMethod.POST)

@@ -32,7 +32,7 @@ import com.sesoc.ictmd.api.ImageRekognition;
 
 public class CreateImg extends Thread {
 	// 203.233.199.203
-	private static final String OUR_DOMAIN = "http://203.233.199.203/ictmd"; // 우리의 도메인입니다.
+	private static final String OUR_DOMAIN = "http://203.233.199.202:8081/ictmd"; // 우리의 도메인입니다.
 	private HttpServletRequest request;
 	private UUID uuid = UUID.randomUUID();
 	private String imageFile; // 사용자로부터 이미지 경로를 얻는다.

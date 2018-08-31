@@ -6,16 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sesoc.ictmd.api.ImageRekognition;
 import com.sesoc.ictmd.api.SearchAPI;
 import com.sesoc.ictmd.function.CreateImg;
 import com.sesoc.ictmd.vo.ComplexPhoto;
@@ -52,16 +47,14 @@ public class SearchController {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		ComplexPhoto photo = api.getInfo(id);
-		HashMap<String, String> exifs = api.getExif(id);
-		
+		HashMap<String, String> exif = api.getExif(id);
 		
 		CreateImg creatimg = new CreateImg(photo.getUrl(), request);
 		creatimg.start();
 		
-		
 		result.put("photo", photo);
-		result.put("exifs", exifs);
+		result.put("exif", exif);
+		
 		return result;
 	}
-
 }

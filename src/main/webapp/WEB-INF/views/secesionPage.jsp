@@ -169,7 +169,7 @@ body {
     				 success:function(data){
     					 if(data == 1){
     						alert("회원탈퇴 완료.... GoodBye.... ㅠㅠ");
-    						location.href="/ictmd"
+    						location.href="/ictmd/"
     					 } else {
     						alert("회원정보가 일치하지않습니다.");
     						return;
