@@ -76,7 +76,7 @@ public class ImageRekognition extends Thread {
 			} catch (ParseException e) {
 				System.out.println("ImageRekognition.java resultLabelDetection 오류(seoyul)");
 				// TODO Auto-generated catch block
-			}
+			}	
 		}
 
 		// System.out.println("======랜드마크=======");
@@ -126,7 +126,6 @@ public class ImageRekognition extends Thread {
 	 * 가져온 값을 String 타입으로 줄줄 써서 나열
 	 * return resp;
 	 */
-	
 	public String doLabelDetection () {
 		try {
 			URL serverUrl = new URL(TARGET_URL + API_KEY);
@@ -140,7 +139,7 @@ public class ImageRekognition extends Thread {
 			httpRequestBodyWriter.write("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\",\"maxResults\": \"2\"	}],"
 					+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
-			String response = httpConnection.getResponseMessage();
+//			String response = httpConnection.getResponseMessage();
 //			System.out.println(response); //ok
 			if (httpConnection.getInputStream() == null) {
 				System.out.println("No stream");
@@ -149,7 +148,7 @@ public class ImageRekognition extends Thread {
 
 			Scanner httpResponseScanner = new Scanner(httpConnection.getInputStream());
 			String resp = "";
-			ArrayList<String> descriptionList = new ArrayList<String>();
+//			ArrayList<String> descriptionList = new ArrayList<String>();
 			while (httpResponseScanner.hasNext()) {
 				String line = httpResponseScanner.nextLine();
 				resp += line;
@@ -177,7 +176,7 @@ public class ImageRekognition extends Thread {
 					"{\"requests\":  [{ \"features\":  [ {\"type\": \"LANDMARK_DETECTION\",\"maxResults\": \"2\"	}],"
 							+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
-			String response = httpConnection.getResponseMessage();
+//			String response = httpConnection.getResponseMessage();
 			if (httpConnection.getInputStream() == null) {
 				System.out.println("No stream");
 				return null;
@@ -212,7 +211,7 @@ public class ImageRekognition extends Thread {
 					.write("{ \"requests\": [ { \"features\": [ { \"type\": \"WEB_DETECTION\", \"maxResults\": 1 } ],"
 							+ " \"image\": { \"source\": { \"imageUri\": \"" + imageTmp + "\" } } } ] }");
 			httpRequestBodyWriter.close();
-			String response = httpConnection.getResponseMessage();
+//			String response = httpConnection.getResponseMessage();
 			if (httpConnection.getInputStream() == null) {
 				System.out.println("No stream");
 				return null;
@@ -232,7 +231,5 @@ public class ImageRekognition extends Thread {
 		} catch (Exception e) {
 			return null;
 		}
-
 	}
-
 }

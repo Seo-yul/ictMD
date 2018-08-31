@@ -31,13 +31,7 @@ public class SearchController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	// search.jsp이동
-	@RequestMapping(value = "/toSearch", method = RequestMethod.GET)
-	public String toSearch() {
-		return "search";
-	}
-
-	// keyword 입력시 검색어를 스트링배열로 가져와서 처리
+	// 검색어를 문자열 배열로 입력받아 검색 후 결과를 반환하는 메소드
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> list(String[] tags) {
 		api = new SearchAPI();
@@ -51,22 +45,25 @@ public class SearchController {
 		return result;
 	}
 
-	// 하나를 클릭했을때 사진에 대한 모든 정보를 가져옴.
+	// 임의의 사진 하나를 클릭했을 때 해당 사진에 대한 모든 정보를 가져오는 메소드
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> detail(String id, HttpServletRequest request) {
 		api = new SearchAPI();
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		ComplexPhoto photo = api.getInfo(id);
-		photo.setExifs(api.getExif(id));
-
-		// 이미지 인식 ---
+		HashMap<String, String> exifs = api.getExif(id);
+		
+		
 		CreateImg creatimg = new CreateImg(photo.getUrl(), request);
 		ImageRekognition imgRekog = new ImageRekognition(creatimg); // api콜
 		creatimg.start();
 		imgRekog.start();
 		
+		
 		result.put("photo", photo);
+		result.put("exifs", exifs);
 		return result;
 	}
+
 }
