@@ -56,9 +56,7 @@ public class SearchController {
 		
 		
 		CreateImg creatimg = new CreateImg(photo.getUrl(), request);
-		ImageRekognition imgRekog = new ImageRekognition(creatimg); // api콜
 		creatimg.start();
-		imgRekog.start();
 		
 		
 		result.put("photo", photo);

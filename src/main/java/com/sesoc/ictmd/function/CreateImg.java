@@ -3,8 +3,12 @@ package com.sesoc.ictmd.function;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -13,67 +17,103 @@ import java.util.UUID;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.util.FileCopyUtils;
 
+import com.sesoc.ictmd.api.ImageRekognition;
 
 /**
  * 
- * @author yoon seoyul 
- * 이미지 경로를 웹에서 받아 로컬에 저장한 후 google API를 이용해 분석하기 위한 
- * 로컬의 웹경로를 담은 imageTmp 이용을 위해 get 매서드를 두었다.
- * 객체 생성과 동시에 이미지를 만든다.
- * imgResize() 이미지를 리사이징한다.
- * fileClear() 사용한 이미지를 삭제한다.
+ * @author yoon seoyul 이미지 경로를 웹에서 받아 로컬에 저장한 후 google API를 이용해 분석하기 위한 로컬의 웹경로를
+ *         담은 imageTmp 이용을 위해 get 매서드를 두었다. 객체 생성과 동시에 이미지를 만든다. imgResize()
+ *         이미지를 리사이징한다. fileClear() 사용한 이미지를 삭제한다.
  * 
  */
 
 public class CreateImg extends Thread {
-	
+	// 203.233.199.203
 	private static final String OUR_DOMAIN = "http://203.233.199.203/ictmd"; // 우리의 도메인입니다.
 	private HttpServletRequest request;
 	private UUID uuid = UUID.randomUUID();
 	private String imageFile; // 사용자로부터 이미지 경로를 얻는다.
 	private String imageTmp; // 얻은 이미지가 저장된 서버의 웹에서의 임시 경로
-	private String imageTmpFile; //로컬에서의 이미지 경로
+	private String imageTmpFile; // 로컬에서의 이미지 경로
 	private String uid;
-	
+	private String encode64;
+
 	public CreateImg(String imageFile, HttpServletRequest request) {
 		super();
 		this.request = request;
 		this.imageFile = imageFile;
 		this.uid = uuid.toString();
-		this.uid = uid.substring(uid.length()-12, uid.length());
-	}
-	
-	@Override
-	public void run() {
-		System.out.println("imageFile 생성 스레드 시작");
+		this.uid = uid.substring(uid.length() - 12, uid.length());
+
 		System.out.println("기원 주소 : " + imageFile);
 		try {
 			URL url = new URL(imageFile);
-			imageTmpFile = request.getSession().getServletContext().getRealPath("/resources/img/" + uid + ".png");
+			imageTmpFile = request.getSession().getServletContext().getRealPath("/resources/img/" + uid + ".jpg");
 			InputStream fis = url.openStream();
 			File file = new File(imageTmpFile);
 			OutputStream os = new FileOutputStream(file);
 			FileCopyUtils.copy(fis, os);
 			fis.close();
 			os.close();
-			
-			imageTmp = OUR_DOMAIN +"/resources/img/" + uid + ".png";
-			System.out.println("서버 경로 : "+imageTmp);
-			System.out.println("로컬 경로 : "+imageTmpFile);
+//			imgEncode64();
 		} catch (Exception e) {
 			System.out.println("CreateImg.java run() 오류(seoyul)");
 		}
+
+	}
+
+	@Override
+	public void run() {
+		System.out.println("imageFile 생성 스레드 시작");
+		imageTmp = OUR_DOMAIN + "/resources/img/" + uid + ".jpg";
+		System.out.println("로컬 경로 : " + imageTmpFile);
+	/*	if(encode64!=null)
+			System.out.println("encode64 은 null이 아님");*/
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		ImageRekognition imgRekog = new ImageRekognition(this); // api콜
+		imgRekog.start();
 		super.run();
 	}
-	
+
 	public String getImageTmp() {
 		return imageTmp;
 	}
 
-	//이미지 리사이징
-	private void imgResize() { 
+	public String getImageEncode64() {
+		return encode64;
+	}
+
+	// 파일 base64 변환
+	private void imgEncode64() {
+		File file = new File(imageTmpFile);
+		String encodedfile = null;
+		if (file.exists()) {
+			try {
+				FileInputStream fileInputStreamReader = new FileInputStream(file);
+				byte[] bytes = new byte[(int) file.length()];
+				fileInputStreamReader.read(bytes);
+				encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		encode64 = encodedfile;
+	}
+
+	// 이미지 리사이징
+	private void imgResize() {
 		String imgOriginalPath = imageTmpFile; // 원본 이미지 파일명
 		String imgTargetPath = imageTmpFile; // 새 이미지 파일명
 		String imgFormat = "png"; // 새 이미지 포맷. jpg, gif 등
@@ -134,12 +174,12 @@ public class CreateImg extends Thread {
 			// e.printStackTrace();
 		}
 	}
-	
+
 	public void fileClear() {
 		System.out.println("imageTmpFile 삭제");
 		File file = new File(imageTmpFile);
 		if (file.exists())
 			file.delete();
 	}
-	
+
 }

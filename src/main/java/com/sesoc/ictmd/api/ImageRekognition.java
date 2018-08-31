@@ -28,22 +28,19 @@ import com.sesoc.ictmd.function.CreateImg;
  */
 public class ImageRekognition extends Thread {
 
-	private static final String TARGET_URL = "https://vision.googleapis.com/v1/images:annotate?"; // REST API TARGET URL
+	private static final String TARGET_URL = "https://vision.googleapis.com/v1p3beta1/images:annotate?"; // REST API TARGET URL
 	private static final String API_KEY = "key=AIzaSyCV2X6B5-Di_ubLyaMALNBSg4pBH3LkN2k"; // API사용을 위한키
 	private String imageTmp; // 얻은 이미지가 저장된 서버의 웹에서의 임시 경로
 	private String resultLabelDetection; //요소검색 결과
 	private String resultWebDetection; //관련검색어 결과
 	private String resultLandmarkDetection; //랜드마크검사 결과
 	private CreateImg creatimg; //분석할 이미지의 경로를 담은 객체
+	private String encode64;
 	@Override
 	public void run() {
-		int mst = 0;
-		while(true) {
-			if(creatimg.getImageTmp()!=null)break;
-			System.out.println("이미지 생성 기다리는중..  "+mst);
-			mst++;
-		}
 		this.imageTmp = creatimg.getImageTmp();
+		this.encode64 = creatimg.getImageEncode64();
+		System.out.println("서버 경로 : " + imageTmp);
 		
 		resultLabelDetection = doLabelDetection();
 		resultWebDetection = doWebDetection();
@@ -112,7 +109,6 @@ public class ImageRekognition extends Thread {
 			System.out.println("없음");
 		}
 		// 이미지 인식 끝
-		super.run();
 	}
 	
 	public ImageRekognition(CreateImg creatimg) {
@@ -136,6 +132,8 @@ public class ImageRekognition extends Thread {
 			httpConnection.setDoOutput(true);
 			BufferedWriter httpRequestBodyWriter = new BufferedWriter(
 					new OutputStreamWriter(httpConnection.getOutputStream()));
+		/*	httpRequestBodyWriter.write("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\",\"maxResults\": \"2\"	}],"
+					+ " \"image\": {\"content\": "+encode64 +" }}]}");*/
 			httpRequestBodyWriter.write("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\",\"maxResults\": \"2\"	}],"
 					+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
