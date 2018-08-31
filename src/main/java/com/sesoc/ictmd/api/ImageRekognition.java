@@ -1,140 +1,125 @@
 package com.sesoc.ictmd.api;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.util.FileCopyUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.sesoc.ictmd.function.CreateImg;
 
 /**
  * 
- * @author yoon seoyul LABEL_DETECTION // 사진속 요소찾기 LANDMARK_DETECTION // 사진속
- *         랜드마크 (특정 건물이나 중요한 건물) WEB_DETECTION // 사진을 바탕으로한 연관검색어
+ * @author yoon seoyul
+ * LABEL_DETECTION 사진속 요소찾기
+ *  LANDMARK_DETECTION 사진속 랜드마크 (특정 건물이나 중요한 건물)
+ *  WEB_DETECTION 사진을 바탕으로한 관련검색어
  * 
  */
-public class ImageRekognition {
+public class ImageRekognition extends Thread {
 
 	private static final String TARGET_URL = "https://vision.googleapis.com/v1/images:annotate?"; // REST API TARGET URL
 	private static final String API_KEY = "key=AIzaSyCV2X6B5-Di_ubLyaMALNBSg4pBH3LkN2k"; // API사용을 위한키
-	private static final String OUR_DOMAIN = "http://203.233.199.203"; // 우리의 도메인입니다.
-	private String imageFile = null; // 사용자로부터 이미지 경로를 얻는다.
-	private String imageTmp = null; // 얻은 이미지가 저장된 서버의 웹에서의 임시 경로
-	private String imageTmpFile = null;
-	private HttpServletRequest request = null;
-	private UUID uuid = UUID.randomUUID();
-	private String uid = null;
-	
-	public ImageRekognition(String imageFile, HttpServletRequest request) {
-		super();
-		this.request = request;
-		this.imageFile = imageFile;
-		this.uid = uuid.toString();
-		this.uid = uid.substring(uid.length()-12, uid.length());
+	private String imageTmp; // 얻은 이미지가 저장된 서버의 웹에서의 임시 경로
+	private String resultLabelDetection; //요소검색 결과
+	private String resultWebDetection; //관련검색어 결과
+	private String resultLandmarkDetection; //랜드마크검사 결과
+	private CreateImg creatimg; //분석할 이미지의 경로를 담은 객체
+	@Override
+	public void run() {
+		int mst = 0;
+		while(true) {
+			if(creatimg.getImageTmp()!=null)break;
+			System.out.println("이미지 생성 기다리는중..  "+mst);
+			mst++;
+		}
+		this.imageTmp = creatimg.getImageTmp();
 		
-		System.out.println("imageFile 생성");
-		System.out.println("주소 : " + imageFile);
-		String initUrl = imageFile;
-		try {
-			URL url = new URL(initUrl);
-			imageTmpFile = request.getSession().getServletContext().getRealPath("/resources/img/" + uid + ".png");
-			InputStream fis = url.openStream();
-			File file = new File(imageTmpFile);
-			OutputStream os = new FileOutputStream(file);
-			FileCopyUtils.copy(fis, os);
-			fis.close();
-			os.close();
-
-			imgResize();
-
-			imageTmp = OUR_DOMAIN + request.getContextPath() + "/resources/img/" + uid + ".png";
-			System.out.println(imageTmp);
-		} catch (Exception e) {
-			// e.printStackTrace();
-		}
-	}
-
-	private void imgResize() {
-		String imgOriginalPath = imageTmpFile; // 원본 이미지 파일명
-		String imgTargetPath = imageTmpFile; // 새 이미지 파일명
-		String imgFormat = "png"; // 새 이미지 포맷. jpg, gif 등
-		int newWidth = 600; // 변경 할 넓이
-		int newHeight = 700; // 변경 할 높이
-		String mainPosition = "W"; // W:넓이중심, H:높이중심, X:설정한 수치로(비율무시)
-
-		Image image;
-		int imageWidth;
-		int imageHeight;
-		double ratio;
-		int w;
-		int h;
-
-		try {
-			// 원본 이미지 가져오기
-			image = ImageIO.read(new File(imgOriginalPath));
-
-			// 원본 이미지 사이즈 가져오기
-			imageWidth = image.getWidth(null);
-			imageHeight = image.getHeight(null);
-
-			if (mainPosition.equals("W")) { // 넓이기준
-
-				ratio = (double) newWidth / (double) imageWidth;
-				w = (int) (imageWidth * ratio);
-				h = (int) (imageHeight * ratio);
-
-			} else if (mainPosition.equals("H")) { // 높이기준
-
-				ratio = (double) newHeight / (double) imageHeight;
-				w = (int) (imageWidth * ratio);
-				h = (int) (imageHeight * ratio);
-
-			} else { // 설정값 (비율무시)
-
-				w = newWidth;
-				h = newHeight;
+		resultLabelDetection = doLabelDetection();
+		resultWebDetection = doWebDetection();
+//		resultLandmarkDetection = doLandmarkDetection();
+		
+		JSONParser pJson = new JSONParser();
+		// 요소인식
+		System.out.println("======탐지된 요소=======");
+		if (resultLabelDetection != null) {
+			try {
+				JSONObject jobj = (JSONObject) pJson.parse(resultLabelDetection);
+				JSONArray jarry = (JSONArray) jobj.get("responses");
+				System.out.println(jarry);
+				jobj = (JSONObject) jarry.get(0);
+				jarry = (JSONArray) jobj.get("labelAnnotations");
+				if (jarry != null) {
+					ArrayList<JSONObject> arryJSONObject = new ArrayList<>();
+					for (int i = 0; i < jarry.size(); i++) {
+						arryJSONObject.add((JSONObject) jarry.get(i));
+					}
+					ArrayList<String> el = new ArrayList<>();
+					// 사진에서 탐지된 요소를 0개~2개를 출력합니다. (최대 수는 콜에서 설정가능. 현재값 2개)
+					for (JSONObject JSONobj : arryJSONObject) {
+						el.add((String) JSONobj.get("description"));
+					}
+					System.out.println(el); // 요소 두개들어있습니다.
+				} else {
+					System.out.println("분석 실패 or 분석 할 것 없음");
+				}
+			} catch (ParseException e) {
+				System.out.println("ImageRekognition.java resultLabelDetection 오류(seoyul)");
+				// TODO Auto-generated catch block
 			}
-
-			// 이미지 리사이즈
-			// Image.SCALE_DEFAULT : 기본 이미지 스케일링 알고리즘 사용
-			// Image.SCALE_FAST : 이미지 부드러움보다 속도 우선
-			// Image.SCALE_REPLICATE : ReplicateScaleFilter 클래스로 구체화 된 이미지 크기 조절 알고리즘
-			// Image.SCALE_SMOOTH : 속도보다 이미지 부드러움을 우선
-			// Image.SCALE_AREA_AVERAGING : 평균 알고리즘 사용
-			Image resizeImage = image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-
-			// 새 이미지 저장하기
-			BufferedImage newImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-			Graphics g = newImage.getGraphics();
-			g.drawImage(resizeImage, 0, 0, null);
-			g.dispose();
-			ImageIO.write(newImage, imgFormat, new File(imgTargetPath));
-			System.out.println("이미지 리사이징 끝");
-		} catch (Exception e) {
-			// e.printStackTrace();
 		}
-	}
 
-	public void fileClear() {
-		System.out.println("imageFile 삭제");
-		File file = new File(imageTmpFile);
-		if (file.exists())
-			file.delete();
+		// System.out.println("======랜드마크=======");
+		// doLandmarkDetection();
+
+		System.out.println("======관련어=======");
+		if (resultWebDetection != null) {
+			try {
+				JSONObject jobj = (JSONObject) pJson.parse(resultWebDetection);
+				JSONArray jarry = (JSONArray) jobj.get("responses");
+				jobj = (JSONObject) jarry.get(0);
+				jobj = (JSONObject) jobj.get("webDetection");
+				if (jobj != null) {
+					jarry = (JSONArray) jobj.get("webEntities");
+					JSONObject jobjtmp = (JSONObject) jarry.get(0);
+					String aa = (String) jobjtmp.get("description"); // 사진 명사 인식?
+					System.out.println(aa);
+					
+					jarry = (JSONArray) jobj.get("bestGuessLabels");
+					jobjtmp = (JSONObject) jarry.get(0);
+					String bb = (String) jobjtmp.get("label"); // 사진설명느낌?
+					if(!(bb.equals(aa))) {
+					System.out.println(bb);
+					}
+				} else {
+					System.out.println(jarry);
+					System.out.println("분석 실패 or 분석 할 것 없음");
+				}
+			} catch (Exception e) {
+				System.out.println("ImageRekognition.java resultWebDetection 오류(seoyul)");
+			}
+		} else {
+			System.out.println("없음");
+		}
+		// 이미지 인식 끝
+		super.run();
 	}
+	
+	public ImageRekognition(CreateImg creatimg) {
+		super();
+		this.creatimg = creatimg;
+	}
+	
 
 	/**
 	 * doLabelDetection
@@ -142,7 +127,7 @@ public class ImageRekognition {
 	 * return resp;
 	 */
 	
-	public String doLabelDetection() {
+	public String doLabelDetection () {
 		try {
 			URL serverUrl = new URL(TARGET_URL + API_KEY);
 			URLConnection urlConnection = serverUrl.openConnection();
