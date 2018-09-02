@@ -10,6 +10,11 @@
 	<script src="./resources/js/search.js"></script>
 </head>
 <body>
+	<div id="toMain">
+		<form action="main">
+			<input type="submit" value="메인 화면으로">		
+		</form>
+	</div>
 	<h1>사진 검색</h1>
 	<input id="text" type="text">
 	<input id="button" type="button" value="Search">

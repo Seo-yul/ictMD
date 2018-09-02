@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sesoc.ictmd.Interface.ModelDetailDAO">
+
+	<select id="searchModelDetail" parameterType="hashmap" resultType="modelDetail">
+		select
+			maker,
+			model,
+			imgUrl,
+			type,
+			pixel,
+			cmos,
+			sensor,
+			imageProcessor,
+			screen,
+			viewFinder,
+			maxISO,
+			shutterSpeed,
+			continuousShooting,
+			af,
+			focusArea,
+			flash,
+			videoQuality,
+			volume,
+			weight,
+			etc
+		from 
+			modelDetail
+		where
+			REPLACE(model, ' ', '') IN
+		 	<foreach item="item" collection="tags" index="index" open="(" separator="," close=")">
+		 		 UPPER(REPLACE(#{item}, ' ', ''))
+		 	</foreach>
+	</select>
+</mapper>
+

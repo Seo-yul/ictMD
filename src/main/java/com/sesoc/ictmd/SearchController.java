@@ -6,14 +6,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sesoc.ictmd.Interface.ModelDetailDAO;
 import com.sesoc.ictmd.api.SearchAPI;
 import com.sesoc.ictmd.function.CreateImg;
 import com.sesoc.ictmd.vo.ComplexPhoto;
+import com.sesoc.ictmd.vo.ModelDetail;
 import com.sesoc.ictmd.vo.SimplePhoto;
 
 /**
@@ -21,6 +25,9 @@ import com.sesoc.ictmd.vo.SimplePhoto;
  */
 @Controller
 public class SearchController {
+	@Autowired
+	SqlSession session;
+	
 	SearchAPI api;
 
 	/**
@@ -35,6 +42,14 @@ public class SearchController {
 		ArrayList<SimplePhoto> list = api.search(tags);
 		if (list != null) {
 			result.put("list", list);
+		}
+		
+		HashMap<String, String[]> tagsMap = new HashMap<>();
+		tagsMap.put("tags", tags);
+		ModelDetailDAO mdDAO = session.getMapper(ModelDetailDAO.class);
+		ModelDetail modelInfo = mdDAO.searchModelDetail(tagsMap);
+		if (modelInfo != null) {
+			result.put("model", modelInfo);
 		}
 
 		return result;

@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+#toMain {
+	position: fixed;
+	top: 5%;
+	right: 5%;
+}
+
 #dim {
 	background-color: #000;
 	bottom: 0;

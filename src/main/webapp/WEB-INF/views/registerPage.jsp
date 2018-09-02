@@ -201,6 +201,12 @@
 			<input type="button" id="submit" name="submit" class="submit action-button" value="Submit" />
 		</fieldset>
 	</form>
+	
+	<div id="toMain">
+		<form action="main">
+			<input type="submit" value="메인 화면으로">		
+		</form>
+	</div>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
 	<script src="./resources/js/registerPage.js"></script>

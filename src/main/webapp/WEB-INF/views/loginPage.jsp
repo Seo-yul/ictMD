@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ハンサムLoginPage</title>
+	<link rel="stylesheet" type="text/css" href="./resources/css/loginPage.css">
 	
 	<!-- jquery cdn -->
 	<script
@@ -151,6 +152,7 @@
 </head>
 
 <body>
+	
 	<!-- under overlay stuff -->
 	<div class="body"></div>
 
@@ -183,7 +185,12 @@
 			</footer>
 		</div>
 	</div>
-
+	
+	<div id="toMain">
+		<form action="main">
+			<input type="submit" value="메인 화면으로">		
+		</form>
+	</div>
 	<!-- get dem fancy typefaces -->
 	<script type="text/javascript" src="//use.typekit.net/psm0wvc.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>

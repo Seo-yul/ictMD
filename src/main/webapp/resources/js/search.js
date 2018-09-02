@@ -57,7 +57,14 @@ var listup = function(resp) {
 		$("#list").off();
 		$("#list >").remove();
 	}
+	var modelInfo = resp["model"];
+	if (modelInfo != null) {
+		$("#list").append("<br><h3>" + modelInfo["maker"] + " " + modelInfo["model"] + "</h3>");
+		$("#list").append("<img src='" + modelInfo["imgUrl"] + "'>");
+		$("#list").append("<div>" + JSON.stringify(modelInfo) + "</div><br>");
+	}
 	var list = resp["list"];
+	$("#list").append("<h3>검색 결과 : " + list.length + "건의 결과를 출력합니다.</h3>");
 	for (var i in list) {
 		arr[i] = list[i].id;
 		var url = list[i].squareImageUrl;
