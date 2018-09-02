@@ -40,13 +40,19 @@ public class CreateImg extends Thread {
 	private String imageTmpFile; // 로컬에서의 이미지 경로
 	private String uid;
 	private String encode64;
+	private String[] tags; 
+	private String make;
+	private String model;
 
-	public CreateImg(String imageFile, HttpServletRequest request) {
+	public CreateImg(String imageFile, HttpServletRequest request, String[] tags, String make, String model) {
 		super();
 		this.request = request;
 		this.imageFile = imageFile;
 		this.uid = uuid.toString();
 		this.uid = uid.substring(uid.length() - 12, uid.length());
+		this.tags = tags;
+		this.make = make;
+		this.model = model;
 
 		System.out.println("기원 주소 : " + imageFile);
 		try {
@@ -89,6 +95,18 @@ public class CreateImg extends Thread {
 
 	public String getImageEncode64() {
 		return encode64;
+	}
+	
+	public String[] getTags() {
+		return tags;
+	}
+
+	public String getMake() {
+		return make;
+	}
+
+	public String getModel() {
+		return model;
 	}
 
 	// 파일 base64 변환

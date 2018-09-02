@@ -1,22 +1,28 @@
 package com.sesoc.ictmd.api;
 
 import java.io.BufferedWriter;
-import java.io.File;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.sesoc.ictmd.Interface.AnalysisDAO;
 import com.sesoc.ictmd.function.CreateImg;
+import com.sesoc.ictmd.vo.BasicAnalysisData;
 
 /**
  * 
@@ -27,7 +33,8 @@ import com.sesoc.ictmd.function.CreateImg;
  * 
  */
 public class ImageRekognition extends Thread {
-
+	/*@Autowired
+	SqlSession session;*/
 	private static final String TARGET_URL = "https://vision.googleapis.com/v1p3beta1/images:annotate?"; // REST API TARGET URL
 	private static final String API_KEY = "key=AIzaSyCV2X6B5-Di_ubLyaMALNBSg4pBH3LkN2k"; // API사용을 위한키
 	private String imageTmp; // 얻은 이미지가 저장된 서버의 웹에서의 임시 경로
@@ -46,6 +53,8 @@ public class ImageRekognition extends Thread {
 		resultWebDetection = doWebDetection();
 //		resultLandmarkDetection = doLandmarkDetection();
 		
+		ArrayList<String> el = new ArrayList<>();
+		
 		JSONParser pJson = new JSONParser();
 		// 요소인식
 		System.out.println("======탐지된 요소=======");
@@ -61,7 +70,6 @@ public class ImageRekognition extends Thread {
 					for (int i = 0; i < jarry.size(); i++) {
 						arryJSONObject.add((JSONObject) jarry.get(i));
 					}
-					ArrayList<String> el = new ArrayList<>();
 					// 사진에서 탐지된 요소를 0개~2개를 출력합니다. (최대 수는 콜에서 설정가능. 현재값 2개)
 					for (JSONObject JSONobj : arryJSONObject) {
 						el.add((String) JSONobj.get("description"));
@@ -109,6 +117,37 @@ public class ImageRekognition extends Thread {
 			System.out.println("없음");
 		}
 		// 이미지 인식 끝
+		
+		// 데이터 가공 후 DB 입력 작업
+		BasicAnalysisData bad = new BasicAnalysisData();
+		String tags = "";
+		for (String t : creatimg.getTags()) {
+			tags += t + ",";
+		}
+		bad.setTags(tags);
+		String elements = "";
+		for (String t : el) {
+			elements += t + ",";
+		}
+		bad.setElements(elements);
+		bad.setSearchDate("");
+		bad.setMake(creatimg.getMake());
+		bad.setModel(creatimg.getModel());
+		System.out.println(bad);
+		
+		String resource = "mybatis-config.xml";
+		try {
+			Reader reader = Resources.getResourceAsReader(resource);
+			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
+			SqlSession session = factory.openSession();
+			AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
+			
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		/*AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
+		dao.write(bad);*/
 	}
 	
 	public ImageRekognition(CreateImg creatimg) {

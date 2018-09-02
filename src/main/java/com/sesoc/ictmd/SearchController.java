@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,12 @@ public class SearchController {
 	 */
 	// 검색어를 문자열 배열로 입력받아 검색 후 결과를 반환하는 메소드
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> list(String[] tags) {
+	public @ResponseBody Map<String, Object> list(String[] tags, HttpSession ss) {
 		api = new SearchAPI();
 		Map<String, Object> result = new HashMap<String, Object>();
+		
+		ss.removeAttribute("tags");
+		ss.setAttribute("tags", tags);
 
 		ArrayList<SimplePhoto> list = api.search(tags);
 		if (list != null) {
@@ -57,14 +61,23 @@ public class SearchController {
 
 	// 임의의 사진 하나를 클릭했을 때 해당 사진에 대한 모든 정보를 가져오는 메소드
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
-	public @ResponseBody Map<String, Object> detail(String id, HttpServletRequest request) {
+	public @ResponseBody Map<String, Object> detail(String id, HttpServletRequest request, HttpSession ss) {
 		api = new SearchAPI();
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		ComplexPhoto photo = api.getInfo(id);
 		HashMap<String, String> exif = api.getExif(id);
 		
-		CreateImg creatimg = new CreateImg(photo.getUrl(), request);
+		String[] tags = (String[]) ss.getAttribute("tags");
+		String make = "";
+		String model = "";
+		if (exif.containsKey("Make")) {
+			make = exif.get("Make");
+		}
+		if (exif.containsKey("Model")) {
+			model = exif.get("Model");
+		}
+		CreateImg creatimg = new CreateImg(photo.getUrl(), request, tags, make, model);
 		creatimg.start();
 		
 		result.put("photo", photo);
