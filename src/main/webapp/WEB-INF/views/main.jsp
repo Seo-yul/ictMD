@@ -55,5 +55,6 @@
 		<a href="analysis">트렌드 분석 페이지로 이동</a>
 		<br>
 		<a href="weatherNshopping">날씨 및 가격 정보 페이지로 이동</a>
+		<a href="test">test</a>
 	</body>
 </html>

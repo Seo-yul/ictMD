@@ -1,7 +1,5 @@
 package com.sesoc.ictmd.vo;
 
-import java.sql.Date;
-
 public class BasicAnalysisData {
 	private int num;
 	private String tags;

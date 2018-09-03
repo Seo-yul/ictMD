@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sesoc.ictmd.Interface.AnalysisDAO;
 import com.sesoc.ictmd.Interface.ModelDetailDAO;
 import com.sesoc.ictmd.api.SearchAPI;
 import com.sesoc.ictmd.function.CreateImg;
+import com.sesoc.ictmd.vo.BasicAnalysisData;
 import com.sesoc.ictmd.vo.ComplexPhoto;
 import com.sesoc.ictmd.vo.ModelDetail;
 import com.sesoc.ictmd.vo.SimplePhoto;
@@ -84,5 +86,20 @@ public class SearchController {
 		result.put("exif", exif);
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void test() {
+		AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
+		ArrayList<BasicAnalysisData> l = dao.readAll();
+		System.out.println("list : " + l);
+		for (BasicAnalysisData asdf : l) {
+			System.out.println(asdf);
+			String[] aa = asdf.getTags().split(",");
+			for (String bb : aa) {
+				System.out.println("tag : " + bb);
+			}
+			System.out.println("");
+		}
 	}
 }

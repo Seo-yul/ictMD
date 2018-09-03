@@ -122,7 +122,7 @@ public class ImageRekognition extends Thread {
 		BasicAnalysisData bad = new BasicAnalysisData();
 		String tags = "";
 		for (String t : creatimg.getTags()) {
-			tags += t + ",";
+			tags += t.trim() + ",";
 		}
 		bad.setTags(tags);
 		String elements = "";
@@ -135,21 +135,9 @@ public class ImageRekognition extends Thread {
 		bad.setModel(creatimg.getModel());
 		System.out.println(bad);
 		
-		/*String resource = "mybatis-config.xml";
-		try {
-			Reader reader = Resources.getResourceAsReader(resource);
-			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
-			SqlSession session = factory.openSession();
-			AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
-			
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
 		SqlSession session = creatimg.getSession();
 		AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
 		int result = dao.write(bad);
-		System.out.println("insert result : " + result);
 	}
 	
 	public ImageRekognition(CreateImg creatimg) {
