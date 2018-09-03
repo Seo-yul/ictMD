@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.util.FileCopyUtils;
 
 import com.sesoc.ictmd.api.ImageRekognition;
@@ -43,8 +44,9 @@ public class CreateImg extends Thread {
 	private String[] tags; 
 	private String make;
 	private String model;
+	private SqlSession session;
 
-	public CreateImg(String imageFile, HttpServletRequest request, String[] tags, String make, String model) {
+	public CreateImg(String imageFile, HttpServletRequest request, String[] tags, String make, String model, SqlSession session) {
 		super();
 		this.request = request;
 		this.imageFile = imageFile;
@@ -53,6 +55,7 @@ public class CreateImg extends Thread {
 		this.tags = tags;
 		this.make = make;
 		this.model = model;
+		this.session = session;
 
 		System.out.println("기원 주소 : " + imageFile);
 		try {
@@ -107,6 +110,10 @@ public class CreateImg extends Thread {
 
 	public String getModel() {
 		return model;
+	}
+	
+	public SqlSession getSession() {
+		return session;
 	}
 
 	// 파일 base64 변환

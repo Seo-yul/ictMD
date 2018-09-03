@@ -77,7 +77,7 @@ public class SearchController {
 		if (exif.containsKey("Model")) {
 			model = exif.get("Model");
 		}
-		CreateImg creatimg = new CreateImg(photo.getUrl(), request, tags, make, model);
+		CreateImg creatimg = new CreateImg(photo.getUrl(), request, tags, make, model, session);
 		creatimg.start();
 		
 		result.put("photo", photo);

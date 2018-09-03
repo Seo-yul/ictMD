@@ -135,7 +135,7 @@ public class ImageRekognition extends Thread {
 		bad.setModel(creatimg.getModel());
 		System.out.println(bad);
 		
-		String resource = "mybatis-config.xml";
+		/*String resource = "mybatis-config.xml";
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);
 			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(reader);
@@ -145,9 +145,11 @@ public class ImageRekognition extends Thread {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		/*AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
-		dao.write(bad);*/
+		}*/
+		SqlSession session = creatimg.getSession();
+		AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
+		int result = dao.write(bad);
+		System.out.println("insert result : " + result);
 	}
 	
 	public ImageRekognition(CreateImg creatimg) {
