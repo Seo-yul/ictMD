@@ -55,6 +55,7 @@
 		<a href="analysis">트렌드 분석 페이지로 이동</a>
 		<br>
 		<a href="weatherNshopping">날씨 및 가격 정보 페이지로 이동</a>
-		<a href="test">test</a>
+		<br>
+		<h1>검색하기 전, com.sesoc.ictmd.function의 CreateImg.java에서 도메인을 private static final String OUR_DOMAIN을 자기 서버로 설정할 것.</h1>
 	</body>
 </html>
