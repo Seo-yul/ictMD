@@ -84,7 +84,7 @@
 		var humiddata = [];
 		function insertChart(){
 			Highcharts.chart('foreTable', {
-			    chart: {
+	 		    chart: {
 			        zoomType: 'xy'
 			    },
 			    title: {
