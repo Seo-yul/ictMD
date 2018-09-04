@@ -114,7 +114,7 @@ public class ImageRekognition extends Thread {
 		BasicAnalysisData bad = new BasicAnalysisData();
 		String tags = "";
 		for (String t : creatimg.getTags()) {
-			tags += t.trim().toUpperCase() + ",";
+			tags += t + ",";
 		}
 		tags = tags.substring(0, tags.length() - 1);
 		bad.setTags(tags);

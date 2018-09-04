@@ -79,7 +79,7 @@ var listup = function(resp) {
 	for (var i in result) {
 		arr[i] = result[i].id;
 		list.append("<img alt='" + i + "' src='" + result[i].squareImageUrl + "' style='width:300px;height:300px;'>");
-		if ((i+1)%3 == 0) {
+		if ((i+1)%4 == 0) {
 			list.append("<br>");
 		}
 	}
