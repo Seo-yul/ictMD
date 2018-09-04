@@ -4,36 +4,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
-		
-		<title>사진 검색</title>
-		
-		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-		<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
-		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-		<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Custom styles for this template -->
-		<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
-		<link href="./resources/templete/css/style.css" rel="stylesheet">
-		<link href="./resources/templete/css/full-slider.css" rel="stylesheet">
-		<link href="./resources/templete/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
-		<link href="./resources/templete/css/animated-masonry-gallery.css" rel="stylesheet" type="text/css" />
-		<link href="./resources/templete/css/lightbox.css" rel="stylesheet" type="text/css" />
-		
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		    <![endif]-->
-		
-		<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
-	</head>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
+	
+	<title>사진 검색</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
+	<link href="./resources/templete/css/style.css" rel="stylesheet">
+	<link href="./resources/templete/css/full-slider.css" rel="stylesheet">
+	<link href="./resources/templete/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
+	<link href="./resources/templete/css/animated-masonry-gallery.css" rel="stylesheet" type="text/css" />
+	<link href="./resources/templete/css/lightbox.css" rel="stylesheet" type="text/css" />
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	
+	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
+</head>
 <body>
 	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
@@ -44,11 +44,11 @@
 	</div>
 	<div class="navmenu navmenu-default navmenu-fixed-left">
 		<ul class="nav navmenu-nav">
-			<li><a href="index.html">Home</a></li>
-			<li><a href="works.html">Works</a></li>
-			<li><a href="gallery.html">Gallery</a></li>
-			<li><a href="blog.html">Blog</a></li>
-			<li><a href="contact.html">Contact</a></li>
+			<li><a href="main">메인</a></li>
+			<li><a href="search">검색</a></li>
+			<li><a href="analysis">분석</a></li>
+			<li><a href="weatherNshopping">종합 정보</a></li>
+			<li><a href="">남는 칸</a></li>
 		</ul>
 		<a class="navmenu-brand" href="#"><img src="./resources/templete/img/logo.png" width="160"></a>
 		<div class="social">
@@ -142,18 +142,17 @@
 		</div>
 	</div>
 	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
-    <script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
-    </script>
-    <script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
-    <script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
-    <script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
-    <!-- <script src="./resources/js/main.js"></script> -->
-    <script src="./resources/templete/js/lightbox.js"></script>
+	   ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
+	<script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
+	<script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
+	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
+	<!-- <script src="./resources/js/main.js"></script> -->
+	<script src="./resources/templete/js/lightbox.js"></script>
 	
 	<script src="./resources/js/search.js"></script>
-  </body>
+</body>
 </html>
