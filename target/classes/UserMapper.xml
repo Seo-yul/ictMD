@@ -49,17 +49,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			userName
 		from userBase
 		where userId=#{userId} and userPwd=#{userPwd}
-<<<<<<< HEAD
-	
-=======
 	</select>
 	
-		<select id="checkEmail" parameterType="userBase" resultType="userBase">
+	<select id="checkEmail" parameterType="userBase" resultType="userBase">
 		select
 			userId
 		from userBase
 		where userId=#{userId}
->>>>>>> a7d2d2dd766a9c00c9e00baaa430e124d772f6a7
 	</select>
+	
+	<delete id="secesionUser" parameterType="userBase">
+		delete from userBase where userId=#{userId}
+	</delete>
+	
+	<update id="fixUserBase" parameterType="userBase">
+			update userbase set userId = #{userId}
+			<if test="userPwd != null">
+				, userPwd=#{userPwd}
+			</if> 
+			<if test="userName != null">
+				, userName=#{userName}
+			</if>
+			where userId = #{userId}
+	</update>
+	
+	<update id="fixUserDetail" parameterType="userDetail">
+		update userdetail set userId = #{userId}
+			<if test="birth != null">
+				, birth=#{birth}
+			</if> 
+			<if test="favorite != null">
+				, favorite=#{favorite}
+			</if>
+			<if test="model != null">
+				, model=#{model}
+			</if>
+			where userId = #{userId}
+	</update>
 </mapper>
 

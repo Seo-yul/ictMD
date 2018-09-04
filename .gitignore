@@ -1,3 +1,6 @@
+# Created by https://www.gitignore.io/api/java,java-web
+
+### Java ###
 # Compiled class file
 *.class
 
@@ -11,6 +14,7 @@
 .mtj.tmp/
 
 # Package Files #
+*.jar
 *.war
 *.nar
 *.ear
@@ -20,6 +24,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
- 
-target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
-target/m2e-wtp/web-resources/META-INF/maven/com.sesoc/ictmd/pom.properties
+
+### Java-Web ###
+## ignoring target file
+target/
+
+
+# End of https://www.gitignore.io/api/java,java-web
