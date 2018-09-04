@@ -5,6 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- Bootstrap core CSS -->
+   
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="./resources/css/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./resources/css/navmenu-reveal.css" rel="stylesheet">
+    <link href="./resources/css/style.css" rel="stylesheet">
+  	<link href="./resources/css/full-slider.css" rel="stylesheet">
+    
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo.js"></script>
 <script src="./resources/js/highcharts.js"></script>
@@ -217,6 +232,14 @@
 					console.log("일몰시간 : " + sunsetTime);
 					console.log("흐림정도 : " + data.clouds.all+ "%");
 					
+					if(data.weather[0].main == 'Clouds'){
+						$("#weaDiv").css("background-image","url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdJ6rOKMlmg6fauCNr7A6Mv0ZkQmIv8SuR0W_3gKfyX5Wgyxa2Xg')")
+					} else if(data.weather[0].main == 'Clear'){
+						$("#weaDiv").css("background-image","url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif')")
+					} else {
+						$("#weaDiv").css("background-image","url('http://i.imgur.com/EWynBnd.gif')")
+					}
+					
 					// 검색한 도시를 위젯으로 출력
 					$("#widgetDiv").html('');
 					$("#widgetDiv").html(showWidget(data.id));
@@ -253,36 +276,7 @@
 						
 					});
 					
-					console.log(tempdata);
-					console.log(raindata);
-					console.log(humiddata);
 					insertChart();
-					
-					
-					
-				/* var fTable=[];
-				var ft = "<table border='1'><tr><th>시간</th><th>날씨</th><th>온도</th><th>강우량</th></tr>";
-				
-				$(data).find("time").each(function() {
-				var times = $(this).attr("from").substring(0,10) +" "+ $(this).attr("from").substring(11,13);
-				ft += "<tr><td>"+times+"</td>";
-				ft += "<td>"+$(this).find("symbol").attr("name")+"</td>";
-				ft += "<td>"+($(this).find("temperature").attr("value")-273.15).toFixed(1)+"</td>";
-
-				if (($(this).find("precipitation").attr("value") != null) &&
-						($(this).find("precipitation").attr("value") > 0.01)){
-					var preci = $(this).find("precipitation").attr("value");
-					ft += "<td>"+parseFloat(preci).toFixed(2)+"</td>";
-				}
-				else{
-					ft += "<td>0</td>";
-				}
-				ft += "</tr>";
-				
-				});
-				ft += "</table>";
-				fTable.push(ft);
-				document.getElementById("foreTable").innerHTML = fTable.join(""); */
 				}
 			});
 		}
@@ -349,25 +343,96 @@
 </script>
 </head>
 <body>
-	<a id="goHome">홈으로</a>
-	<a id="callback">새로고침</a>
-	<hr>
-	<h1>날씨와 쇼핑페이지!!</h1>
-	<hr>
-	<h2>날씨검색</h2>
-	<input type="text" id="city" placeholder="도시입력해주셈 ㅋ" />
-	<button id="searchWeather">검색!</button>
-	<hr>
-	<!-- 현재 날씨정보 위젯 출력부분 -->
-	<div id="widgetDiv"></div>
-	<hr>
-	<!-- 5일간의 일기예보 출력부분 -->
-	<div id="foreTable"></div>
-	<hr>
-	<h2>쇼핑검색</h2>
-	<input type="text" id="product" placeholder="품명을 적어주세요"/>
-	<button id="searchProduct">검색하기</button>
-	<!-- 쇼핑검색결과 출력부분 -->
-	<div id="results"></div>
+	<div class="bar">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+    </button>
+  </div>  
+    <div class="navmenu navmenu-default navmenu-fixed-left">
+      
+     <ul class="nav navmenu-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a class="navmenu-brand" id="goHome"><img src="img/logo.png" width="160"></a>
+      <div class="social">
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#"><i class="fa fa-pinterest-p"></i></a>
+        <a href="#"><i class="fa fa-google-plus"></i></a>
+        <a href="#"><i class="fa fa-skype"></i></a>
+      </div>
+      <div class="copyright-text">©Copyright <a href="https://themewagon.com/"> ThemeWagon</a> 2015 </div>
+    </div>
+
+    <div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
+    <!-- Full Page Image Background Carousel Header -->
+    
+        <!-- Indicators -->
+        <ol class="carousel-indicators xtra-border">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+          <!--   <li data-target="#myCarousel" data-slide-to="2"></li> -->
+        </ol>
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+            	<!-- <div class="fill" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdJ6rOKMlmg6fauCNr7A6Mv0ZkQmIv8SuR0W_3gKfyX5Wgyxa2Xg');"> -->
+            	<div id = "weaDiv" class="fill" style="background-image:url('http://i.imgur.com/EWynBnd.gif');">
+            	    <input type="text" id="city" placeholder="도시입력해주셈 ㅋ" />
+					<button id="searchWeather">검색!</button>
+					<hr>
+					<!-- 현재 날씨정보 위젯 출력부분 -->
+					<div id="widgetDiv"></div>
+					<hr>
+					<!-- 5일간의 일기예보 출력부분 -->
+					<div id="foreTable"></div>
+            	</div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://data.1freewallpapers.com/download/anne-hathaway-at-shopping.jpg');">
+	                <h2>쇼핑검색</h2>
+					<input type="text" id="product" placeholder="품명을 적어주세요"/>
+					<button id="searchProduct">검색하기</button>
+					<!-- 쇼핑검색결과 출력부분 -->
+					<div id="results"></div>
+                
+                </div>
+            </div>
+        </div>
+    </header>
+      <!-- <div class="navbar navbar-default navbar-fixed-top">
+        
+      </div> -->
+
+      <div class="container page-container">
+        <div class="home-page-header">
+         
+         <!-- <div class="col-md-4 col-md-offset-4"><img src="img/zigzag.png" width="400" height="30"></div> -->
+        </div>
+        
+      </div><!-- /.container -->
+    </div>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="./resources/js/jasny-bootstrap.min.js"></script>
+    <script type="text/javascript" src="./resources/js/bootstrap.min.js"></script>
+    <script src="./resources/js/main.js"></script>
+    <script>
+    $('.carousel').carousel({
+        interval: 6000 //changes the speed
+    })
+    </script>
 </body>
 </html>
