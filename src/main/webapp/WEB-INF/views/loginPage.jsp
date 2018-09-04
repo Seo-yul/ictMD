@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>ハンサムLoginPage</title>
+	<link rel="stylesheet" type="text/css" href="./resources/css/loginPage.css">
 	
 	<!-- jquery cdn -->
 	<script
@@ -152,6 +152,7 @@
 </head>
 
 <body>
+	
 	<!-- under overlay stuff -->
 	<div class="body"></div>
 
@@ -184,7 +185,12 @@
 			</footer>
 		</div>
 	</div>
-
+	
+	<div id="toMain">
+		<form action="main">
+			<input type="submit" value="메인 화면으로">		
+		</form>
+	</div>
 	<!-- get dem fancy typefaces -->
 	<script type="text/javascript" src="//use.typekit.net/psm0wvc.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>

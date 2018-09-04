@@ -1,7 +1,6 @@
 package com.sesoc.ictmd.vo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ComplexPhoto {
 	private String id;
@@ -9,21 +8,18 @@ public class ComplexPhoto {
 	private ArrayList<String> tags;
 	private float latitude;
 	private float longitude;
-	private HashMap<String, String> exifs;
 	
 	public ComplexPhoto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ComplexPhoto(String id, String url, ArrayList<String> tags, float latitude, float longitude,
-			HashMap<String, String> exifs) {
+	public ComplexPhoto(String id, String url, ArrayList<String> tags, float latitude, float longitude) {
 		super();
 		this.id = id;
 		this.url = url;
 		this.tags = tags;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.exifs = exifs;
 	}
 
 	public String getId() {
@@ -66,17 +62,9 @@ public class ComplexPhoto {
 		this.longitude = longitude;
 	}
 
-	public HashMap<String, String> getExifs() {
-		return exifs;
-	}
-
-	public void setExifs(HashMap<String, String> exifs) {
-		this.exifs = exifs;
-	}
-
 	@Override
 	public String toString() {
 		return "ComplexPhoto [id=" + id + ", url=" + url + ", tags=" + tags + ", latitude=" + latitude + ", longitude="
-				+ longitude + ", exifs=" + exifs + "]";
+				+ longitude + "]";
 	}
 }

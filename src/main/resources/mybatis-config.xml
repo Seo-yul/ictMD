@@ -6,8 +6,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias type="com.sesoc.ictmd.vo.UserBase" alias="userBase"/>
 		<typeAlias type="com.sesoc.ictmd.vo.UserDetail" alias="userDetail"/>
+		<typeAlias alias="modelBase" type="com.sesoc.ictmd.vo.ModelBase"/>
+		<typeAlias alias="modelDetail" type="com.sesoc.ictmd.vo.ModelDetail"/>
+		<typeAlias type="com.sesoc.ictmd.vo.BasicAnalysisData" alias="BAD"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="UserMapper.xml"/>
+		<mapper resource="ModelBaseMapper.xml"/>
+		<mapper resource="ModelDetailMapper.xml"/>
+		<mapper resource="analysisMapper.xml"/>
 	</mappers>
 </configuration>

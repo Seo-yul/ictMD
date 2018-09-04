@@ -15,7 +15,7 @@
 	$(function() {
 		/* 홈화면으로 가기. 단 아직 메인을 만들지 않았기때문에 로그인후의 imsi페이지로 가게 만들었습니다. */
 		$("#goHome").on("click",function(){
-			location.href="/ictmd/imsi";
+			location.href="/ictmd/";
 		});
 		
 		/* 새로고침 */

@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- db.properties 읽어오기 -->
 	<bean
@@ -32,12 +32,13 @@
 	<!-- sqlSession -->
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<constructor-arg index="0" name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
 	</bean>
 
 	<!-- file I/O -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
-	</bean>	
+	</bean>
 </beans>

@@ -1,47 +1,41 @@
 package com.sesoc.ictmd;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.sesoc.ictmd.api.ImageRekognition;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	// 처음 구동 시 메인 화면으로 이동하는 메소드
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		//logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		//return "home";
-		return "loginPage";
+	public String init() {
+		return "redirect:/main";
 	}
 	
+	// 메인 화면으로 이동하는 메소드
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String main() {
+		return "main";
+	}
+	
+	// 사진 검색 화면으로 이동하는 메소드
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search() {
+		return "search";
+	}
+	
+	// 트렌드 분석 화면으로 이동하는 메소드
+	@RequestMapping(value = "/analysis", method = RequestMethod.GET)
+	public String analysis() {
+		return "analysis";
+	}
+	
+	// 날씨 및 가격 정보 화면으로 이동하는 메소드
 	@RequestMapping(value = "/weatherNshopping", method = RequestMethod.GET)
 	public String goWeather() {
 		return "weatherNshopping";
 	}
-	
-	
 }
