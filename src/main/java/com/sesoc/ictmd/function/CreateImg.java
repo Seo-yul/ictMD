@@ -3,7 +3,6 @@ package com.sesoc.ictmd.function;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,8 +31,12 @@ import com.sesoc.ictmd.api.ImageRekognition;
  */
 
 public class CreateImg extends Thread {
-	// 203.233.199.203
-	private static final String OUR_DOMAIN = "http://203.233.199.202:8081/ictmd"; // 우리의 도메인입니다.
+	// 우리의 도메인입니다.
+	private static final String OUR_DOMAIN = "http://203.233.199.202:8081/ictmd"; // 정병준 서버 주소
+	// private static final String OUR_DOMAIN = "http://203.233.199.203/ictmd"; // 윤서율 서버 주소
+	// private static final String OUR_DOMAIN = "http://203.233.199.204:포트번호/ictmd"; // 김재원 서버 주소
+	// private static final String OUR_DOMAIN = "http://203.233.199.205:포트번호/ictmd"; // 김현우 서버 주소
+	// 서버 설정할 때 방화벽 인바운드 규칙에 해당 포트를 추가해야 함
 	private HttpServletRequest request;
 	private UUID uuid = UUID.randomUUID();
 	private String imageFile; // 사용자로부터 이미지 경로를 얻는다.
@@ -71,7 +74,6 @@ public class CreateImg extends Thread {
 		} catch (Exception e) {
 			System.out.println("CreateImg.java run() 오류(seoyul)");
 		}
-
 	}
 
 	@Override
@@ -81,15 +83,15 @@ public class CreateImg extends Thread {
 		System.out.println("로컬 경로 : " + imageTmpFile);
 	/*	if(encode64!=null)
 			System.out.println("encode64 은 null이 아님");*/
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ImageRekognition imgRekog = new ImageRekognition(this); // api콜
 		imgRekog.start();
-		super.run();
+		// super.run();
 	}
 
 	public String getImageTmp() {
@@ -206,5 +208,4 @@ public class CreateImg extends Thread {
 		if (file.exists())
 			file.delete();
 	}
-
 }

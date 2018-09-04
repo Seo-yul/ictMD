@@ -4,7 +4,8 @@ var arr;
 var popup = function(resp) {
 	var photo = resp["photo"];
 	var exif = JSON.stringify(resp["exif"]);
-	$("body").append("<div id='dim'></div>");
+	$("#loader").remove();
+	$("#msg").remove();
 	$("body").append("<div id='layer'></div>");
 	var layer = $("#layer");
 	layer.css("top", Math.max(0, $(window).scrollTop() + 60) + "px");
@@ -37,6 +38,13 @@ var popup = function(resp) {
 
 // 4. 검색된 사진 목록에서 임의의 사진 하나를 클릭하면 서버에서 해당 사진에 대한 상세 정보를 가져오는 함수.
 var detail = function(e) {
+	var body = $("body");
+	body.append("<div id='dim'></div>");
+	body.append("<div id='loader'></div>");
+	$("#loader").css("top", Math.max(0, $(window).scrollTop() + 200) + "px");
+	body.append("<div id='msg'>Loading...</div>");
+	$("#msg").css("top", Math.max(0, $(window).scrollTop() + 400) + "px");
+	
 	var num = e.target.getAttribute("alt");
 	$.ajax({
 		  data : {
@@ -53,27 +61,27 @@ var detail = function(e) {
 // 3. 서버로부터 전송받은 사진 목록을 화면에 그리는 함수.
 var listup = function(resp) {
 	arr = new Array();
+	var list = $("#list");
 	if ($("#list >").length) {
-		$("#list").off();
+		list.off();
 		$("#list >").remove();
 	}
-	var modelInfo = resp["model"];
-	if (modelInfo != null) {
-		$("#list").append("<br><h3>" + modelInfo["maker"] + " " + modelInfo["model"] + "</h3>");
-		$("#list").append("<img src='" + modelInfo["imgUrl"] + "'>");
-		$("#list").append("<div>" + JSON.stringify(modelInfo) + "</div><br>");
+	var model = resp["model"];
+	if (model != null) {
+		list.append("<br><h3>" + model["maker"] + " " + model["model"] + "</h3>");
+		list.append("<img src='" + model["imgUrl"] + "'>");
+		list.append("<div>" + JSON.stringify(model) + "</div><br>");
 	}
-	var list = resp["list"];
-	$("#list").append("<h3>검색 결과 : " + list.length + "건의 결과를 출력합니다.</h3>");
-	for (var i in list) {
-		arr[i] = list[i].id;
-		var url = list[i].squareImageUrl;
-		$("#list").append("<img alt='" + i + "' src='" + url + "' style='width:300px;height:300px;'>");
+	var result = resp["list"];
+	list.append("<h3>검색 결과 : " + result.length + "건의 결과를 출력합니다.</h3>");
+	for (var i in result) {
+		arr[i] = result[i].id;
+		list.append("<img alt='" + i + "' src='" + result[i].squareImageUrl + "' style='width:300px;height:300px;'>");
 		if ((i+1)%3 == 0) {
-			$("#list").append("<br>");
+			list.append("<br>");
 		}
 	}
-	$("#list").on("click", "img", function(e) {
+	list.on("click", "img", function(e) {
 		detail(e);
 	});
 }
@@ -106,7 +114,8 @@ var search = function() {
 $(function() {
 	$("#button").on("click", search);
 	$("#text").keydown(function(key) {
-		if (key.keyCode == 13)
+		if (key.keyCode == 13) {
 			search();
+		}
 	});
 });
