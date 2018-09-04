@@ -68,9 +68,11 @@ var listup = function(resp) {
 	}
 	var model = resp["model"];
 	if (model != null) {
-		list.append("<br><h3>" + model["maker"] + " " + model["model"] + "</h3>");
-		list.append("<img src='" + model["imgUrl"] + "'>");
-		list.append("<div>" + JSON.stringify(model) + "</div><br>");
+		for (var i in model) {
+			list.append("<br><h3>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
+			list.append("<img src='" + model[i]["imgUrl"] + "'>");
+			list.append("<div>" + JSON.stringify(model[i]) + "</div><br>");
+		}
 	}
 	var result = resp["list"];
 	list.append("<h3>검색 결과 : " + result.length + "건의 결과를 출력합니다.</h3>");

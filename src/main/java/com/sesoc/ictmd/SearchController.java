@@ -52,7 +52,7 @@ public class SearchController {
 		HashMap<String, String[]> tagsMap = new HashMap<>();
 		tagsMap.put("tags", tags);
 		ModelDetailDAO mdDAO = session.getMapper(ModelDetailDAO.class);
-		ModelDetail model = mdDAO.searchModelDetail(tagsMap);
+		ArrayList<ModelDetail> model = mdDAO.searchModelDetail(tagsMap);
 		if (model != null) {
 			result.put("model", model);
 		}
