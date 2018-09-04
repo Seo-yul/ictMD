@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo.js"></script>
+<script src="./resources/js/highcharts.js"></script>
+<script src="./resources/js/series-label.js"></script>
+<script src="./resources/js/exporting.js"></script>
+<script src="./resources/js/export-data.js"></script>
 <script>
 	$(function() {
 		/* 홈화면으로 가기. 단 아직 메인을 만들지 않았기때문에 로그인후의 imsi페이지로 가게 만들었습니다. */
@@ -22,6 +26,7 @@
 		/* 처음 페이지 들어오면 현재 접속위치의 날씨정보 출력부분 */
 			var currnetLon = ""; // 경도 초기화
 			var currentLat = ""; // 위도 초기화
+			var cityName = "";
 			
 			//현재 접속위치의 경도 및 위도 정보 받아오기
 			navigator.geolocation.getCurrentPosition(function(position){
@@ -73,10 +78,119 @@
 				s.parentNode.insertBefore(script, s);
 			})();
 		}
+		var carta = [];
+		var raindata = [];
+		var tempdata = [];
+		var humiddata = [];
+		function insertChart(){
+			Highcharts.chart('foreTable', {
+	 		    chart: {
+			        zoomType: 'xy'
+			    },
+			    title: {
+			        text: 'Weather Forecast for '+ cityName
+			    },
+			   /*  subtitle: {
+			        text: 'Source: WorldClimate.com'
+			    }, */
+			    xAxis: [{
+			        categories: carta,
+			        crosshair: true
+			    }],
+			    yAxis: [{ // Primary yAxis
+			        labels: {
+			            format: '{value}°C',
+			            style: {
+			                color: Highcharts.getOptions().colors[2]
+			            }
+			        },
+			        title: {
+			            text: 'Temperature',
+			            style: {
+			                color: Highcharts.getOptions().colors[2]
+			            }
+			        },
+			        opposite: true
+
+			    }, { // Secondary yAxis
+			        gridLineWidth: 0,
+			        title: {
+			            text: 'Rainfall',
+			            style: {
+			                color: Highcharts.getOptions().colors[0]
+			            }
+			        },
+			        labels: {
+			            format: '{value} mm',
+			            style: {
+			                color: Highcharts.getOptions().colors[0]
+			            }
+			        }
+
+			    }, { // Tertiary yAxis
+			        gridLineWidth: 0,
+			        title: {
+			            text: 'humidity',
+			            style: {
+			                color: Highcharts.getOptions().colors[1]
+			            }
+			        },
+			        labels: {
+			            format: '{value} %',
+			            style: {
+			                color: Highcharts.getOptions().colors[1]
+			            }
+			        },
+			        opposite: true
+			    }],
+			    tooltip: {
+			        shared: true
+			    },
+			    legend: {
+			        layout: 'vertical',
+			        align: 'left',
+			        x: 80,
+			        verticalAlign: 'top',
+			        y: 55,
+			        floating: true,
+			        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+			    },
+			    series: [{
+			        name: 'Rainfall',
+			        type: 'column',
+			        yAxis: 1,
+			        data: raindata,
+			        tooltip: {
+			            valueSuffix: ' mm'
+			        }
+
+			    }, {
+			        name: 'Humidity',
+			        type: 'spline',
+			        yAxis: 2,
+			        data: humiddata,
+			        marker: {
+			            enabled: false
+			        },
+			        dashStyle: 'shortdot',
+			        tooltip: {
+			            valueSuffix: ' %'
+			        }
+
+			    }, {
+			        name: 'Temperature',
+			        type: 'spline',
+			        data: tempdata,
+			        tooltip: {
+			            valueSuffix: ' °C'
+			        }
+			    }]
+			});
+		}
 		
 		/* 날씨부분 메인함수 */
 		function showWeather(){			
-			var cityName = $("#city").val();
+			cityName = $("#city").val();
 			var urlAddr = "http:////api.openweathermap.org/data/2.5/weather?q="+ cityName+ "&appid=8d9df8e528baa07108cb74b3776716c3";
 			
 			$.ajax({ 
@@ -119,7 +233,34 @@
 				type : "get",
 				dataType : "xml",
 				success : function(data) {
-				var fTable=[];
+					console.log(data);
+					carta = [];
+					raindata = [];
+					tempdata = [];
+					humiddata = [];
+					$(data).find("time").each(function() {
+						carta.push($(this).attr("from").substring(0,10) +" "+ $(this).attr("from").substring(11,13));
+						humiddata.push(parseFloat($(this).find("humidity").attr("value")));
+						tempdata.push(parseFloat(($(this).find("temperature").attr("value")-273.15).toFixed(1)));
+						if (($(this).find("precipitation").attr("value") != null) &&
+								($(this).find("precipitation").attr("value") > 0.01)){
+							var preci = $(this).find("precipitation").attr("value");
+							raindata.push(parseFloat(parseFloat(preci).toFixed(2)));
+						}
+						else{
+							raindata.push(0);
+						}
+						
+					});
+					
+					console.log(tempdata);
+					console.log(raindata);
+					console.log(humiddata);
+					insertChart();
+					
+					
+					
+				/* var fTable=[];
 				var ft = "<table border='1'><tr><th>시간</th><th>날씨</th><th>온도</th><th>강우량</th></tr>";
 				
 				$(data).find("time").each(function() {
@@ -141,7 +282,7 @@
 				});
 				ft += "</table>";
 				fTable.push(ft);
-				document.getElementById("foreTable").innerHTML = fTable.join("");
+				document.getElementById("foreTable").innerHTML = fTable.join(""); */
 				}
 			});
 		}
