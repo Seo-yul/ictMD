@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sesoc.ictmd.Interface.UserDAO;
-import com.sesoc.ictmd.VO.UserBase;
-import com.sesoc.ictmd.VO.UserDetail;
+import com.sesoc.ictmd.vo.UserBase;
+import com.sesoc.ictmd.vo.UserDetail;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	SqlSession session;
-
+	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String loginPage() {
 		return "loginPage";
@@ -26,8 +26,6 @@ public class UserController {
 
 	@RequestMapping(value = "loginCheck", method = RequestMethod.POST)
 	public @ResponseBody Integer loginCheck(UserBase ub, HttpSession hsession) {
-
-		System.out.println("ub = " + ub);
 
 		UserDAO uDAO = session.getMapper(UserDAO.class);
 
@@ -62,17 +60,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public @ResponseBody void logout(HttpSession hsession) {
+	public String logout(HttpSession hsession) {
 
 		hsession.invalidate();
 
-		return;
+		return "redirect:/main";
 	}
 
 	@RequestMapping(value = "/secesionCheck", method = RequestMethod.POST)
 	public @ResponseBody Integer secessionCheck(HttpSession hsession, UserBase ub) {
 
-		System.out.println("넘어온값 : " + ub);
 		UserDAO uDAO = session.getMapper(UserDAO.class);
 
 		UserBase result = uDAO.checkUser(ub);
@@ -90,7 +87,6 @@ public class UserController {
 	@RequestMapping(value = "/fixUserBase", method = RequestMethod.POST)
 	public @ResponseBody void fixUserBase(HttpSession hsession, UserBase ub) {
 
-		System.out.println("넘어온값 : " + ub);
 		UserDAO uDAO = session.getMapper(UserDAO.class);
 		ub.setUserId((String) hsession.getAttribute("userId"));
 		uDAO.fixUserBase(ub);
@@ -101,7 +97,6 @@ public class UserController {
 	@RequestMapping(value = "/fixUserDetail", method = RequestMethod.POST)
 	public @ResponseBody void fixUserDetail(HttpSession hsession, UserDetail ud) {
 
-		System.out.println("넘어온값 : " + ud);
 		UserDAO uDAO = session.getMapper(UserDAO.class);
 		ud.setUserId((String) hsession.getAttribute("userId"));
 		uDAO.fixUserDetail(ud);
@@ -122,7 +117,6 @@ public class UserController {
 
 	@RequestMapping(value = "/insertuserBase", method = RequestMethod.POST)
 	public @ResponseBody void insertuserBase(UserBase userbase) {
-		System.out.println("제발... : " + userbase);
 		UserDAO dao = session.getMapper(UserDAO.class);
 
 		dao.insertUserBase(userbase);
@@ -132,7 +126,6 @@ public class UserController {
 
 	@RequestMapping(value = "/insertuserDetail", method = RequestMethod.POST)
 	public @ResponseBody void insertuserDetail(UserDetail userdetail) {
-		System.out.println("너도제발... : " + userdetail);
 		UserDAO dao = session.getMapper(UserDAO.class);
 
 		dao.insertUserDetail(userdetail);
@@ -146,7 +139,6 @@ public class UserController {
 		UserDAO uDAO = session.getMapper(UserDAO.class);
 
 		ub.setUserId((String) hsession.getAttribute("userId"));
-		System.out.println(ub);
 
 		UserBase result = uDAO.checkUser(ub);
 		if (result == null) {

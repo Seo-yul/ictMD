@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
@@ -74,21 +73,20 @@
 	});
 	
 	setInterval(function(){
-	if(confirmNewCheck && newCheck && currentCheck){
-		$("#next1").removeAttr("disabled");
-	}
-		
+		if(confirmNewCheck && newCheck && currentCheck){
+			$("#next1").removeAttr("disabled");
+		}
 	}, 1000);
 	
 	$("#goFix").on('click',function(){
 		var newPwd = $("#newPwd").val();
-		var userName = $("#name").val();
+		var userName = $("#userName").val();
 		var birth = $("#birth").val();
 		var check = "";
 		$("input[name=favorite]:checked").each(function(){
 			check += $(this).val() + " ";
 		});
-		var camera = $("#camera").val();
+		var camera = $("#model").val();
 		
 		$.ajax({
 			url : "fixUserBase",
@@ -112,25 +110,12 @@
 				location.href="/ictmd/imsi";
 			}
 		});
-		
-
-		
-		
-		
 	})
-	
-	
- });
- 
- 
-
- 
- </script>
-
+});
+</script>
 </head>
 
 <body>
-
 	<!-- multistep form -->
 	<form id="msform">
 		<!-- progressbar -->
@@ -145,6 +130,7 @@
 			<h3>변경하실 부분만 입력해주세요</h3>
 			<br>
 			<p align="left">Email : ${sessionScope.userId }</h3>
+			<input type="hidden" id="userId" value="${sessionScope.userId }" />
 			<br> <input type="password" id="currentPwd" name="cpass" placeholder="Current Password" />
 			<p id="curcheck" style="font-size: 10px; color: red;" align="left"></p>
 			<br> <input type="password" id="newPwd" name="npass" placeholder="New Password" />
@@ -152,7 +138,7 @@
 			<br> <input type="password" id="confirmNewPwd" name="cnpass"	placeholder="Confirm New Password" />
 			<p id="confirmResult" style="font-size: 10px; color: red;" align="left"></p>
 			<br> 
-			<input type="text" id="name" name="userName" placeHolder="User Name" />
+			<input type="text" id="userName" name="userName" placeHolder="User Name" />
 			<br> 
 			<input type="button" id="next1" name="next" class="next action-button" value="Next"  disabled=""/><br>
 		</fieldset>
@@ -187,7 +173,7 @@
 				</tr>
 				<tr>
 					<td colspan="3">
-					<input type="text" id="camera" name="camera" placeholder="Camera Model" /></td>
+					<input type="text" id="model" name="camera" placeholder="Camera Model" /></td>
 				</tr>
 			</table>
 			<input type="button" name="previous" class="previous action-button"
@@ -196,6 +182,7 @@
 		</fieldset>
 		<fieldset>
 			<h2 class="fs-title">입력정보확인</h2>
+			<input type="hidden" id="userId" value="${sessionScope.userId }"/>
 			<table id="usercheck" align="left" style='width:100%'>
 			<!--  js에서 가지고 옴 -->
 			</table>

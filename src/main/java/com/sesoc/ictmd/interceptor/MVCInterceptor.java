@@ -13,16 +13,15 @@ public class MVCInterceptor extends HandlerInterceptorAdapter{
 	 * return false 필터에 만족하지않아 컨트롤러의 명령대로 보내지 않는다.
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
-//			return false;   //익샙션거름
-			
-			return true;    //통과	
-		
-	}
+		String user = (String) session.getAttribute("userId");
 
-	
-	
+		if (user == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			
+			return false;
+		} else
+			return true;
+	}
 }
