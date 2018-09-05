@@ -10,6 +10,11 @@
     <title>Photo Graphy</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo.js"></script>
+<script src="./resources/js/highcharts.js"></script>
+<script src="./resources/js/series-label.js"></script>
+<script src="./resources/js/exporting.js"></script>
+<script src="./resources/js/export-data.js"></script>
+
 <link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
 
 
@@ -31,10 +36,9 @@
 			location.href="/ictmd/";
 		});
 		
-		/* 새로고침 */
-		$("#callback").on("click",function(){
-			location.href="/ictmd/weatherNshopping";
-		});
+		var imsi = 0;
+
+		
 		
 		/* 처음 페이지 들어오면 현재 접속위치의 날씨정보 출력부분 */
 			var currnetLon = ""; // 경도 초기화
@@ -51,11 +55,36 @@
 					success : function(data){
 						console.log(data);
 						var curId = JSON.stringify(data.id);
-						$("#widgetDiv").html(showWidget(curId));
+						$("#widgetDiv").innerHtml = showWidget(curId);
+
+						//$("#widgetDiv").val(showWidget(curId));
 					}
 				
 				})
 			})
+		
+		/* mousewheel event */
+		$("#myCarousel").on("mousewheel",function(e){
+			var E = e.originalEvent;
+			delta = 0;
+			if (E.detail) {
+                delta = E.detail * -40;
+               	console.log("delta : " + delta);
+            }else{
+                delta = E.wheelDelta;
+               	console.log("delta : " + delta);
+            };
+            imsi += delta;
+            if(imsi > 360){
+            	imsi = 0;
+            	$('.carousel').carousel("prev");
+            } else if(imsi < -360){
+            	imsi = 0;
+            	$('.carousel').carousel("next");
+            }
+            
+		})
+		
 		
 		//날씨에서 검색버튼부분
 		$("#searchWeather").on('click',function() {
@@ -68,7 +97,6 @@
 				showWeather();
 			}
 		});
-		
 		/* 위젯으로 현재 날씨정보 출력 */ 
 		// 일단 이쁘게 출력하기위해서 openWeatherMap의 위젯으로 받아옴. css가 가능하다면 원하는데로 출력가능
 		function showWidget(id){ 
@@ -90,10 +118,119 @@
 				s.parentNode.insertBefore(script, s);
 			})();
 		}
+		var carta = [];
+		var raindata = [];
+		var tempdata = [];
+		var humiddata = [];
+		function insertChart(){
+			Highcharts.chart('foreTable', {
+	 		    chart: {
+			        zoomType: 'xy'
+			    },
+			    title: {
+			        text: 'Weather Forecast for '+ cityName
+			    },
+			   /*  subtitle: {
+			        text: 'Source: WorldClimate.com'
+			    }, */
+			    xAxis: [{
+			        categories: carta,
+			        crosshair: true
+			    }],
+			    yAxis: [{ // Primary yAxis
+			        labels: {
+			            format: '{value}°C',
+			            style: {
+			                color: Highcharts.getOptions().colors[2]
+			            }
+			        },
+			        title: {
+			            text: 'Temperature',
+			            style: {
+			                color: Highcharts.getOptions().colors[2]
+			            }
+			        },
+			        opposite: true
+
+			    }, { // Secondary yAxis
+			        gridLineWidth: 0,
+			        title: {
+			            text: 'Rainfall',
+			            style: {
+			                color: Highcharts.getOptions().colors[0]
+			            }
+			        },
+			        labels: {
+			            format: '{value} mm',
+			            style: {
+			                color: Highcharts.getOptions().colors[0]
+			            }
+			        }
+
+			    }, { // Tertiary yAxis
+			        gridLineWidth: 0,
+			        title: {
+			            text: 'humidity',
+			            style: {
+			                color: Highcharts.getOptions().colors[1]
+			            }
+			        },
+			        labels: {
+			            format: '{value} %',
+			            style: {
+			                color: Highcharts.getOptions().colors[1]
+			            }
+			        },
+			        opposite: true
+			    }],
+			    tooltip: {
+			        shared: true
+			    },
+			    legend: {
+			        layout: 'vertical',
+			        align: 'left',
+			        x: 80,
+			        verticalAlign: 'top',
+			        y: 55,
+			        floating: true,
+			        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+			    },
+			    series: [{
+			        name: 'Rainfall',
+			        type: 'column',
+			        yAxis: 1,
+			        data: raindata,
+			        tooltip: {
+			            valueSuffix: ' mm'
+			        }
+
+			    }, {
+			        name: 'Humidity',
+			        type: 'spline',
+			        yAxis: 2,
+			        data: humiddata,
+			        marker: {
+			            enabled: false
+			        },
+			        dashStyle: 'shortdot',
+			        tooltip: {
+			            valueSuffix: ' %'
+			        }
+
+			    }, {
+			        name: 'Temperature',
+			        type: 'spline',
+			        data: tempdata,
+			        tooltip: {
+			            valueSuffix: ' °C'
+			        }
+			    }]
+			});
+		}
 		
 		/* 날씨부분 메인함수 */
 		function showWeather(){			
-			var cityName = $("#city").val();
+			cityName = $("#city").val();
 			var urlAddr = "http:////api.openweathermap.org/data/2.5/weather?q="+ cityName+ "&appid=8d9df8e528baa07108cb74b3776716c3";
 			
 			$.ajax({ 
@@ -120,13 +257,14 @@
 					console.log("일몰시간 : " + sunsetTime);
 					console.log("흐림정도 : " + data.clouds.all+ "%");
 					
-					if(data.weather[0].main == 'Clear'){
-						("#weatherBg").css("background-image","url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif')");
-					} else if(data.weather[0].main == 'Clouds'){
-						("#weatherBg").css("background-image","url('https://thumbs.gfycat.com/WiltedFailingBrownbutterfly-max-1mb.gif')");
-					} else if(data.weather[0].main == "Rainy"){
-						("#weatherBg").css("background-image","url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8vLdr_nMpxjdl209e-JiMUNGENhhETvjkLa35uK4555kIGyeS')");
+					if(data.weather[0].main == "Clear"){
+						$("#weatherBg").css("background-image","url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif')")
+					} else if(data.weather[0].main == "Clouds"){
+						$("#weatherBg").css("background-image","url('https://www.adventurebikerider.com/wp-content/uploads/2017/10/tumblr_o27c7fByaO1tchrkco1_500.gif')")
+					} else if(data.weather[0].main == "Rain"){
+						$("#weatherBg").css("background-image","url('https://img.buzzfeed.com/buzzfeed-static/static/2015-03/29/20/enhanced/webdr12/anigif_enhanced-11357-1427674845-3.gif?downsize=715:*&output-format=auto&output-quality=auto')")
 					}
+					
 					
 					// 검색한 도시를 위젯으로 출력
 					$("#widgetDiv").html('');
@@ -144,29 +282,27 @@
 				type : "get",
 				dataType : "xml",
 				success : function(data) {
-				var fTable=[];
-				var ft = "<table border='1'><tr><th>시간</th><th>날씨</th><th>온도</th><th>강우량</th></tr>";
-				
-				$(data).find("time").each(function() {
-				var times = $(this).attr("from").substring(0,10) +" "+ $(this).attr("from").substring(11,13);
-				ft += "<tr><td>"+times+"</td>";
-				ft += "<td>"+$(this).find("symbol").attr("name")+"</td>";
-				ft += "<td>"+($(this).find("temperature").attr("value")-273.15).toFixed(1)+"</td>";
-
-				if (($(this).find("precipitation").attr("value") != null) &&
-						($(this).find("precipitation").attr("value") > 0.01)){
-					var preci = $(this).find("precipitation").attr("value");
-					ft += "<td>"+parseFloat(preci).toFixed(2)+"</td>";
-				}
-				else{
-					ft += "<td>0</td>";
-				}
-				ft += "</tr>";
-				
-				});
-				ft += "</table>";
-				fTable.push(ft);
-				document.getElementById("foreTable").innerHTML = fTable.join("");
+					console.log(data);
+					carta = [];
+					raindata = [];
+					tempdata = [];
+					humiddata = [];
+					$(data).find("time").each(function() {
+						carta.push($(this).attr("from").substring(0,10) +" "+ $(this).attr("from").substring(11,13));
+						humiddata.push(parseFloat($(this).find("humidity").attr("value")));
+						tempdata.push(parseFloat(($(this).find("temperature").attr("value")-273.15).toFixed(1)));
+						if (($(this).find("precipitation").attr("value") != null) &&
+								($(this).find("precipitation").attr("value") > 0.01)){
+							var preci = $(this).find("precipitation").attr("value");
+							raindata.push(parseFloat(parseFloat(preci).toFixed(2)));
+						}
+						else{
+							raindata.push(0);
+						}
+						
+					});
+					
+					insertChart();
 				}
 			});
 		}
@@ -320,7 +456,7 @@
     <script src="./resources/templete/js/main.js"></script>
     <script>
     $('.carousel').carousel({
-        interval: 6000 //changes the speed
+        interval: 600000 //changes the speed
     })
     </script>
 </body>
