@@ -4,9 +4,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+    <title>Photo Graphy</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo.js"></script>
+<script src="./resources/js/highcharts.js"></script>
+<script src="./resources/js/series-label.js"></script>
+<script src="./resources/js/exporting.js"></script>
+<script src="./resources/js/export-data.js"></script>
+
+<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
+
+
+    <!-- Bootstrap core CSS -->
+   
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
+    <link href="./resources/templete/css/style.css" rel="stylesheet">
+    <link href="./resources/templete/css/full-slider.css" rel="stylesheet">
+    
 <script>
 	$(function() {
 		/* 홈화면으로 가기. 단 아직 메인을 만들지 않았기때문에 로그인후의 imsi페이지로 가게 만들었습니다. */
@@ -14,10 +36,9 @@
 			location.href="/ictmd/";
 		});
 		
-		/* 새로고침 */
-		$("#callback").on("click",function(){
-			location.href="/ictmd/weatherNshopping";
-		});
+		var imsi = 0;
+
+		
 		
 		/* 처음 페이지 들어오면 현재 접속위치의 날씨정보 출력부분 */
 			var currnetLon = ""; // 경도 초기화
@@ -34,11 +55,36 @@
 					success : function(data){
 						console.log(data);
 						var curId = JSON.stringify(data.id);
-						$("#widgetDiv").html(showWidget(curId));
+						$("#widgetDiv").innerHtml = showWidget(curId);
+
+						//$("#widgetDiv").val(showWidget(curId));
 					}
 				
 				})
 			})
+		
+		/* mousewheel event */
+		$("#myCarousel").on("mousewheel",function(e){
+			var E = e.originalEvent;
+			delta = 0;
+			if (E.detail) {
+                delta = E.detail * -40;
+               	console.log("delta : " + delta);
+            }else{
+                delta = E.wheelDelta;
+               	console.log("delta : " + delta);
+            };
+            imsi += delta;
+            if(imsi > 360){
+            	imsi = 0;
+            	$('.carousel').carousel("prev");
+            } else if(imsi < -360){
+            	imsi = 0;
+            	$('.carousel').carousel("next");
+            }
+            
+		})
+		
 		
 		//날씨에서 검색버튼부분
 		$("#searchWeather").on('click',function() {
@@ -51,7 +97,6 @@
 				showWeather();
 			}
 		});
-		
 		/* 위젯으로 현재 날씨정보 출력 */ 
 		// 일단 이쁘게 출력하기위해서 openWeatherMap의 위젯으로 받아옴. css가 가능하다면 원하는데로 출력가능
 		function showWidget(id){ 
@@ -73,10 +118,119 @@
 				s.parentNode.insertBefore(script, s);
 			})();
 		}
+		var carta = [];
+		var raindata = [];
+		var tempdata = [];
+		var humiddata = [];
+		function insertChart(){
+			Highcharts.chart('foreTable', {
+	 		    chart: {
+			        zoomType: 'xy'
+			    },
+			    title: {
+			        text: 'Weather Forecast for '+ cityName
+			    },
+			   /*  subtitle: {
+			        text: 'Source: WorldClimate.com'
+			    }, */
+			    xAxis: [{
+			        categories: carta,
+			        crosshair: true
+			    }],
+			    yAxis: [{ // Primary yAxis
+			        labels: {
+			            format: '{value}°C',
+			            style: {
+			                color: Highcharts.getOptions().colors[2]
+			            }
+			        },
+			        title: {
+			            text: 'Temperature',
+			            style: {
+			                color: Highcharts.getOptions().colors[2]
+			            }
+			        },
+			        opposite: true
+
+			    }, { // Secondary yAxis
+			        gridLineWidth: 0,
+			        title: {
+			            text: 'Rainfall',
+			            style: {
+			                color: Highcharts.getOptions().colors[0]
+			            }
+			        },
+			        labels: {
+			            format: '{value} mm',
+			            style: {
+			                color: Highcharts.getOptions().colors[0]
+			            }
+			        }
+
+			    }, { // Tertiary yAxis
+			        gridLineWidth: 0,
+			        title: {
+			            text: 'humidity',
+			            style: {
+			                color: Highcharts.getOptions().colors[1]
+			            }
+			        },
+			        labels: {
+			            format: '{value} %',
+			            style: {
+			                color: Highcharts.getOptions().colors[1]
+			            }
+			        },
+			        opposite: true
+			    }],
+			    tooltip: {
+			        shared: true
+			    },
+			    legend: {
+			        layout: 'vertical',
+			        align: 'left',
+			        x: 80,
+			        verticalAlign: 'top',
+			        y: 55,
+			        floating: true,
+			        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+			    },
+			    series: [{
+			        name: 'Rainfall',
+			        type: 'column',
+			        yAxis: 1,
+			        data: raindata,
+			        tooltip: {
+			            valueSuffix: ' mm'
+			        }
+
+			    }, {
+			        name: 'Humidity',
+			        type: 'spline',
+			        yAxis: 2,
+			        data: humiddata,
+			        marker: {
+			            enabled: false
+			        },
+			        dashStyle: 'shortdot',
+			        tooltip: {
+			            valueSuffix: ' %'
+			        }
+
+			    }, {
+			        name: 'Temperature',
+			        type: 'spline',
+			        data: tempdata,
+			        tooltip: {
+			            valueSuffix: ' °C'
+			        }
+			    }]
+			});
+		}
 		
 		/* 날씨부분 메인함수 */
 		function showWeather(){			
-			var cityName = $("#city").val();
+			cityName = $("#city").val();
 			var urlAddr = "http:////api.openweathermap.org/data/2.5/weather?q="+ cityName+ "&appid=8d9df8e528baa07108cb74b3776716c3";
 			
 			$.ajax({ 
@@ -103,6 +257,15 @@
 					console.log("일몰시간 : " + sunsetTime);
 					console.log("흐림정도 : " + data.clouds.all+ "%");
 					
+					if(data.weather[0].main == "Clear"){
+						$("#weatherBg").css("background-image","url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif')")
+					} else if(data.weather[0].main == "Clouds"){
+						$("#weatherBg").css("background-image","url('https://www.adventurebikerider.com/wp-content/uploads/2017/10/tumblr_o27c7fByaO1tchrkco1_500.gif')")
+					} else if(data.weather[0].main == "Rain"){
+						$("#weatherBg").css("background-image","url('https://img.buzzfeed.com/buzzfeed-static/static/2015-03/29/20/enhanced/webdr12/anigif_enhanced-11357-1427674845-3.gif?downsize=715:*&output-format=auto&output-quality=auto')")
+					}
+					
+					
 					// 검색한 도시를 위젯으로 출력
 					$("#widgetDiv").html('');
 					$("#widgetDiv").html(showWidget(data.id));
@@ -119,29 +282,27 @@
 				type : "get",
 				dataType : "xml",
 				success : function(data) {
-				var fTable=[];
-				var ft = "<table border='1'><tr><th>시간</th><th>날씨</th><th>온도</th><th>강우량</th></tr>";
-				
-				$(data).find("time").each(function() {
-				var times = $(this).attr("from").substring(0,10) +" "+ $(this).attr("from").substring(11,13);
-				ft += "<tr><td>"+times+"</td>";
-				ft += "<td>"+$(this).find("symbol").attr("name")+"</td>";
-				ft += "<td>"+($(this).find("temperature").attr("value")-273.15).toFixed(1)+"</td>";
-
-				if (($(this).find("precipitation").attr("value") != null) &&
-						($(this).find("precipitation").attr("value") > 0.01)){
-					var preci = $(this).find("precipitation").attr("value");
-					ft += "<td>"+parseFloat(preci).toFixed(2)+"</td>";
-				}
-				else{
-					ft += "<td>0</td>";
-				}
-				ft += "</tr>";
-				
-				});
-				ft += "</table>";
-				fTable.push(ft);
-				document.getElementById("foreTable").innerHTML = fTable.join("");
+					console.log(data);
+					carta = [];
+					raindata = [];
+					tempdata = [];
+					humiddata = [];
+					$(data).find("time").each(function() {
+						carta.push($(this).attr("from").substring(0,10) +" "+ $(this).attr("from").substring(11,13));
+						humiddata.push(parseFloat($(this).find("humidity").attr("value")));
+						tempdata.push(parseFloat(($(this).find("temperature").attr("value")-273.15).toFixed(1)));
+						if (($(this).find("precipitation").attr("value") != null) &&
+								($(this).find("precipitation").attr("value") > 0.01)){
+							var preci = $(this).find("precipitation").attr("value");
+							raindata.push(parseFloat(parseFloat(preci).toFixed(2)));
+						}
+						else{
+							raindata.push(0);
+						}
+						
+					});
+					
+					insertChart();
 				}
 			});
 		}
@@ -208,25 +369,95 @@
 </script>
 </head>
 <body>
-	<a id="goHome">홈으로</a>
-	<a id="callback">새로고침</a>
-	<hr>
-	<h1>날씨와 쇼핑페이지!!</h1>
-	<hr>
-	<h2>날씨검색</h2>
-	<input type="text" id="city" placeholder="도시입력해주셈 ㅋ" />
-	<button id="searchWeather">검색!</button>
-	<hr>
-	<!-- 현재 날씨정보 위젯 출력부분 -->
-	<div id="widgetDiv"></div>
-	<hr>
-	<!-- 5일간의 일기예보 출력부분 -->
-	<div id="foreTable"></div>
-	<hr>
-	<h2>쇼핑검색</h2>
-	<input type="text" id="product" placeholder="품명을 적어주세요"/>
-	<button id="searchProduct">검색하기</button>
-	<!-- 쇼핑검색결과 출력부분 -->
-	<div id="results"></div>
+	<div class="bar">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+  	</div>  
+    <div class="navmenu navmenu-default navmenu-fixed-left">
+		<ul class="nav navmenu-nav">
+			<li><a href="main">메인</a></li>
+			<li><a href="search">검색</a></li>
+			<li><a href="analysis">분석</a></li>
+			<li><a href="weatherNshopping">종합 정보</a></li>
+			<li><a href="">남는 칸</a></li>
+		</ul>
+		<a class="navmenu-brand" href="goHome"><img src="./resources/templete/img/logo.png" width="160"></a>
+		<div class="social">
+			<a href="#"><i class="fa fa-twitter"></i></a>
+			<a href="#"><i class="fa fa-facebook"></i></a>
+			<a href="#"><i class="fa fa-instagram"></i></a>
+			<a href="#"><i class="fa fa-pinterest-p"></i></a>
+			<a href="#"><i class="fa fa-google-plus"></i></a>
+			<a href="#"><i class="fa fa-skype"></i></a>
+		</div>
+		<div class="copyright-text">©Copyright #ハンサム 2018</div>
+	</div>
+
+    <div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
+    <!-- Full Page Image Background Carousel Header -->
+    
+        <!-- Indicators -->
+        <ol class="carousel-indicators xtra-border">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <!-- Set the first background image using inline CSS below. -->
+                <div class="fill" id = "weatherBg" style="background-image:url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif');">
+	                <h2>날씨검색</h2>
+					<input type="text" id="city" placeholder="도시입력해주셈 ㅋ" />
+					<button id="searchWeather">검색!</button>
+					<hr>
+					<!-- 현재 날씨정보 위젯 출력부분 -->
+					<div id="widgetDiv"></div>
+					<hr>
+					<!-- 5일간의 일기예보 출력부분 -->
+					<div id="foreTable"></div>
+                </div>
+            </div>
+            <div class="item">
+                <!-- Set the second background image using inline CSS below. -->
+                <div class="fill" style="background-image:url('http://data.1freewallpapers.com/download/anne-hathaway-at-shopping.jpg');">
+	                <h2>쇼핑검색</h2>
+					<input type="text" id="product" placeholder="품명을 적어주세요"/>
+					<button id="searchProduct">검색하기</button>
+					<!-- 쇼핑검색결과 출력부분 -->
+					<div id="results"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+      <!-- <div class="navbar navbar-default navbar-fixed-top">
+        
+      </div> -->
+
+      <div class="container page-container">
+        <div class="home-page-header">
+         
+         <!-- <div class="col-md-4 col-md-offset-4"><img src="img/zigzag.png" width="400" height="30"></div> -->
+        </div>
+        
+      </div><!-- /.container -->
+    </div>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
+    <script type="text/javascript" src="./resources/templete/js/bootstrap.min.js"></script>
+    <script src="./resources/templete/js/main.js"></script>
+    <script>
+    $('.carousel').carousel({
+        interval: 600000 //changes the speed
+    })
+    </script>
 </body>
 </html>
