@@ -10,7 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -32,10 +34,11 @@ import com.sesoc.ictmd.api.ImageRekognition;
 
 public class CreateImg extends Thread {
 	// 우리의 도메인입니다.
-	private static final String OUR_DOMAIN = "http://203.233.199.202:8081/ictmd"; // 정병준 서버 주소
+//	private static final String OUR_DOMAIN = "http://203.233.199.202:8081/ictmd"; // 정병준 서버 주소
 	// private static final String OUR_DOMAIN = "http://203.233.199.203/ictmd"; // 윤서율 서버 주소
 	// private static final String OUR_DOMAIN = "http://203.233.199.204:포트번호/ictmd"; // 김재원 서버 주소
 	// private static final String OUR_DOMAIN = "http://203.233.199.205:포트번호/ictmd"; // 김현우 서버 주소
+	 private static String OUR_DOMAIN ; // 배포서버용
 	// 서버 설정할 때 방화벽 인바운드 규칙에 해당 포트를 추가해야 함
 	private HttpServletRequest request;
 	private UUID uuid = UUID.randomUUID();
@@ -48,7 +51,8 @@ public class CreateImg extends Thread {
 	private String make;
 	private String model;
 	private SqlSession session;
-
+	private InetAddress local;
+	
 	public CreateImg(String imageFile, HttpServletRequest request, String[] tags, String make, String model, SqlSession session) {
 		super();
 		this.request = request;
@@ -72,10 +76,22 @@ public class CreateImg extends Thread {
 			os.close();
 //			imgEncode64();
 		} catch (Exception e) {
-			System.out.println("CreateImg.java run() 오류(seoyul)");
+			System.out.println("CreateImg.java 생성자 오류(seoyul)");
 		}
+		
+		try {
+		    local = InetAddress.getLocalHost();
+		    OUR_DOMAIN = local.getHostAddress();
+//		    System.out.println("local ip : "+OUR_DOMAIN);
+		} catch (UnknownHostException e1) {
+			System.out.println("CreateImg.java InetAddress 오류(seoyul)");
+		}
+		
 	}
 
+	
+
+	
 	@Override
 	public void run() {
 		System.out.println("imageFile 생성 스레드 시작");

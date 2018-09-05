@@ -170,10 +170,6 @@
             marker = WE.marker([37.579617,126.977041],markerimg,24,24).addTo(earth)
             marker.bindPopup('<h2>Gyeongbokgung, Korea-South</h2>'+
         	'<img src="https://lh5.googleusercontent.com/proxy/XmnHVngvJ-_FVag6Ma79DoDsi0qverft5987BW75y6GNmBPr_G_mJJptp_TfLztBfDRbZxUOjb4xwd2u-b43X4FtGGhqOrSMN9yRO6ik_GSMCBbgb2uiFuMhSCWuL9iSttVS2afN9fYBZH6bZXZkUDknj0GnMo8=w408-h270-k-no" alt="..." class="img-circle img-responsive">');
-       
-        
-        
-        
         
       }
     </script>

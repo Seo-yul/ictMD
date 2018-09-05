@@ -1,5 +1,8 @@
 package com.sesoc.ictmd;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +21,7 @@ public class HomeController {
 	// 메인 화면으로 이동하는 메소드
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main() {
+		
 		return "main";
 	}
 	
