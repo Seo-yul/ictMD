@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,7 +22,7 @@
    
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
@@ -48,7 +48,7 @@
 			navigator.geolocation.getCurrentPosition(function(position){
 				currentLon = position.coords.longitude; 
 				currentLat = position.coords.latitude;
-				var curUrl = "http:////api.openweathermap.org/data/2.5/weather?lat="+currentLat+"&lon="+currentLon+ "&appid=8d9df8e528baa07108cb74b3776716c3";
+				var curUrl = "https:////api.openweathermap.org/data/2.5/weather?lat="+currentLat+"&lon="+currentLon+ "&appid=8d9df8e528baa07108cb74b3776716c3";
 				
 				$.ajax({
 					url : curUrl,
@@ -231,7 +231,7 @@
 		/* 날씨부분 메인함수 */
 		function showWeather(){			
 			cityName = $("#city").val();
-			var urlAddr = "http:////api.openweathermap.org/data/2.5/weather?q="+ cityName+ "&appid=8d9df8e528baa07108cb74b3776716c3";
+			var urlAddr = "https:////api.openweathermap.org/data/2.5/weather?q="+ cityName+ "&appid=8d9df8e528baa07108cb74b3776716c3";
 			
 			$.ajax({ 
 				url : urlAddr,
@@ -276,7 +276,7 @@
 			// 이부분은 금일 새벽 3시부터 5일간의 날씨데이터를 3시간 간격의 예보정보를 표로 출력시킨부분
 			// 여기도 많은 데이터를 출력할 수 있지만 일단 기본적인데이터만 출력하게 했습니다
 			// 여기도 처음접속할때 현재 접속위치의 예보 넣을까하다가 너무 더러워서 일단 뺐어요.
-			var foreUrl = "http:////api.openweathermap.org/data/2.5/forecast?q="+ cityName+ "&mode=xml&appid=8d9df8e528baa07108cb74b3776716c3";
+			var foreUrl = "https:////api.openweathermap.org/data/2.5/forecast?q="+ cityName+ "&mode=xml&appid=8d9df8e528baa07108cb74b3776716c3";
 			$.ajax({
 				url : foreUrl,
 				type : "get",
@@ -322,7 +322,7 @@
 		// 쇼핑부분 메인함수
 		function playShopping(){
 			var productName = $("#product").val();
-			var urlName = "http://svcs.ebay.com/services/search/FindingService/v1";
+			var urlName = "https://svcs.ebay.com/services/search/FindingService/v1";
 			urlName += "?OPERATION-NAME=findItemsByKeywords";
 			urlName += "&SERVICE-VERSION=1.0.0";
 			urlName += "&SECURITY-APPNAME=kimjaewo-ScitMast-PRD-959c93333-881667c4";
@@ -423,7 +423,7 @@
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://data.1freewallpapers.com/download/anne-hathaway-at-shopping.jpg');">
+                <div class="fill" style="background-image:url('https://data.1freewallpapers.com/download/anne-hathaway-at-shopping.jpg');">
 	                <h2>쇼핑검색</h2>
 					<input type="text" id="product" placeholder="품명을 적어주세요"/>
 					<button id="searchProduct">검색하기</button>

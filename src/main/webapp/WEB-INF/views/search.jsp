@@ -16,7 +16,7 @@
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
-	<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
