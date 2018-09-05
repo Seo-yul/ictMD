@@ -79,7 +79,7 @@
         markerimg = "./resources/img/Italy.png"
             marker = WE.marker([41.8902102,12.4922309],markerimg,24,24).addTo(earth)
             marker.bindPopup('<h2>Colosseum</h2>'+
-        	'<img src="https://www.listchallenges.com/f/items/bb1fa37e-fd85-43ef-87a6-02387af5dc25.jpg" alt="..." class="img-circle img-responsive">');
+        	'<img src="https://www.listchallenges.com/f/items/e71fd9ad-6027-44f2-93df-b0a284507c74.jpg" alt="..." class="img-circle img-responsive">');
             
         markerimg = "./resources/img/UnitedStates.png"
             marker = WE.marker([34.1341151,-118.3215482],markerimg,24,24).addTo(earth)
