@@ -1,14 +1,7 @@
 @charset "UTF-8";
 
-* {
+#searchForm {
 	margin: 0 auto;
-	text-align: center;
-}
-
-#toMain {
-	position: fixed;
-	top: 5%;
-	right: 5%;
 }
 
 #loader  {

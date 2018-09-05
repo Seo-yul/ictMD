@@ -80,7 +80,7 @@ public class SearchAPI {
 		ArrayList<SimplePhoto> result = new ArrayList<SimplePhoto>();
 		p.setTags(tags);
 		try {
-			PhotoList<Photo> l = i.search(p, 99, 0);
+			PhotoList<Photo> l = i.search(p, 100, 0);
 			for (Photo p : l) {
 				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl()));
 			}
