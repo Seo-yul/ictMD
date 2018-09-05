@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
@@ -41,10 +42,10 @@
       
      <ul class="nav navmenu-nav">
         <li><a href="kenMain">Home</a></li>
-        <li><a href="works">Works</a></li>
-        <li><a href="gallery">Gallery</a></li>
-        <li><a href="blog">Blog</a></li>
-        <li><a href="contact">Contact</a></li>
+        <li><a href="kenSearch">Search</a></li>
+        <li><a href="Trend">Trend</a></li>
+        <li><a href="Shop">Shop</a></li>
+        <li><a href="ETC">ETC</a></li>
       </ul>
       <a class="navmenu-brand" href="#"><img src="./resources/img/logo.png" width="160"></a>
       <div class="social">
@@ -55,7 +56,7 @@
         <a href="#"><i class="fa fa-google-plus"></i></a>
         <a href="#"><i class="fa fa-skype"></i></a>
       </div>
-      <div class="copyright-text">�Copyright <a href="https://themewagon.com/"> ThemeWagon</a> 2015 </div>
+      <div class="copyright-text">©Copyright <a href="https://themewagon.com/"> ThemeWagon</a> 2015 </div>
     </div>
 
     <div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
@@ -73,28 +74,28 @@
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
                 <!-- <div class="fill" style="background-image:url('img/bg.jpg');"></div> -->
-                <img src="./resources/img/bg.jpg" alt="First slide">
+                <img src="./resources/img/KensImg/space_moon.jpg" alt="First slide">
                 <div class="carousel-caption">
-                  <h2 class="sub-title-home">We Don't Take Photograph</h2>
-                  <h1 class="title-home">We Make It</h1>
+                  <h2 class="sub-title-home">ようこそ。</h2>
+                  <h1 class="title-home">ヘンタイショップへ</h1>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
                 <!-- <div class="fill" style="background-image:url('img/bg1.jpg');"></div> -->
-                <img src="./resources/img/bg1.jpg" alt="Second slide">
+                <img src="./resources/img/KensImg/space_blue.jpg" alt="Second slide">
                 <div class="carousel-caption">
-                  <h2 class="sub-title-home">We Don't Take Photograph</h2>
-                  <h1 class="title-home">We Make It</h1>
+                  <h2 class="sub-title-home">欲しかったカメラの写真</h2>
+                  <h1 class="title-home">サーチしてご覧ください。</h1>
                 </div>
             </div>
             <div class="item">
                 <!-- Set the third background image using inline CSS below. -->
                 <!-- <div class="fill" style="background-image:url('img/bg3.jpg');"></div> -->
-                <img src="./resources/img/bg3.jpg" alt="Third slide">
+                <img src="./resources/img/KensImg/sunset_beach.jpg" alt="Third slide">
                 <div class="carousel-caption">
-                  <h2 class="sub-title-home">We Don't Take Photograph</h2>
-                  <h1 class="title-home">We Make It</h1>
+                  <h2 class="sub-title-home">あいしてる。</h2>
+                  <h1 class="title-home">♥</h1>
                 </div>
             </div>
         </div>

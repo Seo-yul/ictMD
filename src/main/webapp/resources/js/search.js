@@ -38,6 +38,8 @@ var popup = function(resp) {
 // 4. 검색된 사진 목록에서 임의의 사진 하나를 클릭하면 서버에서 해당 사진에 대한 상세 정보를 가져오는 함수.
 var detail = function(e) {
 	var num = e.target.getAttribute("alt");
+	//$("#loading").append('<div id="loader">Loading</div><span class="line line-1"></span><span class="line line-2"></span><span class="line line-3"></span><span class="line line-4"></span><span class="line line-5"></span><span class="line line-6"></span><span class="line line-7"></span><span class="line line-8"></span><span class="line line-9"></span></div>');
+	
 	$.ajax({
 		  data : {
 			id : arr[num]
@@ -46,6 +48,8 @@ var detail = function(e) {
 		, url : "detail"
 		, success : function(resp) {
 			popup(resp);
+			//$("#loading").remove();
+			$("#loading").hide();
 		}
 	});
 }
@@ -64,11 +68,12 @@ var listup = function(resp) {
 		$("#list").append("<div>" + JSON.stringify(modelInfo) + "</div><br>");
 	}
 	var list = resp["list"];
-	$("#list").append("<h3>검색 결과 : " + list.length + "건의 결과를 출력합니다.</h3>");
+	alert("「検索結果 : " + list.length + "件の結果があります。」");
+	/*$("#list").append("<h3 style='font-size:15px; text-align-last: right;'>「検索結果 : " + list.length + "件の結果があります。」</h3>");*/
 	for (var i in list) {
 		arr[i] = list[i].id;
 		var url = list[i].squareImageUrl;
-		$("#list").append("<img alt='" + i + "' src='" + url + "' style='width:300px;height:300px;'>");
+		$("#list").append("<img alt='" + i + "' src='" + url + "' style='width:300px; height:300px; margin-left:10px; margin-bottom:10px;'>");
 		if ((i+1)%3 == 0) {
 			$("#list").append("<br>");
 		}
@@ -76,10 +81,13 @@ var listup = function(resp) {
 	$("#list").on("click", "img", function(e) {
 		detail(e);
 	});
+	
+	$("#loading").hide();
 }
 
 // 2. 검색 이벤트가 발생할 경우 호출되는 함수. 서버에서 사진 목록을 가져오고, 화면에 그리는 함수를 호출함.
 var search = function() {
+	$("#loading").show();
 	var tagstr = $("#text").val().trim();
 	if (tagstr.length <= 0) {
 		alert("Please insert any tags.");
@@ -104,6 +112,7 @@ var search = function() {
 
 // 1. 검색 이벤트를 본문에 걸어두는 부분.
 $(function() {
+	$("#loading").hide();
 	$("#button").on("click", search);
 	$("#text").keydown(function(key) {
 		if (key.keyCode == 13)

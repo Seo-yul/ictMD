@@ -16,19 +16,19 @@ public class TestController {
 	}
 
 	
-	@RequestMapping(value = "/gallery", method = RequestMethod.GET)
-	public String gallery() {
-		return "menu/gallery";
+	@RequestMapping(value = "/Trend", method = RequestMethod.GET)
+	public String Trend() {
+		return "menu/Trend";
 	}
 	
-	@RequestMapping(value = "/blog", method = RequestMethod.GET)
-	public String blog() {
-		return "menu/blog";
+	@RequestMapping(value = "/Shop", method = RequestMethod.GET)
+	public String Shop() {
+		return "menu/Shop";
 	}
 	
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
-	public String contact() {
-		return "menu/contact";
+	@RequestMapping(value = "/ETC", method = RequestMethod.GET)
+	public String ETC() {
+		return "menu/ETC";
 	}
 	
 	@RequestMapping(value = "/single", method = RequestMethod.GET)
@@ -36,9 +36,9 @@ public class TestController {
 		return "menu/single";
 	}
 	
-	@RequestMapping(value = "/works", method = RequestMethod.GET)
-	public String works() {
-		return "menu/works";
+	@RequestMapping(value = "/kenSearch", method = RequestMethod.GET)
+	public String Search() {
+		return "menu/kenSearch";
 	}
 	
 	

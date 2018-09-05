@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
@@ -46,10 +47,10 @@
     <div class="navmenu navmenu-default navmenu-fixed-left">
       <ul class="nav navmenu-nav">
         <li><a href="kenMain">Home</a></li>
-        <li><a href="works">Works</a></li>
-        <li><a href="gallery">Gallery</a></li>
-        <li><a href="blog">Blog</a></li>
-        <li><a href="contact">Contact</a></li>
+        <li><a href="kenSearch">Search</a></li>
+        <li><a href="Trend">Trend</a></li>
+        <li><a href="Shop">Shop</a></li>
+        <li><a href="ETC">ETC</a></li>
       </ul>
       <a class="navmenu-brand" href="#"><img src="./resources/img/logo.png" width="160"></a>
      <div class="social">
@@ -60,7 +61,7 @@
         <a href="#"><i class="fa fa-google-plus"></i></a>
         <a href="#"><i class="fa fa-skype"></i></a>
       </div>
-      <div class="copyright-text">©Copyright <a href="https://themewagon.com/"> ThemeWagon</a> 2015 </div>
+      <div class="copyright-text">Â©Copyright <a href="https://themewagon.com/"> ThemeWagon</a> 2015 </div>
     </div>
 
     <div class="canvas gallery"><br>
