@@ -4,9 +4,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+    <title>Photo Graphy</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo.js"></script>
+<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
+
+
+    <!-- Bootstrap core CSS -->
+   
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
+    <link href="./resources/templete/css/style.css" rel="stylesheet">
+    <link href="./resources/templete/css/full-slider.css" rel="stylesheet">
+    
 <script>
 	$(function() {
 		/* 홈화면으로 가기. 단 아직 메인을 만들지 않았기때문에 로그인후의 imsi페이지로 가게 만들었습니다. */
@@ -102,6 +119,14 @@
 					console.log("일출시간 : " + sunriseTime);
 					console.log("일몰시간 : " + sunsetTime);
 					console.log("흐림정도 : " + data.clouds.all+ "%");
+					
+					if(data.weather[0].main == 'Clear'){
+						("#weatherBg").css("background-image","url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif')");
+					} else if(data.weather[0].main == 'Clouds'){
+						("#weatherBg").css("background-image","url('https://thumbs.gfycat.com/WiltedFailingBrownbutterfly-max-1mb.gif')");
+					} else if(data.weather[0].main == "Rainy"){
+						("#weatherBg").css("background-image","url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8vLdr_nMpxjdl209e-JiMUNGENhhETvjkLa35uK4555kIGyeS')");
+					}
 					
 					// 검색한 도시를 위젯으로 출력
 					$("#widgetDiv").html('');
@@ -208,25 +233,95 @@
 </script>
 </head>
 <body>
-	<a id="goHome">홈으로</a>
-	<a id="callback">새로고침</a>
-	<hr>
-	<h1>날씨와 쇼핑페이지!!</h1>
-	<hr>
-	<h2>날씨검색</h2>
-	<input type="text" id="city" placeholder="도시입력해주셈 ㅋ" />
-	<button id="searchWeather">검색!</button>
-	<hr>
-	<!-- 현재 날씨정보 위젯 출력부분 -->
-	<div id="widgetDiv"></div>
-	<hr>
-	<!-- 5일간의 일기예보 출력부분 -->
-	<div id="foreTable"></div>
-	<hr>
-	<h2>쇼핑검색</h2>
-	<input type="text" id="product" placeholder="품명을 적어주세요"/>
-	<button id="searchProduct">검색하기</button>
-	<!-- 쇼핑검색결과 출력부분 -->
-	<div id="results"></div>
+	<div class="bar">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+  	</div>  
+    <div class="navmenu navmenu-default navmenu-fixed-left">
+		<ul class="nav navmenu-nav">
+			<li><a href="main">메인</a></li>
+			<li><a href="search">검색</a></li>
+			<li><a href="analysis">분석</a></li>
+			<li><a href="weatherNshopping">종합 정보</a></li>
+			<li><a href="">남는 칸</a></li>
+		</ul>
+		<a class="navmenu-brand" href="goHome"><img src="./resources/templete/img/logo.png" width="160"></a>
+		<div class="social">
+			<a href="#"><i class="fa fa-twitter"></i></a>
+			<a href="#"><i class="fa fa-facebook"></i></a>
+			<a href="#"><i class="fa fa-instagram"></i></a>
+			<a href="#"><i class="fa fa-pinterest-p"></i></a>
+			<a href="#"><i class="fa fa-google-plus"></i></a>
+			<a href="#"><i class="fa fa-skype"></i></a>
+		</div>
+		<div class="copyright-text">©Copyright #ハンサム 2018</div>
+	</div>
+
+    <div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
+    <!-- Full Page Image Background Carousel Header -->
+    
+        <!-- Indicators -->
+        <ol class="carousel-indicators xtra-border">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <!-- Set the first background image using inline CSS below. -->
+                <div class="fill" id = "weatherBg" style="background-image:url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif');">
+	                <h2>날씨검색</h2>
+					<input type="text" id="city" placeholder="도시입력해주셈 ㅋ" />
+					<button id="searchWeather">검색!</button>
+					<hr>
+					<!-- 현재 날씨정보 위젯 출력부분 -->
+					<div id="widgetDiv"></div>
+					<hr>
+					<!-- 5일간의 일기예보 출력부분 -->
+					<div id="foreTable"></div>
+                </div>
+            </div>
+            <div class="item">
+                <!-- Set the second background image using inline CSS below. -->
+                <div class="fill" style="background-image:url('http://data.1freewallpapers.com/download/anne-hathaway-at-shopping.jpg');">
+	                <h2>쇼핑검색</h2>
+					<input type="text" id="product" placeholder="품명을 적어주세요"/>
+					<button id="searchProduct">검색하기</button>
+					<!-- 쇼핑검색결과 출력부분 -->
+					<div id="results"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+      <!-- <div class="navbar navbar-default navbar-fixed-top">
+        
+      </div> -->
+
+      <div class="container page-container">
+        <div class="home-page-header">
+         
+         <!-- <div class="col-md-4 col-md-offset-4"><img src="img/zigzag.png" width="400" height="30"></div> -->
+        </div>
+        
+      </div><!-- /.container -->
+    </div>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
+    <script type="text/javascript" src="./resources/templete/js/bootstrap.min.js"></script>
+    <script src="./resources/templete/js/main.js"></script>
+    <script>
+    $('.carousel').carousel({
+        interval: 6000 //changes the speed
+    })
+    </script>
 </body>
 </html>
