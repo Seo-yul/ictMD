@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -42,4 +43,15 @@ public class HomeController {
 	public String goWeather() {
 		return "weatherNshopping";
 	}
+	
+	//search 이동
+	@RequestMapping(value = "/goClickSearch", method = RequestMethod.POST)
+	public String goClickSearch(Model model,String tags) {
+		model.addAttribute("mtotag",tags);
+		return "search";
+	}
+	
+	
+	
+	
 }

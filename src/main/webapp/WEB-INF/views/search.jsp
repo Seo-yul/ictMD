@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
 	<meta charset="utf-8">
@@ -33,8 +33,10 @@
 	    <![endif]-->
 	
 	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
+	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
 </head>
-<body>
+<body onload="initialize()">
+<input type="hidden" id="mtotag" value="${mtotag}">
 	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
@@ -144,7 +146,7 @@
 	<!-- Bootstrap core JavaScript
 	   ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
+	
 	<script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
@@ -152,7 +154,19 @@
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
 	<!-- <script src="./resources/js/main.js"></script> -->
 	<script src="./resources/templete/js/lightbox.js"></script>
-	
 	<script src="./resources/js/search.js"></script>
+	<script>
+	var x = function initialize(){
+	 	var mtotag = '${mtotag}';
+	 	$("#text").val(mtotag)
+	 	if(mtotag!=null){
+	 		search()
+	 	}
+	 }
+	$(()=>{
+		x()
+	})
+	 
+	</script>
 </body>
 </html>
