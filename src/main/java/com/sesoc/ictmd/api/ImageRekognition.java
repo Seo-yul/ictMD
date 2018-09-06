@@ -1,24 +1,18 @@
 package com.sesoc.ictmd.api;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sesoc.ictmd.Interface.AnalysisDAO;
 import com.sesoc.ictmd.function.CreateImg;
@@ -33,8 +27,6 @@ import com.sesoc.ictmd.vo.BasicAnalysisData;
  * 
  */
 public class ImageRekognition extends Thread {
-	/*@Autowired
-	SqlSession session;*/
 	private static final String TARGET_URL = "https://vision.googleapis.com/v1p3beta1/images:annotate?"; // REST API TARGET URL
 	private static final String API_KEY = "key=AIzaSyCV2X6B5-Di_ubLyaMALNBSg4pBH3LkN2k"; // API사용을 위한키
 	private String imageTmp; // 얻은 이미지가 저장된 서버의 웹에서의 임시 경로
@@ -118,26 +110,35 @@ public class ImageRekognition extends Thread {
 		}
 		// 이미지 인식 끝
 		
-		// 데이터 가공 후 DB 입력 작업
+		// 데이터 가공 후 DB 입력 작업 시작
 		BasicAnalysisData bad = new BasicAnalysisData();
 		String tags = "";
 		for (String t : creatimg.getTags()) {
-			tags += t.trim() + ",";
+			tags += t + ",";
 		}
+		tags = tags.substring(0, tags.length() - 1);
 		bad.setTags(tags);
 		String elements = "";
 		for (String t : el) {
 			elements += t + ",";
 		}
+		elements = elements.substring(0, elements.length() - 1);
 		bad.setElements(elements);
-		bad.setSearchDate("");
 		bad.setMake(creatimg.getMake());
 		bad.setModel(creatimg.getModel());
-		System.out.println(bad);
 		
+		System.out.println(bad);
 		SqlSession session = creatimg.getSession();
 		AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
 		int result = dao.write(bad);
+		switch (result) {
+		case 0:
+			System.out.println("경고 : 분석 정보를 DB에 저장하는데 실패했습니다.");
+			break;
+		case 1:
+			System.out.println("알림 : 분석 정보를 DB에 저장하는데 성공했습니다.");
+		}
+		// DB 입력 작업 끝
 	}
 	
 	public ImageRekognition(CreateImg creatimg) {

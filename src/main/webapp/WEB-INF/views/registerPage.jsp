@@ -10,7 +10,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel="stylesheet" href="./resources/css/registerPage.css">
 
-<script src="http://code.jquery.com/jquery-1.3.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.3.2.min.js"></script>
 
 
 <script>
@@ -207,8 +207,8 @@
 			<input type="submit" value="메인 화면으로">		
 		</form>
 	</div>
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
 	<script src="./resources/js/registerPage.js"></script>
 </body>
 </html>

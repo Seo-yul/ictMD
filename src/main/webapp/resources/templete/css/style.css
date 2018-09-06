@@ -322,14 +322,14 @@ textarea#message {
 }
 @media (min-width: 1200px){
 .canvas.gallery {
-  margin-top: -20px;
+  /* margin-top: -20px; */
   padding: 10px;
   /* margin-bottom: 28px; */
 }
 }
 @media (max-width: 1090){
   div.canvas {
-    margin-top: -50px !important;
+    /* margin-top: -50px !important; */
     height: 110% !important;
   }
   .carousel, .item, .active {

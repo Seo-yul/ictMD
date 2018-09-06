@@ -80,7 +80,7 @@ public class SearchAPI {
 		ArrayList<SimplePhoto> result = new ArrayList<SimplePhoto>();
 		p.setTags(tags);
 		try {
-			PhotoList<Photo> l = i.search(p, 99, 0);
+			PhotoList<Photo> l = i.search(p, 100, 0);
 			for (Photo p : l) {
 				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl()));
 			}
@@ -96,7 +96,7 @@ public class SearchAPI {
 		try {
 			// 사진 고유의 ID를 입력받아 사진 정보를 담은 객체를 가져온다.
 			Photo p = i.getInfo(id, "");
-			System.out.println("선택한 사진의 원본 글 주소: " + p.getUrl());
+			System.out.println("선택한 사진의 원본 글 주소 : " + p.getUrl());
 			result.setId(id);
 			
 			// 사진 주소를 가져온다.
@@ -116,7 +116,7 @@ public class SearchAPI {
 				result.setLongitude(p.getGeoData().getLongitude());
 			}
 		} catch (FlickrException e) {
-			System.out.println("경고: 사진 데이터를 불러오는 중 오류 발생.");
+			System.out.println("경고 : 사진 데이터를 불러오는 중 오류 발생.");
 		}
 		return result;
 	}
@@ -133,7 +133,7 @@ public class SearchAPI {
 				}
 			}
 		} catch (FlickrException e) {
-			System.out.println("알림: 열람이 금지된 EXIF 정보.");
+			System.out.println("알림 : 열람이 금지된 EXIF 정보.");
 		}
 		return result;
 	}
