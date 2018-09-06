@@ -33,6 +33,104 @@
 	    <![endif]-->
 	
 	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
+	
+	<style>
+    #back {
+    	align:center;
+    	background-image: url("./resources/img/searchImg/camera_black_center.jpg");
+    	background-size:100%;
+    	padding-bottom: 700px;
+    	margin-left : 85px;
+    	margin-right : 150px;
+    }
+    #bback{
+    	background-color : gery;
+    }
+    
+    body {
+ 		background: #000;
+	}
+	
+	
+	.preloader-1 {
+	  margin: 100px auto 0;
+	  width: 66px;
+	  height: 12px;
+	}
+	
+	div#loader {
+	  color: #fff;
+	  margin: 5px 0;
+	  text-transform: uppercase;
+	  text-align: center;
+	  font-family: 'Arial', sans-serif;
+	  font-size: 10px;
+	  letter-spacing: 2px;
+	  width: 100%;
+	}
+	
+	
+	
+	.preloader-1 .line {
+	  width: 1px;
+	  height: 12px;
+	  background: #fff;
+	  margin: 0 1px;
+	  display: inline-block;
+	  animation: opacity-1 1000ms infinite ease-in-out;
+	}
+	
+	
+	.preloader-1 .line-1 { animation-delay: 800ms; }
+	.preloader-1 .line-2 { animation-delay: 600ms; }
+	.preloader-1 .line-3 { animation-delay: 400ms; }
+	.preloader-1 .line-4 { animation-delay: 200ms; }
+	.preloader-1 .line-6 { animation-delay: 200ms; }
+	.preloader-1 .line-7 { animation-delay: 400ms; }
+	.preloader-1 .line-8 { animation-delay: 600ms; }
+	.preloader-1 .line-9 { animation-delay: 800ms; }
+	
+	@keyframes opacity-1 { 
+	  0% { 
+	    opacity: 1;
+	  }
+	  50% { 
+	    opacity: 0;
+	  }
+	  100% { 
+	    opacity: 1;
+	  }  
+	}
+	
+	@keyframes opacity-2 { 
+	  0% { 
+	    opacity: 1;
+	    height: 15px;
+	  }
+	  50% { 
+	    opacity: 0;
+	    height: 12px;
+	  }
+	  100% { 
+	    opacity: 1;
+	    height: 15px;
+	  }  
+	}
+	
+	#waiting {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+    </style> 
 </head>
 <body>
 	<div class="bar">
@@ -64,80 +162,47 @@
 
 	<div class="canvas gallery">
 	<br>
-	<h1 class="blog-post-title text-center">사진 검색</h1>
-	<span class="title-divider"></span>
-	<div id="searchForm">
-		<input id="text" type="text">
-		<input id="button" type="button" value="Search">
-	</div>
-
-	<div id="list"></div>
-
-		<div id="container" class="container">
-			<div id="gallery">
-				<!-- <div id="gallery-header">
-            <div id="gallery-header-center">
-              <div id="gallery-header-center-left">
-                <div id="gallery-header-center-left-icon">
-                </div>
-                <div id="gallery-header-center-left-title">Search Result</div>
-              </div>
-            <div id="gallery-header-center-right">
-              <div class="gallery-header-center-right-links" id="filter-all">All</div>
-                <div class="gallery-header-center-right-links" id="filter-studio">Studio</div>
-                <div class="gallery-header-center-right-links" id="filter-landscape">Landscapes</div>
-            </div>
-            </div>
-          </div> -->
-				<div id="gallery-content">
-					<div id="gallery-content-center">
-						<!-- <a href="assets/studio1.jpg" data-lightbox="studio1"><img src="assets/studio1.jpg" id="imagelightbox" class="all studio"/> </a>
-            <a href="assets/landscape1.jpg" data-lightbox="studio1"><img src="assets/landscape1.jpg" class="all landscape"></a>
-            <a href="assets/studio2.jpg" data-lightbox="studio1"><img src="assets/studio2.jpg" class="all studio"/></a>
-            <a href="assets/studio25.jpg" data-lightbox="studio1"><img src="assets/studio25.jpg" class="all studio"/></a>
-            <a href="assets/landscape2.jpg" data-lightbox="studio1"><img src="assets/landscape2.jpg" class="all landscape"></a>
-            <a href="assets/studio27.jpg" data-lightbox="studio1"><img src="assets/studio27.jpg" class="all studio"/></a>
-            <a href="assets/studio3.jpg" data-lightbox="studio1"><img src="assets/studio3.jpg" class="all studio"/></a>
-            <a href="assets/landscape3.jpg" data-lightbox="studio1"><img src="assets/landscape3.jpg" class="all landscape"></a>
-            <a href="assets/studio26.jpg" data-lightbox="studio1"><img src="assets/studio26.jpg" class="all studio"/></a>
-            <a href="assets/studio4.jpg" data-lightbox="studio1"><img src="assets/studio4.jpg" class="all studio"/></a>
-            <a href="assets/landscape4.jpg" data-lightbox="studio1"><img src="assets/landscape4.jpg" class="all landscape"></a>
-            <a href="assets/studio5.jpg" data-lightbox="studio1"><img src="assets/studio5.jpg" class="all studio"/></a>
-            <a href="assets/landscape5.jpg" data-lightbox="studio1"><img src="assets/landscape5.jpg" class="all landscape"></a>
-            <a href="assets/studio6.jpg" data-lightbox="studio1"><img src="assets/studio6.jpg" class="all studio"/></a>
-            <a href="assets/landscape6.jpg" data-lightbox="studio1"><img src="assets/landscape6.jpg" class="all landscape"></a>
-            <a href="assets/studio7.jpg" data-lightbox="studio1"><img src="assets/studio7.jpg" class="all studio"/></a>
-            <a href="assets/landscape7.jpg" data-lightbox="studio1"><img src="assets/landscape7.jpg" class="all landscape"></a>
-            <a href="assets/studio8.jpg" data-lightbox="studio1"><img src="assets/studio8.jpg" class="all studio"/></a>
-            <a href="assets/landscape8.jpg" data-lightbox="studio1"><img src="assets/landscape8.jpg" class="all landscape"></a>
-            <a href="assets/studio9.jpg" data-lightbox="studio1"><img src="assets/studio9.jpg" class="all studio"/></a>
-            <a href="assets/landscape9.jpg" data-lightbox="studio1"><img src="assets/landscape9.jpg" class="all landscape"></a>
-            <a href="assets/studio10.jpg" data-lightbox="studio1"><img src="assets/studio10.jpg" class="all studio"/></a>
-            <a href="assets/landscape10.jpg" data-lightbox="studio1"><img src="assets/landscape10.jpg" class="all landscape"></a>
-            <a href="assets/studio11.jpg" data-lightbox="studio1"><img src="assets/studio11.jpg" class="all studio"/></a>
-            <a href="assets/landscape11.jpg" data-lightbox="studio1"><img src="assets/landscape11.jpg" class="all landscape"></a>
-            <a href="assets/studio12.jpg" data-lightbox="studio1"><img src="assets/studio12.jpg" class="all studio"/></a>
-            <a href="assets/landscape12.jpg" data-lightbox="studio1"><img src="assets/landscape12.jpg" class="all landscape"></a>
-            <a href="assets/studio13.jpg" data-lightbox="studio1"><img src="assets/studio13.jpg" class="all studio"/></a>
-            <a href="assets/landscape13.jpg" data-lightbox="studio1"><img src="assets/landscape13.jpg" class="all landscape"></a>
-            <a href="assets/studio14.jpg" data-lightbox="studio1"><img src="assets/studio14.jpg" class="all studio"/></a>
-            <a href="assets/landscape14.jpg" data-lightbox="studio1"><img src="assets/landscape14.jpg" class="all landscape"></a>
-            <a href="assets/studio15.jpg" data-lightbox="studio1"><img src="assets/studio15.jpg" class="all studio"/></a>
-            <a href="assets/landscape15.jpg" data-lightbox="studio1"><img src="assets/landscape15.jpg" class="all landscape"></a>
-            <a href="assets/studio16.jpg" data-lightbox="studio1"><img src="assets/studio16.jpg" class="all studio"/></a>
-            <a href="assets/landscape16.jpg" data-lightbox="studio1"><img src="assets/landscape16.jpg" class="all landscape"></a>
-            <a href="assets/studio17.jpg" data-lightbox="studio1"><img src="assets/studio17.jpg" class="all studio"/></a>
-            <a href="assets/landscape17.jpg" data-lightbox="studio1"><img src="assets/landscape17.jpg" class="all landscape"></a>
-            <a href="assets/studio18.jpg" data-lightbox="studio1"><img src="assets/studio18.jpg" class="all studio"/></a>
-            <a href="assets/landscape18.jpg" data-lightbox="studio1"><img src="assets/landscape18.jpg" class="all landscape"></a>
-            <a href="assets/studio19.jpg" data-lightbox="studio1"><img src="assets/studio19.jpg" class="all studio"/></a>
-            <a href="assets/studio20.jpg" data-lightbox="studio1"><img src="assets/studio20.jpg" class="all studio"/></a>
-            <a href="assets/studio21.jpg" data-lightbox="studio1"><img src="assets/studio21.jpg" class="all studio"/></a>
-            <a href="assets/studio22.jpg" data-lightbox="studio1"><img src="assets/studio22.jpg" class="all studio"/></a>
-            <a href="assets/studio23.jpg" data-lightbox="studio1"><img src="assets/studio23.jpg" class="all studio"/></a>
-            <a href="assets/studio24.jpg" data-lightbox="studio1"><img src="assets/studio24.jpg" class="all studio"/></a> -->
+		<div id="bback">
+			<div id="back">
+				<h1 class="blog-post-title text-center" style="color:white; " >欲しかったカメラの写真を検索しましょう</h1>
+				<span class="title-divider"></span>
+				<br>
+				<div id="searchForm" align="center">
+					<table >
+						<tr>
+							<td>
+								<input id="text" type="text" class="form-control" style="width:650px;">
+							</td>
+							<td>
+								<input id="button" type="button" class="form-control"  style="width:100px;" value="Search" >
+							</td>
+						</tr>
+					</table>
+				</div>
+			
+				<div id="list" align="center">
+					<!-- loading.. -->
+					<div id="loading" class="preloader-1" style="z-index:100;">
+							<div>Loading..</div>
+							<span class="line line-1"></span>
+							<span class="line line-2"></span>
+							<span class="line line-3"></span>
+							<span class="line line-4"></span>
+							<span class="line line-5"></span>
+							<span class="line line-6"></span>
+							<span class="line line-7"></span>
+							<span class="line line-8"></span>
+							<span class="line line-9"></span>
 					</div>
 				</div>
+					<div id="container" class="container">
+						<div id="gallery">
+							<div id="gallery-content">
+								<div id="gallery-content-center">
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>

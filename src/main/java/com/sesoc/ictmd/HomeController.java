@@ -18,14 +18,15 @@ public class HomeController {
 		return "redirect:/main";
 	}*/
 	
+	// 메인 화면으로 이동하는 메소드
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String init() {
-		return "kenMain";
+	public String main() {
+		
+		return "main";
 	}
 	
-	// 메인 화면으로 이동하는 메소드
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main() {
+	public String gomain() {
 		
 		return "main";
 	}
