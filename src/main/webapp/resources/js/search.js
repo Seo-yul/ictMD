@@ -33,7 +33,6 @@ var popup = function(resp) {
 	$("#dim, #close").on("click", function() {
 		layer.remove();
 		$("#dim").remove();
-		$("#loading").hide();
 	});
 }
 
@@ -42,7 +41,7 @@ var detail = function(e) {
 	var body = $("body");
 	body.append("<div id='dim'></div>");
 	$("#loading").show();
-	body.append("<div id='msg'>Loading...</div>");
+	body.append("<div id='msg' style='font-size:30px'>Loading...</div>");
 	$("#msg").css("top", Math.max(0, $(window).scrollTop() + 400) + "px");
 	
 	var num = e.target.getAttribute("alt");
