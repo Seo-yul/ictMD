@@ -28,10 +28,54 @@
 	<link href="./resources/templete/css/lightbox.css" rel="stylesheet" type="text/css" />
     <script src="https://www.webglearth.com/v2/api.js"></script>
     <script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
+    <style type="text/css">
+    #firstShowed{
+    top:0;
+    left:0;
+    width:100%;
+	height:100%;
+    background-image:url('./resources/img/firstCamera.jpg');
+    z-index:9998;
+    }
+    #earth_div{
+    z-index:9997;
+    }
+    
+	.flash{ 
+	    position:fixed; 
+	    top:0;
+	    left:0;
+	    width:100%;
+	    height:100%;
+	    background-color:#ffffff;
+	    z-index:9999;
+	 }
+ 
+    </style>
 	    <script>
+	    
       var earth;
       var options;
+      
+      function flash(e){
+    	  $('.flash').show();  //show the hidden div
+    	  $('.flash').animate({opacity: 1}, 500);
+    	  $('.flash').fadeOut(1000);
+    	  $('.flash').css({'opacity': 1});
+    	 
+    	  $("#firstShowed").css("display", "none");
+    	  
+    	}
+	  function firstFunction(){
+		  
+    	  $('.flash').hide();  
+    	  $("#firstShowed").mouseup(function(e) { flash(e); });
+    	  initialize();
+    	  
+	  }
       function initialize() {
+    	  
+    	   
     	options = {atmosphere: false ,sky: true, center: [0, 0], zoom: 0, zooming:false};
         earth = new WE.map('earth_div',options);
         earth.setView([37.511981, 127.058544], 2.7);
@@ -184,7 +228,7 @@
     </script>
 </head>
 
-<body onload="initialize()">
+<body onload="firstFunction()">
 	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
@@ -224,6 +268,9 @@
     
 		<div class="navbar navbar-default navbar-fixed-top"></div>
     <!-- Main component for a primary marketing message or call to action -->
+	  <div id="firstShowed">
+	  </div>
+	  <div class="flash"></div>
 	  <div  id="earth_div">
 	  </div>
 	  
