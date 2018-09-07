@@ -224,7 +224,7 @@
 	var x = function initialize(){
 	 	var mtotag = '${mtotag}';
 	 	$("#text").val(mtotag)
-	 	if(mtotag!=null){
+	 	if(mtotag.length>1){
 	 		search()
 	 	}
 	 }
