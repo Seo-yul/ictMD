@@ -4,7 +4,7 @@ var arr;
 var popup = function(resp) {
 	var photo = resp["photo"];
 	var exif = JSON.stringify(resp["exif"]);
-	$("#loader").remove();
+	$("#dim").remove();
 	$("#msg").remove();
 	$("body").append("<div id='layer'></div>");
 	var layer = $("#layer");
@@ -40,9 +40,8 @@ var popup = function(resp) {
 var detail = function(e) {
 	var body = $("body");
 	body.append("<div id='dim'></div>");
-	body.append("<div id='loader'></div>");
-	$("#loader").css("top", Math.max(0, $(window).scrollTop() + 200) + "px");
-	body.append("<div id='msg'>Loading...</div>");
+	$("#loading").show();
+	body.append("<div id='msg' style='font-size:30px'>Loading...</div>");
 	$("#msg").css("top", Math.max(0, $(window).scrollTop() + 400) + "px");
 	
 	var num = e.target.getAttribute("alt");
@@ -75,10 +74,10 @@ var listup = function(resp) {
 		}
 	}
 	var result = resp["list"];
-	list.append("<h3>검색 결과 : " + result.length + "건의 결과를 출력합니다.</h3>");
+	list.append("<h3 style='font-size:15px;'>「"+ $("#text").val() + "」の検索結果 : " + result.length + "件の結果があります。</h3><br>");
 	for (var i in result) {
 		arr[i] = result[i].id;
-		list.append("<img alt='" + i + "' src='" + result[i].squareImageUrl + "' style='width:300px;height:300px;'>");
+		list.append("<img alt='" + i + "' src='" + result[i].squareImageUrl + "' style='width:300px;height:300px; margin-left:20px; margin-bottom: 20px;'>");
 		if ((i+1)%4 == 0) {
 			list.append("<br>");
 		}
@@ -86,10 +85,12 @@ var listup = function(resp) {
 	list.on("click", "img", function(e) {
 		detail(e);
 	});
+	
 }
 
 // 2. 검색 이벤트가 발생할 경우 호출되는 함수. 서버에서 사진 목록을 가져오고, 화면에 그리는 함수를 호출함.
 var search = function() {
+	$("#loading").show();
 	var tagstr = $("#text").val().trim();
 	if (tagstr.length <= 0) {
 		alert("Please insert any tags.");
@@ -108,12 +109,14 @@ var search = function() {
 		, url : "list"
 		, success : function(resp) {
 			listup(resp);
+			$("#loading").hide();
 		}
 	});
 }
 
 // 1. 검색 이벤트를 본문에 걸어두는 부분.
 $(function() {
+	$("#loading").hide();
 	$("#button").on("click", search);
 	$("#text").keydown(function(key) {
 		if (key.keyCode == 13) {

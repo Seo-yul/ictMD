@@ -11,17 +11,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Handles requests for the application home page.
  */
-@Controller
+@Controller 
 public class HomeController {
 	// 처음 구동 시 메인 화면으로 이동하는 메소드
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String init() {
 		return "redirect:/main";
-	}
+	}*/
 	
 	// 메인 화면으로 이동하는 메소드
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main() {
+		
+		return "main";
+	}
+	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String gomain() {
 		
 		return "main";
 	}

@@ -221,7 +221,6 @@
 	</div>
 	
 	<div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
-	Full Page Image Background Carousel Header
     
 		<div class="navbar navbar-default navbar-fixed-top"></div>
     <!-- Main component for a primary marketing message or call to action -->
