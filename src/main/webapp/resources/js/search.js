@@ -74,7 +74,7 @@ var listup = function(resp) {
 		}
 	}
 	var result = resp["list"];
-	list.append("<h3 style='font-size:15px;'>「"+ $("#text").val() + "」の検索結果 : " + result.length + "件の結果があります。</h3><br>");
+	list.append("<br><h3 style='font-size:15px;'>「"+ $("#text").val() + "」の検索結果 : " + result.length + "件の結果があります。</h3>");
 	for (var i in result) {
 		arr[i] = result[i].id;
 		list.append("<img alt='" + i + "' src='" + result[i].squareImageUrl + "' style='width:300px;height:300px; margin-left:20px; margin-bottom: 20px;'>");
