@@ -35,7 +35,7 @@
 	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
 	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
 </head>
-<body onload="initialize()">
+<body>
 <input type="hidden" id="mtotag" value="${mtotag}">
 	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
