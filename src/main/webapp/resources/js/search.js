@@ -4,7 +4,6 @@ var arr;
 var popup = function(resp) {
 	var photo = resp["photo"];
 	var exif = JSON.stringify(resp["exif"]);
-	$("#dim").remove();
 	$("#msg").remove();
 	$("body").append("<div id='layer'></div>");
 	var layer = $("#layer");

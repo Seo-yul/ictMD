@@ -54,31 +54,31 @@
 	
 	
 	.preloader-1 {
-	  margin: 100px auto 0;
-	  width: 66px;
-	  height: 12px;
+		margin: 100px auto 0;
+		width: 66px;
+		height: 12px;
 	}
 	
 	div#loader {
-	  color: #fff;
-	  margin: 5px 0;
-	  text-transform: uppercase;
-	  text-align: center;
-	  font-family: 'Arial', sans-serif;
-	  font-size: 10px;
-	  letter-spacing: 2px;
-	  width: 100%;
+		color: #fff;
+		margin: 5px 0;
+		text-transform: uppercase;
+		text-align: center;
+		font-family: 'Arial', sans-serif;
+		font-size: 10px;
+		letter-spacing: 2px;
+		width: 100%;
 	}
 	
 	
 	
 	.preloader-1 .line {
-	  width: 1px;
-	  height: 12px;
-	  background: #fff;
-	  margin: 0 1px;
-	  display: inline-block;
-	  animation: opacity-1 1000ms infinite ease-in-out;
+		width: 1px;
+		height: 12px;
+		background: #fff;
+		margin: 0 1px;
+		display: inline-block;
+		animation: opacity-1 1000ms infinite ease-in-out;
 	}
 	
 	
@@ -119,17 +119,17 @@
 	}
 	
 	#waiting {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	display: block;
-	opacity: 0.8;
-	background: white;
-	z-index: 99;
-	text-align: center;
-}
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: fixed;
+		display: block;
+		opacity: 0.8;
+		background: white;
+		z-index: 99;
+		text-align: center;
+	}
 
     </style> 
 </head>
@@ -221,17 +221,16 @@
 	<script src="./resources/templete/js/lightbox.js"></script>
 	<script src="./resources/js/search.js"></script>
 	<script>
-	var x = function initialize(){
-	 	var mtotag = '${mtotag}';
-	 	$("#text").val(mtotag)
-	 	if(mtotag.length>1){
-	 		search()
-	 	}
-	 }
-	$(()=>{
-		x()
-	})
-	 
+		var x = function initialize(){
+		 	var mtotag = '${mtotag}';
+		 	$("#text").val(mtotag)
+		 	if(mtotag.length>1){
+		 		search();
+		 	}
+		 }
+		$(()=>{
+			x();
+		});
 	</script>
 </body>
 </html>

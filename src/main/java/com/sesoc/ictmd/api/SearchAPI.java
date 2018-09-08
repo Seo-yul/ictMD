@@ -85,10 +85,6 @@ public class SearchAPI {
 	private void init() {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
-		
-		// Token token = a.getRequestToken();
-		// String callbackUrl = "http://203.233.199.202:8081/ictmd";
-		// a.getAuthorizationUrl(token, f.getAuth().getPermission());
 	}
 	
 	// 검색 패러미터를 초기화하는 메소드
@@ -109,18 +105,6 @@ public class SearchAPI {
 	public ArrayList<SimplePhoto> search(String[] tags) {
 		ArrayList<SimplePhoto> result = new ArrayList<SimplePhoto>();
 		initParam(tags);
-		/*try {
-			PhotoList<Photo> l = i.search(p, 100, 0);
-			for (Photo p : l) {
-				String id = p.getId();
-				Stats stats = s.getPhotoStats(id, new Date());
-				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), stats.getViews(), stats.getFavorites(), stats.getComments());
-				System.out.println(temp);
-				result.add(temp);
-			}
-		} catch (FlickrException e1) {
-			System.out.println("Unexpected error occured when initializing photoList.");
-		}*/
 		PhotoList<Photo> l = null;
 		try {
 			l = i.search(p, 100, 0);
@@ -131,12 +115,8 @@ public class SearchAPI {
 			for (Photo p : l) {
 				String id = p.getId();
 				System.out.println("ID : " + id);
-				
-				/*Stats stats = p.getStats();
-				System.out.println("Stats : " + stats);
-				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), stats.getViews(), stats.getFavorites(), stats.getComments());
-				System.out.println("SimplePhoto : " + temp);
-				result.add(temp);*/
+				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
+				result.add(temp);
 			}
 		} else {
 			System.out.println("search result 0");
