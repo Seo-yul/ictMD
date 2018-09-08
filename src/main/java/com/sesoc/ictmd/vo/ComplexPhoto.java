@@ -8,18 +8,25 @@ public class ComplexPhoto {
 	private ArrayList<String> tags;
 	private float latitude;
 	private float longitude;
+	private int views;
+	private int favorites;
+	private int comments;
 	
 	public ComplexPhoto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ComplexPhoto(String id, String url, ArrayList<String> tags, float latitude, float longitude) {
+	public ComplexPhoto(String id, String url, ArrayList<String> tags, float latitude, float longitude, int views,
+			int favorites, int comments) {
 		super();
 		this.id = id;
 		this.url = url;
 		this.tags = tags;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.views = views;
+		this.favorites = favorites;
+		this.comments = comments;
 	}
 
 	public String getId() {
@@ -61,10 +68,34 @@ public class ComplexPhoto {
 	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
+	
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
+	public int getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(int favorites) {
+		this.favorites = favorites;
+	}
+
+	public int getComments() {
+		return comments;
+	}
+
+	public void setComments(int comments) {
+		this.comments = comments;
+	}
 
 	@Override
 	public String toString() {
 		return "ComplexPhoto [id=" + id + ", url=" + url + ", tags=" + tags + ", latitude=" + latitude + ", longitude="
-				+ longitude + "]";
+				+ longitude + ", views=" + views + ", favorites=" + favorites + ", comments=" + comments + "]";
 	}
 }

@@ -70,8 +70,6 @@
 		width: 100%;
 	}
 	
-	
-	
 	.preloader-1 .line {
 		width: 1px;
 		height: 12px;
@@ -130,7 +128,6 @@
 		z-index: 99;
 		text-align: center;
 	}
-
     </style> 
 </head>
 <body>
@@ -161,7 +158,20 @@
 		</div>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
-
+	<div id='dim'></div>
+	<!-- loading.. -->
+	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
+			<div style="color:white;">Loading..</div>
+			<span class="line line-1"></span>
+			<span class="line line-2"></span>
+			<span class="line line-3"></span>
+			<span class="line line-4"></span>
+			<span class="line line-5"></span>
+			<span class="line line-6"></span>
+			<span class="line line-7"></span>
+			<span class="line line-8"></span>
+			<span class="line line-9"></span>
+	</div>
 	<div class="canvas gallery">
 	<br>
 		<div id="bback">
@@ -181,30 +191,15 @@
 						</tr>
 					</table>
 				</div>
-			
-				<div id="list" align="center">
-					<!-- loading.. -->
-					<div id="loading" class="preloader-1" style="z-index:100;">
-							<div>Loading..</div>
-							<span class="line line-1"></span>
-							<span class="line line-2"></span>
-							<span class="line line-3"></span>
-							<span class="line line-4"></span>
-							<span class="line line-5"></span>
-							<span class="line line-6"></span>
-							<span class="line line-7"></span>
-							<span class="line line-8"></span>
-							<span class="line line-9"></span>
-					</div>
-				</div>
-					<div id="container" class="container">
-						<div id="gallery">
-							<div id="gallery-content">
-								<div id="gallery-content-center">
-								</div>
+				<div id="list" align="center"></div>
+				<div id="container" class="container">
+					<div id="gallery">
+						<div id="gallery-content">
+							<div id="gallery-content-center">
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>

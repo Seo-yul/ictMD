@@ -114,7 +114,6 @@ public class SearchAPI {
 		if (l != null) {
 			for (Photo p : l) {
 				String id = p.getId();
-				System.out.println("ID : " + id);
 				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
 				result.add(temp);
 			}
