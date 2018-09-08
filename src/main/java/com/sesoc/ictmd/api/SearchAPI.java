@@ -2,7 +2,9 @@ package com.sesoc.ictmd.api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
@@ -28,8 +30,19 @@ public class SearchAPI {
 	private static PhotosInterface i;
 	private static SearchParameters p;
 	
-	// 사용할 EXIF 데이터 목록
-	private static final ArrayList<String> l = new ArrayList<String>();
+	// 추가 검색 대상 항목들을 미리 목록화한다.
+	private static final Set<String> e = new HashSet<>();
+	{
+		e.add("date_upload");
+		e.add("geo");
+		e.add("tags");
+		e.add("views");
+		e.add("url_sq");
+		e.add("url_l");
+	}
+	
+	// 사용할 EXIF 데이터 대상 항목들을 미리 목록화한다.
+	private static final ArrayList<String> l = new ArrayList<>();
 	{
 		l.add("Image Width");
 		l.add("Image Height");
@@ -68,24 +81,65 @@ public class SearchAPI {
 		init();
 	}
 	
-	// 객체를 초기화하는 메소드
+	// 검색 객체를 초기화하는 메소드
 	private void init() {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
+		
+		// Token token = a.getRequestToken();
+		// String callbackUrl = "http://203.233.199.202:8081/ictmd";
+		// a.getAuthorizationUrl(token, f.getAuth().getPermission());
+	}
+	
+	// 검색 패러미터를 초기화하는 메소드
+	private void initParam(String[] tags) {
 		p = new SearchParameters();
+		if (tags.length > 1) {
+			p.setTags(tags);
+		} else {
+			p.setText(tags[0]);
+		}
+		p.setPrivacyFilter(1);
+		p.setHasGeo(true);
+		p.setExtras(e);
+		p.setSafeSearch("2");
 	}
 
 	// 사진 검색 메소드
 	public ArrayList<SimplePhoto> search(String[] tags) {
 		ArrayList<SimplePhoto> result = new ArrayList<SimplePhoto>();
-		p.setTags(tags);
-		try {
+		initParam(tags);
+		/*try {
 			PhotoList<Photo> l = i.search(p, 100, 0);
 			for (Photo p : l) {
-				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl()));
+				String id = p.getId();
+				Stats stats = s.getPhotoStats(id, new Date());
+				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), stats.getViews(), stats.getFavorites(), stats.getComments());
+				System.out.println(temp);
+				result.add(temp);
 			}
 		} catch (FlickrException e1) {
 			System.out.println("Unexpected error occured when initializing photoList.");
+		}*/
+		PhotoList<Photo> l = null;
+		try {
+			l = i.search(p, 100, 0);
+		} catch (FlickrException e) {
+			e.printStackTrace();
+		}
+		if (l != null) {
+			for (Photo p : l) {
+				String id = p.getId();
+				System.out.println("ID : " + id);
+				
+				/*Stats stats = p.getStats();
+				System.out.println("Stats : " + stats);
+				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), stats.getViews(), stats.getFavorites(), stats.getComments());
+				System.out.println("SimplePhoto : " + temp);
+				result.add(temp);*/
+			}
+		} else {
+			System.out.println("search result 0");
 		}
 		return result;
 	}
