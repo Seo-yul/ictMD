@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
@@ -30,13 +32,14 @@ public class SearchAPI {
 	private static PhotosInterface i;
 	private static SearchParameters p;
 	
+	SqlSession s;
+	
 	// 추가 검색 대상 항목들을 미리 목록화한다.
 	private static final Set<String> e = new HashSet<>();
 	{
 		e.add("date_upload");
 		e.add("geo");
 		e.add("tags");
-		e.add("views");
 		e.add("url_sq");
 		e.add("url_l");
 	}
@@ -77,14 +80,15 @@ public class SearchAPI {
 	}
 	
 	// 생성자가 호출되면 객체를 초기화하는 메소드를 실행한다.
-	public SearchAPI() {
-		init();
+	public SearchAPI(SqlSession s) {
+		init(s);
 	}
 	
 	// 검색 객체를 초기화하는 메소드
-	private void init() {
+	private void init(SqlSession s) {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
+		this.s = s;
 	}
 	
 	// 검색 패러미터를 초기화하는 메소드
@@ -98,7 +102,7 @@ public class SearchAPI {
 		p.setPrivacyFilter(1);
 		p.setHasGeo(true);
 		p.setExtras(e);
-		p.setSafeSearch("2");
+		// p.setSafeSearch("2");
 	}
 
 	// 사진 검색 메소드
@@ -109,6 +113,7 @@ public class SearchAPI {
 		try {
 			l = i.search(p, 100, 0);
 		} catch (FlickrException e) {
+			System.out.println("경고 : 검색 목록 초기화 중 에러 발생.");
 			e.printStackTrace();
 		}
 		if (l != null) {
@@ -118,7 +123,7 @@ public class SearchAPI {
 				result.add(temp);
 			}
 		} else {
-			System.out.println("search result 0");
+			System.out.println("검색 결과 없음.");
 		}
 		return result;
 	}
@@ -128,7 +133,7 @@ public class SearchAPI {
 		ComplexPhoto result = new ComplexPhoto();
 		try {
 			// 사진 고유의 ID를 입력받아 사진 정보를 담은 객체를 가져온다.
-			Photo p = i.getInfo(id, "");
+			Photo p = i.getInfo(id, sharedSecret);
 			System.out.println("선택한 사진의 원본 글 주소 : " + p.getUrl());
 			result.setId(id);
 			
@@ -150,6 +155,7 @@ public class SearchAPI {
 			}
 		} catch (FlickrException e) {
 			System.out.println("경고 : 사진 데이터를 불러오는 중 오류 발생.");
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -158,7 +164,7 @@ public class SearchAPI {
 	public HashMap<String, String> getExif(String id) {
 		HashMap<String, String> result = new HashMap<String, String>();
 		try {
-			Iterator<Exif> it = i.getExif(id, "").iterator();
+			Iterator<Exif> it = i.getExif(id, sharedSecret).iterator();
 			while (it.hasNext()) {
 				Exif e = it.next();
 				if (l.contains(e.getLabel())) {
@@ -167,6 +173,7 @@ public class SearchAPI {
 			}
 		} catch (FlickrException e) {
 			System.out.println("알림 : 열람이 금지된 EXIF 정보.");
+			e.printStackTrace();
 		}
 		return result;
 	}
