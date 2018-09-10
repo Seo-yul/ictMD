@@ -54,31 +54,29 @@
 	
 	
 	.preloader-1 {
-	  margin: 100px auto 0;
-	  width: 66px;
-	  height: 12px;
+		margin: 100px auto 0;
+		width: 66px;
+		height: 12px;
 	}
 	
 	div#loader {
-	  color: #fff;
-	  margin: 5px 0;
-	  text-transform: uppercase;
-	  text-align: center;
-	  font-family: 'Arial', sans-serif;
-	  font-size: 10px;
-	  letter-spacing: 2px;
-	  width: 100%;
+		color: #fff;
+		margin: 5px 0;
+		text-transform: uppercase;
+		text-align: center;
+		font-family: 'Arial', sans-serif;
+		font-size: 10px;
+		letter-spacing: 2px;
+		width: 100%;
 	}
 	
-	
-	
 	.preloader-1 .line {
-	  width: 1px;
-	  height: 12px;
-	  background: #fff;
-	  margin: 0 1px;
-	  display: inline-block;
-	  animation: opacity-1 1000ms infinite ease-in-out;
+		width: 1px;
+		height: 12px;
+		background: #fff;
+		margin: 0 1px;
+		display: inline-block;
+		animation: opacity-1 1000ms infinite ease-in-out;
 	}
 	
 	
@@ -119,18 +117,17 @@
 	}
 	
 	#waiting {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	display: block;
-	opacity: 0.8;
-	background: white;
-	z-index: 99;
-	text-align: center;
-}
-
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		position: fixed;
+		display: block;
+		opacity: 0.8;
+		background: white;
+		z-index: 99;
+		text-align: center;
+	}
     </style> 
 </head>
 <body>
@@ -161,7 +158,20 @@
 		</div>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
-
+	<div id='dim'></div>
+	<!-- loading.. -->
+	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
+			<div style="color:white;">Loading..</div>
+			<span class="line line-1"></span>
+			<span class="line line-2"></span>
+			<span class="line line-3"></span>
+			<span class="line line-4"></span>
+			<span class="line line-5"></span>
+			<span class="line line-6"></span>
+			<span class="line line-7"></span>
+			<span class="line line-8"></span>
+			<span class="line line-9"></span>
+	</div>
 	<div class="canvas gallery">
 	<br>
 		<div id="bback">
@@ -181,30 +191,15 @@
 						</tr>
 					</table>
 				</div>
-			
-				<div id="list" align="center">
-					<!-- loading.. -->
-					<div id="loading" class="preloader-1" style="z-index:100;">
-							<div>Loading..</div>
-							<span class="line line-1"></span>
-							<span class="line line-2"></span>
-							<span class="line line-3"></span>
-							<span class="line line-4"></span>
-							<span class="line line-5"></span>
-							<span class="line line-6"></span>
-							<span class="line line-7"></span>
-							<span class="line line-8"></span>
-							<span class="line line-9"></span>
-					</div>
-				</div>
-					<div id="container" class="container">
-						<div id="gallery">
-							<div id="gallery-content">
-								<div id="gallery-content-center">
-								</div>
+				<div id="list" align="center"></div>
+				<div id="container" class="container">
+					<div id="gallery">
+						<div id="gallery-content">
+							<div id="gallery-content-center">
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -221,17 +216,16 @@
 	<script src="./resources/templete/js/lightbox.js"></script>
 	<script src="./resources/js/search.js"></script>
 	<script>
-	var x = function initialize(){
-	 	var mtotag = '${mtotag}';
-	 	$("#text").val(mtotag)
-	 	if(mtotag!=null){
-	 		search()
-	 	}
-	 }
-	$(()=>{
-		x()
-	})
-	 
+		var x = function initialize(){
+		 	var mtotag = '${mtotag}';
+		 	$("#text").val(mtotag)
+		 	if(mtotag.length>1){
+		 		search();
+		 	}
+		 }
+		$(()=>{
+			x();
+		});
 	</script>
 </body>
 </html>

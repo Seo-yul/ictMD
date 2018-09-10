@@ -38,7 +38,7 @@ public class SearchController {
 	// 검색어를 문자열 배열로 입력받아 검색 후 결과를 반환하는 메소드
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> list(String[] tags, HttpSession ss) {
-		api = new SearchAPI();
+		api = new SearchAPI(session);
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		ss.removeAttribute("tags");
@@ -63,7 +63,7 @@ public class SearchController {
 	// 임의의 사진 하나를 클릭했을 때 해당 사진에 대한 모든 정보를 가져오는 메소드
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> detail(String id, HttpServletRequest request, HttpSession ss) {
-		api = new SearchAPI();
+		api = new SearchAPI(session);
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		ComplexPhoto photo = api.getInfo(id);

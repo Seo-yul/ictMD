@@ -34,11 +34,11 @@ import com.sesoc.ictmd.api.ImageRekognition;
 
 public class CreateImg extends Thread {
 	// 우리의 도메인입니다.
-//	private static final String OUR_DOMAIN = "http://203.233.199.202:8081/ictmd"; // 정병준 서버 주소
+	private static final String OUR_DOMAIN = "http://203.233.199.202:8081/ictmd"; // 정병준 서버 주소
 	// private static final String OUR_DOMAIN = "http://203.233.199.203/ictmd"; // 윤서율 서버 주소
 	// private static final String OUR_DOMAIN = "http://203.233.199.204:8081/ictmd"; // 김재원 서버 주소
-	// private static final String OUR_DOMAIN = "http://203.233.199.205:포트번호/ictmd"; // 김현우 서버 주소
-	 private static String OUR_DOMAIN ; // 배포서버용
+	// private static final String OUR_DOMAIN = "http://203.233.199.205:80/ictmd"; // 김현우 서버 주소
+	// private static String OUR_DOMAIN ; // 배포서버용
 	// 서버 설정할 때 방화벽 인바운드 규칙에 해당 포트를 추가해야 함
 	private HttpServletRequest request;
 	private UUID uuid = UUID.randomUUID();
@@ -81,7 +81,7 @@ public class CreateImg extends Thread {
 		
 		try {
 		    local = InetAddress.getLocalHost();
-		    OUR_DOMAIN = local.getHostAddress();
+		    /*OUR_DOMAIN = local.getHostAddress();*/
 //		    System.out.println("local ip : "+OUR_DOMAIN);
 		} catch (UnknownHostException e1) {
 			System.out.println("CreateImg.java InetAddress 오류(seoyul)");
