@@ -18,7 +18,9 @@ import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
 import com.flickr4java.flickr.tags.Tag;
+import com.sesoc.ictmd.Interface.AnalysisDAO;
 import com.sesoc.ictmd.vo.ComplexPhoto;
+import com.sesoc.ictmd.vo.HistoryVO;
 import com.sesoc.ictmd.vo.SimplePhoto;
 
 public class SearchAPI {
@@ -33,6 +35,7 @@ public class SearchAPI {
 	private static SearchParameters p;
 	
 	SqlSession s;
+	AnalysisDAO d;
 	
 	// 추가 검색 대상 항목들을 미리 목록화한다.
 	private static final Set<String> e = new HashSet<>();
@@ -89,6 +92,7 @@ public class SearchAPI {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
 		this.s = s;
+		d = s.getMapper(AnalysisDAO.class);
 	}
 	
 	// 검색 패러미터를 초기화하는 메소드
@@ -117,9 +121,16 @@ public class SearchAPI {
 			e.printStackTrace();
 		}
 		if (l != null) {
+			HistoryVO v;
+			SimplePhoto temp;
 			for (Photo p : l) {
 				String id = p.getId();
-				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
+				v = d.check(id);
+				if (v != null) {
+					temp = new SimplePhoto(id, p.getSquareLargeUrl(), v.getViews(), v.getFavorites(), v.getComments());
+				} else {
+					temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
+				}
 				result.add(temp);
 			}
 		} else {
@@ -153,6 +164,20 @@ public class SearchAPI {
 				result.setLatitude(p.getGeoData().getLatitude());
 				result.setLongitude(p.getGeoData().getLongitude());
 			}
+			
+			// 조회수 정보를 가져오거나 새로 입력한다.
+			/*HistoryVO v = d.check(id);
+			if (v == null) {
+				d.view(id);
+				result.setViews(1);
+				result.setFavorites(0);
+				result.setComments(0);
+			} else {
+				d.renew(id);
+				result.setViews(v.getViews() + 1);
+				result.setFavorites(v.getFavorites());
+				result.setComments(v.getComments());
+			}*/
 		} catch (FlickrException e) {
 			System.out.println("경고 : 사진 데이터를 불러오는 중 오류 발생.");
 			e.printStackTrace();
