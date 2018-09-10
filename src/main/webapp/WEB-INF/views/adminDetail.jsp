@@ -65,7 +65,6 @@
 			<li><a href="weatherNshopping">종합 정보</a></li>
 			<c:if test="${userId == null}">
 				<li><a href="loginPage">로그인</a></li><li><a href="registerPage">회원가입</a></li>
-			
 			</c:if>
 			<c:if test="${userId != null}">
 				<li><a href="fixPage">회원 정보 수정</a></li>

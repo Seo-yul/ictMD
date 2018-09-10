@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -64,7 +63,6 @@
 			<li><a href="weatherNshopping">종합 정보</a></li>
 			<c:if test="${userId == null}">
 				<li><a href="loginPage">로그인</a></li><li><a href="registerPage">회원가입</a></li>
-			
 			</c:if>
 			<c:if test="${userId != null}">
 				<li><a href="fixPage">회원 정보 수정</a></li>
