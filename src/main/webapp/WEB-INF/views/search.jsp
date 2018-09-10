@@ -168,7 +168,7 @@
 		</div>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
-	<div id='dim'></div>
+	<div id="dim"></div>
 	<!-- loading.. -->
 	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
 			<div style="color:white;">Loading..</div>
