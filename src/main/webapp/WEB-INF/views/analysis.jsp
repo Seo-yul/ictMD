@@ -22,6 +22,16 @@
 	<link href="./resources/templete/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
 	
 	<link rel="stylesheet" type="text/css" href="./resources/css/analysis.css">
+	
+	<script>
+		$(function(){
+			
+			
+			
+		});
+		
+	</script>
+	
 </head>
 <body>
 	<div class="bar">
