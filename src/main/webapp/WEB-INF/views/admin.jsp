@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -32,8 +31,9 @@
 	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
 	
-	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
+	<link rel="stylesheet" type="text/css" href="./resources/css/admin.css">
 	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
+	<script type="text/javascript" src="./resources/js/admin.js"></script>
 	
 	<style>
     #back {
@@ -44,91 +44,7 @@
     	margin-left : 85px;
     	margin-right : 150px;
     }
-    #bback{
-    	background-color : gery;
-    }
-    
-    body {
- 		background: #000;
-	}
-	
-	
-	.preloader-1 {
-		margin: 100px auto 0;
-		width: 66px;
-		height: 12px;
-	}
-	
-	div#loader {
-		color: #fff;
-		margin: 5px 0;
-		text-transform: uppercase;
-		text-align: center;
-		font-family: 'Arial', sans-serif;
-		font-size: 10px;
-		letter-spacing: 2px;
-		width: 100%;
-	}
-	
-	.preloader-1 .line {
-		width: 1px;
-		height: 12px;
-		background: #fff;
-		margin: 0 1px;
-		display: inline-block;
-		animation: opacity-1 1000ms infinite ease-in-out;
-	}
-	
-	
-	.preloader-1 .line-1 { animation-delay: 800ms; }
-	.preloader-1 .line-2 { animation-delay: 600ms; }
-	.preloader-1 .line-3 { animation-delay: 400ms; }
-	.preloader-1 .line-4 { animation-delay: 200ms; }
-	.preloader-1 .line-6 { animation-delay: 200ms; }
-	.preloader-1 .line-7 { animation-delay: 400ms; }
-	.preloader-1 .line-8 { animation-delay: 600ms; }
-	.preloader-1 .line-9 { animation-delay: 800ms; }
-	
-	@keyframes opacity-1 { 
-	  0% { 
-	    opacity: 1;
-	  }
-	  50% { 
-	    opacity: 0;
-	  }
-	  100% { 
-	    opacity: 1;
-	  }  
-	}
-	
-	@keyframes opacity-2 { 
-	  0% { 
-	    opacity: 1;
-	    height: 15px;
-	  }
-	  50% { 
-	    opacity: 0;
-	    height: 12px;
-	  }
-	  100% { 
-	    opacity: 1;
-	    height: 15px;
-	  }  
-	}
-	
-	#waiting {
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		position: fixed;
-		display: block;
-		opacity: 0.8;
-		background: white;
-		z-index: 99;
-		text-align: center;
-	}
-    </style> 
+   </style> 
 </head>
 <body>
 <input type="hidden" id="mtotag" value="${mtotag}">
@@ -168,53 +84,29 @@
 		</div>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
-	<div id='dim'></div>
-	<!-- loading.. -->
-	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
-			<div style="color:white;">Loading..</div>
-			<span class="line line-1"></span>
-			<span class="line line-2"></span>
-			<span class="line line-3"></span>
-			<span class="line line-4"></span>
-			<span class="line line-5"></span>
-			<span class="line line-6"></span>
-			<span class="line line-7"></span>
-			<span class="line line-8"></span>
-			<span class="line line-9"></span>
-	</div>
+
 	<div class="canvas gallery">
-	<br>
-		<div id="bback">
-			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:white; " >欲しかったカメラの写真を検索しましょう</h1>
-				<span class="title-divider"></span>
-				<br>
-				<div id="searchForm" align="center">
-					<table >
-						<tr>
-							<td>
-								<input id="text" type="text" class="form-control" style="width:600px;">
-							</td>
-							<td>
-								<input id="button" type="button" class="form-control"  style="width:80px;" value="Search" >
-							</td>
-						</tr>
-					</table>
-					<div>
-						<i class="fas fa-camera" >	
-							「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
-						</i>
-					</div>
+		<div id="back">
+			<h1 class="blog-post-title text-center" style="color:white;">ADMIN_PAGE</h1>
+			<div align="center" style="margin-top:50px;">
+				<div style="display: inline-block; width: 70%;">
+					<input type="button" id="btnInsertFormModel" value="입력" style="margin-bottom: 20px; float: right;">
 				</div>
-				<div id="list" align="center"></div>
-				<div id="container" class="container">
-					<div id="gallery">
-						<div id="gallery-content">
-							<div id="gallery-content-center">
-							</div>
-						</div>
-					</div>
-				</div>
+				<table id="adminTbl" border="2" style="width: 70%; color: #fff; background-color: #000; opacity: 0.9;">
+					<tr style="height: 25px;">
+						<td style="width: 20%; text-align: center;">MAKER</td>
+						<td style="width: 50%; text-align: center;">MODEL</td>
+						<td style="width: 30%; text-align: center;">TYPE</td>
+					</tr>
+					<c:forEach var="model" items="${modelList}">
+					<tr style="height: 35px;">
+						<td style="width: 20%; text-align: center;">${model.maker}</td>
+						<td style="width: 50%; text-align: center;">${model.model}</td>
+						<td style="width: 30%; text-align: center;"> ${model.type}</td>
+					</tr>
+					</c:forEach>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -229,18 +121,18 @@
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
 	<!-- <script src="./resources/js/main.js"></script> -->
 	<script src="./resources/templete/js/lightbox.js"></script>
-	<script src="./resources/js/search.js"></script>
-	<script>
-		var x = function initialize(){
-		 	var mtotag = '${mtotag}';
-		 	$("#text").val(mtotag)
-		 	if(mtotag.length>1){
-		 		search();
-		 	}
-		 }
-		$(()=>{
-			x();
-		});
-	</script>
+	<!-- <script>
+	var x = function initialize(){
+	 	var mtotag = '${mtotag}';
+	 	$("#text").val(mtotag)
+	 	if(mtotag!=null){
+	 		search()
+	 	}
+	 }
+	$(()=>{
+		x()
+	})
+	 
+	</script> -->
 </body>
 </html>

@@ -14,7 +14,7 @@
 	<title>사진 검색</title>
 	
 	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/ /maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
@@ -32,9 +32,8 @@
 	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
 	
-	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
 	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
-	
+	<script type="text/javascript" src="./resources/js/admin.js"></script>
 	<style>
     #back {
     	align:center;
@@ -44,91 +43,10 @@
     	margin-left : 85px;
     	margin-right : 150px;
     }
-    #bback{
-    	background-color : gery;
+    input{
+    	color : #000;
     }
-    
-    body {
- 		background: #000;
-	}
-	
-	
-	.preloader-1 {
-		margin: 100px auto 0;
-		width: 66px;
-		height: 12px;
-	}
-	
-	div#loader {
-		color: #fff;
-		margin: 5px 0;
-		text-transform: uppercase;
-		text-align: center;
-		font-family: 'Arial', sans-serif;
-		font-size: 10px;
-		letter-spacing: 2px;
-		width: 100%;
-	}
-	
-	.preloader-1 .line {
-		width: 1px;
-		height: 12px;
-		background: #fff;
-		margin: 0 1px;
-		display: inline-block;
-		animation: opacity-1 1000ms infinite ease-in-out;
-	}
-	
-	
-	.preloader-1 .line-1 { animation-delay: 800ms; }
-	.preloader-1 .line-2 { animation-delay: 600ms; }
-	.preloader-1 .line-3 { animation-delay: 400ms; }
-	.preloader-1 .line-4 { animation-delay: 200ms; }
-	.preloader-1 .line-6 { animation-delay: 200ms; }
-	.preloader-1 .line-7 { animation-delay: 400ms; }
-	.preloader-1 .line-8 { animation-delay: 600ms; }
-	.preloader-1 .line-9 { animation-delay: 800ms; }
-	
-	@keyframes opacity-1 { 
-	  0% { 
-	    opacity: 1;
-	  }
-	  50% { 
-	    opacity: 0;
-	  }
-	  100% { 
-	    opacity: 1;
-	  }  
-	}
-	
-	@keyframes opacity-2 { 
-	  0% { 
-	    opacity: 1;
-	    height: 15px;
-	  }
-	  50% { 
-	    opacity: 0;
-	    height: 12px;
-	  }
-	  100% { 
-	    opacity: 1;
-	    height: 15px;
-	  }  
-	}
-	
-	#waiting {
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		position: fixed;
-		display: block;
-		opacity: 0.8;
-		background: white;
-		z-index: 99;
-		text-align: center;
-	}
-    </style> 
+   </style> 
 </head>
 <body>
 <input type="hidden" id="mtotag" value="${mtotag}">
@@ -168,53 +86,124 @@
 		</div>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
-	<div id='dim'></div>
-	<!-- loading.. -->
-	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
-			<div style="color:white;">Loading..</div>
-			<span class="line line-1"></span>
-			<span class="line line-2"></span>
-			<span class="line line-3"></span>
-			<span class="line line-4"></span>
-			<span class="line line-5"></span>
-			<span class="line line-6"></span>
-			<span class="line line-7"></span>
-			<span class="line line-8"></span>
-			<span class="line line-9"></span>
-	</div>
+
 	<div class="canvas gallery">
-	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:white; " >欲しかったカメラの写真を検索しましょう</h1>
-				<span class="title-divider"></span>
-				<br>
-				<div id="searchForm" align="center">
-					<table >
-						<tr>
-							<td>
-								<input id="text" type="text" class="form-control" style="width:600px;">
-							</td>
-							<td>
-								<input id="button" type="button" class="form-control"  style="width:80px;" value="Search" >
-							</td>
-						</tr>
-					</table>
-					<div>
-						<i class="fas fa-camera" >	
-							「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
-						</i>
+				<h1 class="blog-post-title text-center" style="color:white;" >ADMIN_PAGE</h1>
+				<div align="center" style="margin-top:50px;">
+					<form id="formDetail" method="get">
+						<table border="2" style="width: 90%; color: #fff; background-color: #000; opacity: 0.9;">
+							<tr>
+								<td style="width: 25%; text-align: center;">
+									MAKER<br>
+									<input type="text" name="maker" value="${detail.maker}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									IMGURL<br>
+									<input type="text" name="imgUrl" value="${detail.imgUrl}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									TYPE<br>
+									<input type="text" name="type" value="${detail.type}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									MODEL<br>
+									<c:if test="${ insert eq 'false' }">
+										<input type="text" name="model" value="${detail.model}" readonly>
+									</c:if>
+									<c:if test="${ insert eq 'true' }">
+										<input type="text" name="model" value="${detail.model}">
+									</c:if>
+									<input type="hidden" id="model" value="${detail.model}"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 25%; text-align: center;">
+									CMOS<br>
+									<input type="text" name="cmos" value="${detail.cmos}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									SENSOR<br>
+									<input type="text" name="sensor" value="${detail.sensor}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									IMAGEPROCESSOR<br>
+									<input type="text" name="imageProcessor" value="${detail.imageProcessor}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									SCREEN<br>
+									<input type="text" name="screen" value="${detail.screen}">
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 25%; text-align: center;">
+									VIEWFINDER<br>
+									<input type="text" name="viewFinder" value="${detail.viewFinder}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									MAXISO<br>
+									<input type="text" name="maxISO" value="${detail.maxISO}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									IMASHUTTERSPEED<br>
+									<input type="text" name="shutterSpeed" value="${detail.shutterSpeed}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									CONTINUOUSSHOOTING<br>
+									<input type="text" name="continuousShooting" value="${detail.continuousShooting}">
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 25%; text-align: center;">
+									AF<br>
+									<input type="text" name="af" value="${detail.af}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									FOCUSAREA<br>
+									<input type="text" name="focusArea" value="${detail.focusArea}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									FLASH<br>
+									<input type="text" name="flash" value="${detail.flash}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									VIDEOQUALITY<br>
+									<input type="text" name="videoQuality" value="${detail.videoQuality}">
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 25%; text-align: center;">
+									PIXEL<br>
+									<input type="text" name="pixel" value="${detail.pixel}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									VOLUME<br>
+									<input type="text" name="volume" value="${detail.volume}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									WEIGHT<br>
+									<input type="text" name="weight" value="${detail.weight}">
+								</td>
+								<td style="width: 25%; text-align: center;">
+									ETC<br>
+									<input type="text" name="etc" value="${detail.etc}">
+								</td>
+							</tr>
+						</table>
+					</form>
+					<div style="margin-top: 20px;">
+						<c:if test="${ insert eq 'false' }">
+							<input type="button" id="btnUpdateModel" value="수정">
+							<input type="button" id="btnDeleteModel" value="삭제">
+						</c:if>
+						<c:if test="${ insert eq 'true' }">
+							<input type="button" id="btnInsertModel" value="저장">
+						</c:if>
 					</div>
 				</div>
-				<div id="list" align="center"></div>
-				<div id="container" class="container">
-					<div id="gallery">
-						<div id="gallery-content">
-							<div id="gallery-content-center">
-							</div>
-						</div>
-					</div>
-				</div>
+			
+			
 			</div>
 		</div>
 	</div>
@@ -229,18 +218,6 @@
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
 	<!-- <script src="./resources/js/main.js"></script> -->
 	<script src="./resources/templete/js/lightbox.js"></script>
-	<script src="./resources/js/search.js"></script>
-	<script>
-		var x = function initialize(){
-		 	var mtotag = '${mtotag}';
-		 	$("#text").val(mtotag)
-		 	if(mtotag.length>1){
-		 		search();
-		 	}
-		 }
-		$(()=>{
-			x();
-		});
-	</script>
+	
 </body>
 </html>

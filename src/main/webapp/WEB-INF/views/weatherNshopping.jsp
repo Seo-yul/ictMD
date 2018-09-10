@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -382,7 +382,17 @@
 			<li><a href="search">검색</a></li>
 			<li><a href="analysis">분석</a></li>
 			<li><a href="weatherNshopping">종합 정보</a></li>
-			<li><a href="">남는 칸</a></li>
+			<c:if test="${userId == null}">
+				<li><a href="loginPage">로그인</a></li><li><a href="registerPage">회원가입</a></li>
+			</c:if>
+			<c:if test="${userId != null}">
+				<li><a href="fixPage">회원 정보 수정</a></li>
+				<li><a href="secesionPage">회원 탈퇴</a></li>
+				<li><a href="logout">로그아웃</a></li>
+				<c:if test="${userId == 'admin'}">
+					<li><a href="admin">管理者ページ</a></li>
+				</c:if>	
+			</c:if>
 		</ul>
 		<a class="navmenu-brand" href="goHome"><img src="./resources/templete/img/logo.png" width="160"></a>
 		<div class="social">

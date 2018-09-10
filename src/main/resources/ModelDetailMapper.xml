@@ -37,4 +37,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 		 UPPER(REPLACE(#{item}, ' ', ''))
 		 	</foreach>
 	</select>
+	
+	<select id="allModelDetail" resultType="modelDetail">
+		select
+			maker,
+			model,
+			type
+		from
+			modeldetail
+	</select>
+	
+	<select id="selectInfo" parameterType="String" resultType="modelDetail">
+		select
+			*
+		from
+			modeldetail
+		where 
+			model = #{value}
+	</select>
+	
+	<delete id="deleteDetail" parameterType="String">
+		delete from modeldetail
+		where model = #{value}
+	</delete>
+	
+	<update id="updateDetail" parameterType="modelDetail">
+		update 
+			modelDetail 
+		set 
+			maker = #{maker},
+			imgUrl = #{imgUrl},
+			type = #{type},
+			pixel = #{pixel},
+			cmos = #{cmos},
+			sensor = #{sensor},
+			imageProcessor = #{imageProcessor},
+			screen = #{screen},
+			viewFinder = #{viewFinder},
+			maxISO = #{maxISO},
+			shutterSpeed = #{shutterSpeed},
+			continuousShooting = #{continuousShooting},
+			af = #{af},
+			focusArea = #{focusArea},
+			flash = #{flash},
+			videoQuality = #{videoQuality},
+			volume = #{volume},
+			weight = #{weight},
+			etc = #{etc}
+		where 
+			model = #{model}
+	</update>
+	
+	<insert id="insertDetail" parameterType="modelDetail">
+		insert into modeldetail (
+			maker,
+			model,
+			imgUrl,
+			type,
+			pixel,
+			cmos,
+			sensor,
+			imageProcessor,
+			screen,
+			viewFinder,
+			maxISO,
+			shutterSpeed,
+			continuousShooting,
+			af,
+			focusArea,
+			flash,
+			videoQuality,
+			volume,
+			weight,
+			etc
+		) values (
+			#{maker},
+			#{model},
+			#{imgUrl},
+			#{type},
+			#{pixel},
+			#{cmos},
+			#{sensor},
+			#{imageProcessor},
+			#{screen},
+			#{viewFinder},
+			#{maxISO},
+			#{shutterSpeed},
+			#{continuousShooting},
+			#{af},
+			#{focusArea},
+			#{flash},
+			#{videoQuality},
+			#{volume},
+			#{weight},
+			#{etc}
+		)
+	</insert>
+	
 </mapper>
