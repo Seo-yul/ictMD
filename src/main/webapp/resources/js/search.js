@@ -3,6 +3,7 @@ var varr;
 var farr;
 var carr;
 var uarr;
+var larr;
 
 // 5. 서버로부터 가져온 상세 사진 정보를 화면에 그리는 함수
 var popup = function(resp) {
@@ -170,14 +171,34 @@ var viewasc = function() {
 	if ($("#list >").length <= 0) {
 		return;
 	}
-	$("#list").off();
-	$("#list >").remove();
-	$("#list").append("<div id='0' class='frame'></div>");
-	$("#0").append("<img alt='0' class='result' src='" + arr[0] + "'>");
-	$("#0").append("<div>views : " + varr[0] + "</div>");
-	for (var i = 1; i < 100; i++) {
-		
+	larr = new Array();
+	larr[0] = varr[0];
+	for (var i = 1; i < arr.length; i++) {
+		for (var j = 0; j < i; j++) {
+			if (varr[i] < varr[j]) {
+				larr.splice(j, 0, i);
+			} else {
+				if (j == i - 1) {
+					larr[i] = i;
+				} else {
+					continue;
+				}
+			}
+		}
 	}
+	console.log(JSON.stringify(larr));
+	var list = $("#list");
+	list.off();
+	$("#list >").remove();
+	for (var k = 0; k < larr.length; k++) {
+		var n = larr[k];
+		list.append("<div id='" + n + "' class='frame'></div>");
+		$("#" + n).append("<img alt='" + n + "' class='result' src='" + uarr[n] + "'>");
+		$("#" + n).append("<div>views : " + varr[n] + "</div>");
+	}
+	list.on("click", "img", function(e) {
+		detail(e);
+	});
 }
 var viewdesc = function() {
 	if ($("#list >").length <= 0) {
@@ -206,5 +227,5 @@ $(function() {
 	$("#timeasc").on("click", timeasc);
 	$("#timedesc").on("click", timedesc);
 	$("#viewasc").on("click", viewasc);
-	$("#viewasc").on("click", viewdesc);
+	$("#viewdesc").on("click", viewdesc);
 });
