@@ -48,7 +48,14 @@
 				    series: [{
 				        type: 'wordcloud',
 				        data: makeArr,
-				        name: '검색횟수'
+				        name: '검색횟수',
+				        point:{
+				              events:{
+				                  click: function (event) {
+				                      alert(this.name);
+				                  }
+				              }
+				          }
 				    }],
 				    title: {
 				        text: chartTitle
@@ -94,7 +101,14 @@
 				    series: [{
 				        name: seriesName,
 				        colorByPoint: true,
-				        data: makeArr
+				        data: makeArr,
+				        point:{
+				              events:{
+				                  click: function (event) {
+				                      alert(this.name);
+				                  }
+				              }
+				          }
 				    }]
 				});
 			}
