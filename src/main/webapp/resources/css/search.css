@@ -18,6 +18,20 @@
 	/* IE7 & 8 */
 }
 
+.frame {
+	width: 300px;
+	height: 300px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	
+	display: inline-block;
+}
+
+/* .result {
+	width: 300px;
+	height: 300px;
+} */
+
 #layer {
 	position: absolute;
 	top: 260px;

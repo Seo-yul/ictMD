@@ -18,7 +18,9 @@ import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
 import com.flickr4java.flickr.tags.Tag;
+import com.sesoc.ictmd.Interface.AnalysisDAO;
 import com.sesoc.ictmd.vo.ComplexPhoto;
+import com.sesoc.ictmd.vo.HistoryVO;
 import com.sesoc.ictmd.vo.SimplePhoto;
 
 public class SearchAPI {
@@ -117,14 +119,24 @@ public class SearchAPI {
 			e.printStackTrace();
 		}
 		if (l != null) {
+			AnalysisDAO d = s.getMapper(AnalysisDAO.class);
+			HistoryVO v;
+			String id;
+			SimplePhoto temp;
 			for (Photo p : l) {
-				String id = p.getId();
-				SimplePhoto temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
+				id = p.getId();
+				v = d.check(id);
+				if (v == null) {
+					temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
+				} else {
+					temp = new SimplePhoto(id, p.getSquareLargeUrl(), v.getViews(), v.getFavorites(), v.getComments());
+				}
 				result.add(temp);
 			}
 		} else {
 			System.out.println("검색 결과 없음.");
 		}
+		
 		return result;
 	}
 
@@ -153,10 +165,26 @@ public class SearchAPI {
 				result.setLatitude(p.getGeoData().getLatitude());
 				result.setLongitude(p.getGeoData().getLongitude());
 			}
+			
+			// 조회수 정보를 가져오거나 새로 입력한다.
+			AnalysisDAO d = s.getMapper(AnalysisDAO.class);
+			HistoryVO v = d.check(id);
+			if (v == null) {
+				d.view(id);
+				result.setViews(1);
+				result.setFavorites(0);
+				result.setComments(0);
+			} else {
+				d.renew(id);
+				result.setViews(v.getViews() + 1);
+				result.setFavorites(v.getFavorites());
+				result.setComments(v.getComments());
+			}
 		} catch (FlickrException e) {
 			System.out.println("경고 : 사진 데이터를 불러오는 중 오류 발생.");
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 	

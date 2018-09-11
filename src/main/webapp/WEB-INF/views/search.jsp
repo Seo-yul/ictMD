@@ -79,7 +79,6 @@
 		animation: opacity-1 1000ms infinite ease-in-out;
 	}
 	
-	
 	.preloader-1 .line-1 { animation-delay: 800ms; }
 	.preloader-1 .line-2 { animation-delay: 600ms; }
 	.preloader-1 .line-3 { animation-delay: 400ms; }
@@ -131,7 +130,7 @@
     </style> 
 </head>
 <body>
-<input type="hidden" id="mtotag" value="${mtotag}">
+	<input type="hidden" id="mtotag" value="${mtotag}">
 	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
@@ -186,25 +185,36 @@
 	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:white; " >欲しかったカメラの写真を検索しましょう</h1>
+				<h1 class="blog-post-title text-center" style="color:white;">欲しかったカメラの写真を検索しましょう</h1>
 				<span class="title-divider"></span>
 				<br>
 				<div id="searchForm" align="center">
-					<table >
+					<table>
 						<tr>
 							<td>
 								<input id="text" type="text" class="form-control" style="width:600px;">
 							</td>
 							<td>
-								<input id="button" type="button" class="form-control"  style="width:80px;" value="Search" >
+								<input id="button" type="button" class="form-control" style="width:80px;" value="Search" >
 							</td>
 						</tr>
 					</table>
-					<div>
-						<i class="fas fa-camera" >	
-							「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
-						</i>
-					</div>
+				</div>
+				<div align="center">
+					<i class="fas fa-camera">	
+						「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
+					</i>
+				</div>
+				<div id="searchResult" align="center">
+					<h3 style='font-size:15px;'>検索結果 : </h3>
+				</div>
+				<div align="center">
+					<input id="timeasc" type="button" value="업로드시간 순 정렬(최신 먼저)">
+					<input id="timedesc" type="button" value="업로드시간 순 정렬(오래된 것 먼저)">
+					<input id="viewasc" type="button" value="조회수 순 정렬(오름차순)">
+					<input id="viewdesc" type="button" value="조회수 순 정렬(내림차순)">
+					<img src="./resources/img/smaller_1-512.png" style="width:30px;height:30px;">
+					<img src="./resources/img/bigger_1-512.png" style="width:30px;height:30px;">
 				</div>
 				<div id="list" align="center"></div>
 				<div id="container" class="container">
@@ -221,7 +231,6 @@
 	<!-- Bootstrap core JavaScript
 	   ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	
 	<script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
