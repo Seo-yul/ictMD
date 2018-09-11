@@ -77,7 +77,7 @@
       function initialize() {
     	  
     	   
-    	options = {atmosphere: false ,sky: true, center: [0, 0], zoom: 0, zooming:false};
+    	options = {atmosphere: false ,sky: false, center: [0, 0], zoom: 0, zooming:false};
         earth = new WE.map('earth_div',options);
         earth.setView([37.511981, 127.058544], 2.7);
         WE.tileLayer('https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {

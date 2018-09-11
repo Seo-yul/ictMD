@@ -62,11 +62,11 @@ public class ImageRekognition extends Thread {
 					for (int i = 0; i < jarry.size(); i++) {
 						arryJSONObject.add((JSONObject) jarry.get(i));
 					}
-					// 사진에서 탐지된 요소를 0개~2개를 출력합니다. (최대 수는 콜에서 설정가능. 현재값 2개)
+					// 사진에서 탐지된 요소를 0개~n개를 출력합니다. (최대 수는 콜에서 설정가능. 현재값 1개)
 					for (JSONObject JSONobj : arryJSONObject) {
 						el.add((String) JSONobj.get("description"));
 					}
-					System.out.println(el); // 요소 두개들어있습니다.
+					System.out.println(el); // 요소 한개들어있습니다.
 				} else {
 					System.out.println("분석 실패 or 분석 할 것 없음");
 				}
@@ -80,6 +80,7 @@ public class ImageRekognition extends Thread {
 		// doLandmarkDetection();
 
 		System.out.println("======관련어=======");
+		String WDstr = "";
 		if (resultWebDetection != null) {
 			try {
 				JSONObject jobj = (JSONObject) pJson.parse(resultWebDetection);
@@ -94,9 +95,9 @@ public class ImageRekognition extends Thread {
 					
 					jarry = (JSONArray) jobj.get("bestGuessLabels");
 					jobjtmp = (JSONObject) jarry.get(0);
-					String bb = (String) jobjtmp.get("label"); // 사진설명느낌?
-					if(!(bb.equals(aa))) {
-					System.out.println(bb);
+					WDstr = (String) jobjtmp.get("label"); // 사진설명느낌?
+					if(!(WDstr.equals(aa))) {
+						System.out.println(WDstr);
 					}
 				} else {
 					System.out.println(jarry);
@@ -123,9 +124,11 @@ public class ImageRekognition extends Thread {
 			elements += t + ",";
 		}
 		elements = elements.substring(0, elements.length() - 1);
-		bad.setElements(elements);
-		bad.setMake(creatimg.getMake());
-		bad.setModel(creatimg.getModel());
+		bad.setElements(WDstr.toUpperCase());
+		String strMake = creatimg.getMake();
+		bad.setMake(strMake.toUpperCase());
+		String strModel = creatimg.getModel(); 
+		bad.setModel(strModel.toUpperCase());
 		
 		System.out.println(bad);
 		SqlSession session = creatimg.getSession();
@@ -164,7 +167,7 @@ public class ImageRekognition extends Thread {
 					new OutputStreamWriter(httpConnection.getOutputStream()));
 		/*	httpRequestBodyWriter.write("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\",\"maxResults\": \"2\"	}],"
 					+ " \"image\": {\"content\": "+encode64 +" }}]}");*/
-			httpRequestBodyWriter.write("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\",\"maxResults\": \"2\"	}],"
+			httpRequestBodyWriter.write("{\"requests\":  [{ \"features\":  [ {\"type\": \"LABEL_DETECTION\",\"maxResults\": \"1\"	}],"
 					+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
 //			String response = httpConnection.getResponseMessage();
@@ -201,7 +204,7 @@ public class ImageRekognition extends Thread {
 			BufferedWriter httpRequestBodyWriter = new BufferedWriter(
 					new OutputStreamWriter(httpConnection.getOutputStream()));
 			httpRequestBodyWriter.write(
-					"{\"requests\":  [{ \"features\":  [ {\"type\": \"LANDMARK_DETECTION\",\"maxResults\": \"2\"	}],"
+					"{\"requests\":  [{ \"features\":  [ {\"type\": \"LANDMARK_DETECTION\",\"maxResults\": \"1\"	}],"
 							+ " \"image\": {\"source\": { \"imageUri\": \"" + imageTmp + "\"}}}]}");
 			httpRequestBodyWriter.close();
 //			String response = httpConnection.getResponseMessage();
