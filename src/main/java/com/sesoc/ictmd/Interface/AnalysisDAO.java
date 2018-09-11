@@ -15,4 +15,6 @@ public interface AnalysisDAO {
 	public int view(String id);
 	
 	public int renew(String id);
+	
+	public HistoryVO check2(String id);
 }

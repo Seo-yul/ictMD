@@ -35,7 +35,6 @@ public class SearchAPI {
 	private static SearchParameters p;
 	
 	SqlSession s;
-	AnalysisDAO d;
 	
 	// 추가 검색 대상 항목들을 미리 목록화한다.
 	private static final Set<String> e = new HashSet<>();
@@ -92,7 +91,6 @@ public class SearchAPI {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
 		this.s = s;
-		d = s.getMapper(AnalysisDAO.class);
 	}
 	
 	// 검색 패러미터를 초기화하는 메소드
@@ -121,21 +119,24 @@ public class SearchAPI {
 			e.printStackTrace();
 		}
 		if (l != null) {
+			AnalysisDAO d = s.getMapper(AnalysisDAO.class);
 			HistoryVO v;
+			String id;
 			SimplePhoto temp;
 			for (Photo p : l) {
-				String id = p.getId();
+				id = p.getId();
 				v = d.check(id);
-				if (v != null) {
-					temp = new SimplePhoto(id, p.getSquareLargeUrl(), v.getViews(), v.getFavorites(), v.getComments());
-				} else {
+				if (v == null) {
 					temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
+				} else {
+					temp = new SimplePhoto(id, p.getSquareLargeUrl(), v.getViews(), v.getFavorites(), v.getComments());
 				}
 				result.add(temp);
 			}
 		} else {
 			System.out.println("검색 결과 없음.");
 		}
+		
 		return result;
 	}
 
@@ -166,7 +167,8 @@ public class SearchAPI {
 			}
 			
 			// 조회수 정보를 가져오거나 새로 입력한다.
-			/*HistoryVO v = d.check(id);
+			AnalysisDAO d = s.getMapper(AnalysisDAO.class);
+			HistoryVO v = d.check(id);
 			if (v == null) {
 				d.view(id);
 				result.setViews(1);
@@ -177,11 +179,12 @@ public class SearchAPI {
 				result.setViews(v.getViews() + 1);
 				result.setFavorites(v.getFavorites());
 				result.setComments(v.getComments());
-			}*/
+			}
 		} catch (FlickrException e) {
 			System.out.println("경고 : 사진 데이터를 불러오는 중 오류 발생.");
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 	

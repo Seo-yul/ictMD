@@ -131,7 +131,7 @@
     </style> 
 </head>
 <body>
-<input type="hidden" id="mtotag" value="${mtotag}">
+	<input type="hidden" id="mtotag" value="${mtotag}">
 	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
@@ -176,11 +176,11 @@
 	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:white; " >欲しかったカメラの写真を検索しましょう</h1>
+				<h1 class="blog-post-title text-center" style="color:white;">欲しかったカメラの写真を検索しましょう</h1>
 				<span class="title-divider"></span>
 				<br>
 				<div id="searchForm" align="center">
-					<table >
+					<table>
 						<tr>
 							<td>
 								<input id="text" type="text" class="form-control" style="width:650px;">
@@ -191,6 +191,12 @@
 						</tr>
 					</table>
 				</div>
+				<input id="timeasc" type="button" value="업로드시간 순 정렬(최신 먼저)">
+				<input id="timedesc" type="button" value="업로드시간 순 정렬(오래된 것 먼저)">
+				<input id="viewasc" type="button" value="조회수 순 정렬(오름차순)">
+				<input id="viewdesc" type="button" value="조회수 순 정렬(내림차순)">
+				<img src="./resources/img/smaller_1-512.png" style="width:30px;height:30px;">
+				<img src="./resources/img/bigger_1-512.png" style="width:30px;height:30px;">
 				<div id="list" align="center"></div>
 				<div id="container" class="container">
 					<div id="gallery">
