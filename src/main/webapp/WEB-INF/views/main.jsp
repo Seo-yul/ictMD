@@ -30,8 +30,9 @@
     <script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
     <style type="text/css">
     #firstShowed{
+    position:fixed;
     top:0;
-    left:0;
+    left:10;
     width:100%;
 	height:100%;
     background-image:url('./resources/img/firstCamera.jpg');
@@ -64,7 +65,7 @@
     	  $('.flash').css({'opacity': 1});
     	 
     	  $("#firstShowed").css("display", "none");
-    	  
+
     	}
 	  function firstFunction(){
 		  
