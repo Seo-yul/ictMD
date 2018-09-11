@@ -162,7 +162,7 @@
 			<header>
 				<div class="left logo">
 					<a href="/ictmd">
-						<span>35기C반</span>ハンサム
+						<span>35期Dクラス</span>ハンサム
 					</a>
 				</div>
 	
@@ -172,7 +172,7 @@
 			</header>
 
 			<div class="login-form">
-				<div class="subtitle">로그인하세여!</div>
+				<div class="subtitle">ログイン</div>
 				<input type="text" id="userId" placeholder="UserID" required="required" />
 				<input type="password" id="userPwd" placeholder="Password" required="required" />
 			</div>
@@ -188,7 +188,7 @@
 	
 	<div id="toMain">
 		<form action="main">
-			<input type="submit" value="메인 화면으로">		
+			<input type="submit" value="メインへ">		
 		</form>
 	</div>
 	<!-- get dem fancy typefaces -->

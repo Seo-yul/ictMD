@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, favorite
 			</if>
 		) values (
-			#{userid}
+			#{userId}
 			<if test="birth != null">
 			, #{birth}
 			</if>

@@ -20,7 +20,7 @@
 	function emailcheck(){
 		var userId= $(this).val();
 		if(userId.indexOf("@")==-1){
-			$("#emailcheck").text("골뱅이쳐라");
+			$("#emailcheck").text("正しいEmailを書いてください。");
 		}else{
 			$("#emailcheck").text("");
 			$.ajax({
@@ -31,10 +31,10 @@
 				},
 				success:function(data){
 					if(data){
-						$("#emailcheck").text("중복된 email입니다.");
+						$("#emailcheck").text("すでに使われている文字列です。長くするか、別の文字に変更してください。");
 						$("#next1").attr("disabled", true);
 					}else{
-						$("#emailcheck").text("사용가능한 email입니다.");
+						$("#emailcheck").text("使用できます。");
 						$("#next1").attr("disabled", false);
 					}
 				}
@@ -45,26 +45,26 @@
 	function passcheck(){
 		var userPwd=$(this).val();
 		if(userPwd.length < 3 || userPwd.length > 16){
-			$("#passcheck").text("Password의 길이는 3자~16자 입니다.");
+			$("#passcheck").text("Passwordの長さは 3字~16字です。");
 		}else{
 			$("#passcheck").text("");
 			
 			var confirmPassChk=$("#confirmPassChk").val();
 			console.log("password : " + userPwd);
-			console.log("컨펌 : " + $("#confirmPassChk").val());
+			console.log("confirm : " + $("#confirmPassChk").val());
 			
 			if(confirmPassChk != userPwd){
-				$("#passcheck").text("password를 정확히 입력하세요");
+				$("#passcheck").text("passwordが違います。確認してください。");
 
 			}else{
 				$("#passcheck").text("");
 				
 				var confirmPassChk=$("#confirmPassChk").val();
 				console.log("password : " + userPwd);
-				console.log("컨펌 : " + $("#confirmPassChk").val());
+				console.log("confirm : " + $("#confirmPassChk").val());
 				
 				if(confirmPassChk != userPwd){
-					$("#passcheck").text("password를 정확히 입력하세요");
+					$("#passcheck").text("passwordが違います。確認してください。");
 				}else{
 					$("#passcheck").text("");
 					$("#confirmResult").text("");
@@ -77,7 +77,7 @@
 	function confirmPassChk(){
 		var confirmPassChk=$(this).val();
 		if(confirmPassChk != $("#userPwd").val()){
-			$("#confirmResult").text("password를 정확히 입력하세요");
+			$("#confirmResult").text("passwordが違います。確認してください。");
 		}else{
 			$("#confirmResult").text("");
 			
@@ -115,7 +115,7 @@
 				favorite : favorite,
 				model : model
 			}, success:function (){
-				alert("회원가입 추카드릠돠");
+				alert("会員登録おめでとうございます。");
 				location.href="/ictmd";
 			}
 		});
@@ -133,13 +133,13 @@
 	<form id="msform" action="submit" method="post">
 		<!-- progressbar -->
 		<ul id="progressbar">
-			<li class="active">회원 기본정보</li>
-			<li>회원 상세정보</li>
-			<li>회원 정보확인</li>
+			<li class="active">基本情報</li>
+			<li>詳細情報</li>
+			<li>情報確認</li>
 		</ul>
 		<!-- fieldsets -->
 		<fieldset>
-			<h2 class="fs-title">기본정보 입력</h2>
+			<h2 class="fs-title">基本情報入力</h2>
 			<input type="text" id="userId" name="userId" placeholder="Email" />
 			<p id="emailcheck" style="font-size: 10px; color: red;" align="left"></p>
 			<br> <input type="password" id="userPwd" name="userPwd" placeholder="Password" />
@@ -152,7 +152,8 @@
 			<input type="button" id="next1"	name="next" class="next action-button" value="Next"  disabled=""/><br>
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">상세정보 입력</h2>
+		
+			<h2 class="fs-title">詳細情報入力</h2>
 			<table style="width: 100%">
 				<tr>
 					<td colspan="3">
@@ -167,19 +168,19 @@
 				<tr style="height: 50px;">
 					<td>
 						<div style="width: 100%;">
-							<input class="favorite"  name="favorite" type="checkbox" value="풍경" style="width: 30%;"/>
-							<span style="width: 50%;">풍경</span>
+							<input class="favorite"  name="favorite" type="checkbox" value="風景" style="width: 30%;"/>
+							<span style="width: 50%;">風景</span>
 						</div>
 					</td>
 					<td>
 						<div style="width: 100%;">
-							<input class="favorite"  name="favorite" type="checkbox" value="인물" style="width: 30%;"/>
-							<span style="width: 50%;">인물</span>
+							<input class="favorite"  name="favorite" type="checkbox" value="人物" style="width: 30%;"/>
+							<span style="width: 50%;">人物</span>
 						</div>
 					</td>
 					<td><div style="width: 100%;">
-							<input class="favorite"  name="favorite" type="checkbox" value="사람" style="width: 30%;"/>
-							<span style="width: 50%;">사람</span>
+							<input class="favorite"  name="favorite" type="checkbox" value="建物" style="width: 30%;"/>
+							<span style="width: 50%;">建物</span>
 						</div>
 					</td>
 				</tr>
@@ -191,7 +192,7 @@
 			<input type="button" id="next2" name="next" class="next action-button" value="Next" />
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">입력정보확인</h2>
+			<h2 class="fs-title">入力情報確認</h2>
 			<table id="usercheck" align="left" style='width: 100%'>
 				<!--  js에서 가지고 옴 -->
 			</table>
@@ -202,7 +203,7 @@
 	
 	<div id="toMain">
 		<form action="main">
-			<input type="submit" value="메인 화면으로">		
+			<input type="submit" value="メインへ">		
 		</form>
 	</div>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>

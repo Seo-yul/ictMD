@@ -57,17 +57,17 @@
 	</div>
 	<div class="navmenu navmenu-default navmenu-fixed-left">
 		<ul class="nav navmenu-nav">
-			<li><a href="main">메인</a></li>
-			<li><a href="search">검색</a></li>
-			<li><a href="analysis">분석</a></li>
-			<li><a href="weatherNshopping">종합 정보</a></li>
+			<li><a href="main">メイン</a></li>
+			<li><a href="search">検索</a></li>
+			<li><a href="analysis">分析</a></li>
+			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">로그인</a></li><li><a href="registerPage">회원가입</a></li>
+				<li><a href="loginPage">ログイン</a></li><li><a href="registerPage">会員登録</a></li>
 			</c:if>
 			<c:if test="${userId != null}">
-				<li><a href="fixPage">회원 정보 수정</a></li>
-				<li><a href="secesionPage">회원 탈퇴</a></li>
-				<li><a href="logout">로그아웃</a></li>
+				<li><a href="fixPage">登録情報の編集</a></li>
+				<li><a href="secesionPage">IDの削除</a></li>
+				<li><a href="logout">ログアウト</a></li>
 				<c:if test="${userId == 'admin'}">
 					<li><a href="admin">管理者ページ</a></li>
 				</c:if>	
@@ -90,7 +90,7 @@
 			<h1 class="blog-post-title text-center" style="color:white;">ADMIN_PAGE</h1>
 			<div align="center" style="margin-top:50px;">
 				<div style="display: inline-block; width: 70%;">
-					<input type="button" id="btnInsertFormModel" value="입력" style="margin-bottom: 20px; float: right;">
+					<input type="button" id="btnInsertFormModel" value="モデル入力" style="margin-bottom: 20px; float: right;">
 				</div>
 				<table id="adminTbl" border="2" style="width: 70%; color: #fff; background-color: #000; opacity: 0.9;">
 					<tr style="height: 25px;">

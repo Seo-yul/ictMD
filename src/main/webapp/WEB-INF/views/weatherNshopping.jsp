@@ -241,21 +241,21 @@
 					/* 여기 콘솔있는쪽은 그냥 이러한 정보를 받아올수 있다 이런거 보여주려고 만든거고 추후에 삭제예정 */
 					//어떤데이터를 출력할지를 모르니까 우선은...
 					console.log(data);
-					console.log("검색한 도시명 : " + data.name);
-					console.log("위도 및 경도 : " + data.coord.lon+ ", " + data.coord.lat)
-					console.log("현재 날씨 : "+ data.weather[0].main);
-					console.log("아이콘 : "+ data.weather[0].icon);
-					console.log("현재온도 : "+ (data.main.temp - 273.15));
-					console.log("지역순간최고온도 : "+ (data.main.temp_max - 273.15)); // 절대온도로 나오니깐...
-					console.log("지역순간최저온도 : "+ (data.main.temp_min - 273.15));
+					console.log("検索した都市名 : " + data.name);
+					console.log("経度と緯度 : " + data.coord.lon+ ", " + data.coord.lat)
+					console.log("現在天気 : "+ data.weather[0].main);
+					console.log("アイコン : "+ data.weather[0].icon);
+					console.log("現在温度 : "+ (data.main.temp - 273.15));
+					console.log("地域最高温度 : "+ (data.main.temp_max - 273.15)); // 절대온도로 나오니깐...
+					console.log("地域最低温度 : "+ (data.main.temp_min - 273.15));
 					
 					var sunrise = data.sys.sunrise;
 					var sunset = data.sys.sunset;
 					var sunriseTime = new Date(sunrise * 1000).toLocaleTimeString();
 					var sunsetTime = new Date(sunset * 1000).toLocaleTimeString();
-					console.log("일출시간 : " + sunriseTime);
-					console.log("일몰시간 : " + sunsetTime);
-					console.log("흐림정도 : " + data.clouds.all+ "%");
+					console.log("日の出時刻 : " + sunriseTime);
+					console.log("日の入時刻 : " + sunsetTime);
+					console.log("曇り : " + data.clouds.all+ "%");
 					
 					if(data.weather[0].main == "Clear"){
 						$("#weatherBg").css("background-image","url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif')")
@@ -340,12 +340,12 @@
 				success:function(data){
 					var items = data.findItemsByKeywordsResponse[0].searchResult[0].item || [];
 					if(items.length == 0){
-						alert("찾는 데이터가 없넹 ㅠ");
+						alert("結果なし");
 						$("#product").val('');
 						return;
 					}
 					var html = [];
-					var head = "<table><tr><th>사진</th><th>제목</th><th>가격(USD)</th>"
+					var head = "<table><tr><th>写真</th><th>タイトル</th><th>価額(USD)</th>"
 					  
 					html.push(head);
 					for (var i = 0; i < items.length; ++i) {
@@ -378,17 +378,17 @@
   	</div>  
     <div class="navmenu navmenu-default navmenu-fixed-left">
 		<ul class="nav navmenu-nav">
-			<li><a href="main">메인</a></li>
-			<li><a href="search">검색</a></li>
-			<li><a href="analysis">분석</a></li>
-			<li><a href="weatherNshopping">종합 정보</a></li>
+			<li><a href="main">メイン</a></li>
+			<li><a href="search">検索</a></li>
+			<li><a href="analysis">分析</a></li>
+			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">로그인</a></li><li><a href="registerPage">회원가입</a></li>
+				<li><a href="loginPage">ログイン</a></li><li><a href="registerPage">会員登録</a></li>
 			</c:if>
 			<c:if test="${userId != null}">
-				<li><a href="fixPage">회원 정보 수정</a></li>
-				<li><a href="secesionPage">회원 탈퇴</a></li>
-				<li><a href="logout">로그아웃</a></li>
+				<li><a href="fixPage">登録情報の編集</a></li>
+				<li><a href="secesionPage">IDの削除</a></li>
+				<li><a href="logout">ログアウト</a></li>
 				<c:if test="${userId == 'admin'}">
 					<li><a href="admin">管理者ページ</a></li>
 				</c:if>	
@@ -420,9 +420,9 @@
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
                 <div class="fill" id = "weatherBg" style="background-image:url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif');">
-	                <h2>날씨검색</h2>
-					<input type="text" id="city" placeholder="도시입력해주셈 ㅋ" />
-					<button id="searchWeather">검색!</button>
+	                <h2>天気検索</h2>
+					<input type="text" id="city" placeholder="都市を入力してください" />
+					<button id="searchWeather">検索</button>
 					<hr>
 					<!-- 현재 날씨정보 위젯 출력부분 -->
 					<div id="widgetDiv"></div>
@@ -434,9 +434,9 @@
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('https://data.1freewallpapers.com/download/anne-hathaway-at-shopping.jpg');">
-	                <h2>쇼핑검색</h2>
-					<input type="text" id="product" placeholder="품명을 적어주세요"/>
-					<button id="searchProduct">검색하기</button>
+	                <h2>ショッピング検索</h2>
+					<input type="text" id="product" placeholder="Cameraモデルを入力"/>
+					<button id="searchProduct">検索</button>
 					<!-- 쇼핑검색결과 출력부분 -->
 					<div id="results"></div>
                 </div>
