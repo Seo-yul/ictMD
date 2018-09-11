@@ -7,10 +7,11 @@ public class BasicTrendData {
 	private String dataPercentage;
 
 	public BasicTrendData() {
-		
+
 	}
 
 	public BasicTrendData(String dataName, String dataNum, String dataPercentage) {
+		super();
 		this.dataName = dataName;
 		this.dataNum = dataNum;
 		this.dataPercentage = dataPercentage;

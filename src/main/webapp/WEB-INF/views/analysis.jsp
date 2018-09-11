@@ -23,8 +23,116 @@
 	
 	<link rel="stylesheet" type="text/css" href="./resources/css/analysis.css">
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="./resources/js/highcharts.js"></script>
+	<script src="./resources/js/series-label.js"></script>
+	<script src="./resources/js/exporting.js"></script>
+	<script src="./resources/js/export-data.js"></script>
+	<script src="./resources/js/wordcloud.js"></script>
+	
 	<script>
 		$(function(){
+			
+			function wordCloudChart(data, divName, chartTitle){
+				var makeArr = [];
+					
+				$(data).each(function(index,item){
+					makeArr.push({
+						name:item.dataName,
+						weight:parseFloat(item.dataNum)
+					});
+				});
+				
+				
+				Highcharts.chart(divName, {
+				    series: [{
+				        type: 'wordcloud',
+				        data: makeArr,
+				        name: '검색횟수'
+				    }],
+				    title: {
+				        text: chartTitle
+				    }
+				});
+			}
+			
+			function basicDataChart(data, divName, chartTitle, seriesName){
+				var makeArr = [];
+				$(data).each(function(index,item){
+					makeArr.push({
+						name:item.dataName,
+						y:parseFloat(item.dataPercentage)
+					});
+				});
+				console.log(makeArr);
+				Highcharts.chart(divName, {
+				    chart: {
+				        plotBackgroundColor: null,
+				        plotBorderWidth: null,
+				        plotShadow: false,
+				        type: 'pie'
+				    },
+				    title: {
+				        text: chartTitle
+				    },
+				    tooltip: {
+				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				    },
+				    plotOptions: {
+				        pie: {
+				            allowPointSelect: true,
+				            cursor: 'pointer',
+				            dataLabels: {
+				                enabled: true,
+				                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+				                style: {
+				                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+				                }
+				            }
+				        }
+				    },
+				    series: [{
+				        name: seriesName,
+				        colorByPoint: true,
+				        data: makeArr
+				    }]
+				});
+			}
+			
+			$.ajax({
+				url:"importBasicMakeData",
+				type:"post",
+				success:function(data){
+					console.log(data);
+					basicDataChart(data, "BasicMake", "Maker Trend", "percentage");
+					
+				},
+				error:function(data){
+					alert("실패 ㅠ");
+				}
+			});
+			
+			$.ajax({
+				url:"importBasicModelData",
+				type:"post",
+				success:function(data){
+					console.log(data);
+					basicDataChart(data, "BasicModel", "Model Trend Top 10", "percentage");
+					
+				},
+				error:function(data){
+					alert("실패 ㅠ");
+				}
+			});
+			
+			$.ajax({
+				url:"importBasicTagsData",
+				type:"post",
+				success:function(data){
+					console.log(data);
+					wordCloudChart(data, "BasicTag", "Today's Tags TOP 20");
+				}
+			});
 			
 			
 			
@@ -65,6 +173,9 @@
 		<br>
 		<h1 class="blog-post-title text-center">트렌드 분석</h1>
 		<span class="title-divider"></span>
+		<div id="BasicMake"></div>
+		<div id="BasicModel"></div>
+		<div id="BasicTag"></div>
 	</div>
 	
 	<!-- Bootstrap core JavaScript
