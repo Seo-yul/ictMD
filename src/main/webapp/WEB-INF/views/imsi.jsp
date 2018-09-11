@@ -27,7 +27,7 @@
 		});
 
 		$("#secesion").click(function() {
-			var result1 = confirm("정말 회원탈퇴를 하시겠습니까?");
+			var result1 = confirm("本当に会員IDを削除しますか。");
 			if (result1) {
 				var userPwd = prompt("탈퇴절차를 위하여 귀하의 비밀번호 입력해주세요");
 				$.ajax({

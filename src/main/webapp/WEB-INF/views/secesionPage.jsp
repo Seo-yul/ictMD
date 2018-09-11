@@ -162,10 +162,10 @@ body {
 			var userPwd = $("#userPwd").val();
 
 			if (userId == "") {
-				alert("아이디를 입력해주세요");
+				alert("IDを入力してください");
 				return;
 			} else if (userPwd == "") {
-				alert("비밀번호를 입력해주세요");
+				alert("暗証番号を入力してください");
 				return;
 			} else {
 				$.ajax({
@@ -177,10 +177,10 @@ body {
 					},
 					success : function(data) {
 						if (data == 1) {
-							alert("회원탈퇴 완료.... GoodBye.... ㅠㅠ");
+							alert("ID削除完了");
 							location.href = "/ictmd/"
 						} else {
-							alert("회원정보가 일치하지않습니다.");
+							alert("会員情報が違います。");
 							return;
 						}
 					}
@@ -215,7 +215,7 @@ body {
 		<div class="ui-panel login-panel animated bounceInDown">
 			<header>
 				<div class="left logo">
-					<a href="/ictmd"><span>35기C반</span>ハンサム</a>
+					<a href="/ictmd"><span>35基Dクラス</span>ハンサム</a>
 				</div>
 
 				<div class="right">
@@ -224,17 +224,17 @@ body {
 			</header>
 
 			<div class="login-form">
-				<div class="subtitle">회원탈퇴를 하시려면 다시 아이디와 비밀번호를 입력하세요!</div>
-				<input type="text" id="userId" placeholder="UserID"
-					　required="required" /> <input type="password" id="userPwd"
-					placeholder="Password" required="required" />
+				<div class="subtitle">IDと暗証番号をもう一回入力してください。</div>
+				<input type="text" id="userId" placeholder="UserID" required="required" /> 
+				<input type="password" id="userPwd" placeholder="Password" required="required" />
 			</div>
 
 			<footer>
 				<div class="right form-actions">
-					<a id="goSecesion" class="ui-button inactive login">Login</a>
+					<input type="button" id="goSecesion" class="ui-button inactive login" value="ID削除"/>
 				</div>
 			</footer>
+			
 		</div>
 	</div>
 

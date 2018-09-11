@@ -25,10 +25,10 @@ $(document).ready(function() {
 		var userPwd = $("#userPwd").val();
 
 		if (userId == "") {
-			alert("아이디를 입력해주세요");
+			alert("IDを入力してください。");
 			return;
 		} else if (userPwd == "") {
-			alert("비밀번호를 입력해주세요");
+			alert("パスワードを入力してください。");
 			return;
 		} else {
 			$.ajax({
@@ -42,7 +42,7 @@ $(document).ready(function() {
 					if (data == 1) {
 						location.href = "/ictmd/"
 					} else {
-						alert("로그인실패! 아이디 혹은 비밀번호를 다시 확인해주세요");
+						alert("入力したIDまたはパスワードが違います。確認お願いします。");
 						return;
 					}
 				}
