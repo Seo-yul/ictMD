@@ -104,7 +104,7 @@ public class SearchAPI {
 		p.setPrivacyFilter(1);
 		p.setHasGeo(true);
 		p.setExtras(e);
-		// p.setSafeSearch("2");
+		p.setSafeSearch("2");
 	}
 
 	// 사진 검색 메소드
