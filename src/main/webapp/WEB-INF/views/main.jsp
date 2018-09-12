@@ -65,7 +65,7 @@
     	  $('.flash').css({'opacity': 1});
     	 
     	  $("#firstShowed").css("display", "none");
-
+			$("#msg").hide();
     	}
 	  function firstFunction(){
 		  
@@ -219,11 +219,11 @@
 		"use strict";
 		$.clicksearch = (landmark)=>{
 			var tags = landmark
-			$("#gosearch").attr("action","goClickSearch")
-			$("#gosearch").attr("method","POST")
-			$("#tags").attr("name","tags")
-			$("#tags").val(tags)
-			$("#gosearch").submit()
+			$("#gosearch").attr("action","goClickSearch");
+			$("#gosearch").attr("method","POST");
+			$("#tags").attr("name","tags");
+			$("#tags").val(tags);
+			$("#gosearch").submit();
 		}
 	})
     </script>
@@ -267,6 +267,7 @@
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	
+	<h2 id="msg" style="color: white;position: absolute; top: 20%; left: 50%; margin-left: -50px; z-index: 9999;">화면을 클릭하세요.</h2>
 	<div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
     
 		<div class="navbar navbar-default navbar-fixed-top"></div>
