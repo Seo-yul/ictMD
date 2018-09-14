@@ -48,9 +48,10 @@ var detail = function(e) {
 	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
 	$("#loading").show();
 	var num = e.target.getAttribute("alt");
-	$("#" + num + " > div").remove();
-	$("#" + num).append("<div>views : " + (varr[num] + 1) + "</div>");
 	varr[num] += 1;
+	$("#" + num + " > div").remove();
+	$("#" + num).append("<div>views : " + varr[num] + "</div>");
+	
 	$.ajax({
 		  data : {
 			id : arr[num]
@@ -172,17 +173,18 @@ var viewasc = function() {
 		return;
 	}
 	larr = new Array();
-	larr[0] = varr[0];
+	larr.push(0);
 	for (var i = 1; i < arr.length; i++) {
 		for (var j = 0; j < i; j++) {
-			if (varr[i] < varr[j]) {
-				larr.splice(j, 0, i);
-			} else {
+			if (varr[i] > varr[j]) {
 				if (j == i - 1) {
-					larr[i] = i;
+					larr.push(i);
 				} else {
 					continue;
 				}
+			} else {
+				larr.splice(j, 0, i);
+				break;
 			}
 		}
 	}
@@ -190,7 +192,7 @@ var viewasc = function() {
 	var list = $("#list");
 	list.off();
 	$("#list >").remove();
-	for (var k = 0; k < larr.length; k++) {
+	for (var k = 0; k < arr.length; k++) {
 		var n = larr[k];
 		list.append("<div id='" + n + "' class='frame'></div>");
 		$("#" + n).append("<img alt='" + n + "' class='result' src='" + uarr[n] + "'>");

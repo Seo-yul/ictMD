@@ -1,6 +1,5 @@
 package com.sesoc.ictmd;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,24 +17,22 @@ import com.sesoc.ictmd.vo.ModelDetail;
  */
 @Controller 
 public class HomeController {
-	// 처음 구동 시 메인 화면으로 이동하는 메소드
-/*	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String init() {
-		return "redirect:/main";
-	}*/
-	
 	@Autowired SqlSession sqlsession;
 	
-	// 메인 화면으로 이동하는 메소드
+	// 처음 구동 시 메인 화면으로 이동하는 메소드
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main() {
-		
-		return "main";
+	public String init() {
+		return "redirect:/main";
 	}
+	
+	// 메인 화면으로 이동하는 메소드
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String main() {
+		return "main";
+	}*/
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String gomain() {
-		
 		return "main";
 	}
 	
@@ -74,8 +71,4 @@ public class HomeController {
 		
 		return "admin";
 	}
-	
-	
-	
-	
 }
