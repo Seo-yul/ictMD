@@ -58,10 +58,10 @@
 				          }
 				    }],
 				    title: {
-				        text: chartTitle
+				        text: "☆"+chartTitle+"☆"
 				    },
 				    subtitle: {
-				    	text: "각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다."
+				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
 				    }
 				});
 			}
@@ -83,10 +83,10 @@
 				        type: 'pie'
 				    },
 				    title: {
-				        text: chartTitle
+				        text: "☆"+chartTitle+"☆"
 				    },
 				    subtitle: {
-				    	text: "각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다."
+				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
 				    },
 				    tooltip: {
 				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -198,11 +198,18 @@
 		<br>
 		<h1 class="blog-post-title text-center">トレンド分析</h1>
 		<span class="title-divider"></span>
-		<div id="BasicTag" style="width:auto;"></div>
-		<div style="min-width:1200px" align="center">
-			<div id="BasicMake" style="display:inline;float:left;width:500px"></div>
-			<div id="BasicModel" style="display:inline;float:left;width:500px"></div>
-		</div>
+		<br><br>
+		<div id="BasicTag" style="width:80%; margin:auto"></div>
+		<table style="margin:auto;">
+			<tr>
+				<td>
+			<div id="BasicMake" style="display:inline;float:left;width:50%"></div>
+				</td>
+				<td>
+			<div id="BasicModel" style="display:inline;float:left;width:50%"></div>
+				</td>
+			<tr>
+		</table>
 	</div>
 	
 	<!-- Bootstrap core JavaScript
