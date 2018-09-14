@@ -59,6 +59,9 @@
 				    }],
 				    title: {
 				        text: chartTitle
+				    },
+				    subtitle: {
+				    	text: "각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다."
 				    }
 				});
 			}
@@ -81,6 +84,9 @@
 				    },
 				    title: {
 				        text: chartTitle
+				    },
+				    subtitle: {
+				    	text: "각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다."
 				    },
 				    tooltip: {
 				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -147,13 +153,8 @@
 					wordCloudChart(data, "BasicTag", "Today's Tags TOP 20");
 				}
 			});
-			
-			
-			
 		});
-		
 	</script>
-	
 </head>
 <body>
 	<div class="bar">
@@ -197,9 +198,11 @@
 		<br>
 		<h1 class="blog-post-title text-center">トレンド分析</h1>
 		<span class="title-divider"></span>
-		<div id="BasicMake"></div>
-		<div id="BasicModel"></div>
-		<div id="BasicTag"></div>
+		<div id="BasicTag" style="width:auto;"></div>
+		<div style="min-width:1200px" align="center">
+			<div id="BasicMake" style="display:inline;float:left;width:500px"></div>
+			<div id="BasicModel" style="display:inline;float:left;width:500px"></div>
+		</div>
 	</div>
 	
 	<!-- Bootstrap core JavaScript

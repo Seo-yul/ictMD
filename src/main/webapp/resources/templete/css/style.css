@@ -180,12 +180,15 @@ p.blog-post-sub-title.text-center {
 .title-divider {
   border-top: 2px solid;
   display: block;
-  max-width: 60px;
+  max-width: 180px;
   margin: 0 auto 15px;
-  color: rgba(184, 177, 168, 1);
+  color: rgba(248, 222, 126, 1); /* ³ë·©ÀÌ·Î ¹Ù²ãÂÇ */
 }
 h3.blog-post-title {
   margin-top: 0px;
+}
+h1.blog-post-title {
+  color: rgba(16, 52, 166, 1);
 }
 
 
@@ -288,14 +291,17 @@ textarea#message {
 
 .carousel-indicators li {
   border-radius: 0px;
-  width: 20px;
-  height: 5px;
+  width: 30px;
+  height: 10px;
+  border-color:black;
 }
 
 .carousel-indicators .active {
-  width: 20px;
-  height: 5px;
-  margin: 1px;
+  width: 30px;
+  height: 10px;
+  margin: 2px;
+  border-color:black;
+  background-color:gray;
 }
 
 .carousel-inner>.item>img {
@@ -323,6 +329,7 @@ textarea#message {
 @media (min-width: 1200px){
 .canvas.gallery {
   /* margin-top: -20px; */
+  background: rgb(255, 255, 255);
   padding: 10px;
   /* margin-bottom: 28px; */
 }
