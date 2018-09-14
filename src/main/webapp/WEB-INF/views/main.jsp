@@ -30,8 +30,9 @@
     <script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
     <style type="text/css">
     #firstShowed{
+    position:fixed;
     top:0;
-    left:0;
+    left:10;
     width:100%;
 	height:100%;
     background-image:url('./resources/img/firstCamera.jpg');
@@ -64,7 +65,7 @@
     	  $('.flash').css({'opacity': 1});
     	 
     	  $("#firstShowed").css("display", "none");
-    	  
+			$("#msg").hide();
     	}
 	  function firstFunction(){
 		  
@@ -76,7 +77,7 @@
       function initialize() {
     	  
     	   
-    	options = {atmosphere: false ,sky: true, center: [0, 0], zoom: 0, zooming:false};
+    	options = {atmosphere: false ,sky: false, center: [0, 0], zoom: 0, zooming:false};
         earth = new WE.map('earth_div',options);
         earth.setView([37.511981, 127.058544], 2.7);
         WE.tileLayer('https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
@@ -218,11 +219,11 @@
 		"use strict";
 		$.clicksearch = (landmark)=>{
 			var tags = landmark
-			$("#gosearch").attr("action","goClickSearch")
-			$("#gosearch").attr("method","POST")
-			$("#tags").attr("name","tags")
-			$("#tags").val(tags)
-			$("#gosearch").submit()
+			$("#gosearch").attr("action","goClickSearch");
+			$("#gosearch").attr("method","POST");
+			$("#tags").attr("name","tags");
+			$("#tags").val(tags);
+			$("#gosearch").submit();
 		}
 	})
     </script>
@@ -266,6 +267,7 @@
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	
+	<h2 id="msg" style="color: white;position: absolute; top: 20%; left: 50%; margin-left: -50px; z-index: 9999;">화면을 클릭하세요.</h2>
 	<div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
     
 		<div class="navbar navbar-default navbar-fixed-top"></div>

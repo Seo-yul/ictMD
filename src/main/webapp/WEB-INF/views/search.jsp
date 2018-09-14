@@ -38,18 +38,18 @@
 	<style>
     #back {
     	align:center;
-    	background-image: url("./resources/img/searchImg/camera_black_center.jpg");
+    /* 	background-image: url("./resources/img/searchImg/camera_black_center.jpg"); */
     	background-size:100%;
     	padding-bottom: 700px;
     	margin-left : 85px;
     	margin-right : 150px;
     }
     #bback{
-    	background-color : gery;
+    	background-color : white;
     }
     
     body {
- 		background: #000;
+ 		background: white;
 	}
 	
 	
@@ -73,12 +73,11 @@
 	.preloader-1 .line {
 		width: 1px;
 		height: 12px;
-		background: #fff;
+		background: skyblue;
 		margin: 0 1px;
 		display: inline-block;
 		animation: opacity-1 1000ms infinite ease-in-out;
 	}
-	
 	
 	.preloader-1 .line-1 { animation-delay: 800ms; }
 	.preloader-1 .line-2 { animation-delay: 600ms; }
@@ -131,7 +130,7 @@
     </style> 
 </head>
 <body>
-<input type="hidden" id="mtotag" value="${mtotag}">
+	<input type="hidden" id="mtotag" value="${mtotag}">
 	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
@@ -171,7 +170,7 @@
 	<div id="dim"></div>
 	<!-- loading.. -->
 	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
-			<div style="color:white;">Loading..</div>
+			<div style="color:skyblue;">Loading..</div>
 			<span class="line line-1"></span>
 			<span class="line line-2"></span>
 			<span class="line line-3"></span>
@@ -186,26 +185,34 @@
 	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:white; " >欲しかったカメラの写真を検索しましょう</h1>
+				<h1 class="blog-post-title text-center" style="color:#1E90FF;">欲しかったカメラの写真を検索しましょう</h1>
 				<span class="title-divider"></span>
 				<br>
 				<div id="searchForm" align="center">
-					<table >
+					<table>
 						<tr>
 							<td>
-								<input id="text" type="text" class="form-control" style="width:600px;">
+								<input id="text" type="text" class="form-control" >
 							</td>
 							<td>
-								<input id="button" type="button" class="form-control"  style="width:80px;" value="Search" >
+								<input id="searchButton" type="button" class="form-control" value="Search" >
 							</td>
 						</tr>
 					</table>
-					<div>
-						<i class="fas fa-camera" >	
-							「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
-						</i>
-					</div>
 				</div>
+				<div align="center">
+					<i class="fas fa-camera" style="color:skyblue;">	
+						「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
+					</i>
+				</div>
+				<div id="searchResult" align="center" style="color:skyblue;">
+					<h3 class="fas" style='font-size:15px; color:skyblue;'>　 </h3>
+				</div>
+				<div align="center">
+					<input id="timeasc" type="button" value="업로드시간 순 정렬(최신 먼저)">
+					<input id="timedesc" type="button" value="업로드시간 순 정렬(오래된 것 먼저)">
+				</div>
+				<br>
 				<div id="list" align="center"></div>
 				<div id="container" class="container">
 					<div id="gallery">
@@ -221,7 +228,6 @@
 	<!-- Bootstrap core JavaScript
 	   ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	
 	<script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>

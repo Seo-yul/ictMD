@@ -12,11 +12,25 @@
 	right: 0;
 	z-index: 99;
 	
-	background-color: #000;
+	background-color: silver;
 	opacity: 0.5;
 	filter: alpha(opacity = 50);
 	/* IE7 & 8 */
 }
+
+.frame {
+	width: 150px;
+	height: 150px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	
+	display: inline-block;
+}
+
+/* .result {
+	width: 300px;
+	height: 300px;
+} */
 
 #layer {
 	position: absolute;
@@ -48,3 +62,34 @@
 .tags {
 	display: inline-block;
 }
+
+#text{
+	width:600px; 
+	border-color: skyblue;
+	border-width: 3px;
+}
+
+#searchButton{
+	width:80px; 
+	border-color: skyblue; 
+	background-color: skyblue;
+	color:white;
+	font-weight:bold;
+	border-width: 3px;
+}
+
+.detail{
+	color : blue;
+	font-weight: bold;
+	text-align:left;
+	margin-left:20px;
+}
+#taginput{
+	color : blue;
+	font-weight: bold;
+	text-align:left;
+	margin-bottom : 10px;
+	border-color: skyblue;
+	border-width: 2px;
+}
+

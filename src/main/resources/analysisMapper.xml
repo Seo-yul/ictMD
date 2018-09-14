@@ -23,4 +23,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM
 			analysis
 	</select>
+	
+	<select id="check" parameterType="String" resultType="History">
+		SELECT
+			  id
+			, views
+			, favorites
+			, comments
+		FROM
+			history
+		WHERE
+			id = #{id}
+	</select>
+	
+	<insert id="view" parameterType="String">
+		INSERT INTO
+			history
+		VALUES (
+			  #{id}
+			, 1
+			, 0
+			, 0
+		)
+	</insert>
+	
+	<update id="renew" parameterType="String">
+		UPDATE
+			history
+		SET
+			views = views + 1
+		WHERE
+			id = #{id}
+	</update>
 </mapper>

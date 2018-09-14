@@ -1,15 +1,18 @@
 var arr;
+var varr;
+var farr;
+var carr;
+var uarr;
 
 // 5. 서버로부터 가져온 상세 사진 정보를 화면에 그리는 함수
 var popup = function(resp) {
 	var photo = resp["photo"];
 	var exif = JSON.stringify(resp["exif"]);
-	/*$("#msg").remove();*/
 	$("body").append("<div id='layer'></div>");
 	var layer = $("#layer");
 	layer.css("top", Math.max(0, $(window).scrollTop() + 60) + "px");
 	layer.append("<div id='close'>X</div>");
-	layer.append("<img id='pic' src='" + photo["url"] + "' align='center'>");
+	layer.append("<img id='pic' src='" + photo["url"] + "' align='center'><br>");
 	var pic = $("#pic");
 	pic.on("load", function() {
 		if (this.naturalWidth > 1024) {
@@ -17,17 +20,19 @@ var popup = function(resp) {
 			pic.css("height", (this.naturalHeight * 1024 / this.naturalWidth) + "px");
 		}
 	});
-	layer.append("<div>Tags: </div>");
+	layer.append("<div class='detail' '>▶ Views : " + photo["views"] + "</div><br>");
+	layer.append("<div class='detail' '>▶ Tags : </div><br>");
 	$.each(photo["tags"], function(index, item) {
-		layer.append("<div class='tags'>#" + item + "　</div>");
+		/*layer.append("<div class='tags'>#" + item + "　</div>");*/
+		layer.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
 	});
 	if (photo["latitude"] !== 0) {
-		layer.append("<div>latitude : " + photo["latitude"] + "</div>");
-		layer.append("<div>longitude : " + photo["longitude"] + "</div>");
+		layer.append("<div class='detail'>▶ latitude : " + photo["latitude"] + "</div><br>");
+		layer.append("<div class='detail'>▶ longitude : " + photo["longitude"] + "</div><br>");
 	}
 	if (exif.length > 2) {
-		layer.append("<div>EXIF : </div>");
-		layer.append("<div>" + exif + "</div>");
+		layer.append("<div class='detail'>▶ EXIFs : </div><br>");
+		layer.append("<div class='detail'>" + exif + "</div>");
 	}
 	$("#dim, #close").on("click", function() {
 		layer.remove();
@@ -42,11 +47,10 @@ var detail = function(e) {
 	$("#dim").show();
 	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
 	$("#loading").show();
-	/*var body = $("body");
-	body.append("<div id='msg' style='font-size:30px'>Loading...</div>");
-	$("#msg").css("top", Math.max(0, $(window).scrollTop() + 400) + "px");*/
-	
 	var num = e.target.getAttribute("alt");
+	$("#" + num + " > div").remove();
+	$("#" + num).append("<div>views : " + (varr[num] + 1) + "</div>");
+	varr[num] += 1;
 	$.ajax({
 		  data : {
 			id : arr[num]
@@ -62,6 +66,10 @@ var detail = function(e) {
 // 3. 서버로부터 전송받은 사진 목록을 화면에 그리는 함수.
 var listup = function(resp) {
 	arr = new Array();
+	varr = new Array();
+	farr = new Array();
+	carr = new Array();
+	uarr = new Array();
 	var list = $("#list");
 	if ($("#list >").length) {
 		list.off();
@@ -76,10 +84,17 @@ var listup = function(resp) {
 		}
 	}
 	var result = resp["list"];
-	list.append("<br><h3 style='font-size:15px;'>「"+ $("#text").val() + "」の検索結果 : " + result.length + "件の結果があります。</h3>");
+	$("#searchResult > ").remove();
+	$("#searchResult").append("<h3 style='font-size:15px;'>「"+ $("#text").val() + "」の検索結果 : " + result.length + "件の結果があります。</h3>");
 	for (var i in result) {
 		arr[i] = result[i].id;
-		list.append("<img alt='" + i + "' src='" + result[i].squareImageUrl + "' style='width:300px;height:300px; margin-left:20px; margin-bottom: 20px;'>");
+		varr[i] = result[i].views;
+		farr[i] = result[i].favorites;
+		carr[i] = result[i].comments;
+		uarr[i] = result[i].squareImageUrl;
+		list.append("<div id='" + i + "' class='frame'></div>");
+		$("#" + i).append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
+		$("#" + i).append("<div>views : " + varr[i] + "</div>");
 		if ((i+1)%4 == 0) {
 			list.append("<br>");
 		}
@@ -120,6 +135,65 @@ var search = function() {
 	});
 }
 
+var timeasc = function() {
+	if ($("#list >").length <= 0) {
+		return;
+	}
+	var list = $("#list");
+	list.off();
+	$("#list >").remove();
+	for (var i = 0; i < arr.length; i++) {
+		list.append("<div id='" + i + "' class='frame'></div>");
+		$("#" + i).append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
+		$("#" + i).append("<div>views : " + varr[i] + "</div>");
+	}
+	list.on("click", "img", function(e) {
+		detail(e);
+	});
+}
+var timedesc = function() {
+	if ($("#list >").length <= 0) {
+		return;
+	}
+	var list = $("#list");
+	list.off();
+	$("#list >").remove();
+	for (var i = arr.length; i > 0; i--) {
+		list.append("<div id='" + (i - 1) + "' class='frame'></div>");
+		$("#" + (i - 1)).append("<img alt='" + (i - 1) + "' class='result' src='" + uarr[(i - 1)] + "'>");
+		$("#" + (i - 1)).append("<div>views : " + varr[(i - 1)] + "</div>");
+	}
+	list.on("click", "img", function(e) {
+		detail(e);
+	});
+}
+var viewasc = function() {
+	if ($("#list >").length <= 0) {
+		return;
+	}
+	$("#list").off();
+	$("#list >").remove();
+	$("#list").append("<div id='0' class='frame'></div>");
+	$("#0").append("<img alt='0' class='result' src='" + arr[0] + "'>");
+	$("#0").append("<div>views : " + varr[0] + "</div>");
+	for (var i = 1; i < 100; i++) {
+		
+	}
+}
+var viewdesc = function() {
+	if ($("#list >").length <= 0) {
+		return;
+	}
+	$("#list").off();
+	$("#list >").remove();
+	$("#list").append("<div id='0' class='frame'></div>");
+	$("#0").append("<img alt='0' class='result' src='" + arr[0] + "'>");
+	$("#0").append("<div>views : " + varr[0] + "</div>");
+	for (var i = 1; i < 100; i++) {
+		
+	}
+}
+
 // 1. 검색 이벤트를 본문에 걸어두는 부분.
 $(function() {
 	$("#loading").hide();
@@ -130,4 +204,8 @@ $(function() {
 			search();
 		}
 	});
+	$("#timeasc").on("click", timeasc);
+	$("#timedesc").on("click", timedesc);
+	$("#viewasc").on("click", viewasc);
+	$("#viewasc").on("click", viewdesc);
 });
