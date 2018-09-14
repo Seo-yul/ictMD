@@ -117,17 +117,21 @@ public class ImageRekognition extends Thread {
 		for (String t : creatimg.getTags()) {
 			tags += t + ",";
 		}
-		tags = tags.substring(0, tags.length() - 1);
-		bad.setTags(tags);
-		String elements = "";
+		if (tags.length() > 0) {
+			tags = tags.substring(0, tags.length() - 1);
+		}
+		bad.setTags(tags.toUpperCase());
+		/*String elements = "";
 		for (String t : el) {
 			elements += t + ",";
 		}
-		elements = elements.substring(0, elements.length() - 1);
+		if (elements.length() > 0) {
+			elements = elements.substring(0, elements.length() - 1);
+		}*/
 		bad.setElements(WDstr.toUpperCase());
 		String strMake = creatimg.getMake();
 		bad.setMake(strMake.toUpperCase());
-		String strModel = creatimg.getModel(); 
+		String strModel = creatimg.getModel();
 		bad.setModel(strModel.toUpperCase());
 		
 		System.out.println(bad);

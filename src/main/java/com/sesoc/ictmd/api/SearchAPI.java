@@ -6,21 +6,18 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.ibatis.session.SqlSession;
-
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.Transport;
 import com.flickr4java.flickr.photos.Exif;
+import com.flickr4java.flickr.photos.GeoData;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
 import com.flickr4java.flickr.tags.Tag;
-import com.sesoc.ictmd.Interface.AnalysisDAO;
 import com.sesoc.ictmd.vo.ComplexPhoto;
-import com.sesoc.ictmd.vo.HistoryVO;
 import com.sesoc.ictmd.vo.SimplePhoto;
 
 public class SearchAPI {
@@ -34,9 +31,7 @@ public class SearchAPI {
 	private static PhotosInterface i;
 	private static SearchParameters p;
 	
-	SqlSession s;
-	
-	// 추가 검색 대상 항목들을 미리 목록화한다.
+	// 추가 검색 항목들을 미리 목록화한다.
 	private static final Set<String> e = new HashSet<>();
 	{
 		e.add("date_upload");
@@ -46,7 +41,7 @@ public class SearchAPI {
 		e.add("url_l");
 	}
 	
-	// 사용할 EXIF 데이터 대상 항목들을 미리 목록화한다.
+	// 사용할 EXIF 데이터 항목들을 미리 목록화한다.
 	private static final ArrayList<String> l = new ArrayList<>();
 	{
 		l.add("Image Width");
@@ -81,30 +76,25 @@ public class SearchAPI {
 		l.add("Format");
 	}
 	
-	// 생성자가 호출되면 객체를 초기화하는 메소드를 실행한다.
-	public SearchAPI(SqlSession s) {
-		init(s);
+	// 생성자가 호출되면 검색 객체를 초기화하는 메소드를 실행한다.
+	public SearchAPI() {
+		init();
 	}
 	
 	// 검색 객체를 초기화하는 메소드
-	private void init(SqlSession s) {
+	private void init() {
 		f = new Flickr(apiKey, sharedSecret, transport);
 		i = f.getPhotosInterface();
-		this.s = s;
 	}
 	
 	// 검색 패러미터를 초기화하는 메소드
 	private void initParam(String[] tags) {
 		p = new SearchParameters();
-		if (tags.length > 1) {
-			p.setTags(tags);
-		} else {
-			p.setText(tags[0]);
-		}
-		p.setPrivacyFilter(1);
-		p.setHasGeo(true);
 		p.setExtras(e);
-		p.setSafeSearch("2");
+		p.setHasGeo(true);
+		p.setPrivacyFilter(1);
+		// p.setSafeSearch("2");
+		p.setTags(tags);
 	}
 
 	// 사진 검색 메소드
@@ -114,29 +104,13 @@ public class SearchAPI {
 		PhotoList<Photo> l = null;
 		try {
 			l = i.search(p, 100, 0);
-		} catch (FlickrException e) {
-			System.out.println("경고 : 검색 목록 초기화 중 에러 발생.");
-			e.printStackTrace();
-		}
-		if (l != null) {
-			AnalysisDAO d = s.getMapper(AnalysisDAO.class);
-			HistoryVO v;
-			String id;
-			SimplePhoto temp;
 			for (Photo p : l) {
-				id = p.getId();
-				v = d.check(id);
-				if (v == null) {
-					temp = new SimplePhoto(id, p.getSquareLargeUrl(), 0, 0, 0);
-				} else {
-					temp = new SimplePhoto(id, p.getSquareLargeUrl(), v.getViews(), v.getFavorites(), v.getComments());
-				}
-				result.add(temp);
+				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl(), 0, 0, 0));
 			}
-		} else {
-			System.out.println("검색 결과 없음.");
+		} catch (FlickrException e) {
+			e.printStackTrace();
+			System.out.println("Unexpected error has been occured when initializing search list.");
 		}
-		
 		return result;
 	}
 
@@ -146,13 +120,13 @@ public class SearchAPI {
 		try {
 			// 사진 고유의 ID를 입력받아 사진 정보를 담은 객체를 가져온다.
 			Photo p = i.getInfo(id, sharedSecret);
-			System.out.println("선택한 사진의 원본 글 주소 : " + p.getUrl());
+			System.out.println("Original URL of selected post: " + p.getUrl());
 			result.setId(id);
 			
-			// 사진 주소를 가져온다.
+			// 사진 주소를 초기화한다.
 			result.setUrl(p.getLargeUrl());
 			
-			// 태그 목록을 가져온다.
+			// 태그 목록을 초기화한다.
 			ArrayList<String> l = new ArrayList<String>();
 			Iterator<Tag> it = p.getTags().iterator();
 			while (it.hasNext()) {
@@ -160,14 +134,13 @@ public class SearchAPI {
 			}
 			result.setTags(l);
 			
-			// 위도 및 경도 정보가 있을 경우 가져온다.
-			if (p.hasGeoData()) {
-				result.setLatitude(p.getGeoData().getLatitude());
-				result.setLongitude(p.getGeoData().getLongitude());
-			}
+			// 위도 및 경도 정보를 초기화한다.
+			GeoData g = p.getGeoData();
+			result.setLatitude(g.getLatitude());
+			result.setLongitude(g.getLongitude());
 			
 			// 조회수 정보를 가져오거나 새로 입력한다.
-			AnalysisDAO d = s.getMapper(AnalysisDAO.class);
+			/*AnalysisDAO d = s.getMapper(AnalysisDAO.class);
 			HistoryVO v = d.check(id);
 			if (v == null) {
 				d.view(id);
@@ -179,12 +152,11 @@ public class SearchAPI {
 				result.setViews(v.getViews() + 1);
 				result.setFavorites(v.getFavorites());
 				result.setComments(v.getComments());
-			}
+			}*/
 		} catch (FlickrException e) {
-			System.out.println("경고 : 사진 데이터를 불러오는 중 오류 발생.");
 			e.printStackTrace();
+			System.out.println("Unexpected error has been occured when initializing detail result.");
 		}
-		
 		return result;
 	}
 	
@@ -200,8 +172,7 @@ public class SearchAPI {
 				}
 			}
 		} catch (FlickrException e) {
-			System.out.println("알림 : 열람이 금지된 EXIF 정보.");
-			e.printStackTrace();
+			System.out.println("Cannot access to EXIF information.");
 		}
 		return result;
 	}
