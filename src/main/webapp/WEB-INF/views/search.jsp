@@ -131,14 +131,14 @@
 </head>
 <body>
 	<input type="hidden" id="mtotag" value="${mtotag}">
-	<div class="bar">
+	<div class="bar" style="background-color: #337ab7">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
 	</div>
-	<div class="navmenu navmenu-default navmenu-fixed-left">
+	<div class="navmenu navmenu-default navmenu-fixed-left" style="background-color: #e2e2e2;">
 		<ul class="nav navmenu-nav">
 			<li><a href="main">メイン</a></li>
 			<li><a href="search">検索</a></li>
@@ -156,7 +156,7 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/img/logo.png" width="160"></a>
+		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="160"></a>
 		<div class="social">
 			<a href="#"><i class="fa fa-twitter"></i></a>
 			<a href="#"><i class="fa fa-facebook"></i></a>

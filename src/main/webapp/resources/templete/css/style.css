@@ -103,24 +103,14 @@ h2.sub-title-home {
 
 .copyright-text {
   text-align: center;
-  color: rgba(255, 228, 196, 0.21);
+  color: #999999;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> master
 li.category-item a {
-    color: #888888;
+    color: #000000;
 }
 li.category-item a:hover {
    color: #337ab7;
 }
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> master
 /* ----------------------------------------------------
   Gallery
 ------------------------------------------------------- */
@@ -182,7 +172,7 @@ p.blog-post-sub-title.text-center {
   display: block;
   max-width: 180px;
   margin: 0 auto 15px;
-  color: rgba(248, 222, 126, 1); /* �뷩�̷� �ٲ��� */
+  color: rgba(248, 222, 126, 1); /* ｳ�ｷｩﾀﾌｷﾎ ｹﾙｲ翊ﾇ */
 }
 h3.blog-post-title {
   margin-top: 0px;

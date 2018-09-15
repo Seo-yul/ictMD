@@ -90,7 +90,8 @@
     	  $('.flash').animate({opacity: 0.9}, 300);
     	  $('.flash').fadeOut(1000);
     	  $('.flash').css({'opacity': 1});
-    	  $('.bar').css('background-color','#337ab7')
+    	  $('.bar').css('background-color','#337ab7');
+    	  $(".navmenu").css("background-color", "#999999");
     	  $("#firstShowed").css("display", "none");
 			$("#msg").hide();
     	}
@@ -286,7 +287,7 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/img/logo.png" width="160"></a>
+		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="160"></a>
 		<div class="social">
 			<a href="#"><i class="fa fa-twitter"></i></a>
 			<a href="#"><i class="fa fa-facebook"></i></a>
@@ -409,7 +410,6 @@
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
-	<script src="./resources/templete/js/main.js"></script>
 	<script>
 	$('.carousel').carousel({
 	    interval: 6000 //changes the speed
