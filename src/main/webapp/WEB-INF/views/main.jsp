@@ -2,86 +2,96 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<head>
-	<meta charset="utf-8">
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
-		
-		<title>메인</title>
 
-	   	<!-- Bootstrap core CSS -->
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
+	
+	<title>메인</title>
+
+	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
 	<link href="./resources/templete/css/style.css" rel="stylesheet">
 	<link href="./resources/templete/css/full-slider.css" rel="stylesheet">
 	<link href="./resources/templete/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
-	<link href="./resources/templete/css/animated-masonry-gallery.css" rel="stylesheet" type="text/css" />
-	<link href="./resources/templete/css/lightbox.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
+	
+	<link href="./resources/css/thumbs2.css" rel="stylesheet" />
+	<link href="./resources/css/thumbnail-slider.css" rel="stylesheet" type="text/css" />
+	
+	<script src="./resources/templete/js/jquery.js" type="text/javascript"></script>
+	<script src="./resources/js/thumbnail-slider.js" type="text/javascript"></script>
+	<script src="https://www.webglearth.com/v2/api.js"></script>
+	
+	<style type="text/css">
+		.navmenu-default .navmenu-nav>li>a, .navbar-default .navbar-offcanvas .navmenu-nav>li>a{
+			color:#f3f3f3;
+		}
+		
+		.navmenu-default .navmenu-nav>li>a:hover, .navbar-default .navbar-offcanvas .navmenu-nav>li>a:hover, .navmenu-default .navmenu-nav>li>a:focus, .navbar-default .navbar-offcanvas .navmenu-nav>li>a:focus{
+			color:#337ab7;
+		}
+		
+		img{
+			float: center;
+		}
+		
+		#firstShowed{
+			position:fixed;
+			top:0;
+			left:30;
+			width:100%;
+			height:100%;
+			background-image:url('./resources/img/firstCamera.jpg');
+			z-index:9998;
+		}
     
-    <script src="https://www.webglearth.com/v2/api.js"></script>
-    <link href="./resources/css/thumbs2.css" rel="stylesheet" />
-    <link href="./resources/css/thumbnail-slider.css" rel="stylesheet" type="text/css" />
-    <script src="./resources/js/thumbnail-slider.js" type="text/javascript"></script>
-    <style type="text/css">
-    .navmenu-default .navmenu-nav>li>a, .navbar-default .navbar-offcanvas .navmenu-nav>li>a{
-    color:#f3f3f3;
-    }
-    .navmenu-default .navmenu-nav>li>a:hover, .navbar-default .navbar-offcanvas .navmenu-nav>li>a:hover, .navmenu-default .navmenu-nav>li>a:focus, .navbar-default .navbar-offcanvas .navmenu-nav>li>a:focus{
-    color:#337ab7;
-    }
+		#earth_div{
+			z-index:9996;
+			background-image:url('./resources/img/firstCamera2.jpg');
+			width:-webkit-fill-available;
+			height:-webkit-fill-available;
+			padding-top:40px;
+		}
     
-    img {
-    float: center;
-    }
+		.we-pp-wrapper, .we-pp-tip{
+			background:black;
+			text-align:center;
+		}
     
-    #firstShowed{
-    position:fixed;
-    top:0;
-    left:10;
-    width:100%;
-	height:100%;
-    background-image:url('./resources/img/firstCamera.jpg');
-    z-index:9998;
-    }
-    #earth_div{
-    z-index:9996;
-    background-image:url('./resources/img/firstCamera2.jpg');
-    width:-webkit-fill-available;
-    height: -webkit-fill-available;
-    padding-top: 40px;
-    }
-    .we-pp-wrapper, .we-pp-tip{
-    background:black;
-    text-align: center;
-    }
-    .canvas {
-    color:#fff;
-    }
-	.flash{ 
-	    position:fixed; 
-	    top:0;
-	    left:0;
-	    width:100%;
-	    height:100%;
-	    background-color:#f3f3f3;
-	    z-index:9999;
-	 }
- #imgsl{
-  z-index:9997;
- }
-    </style>
-	    <script>
-	    
+		.canvas{
+			color:#fff;
+		}
+	
+		.flash{ 
+			position:fixed; 
+			top:0;
+			left:0;
+			width:100%;
+			height:100%;
+			background-color:#f3f3f3;
+			z-index:9999;
+		}
+		
+		#imgsl{
+			z-index:9997;
+		}
+		
+		.bar {
+			background-color: black;
+		}
+	</style>
+	
+	<script>
       var earth;
       var options;
       
@@ -90,10 +100,23 @@
     	  $('.flash').animate({opacity: 0.9}, 300);
     	  $('.flash').fadeOut(1000);
     	  $('.flash').css({'opacity': 1});
+    	  
     	  $('.bar').css('background-color','#337ab7');
-    	  $(".navmenu").css("background-color", "#999999");
+    	  $("button.navbar-toggle").css("background", "url(./resources/templete/img/navicon.jpg)");
+    	  $(".navmenu-fixed-left").css("background-color", "#a4bfea");
+    	  $(".navmenu-nav").css("background-color", "#cbdaf2");
+    	  $(".navmenu-nav > li > a").css("color", "#111111");
+    	  $(".navmenu-nav > li > a").hover(function() {
+    		  $(this).css("color", "#337ab7");
+    		  $(this).css("background-color", "#ffffff");
+    	  }, function() {
+    		  $(this).css("color", "#111111");
+    		  $(this).css("background-color", "#cbdaf2");
+    	  });
+    	  $(".copyright-text").css("color", "#000000");
+    	  
     	  $("#firstShowed").css("display", "none");
-			$("#msg").hide();
+		  $("#msg").hide();
     	}
 	  function firstFunction(){
 		  
@@ -237,10 +260,9 @@
             marker = WE.marker([37.579617,126.977041],markerimg,24,24).addTo(earth)
             marker.bindPopup('<h2>Gyeongbokgung, Korea-South</h2>'+
         	'<a href="javascript: $.clicksearch(\'Gyeongbokgung\')" role="button"><img src="https://lh5.googleusercontent.com/proxy/XmnHVngvJ-_FVag6Ma79DoDsi0qverft5987BW75y6GNmBPr_G_mJJptp_TfLztBfDRbZxUOjb4xwd2u-b43X4FtGGhqOrSMN9yRO6ik_GSMCBbgb2uiFuMhSCWuL9iSttVS2afN9fYBZH6bZXZkUDknj0GnMo8=w408-h270-k-no" alt="..." class="img-circle img-responsive"></a>');
-        
       }
-    </script>
-    <script type="text/javascript">
+	</script>
+	<script type="text/javascript">
     $(()=>{
 		"use strict";
 		$.clicksearch = (landmark)=>{
@@ -276,7 +298,8 @@
 			<li><a href="analysis">分析</a></li>
 			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">ログイン</a></li><li><a href="registerPage">会員登録</a></li>
+				<li><a href="loginPage">ログイン</a></li>
+				<li><a href="registerPage">会員登録</a></li>
 			</c:if>
 			<c:if test="${userId != null}">
 				<li><a href="fixPage">登録情報の編集</a></li>
@@ -287,7 +310,7 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="160"></a>
+		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
 		<div class="social">
 			<a href="#"><i class="fa fa-twitter"></i></a>
 			<a href="#"><i class="fa fa-facebook"></i></a>
@@ -299,17 +322,17 @@
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	
-	<h2 id="msg" style="color: white;position: absolute; top: 20%; left: 50%; margin-left: -50px; z-index: 9999;">ク リ ッ ク !</h2>
+	<h2 id="msg" style="color: white;position: absolute; top: 20%; left: 50%; margin-left: -90px; z-index: 9999;">ク リ ッ ク !</h2>
+	
 	<div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
-    
 		<div class="navbar navbar-default navbar-fixed-top"></div>
-    <!-- Main component for a primary marketing message or call to action -->
-	  <div id="firstShowed">
-	  </div>
-	  <div class="flash"></div>
-	  <div  id="earth_div">
-	  
-	  <!--start-->
+    	<!-- Main component for a primary marketing message or call to action -->
+		<div id="firstShowed"></div>
+		<div class="flash"></div>
+		
+		<div  id="earth_div">
+
+    <!--start-->
     <div id="imgsl"style="max-width:900px;margin:0 auto;">
         <div style="float:left;">
             <div id="thumbs2">
@@ -395,25 +418,25 @@
         <div style="clear:both;"></div>
     </div>
     <!--end-->
-	  </div>
-	  
+
+		</div>
 	</div>
 
 	<form id="gosearch">
-	<input type="hidden" id="tags">
+		<input type="hidden" id="tags">
 	</form>
+	
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
-	<script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
 	<script>
-	$('.carousel').carousel({
-	    interval: 6000 //changes the speed
-	})
+		$('.carousel').carousel({
+		    interval: 6000 //changes the speed
+		});
 	</script>
 </body>
 </html>
