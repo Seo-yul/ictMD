@@ -49,7 +49,7 @@ var detail = function(e) {
 	$("#loading").show();
 	var num = e.target.getAttribute("alt");
 	$("#" + num + " > div").remove();
-	$("#" + num).append("<div>views : " + (varr[num] + 1) + "</div>");
+	$("#" + num).append("<div style='color:black;'>views : " + (varr[num] + 1) + "</div>");
 	varr[num] += 1;
 	$.ajax({
 		  data : {
@@ -78,9 +78,9 @@ var listup = function(resp) {
 	var model = resp["model"];
 	if (model != null) {
 		for (var i in model) {
-			list.append("<br><h3>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
+			list.append("<br><div style='border:3px double;'><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
 			list.append("<img src='" + model[i]["imgUrl"] + "'>");
-			list.append("<div>" + JSON.stringify(model[i]) + "</div><br>");
+			list.append("<div style='color:black;'>" + JSON.stringify(model[i]) + "</div><br>");
 		}
 	}
 	var result = resp["list"];
@@ -94,7 +94,7 @@ var listup = function(resp) {
 		uarr[i] = result[i].squareImageUrl;
 		list.append("<div id='" + i + "' class='frame'></div>");
 		$("#" + i).append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
-		$("#" + i).append("<div>views : " + varr[i] + "</div>");
+		$("#" + i).append("<div style='color:black;'>[views : " + varr[i] + "]</div></div>");
 		if ((i+1)%4 == 0) {
 			list.append("<br>");
 		}
