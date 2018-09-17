@@ -38,18 +38,18 @@
 	<style>
     #back {
     	align:center;
-    	background-image: url("./resources/img/searchImg/camera_black_center.jpg");
+    /* 	background-image: url("./resources/img/searchImg/camera_black_center.jpg"); */
     	background-size:100%;
     	padding-bottom: 700px;
     	margin-left : 85px;
     	margin-right : 150px;
     }
     #bback{
-    	background-color : gery;
+    	background-color : white;
     }
     
     body {
- 		background: #000;
+ 		background: white;
 	}
 	
 	
@@ -73,7 +73,7 @@
 	.preloader-1 .line {
 		width: 1px;
 		height: 12px;
-		background: #fff;
+		background: skyblue;
 		margin: 0 1px;
 		display: inline-block;
 		animation: opacity-1 1000ms infinite ease-in-out;
@@ -131,14 +131,14 @@
 </head>
 <body>
 	<input type="hidden" id="mtotag" value="${mtotag}">
-	<div class="bar">
+	<div class="bar" style="background-color: #337ab7">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
 	</div>
-	<div class="navmenu navmenu-default navmenu-fixed-left">
+	<div class="navmenu navmenu-default navmenu-fixed-left" style="background-color: #e2e2e2;">
 		<ul class="nav navmenu-nav">
 			<li><a href="main">メイン</a></li>
 			<li><a href="search">検索</a></li>
@@ -156,7 +156,7 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/img/logo.png" width="160"></a>
+		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="160"></a>
 		<div class="social">
 			<a href="#"><i class="fa fa-twitter"></i></a>
 			<a href="#"><i class="fa fa-facebook"></i></a>
@@ -170,7 +170,7 @@
 	<div id="dim"></div>
 	<!-- loading.. -->
 	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
-			<div style="color:white;">Loading..</div>
+			<div style="color:skyblue;">Loading..</div>
 			<span class="line line-1"></span>
 			<span class="line line-2"></span>
 			<span class="line line-3"></span>
@@ -185,37 +185,34 @@
 	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:white;">欲しかったカメラの写真を検索しましょう</h1>
+				<h1 class="blog-post-title text-center" style="color:#1E90FF;">欲しかったカメラの写真を検索しましょう</h1>
 				<span class="title-divider"></span>
 				<br>
 				<div id="searchForm" align="center">
 					<table>
 						<tr>
 							<td>
-								<input id="text" type="text" class="form-control" style="width:600px;">
+								<input id="text" type="text" class="form-control" >
 							</td>
 							<td>
-								<input id="button" type="button" class="form-control" style="width:80px;" value="Search" >
+								<input id="searchButton" type="button" class="form-control" value="Search" >
 							</td>
 						</tr>
 					</table>
 				</div>
 				<div align="center">
-					<i class="fas fa-camera">	
+					<i class="fas fa-camera" style="color:skyblue;">	
 						「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
 					</i>
 				</div>
-				<div id="searchResult" align="center">
-					<h3 style='font-size:15px;'>検索結果 : </h3>
+				<div id="searchResult" align="center" style="color:skyblue;">
+					<h3 class="fas" style='font-size:15px; color:skyblue;'>　 </h3>
 				</div>
 				<div align="center">
 					<input id="timeasc" type="button" value="업로드시간 순 정렬(최신 먼저)">
 					<input id="timedesc" type="button" value="업로드시간 순 정렬(오래된 것 먼저)">
-					<input id="viewasc" type="button" value="조회수 순 정렬(오름차순)">
-					<input id="viewdesc" type="button" value="조회수 순 정렬(내림차순)">
-					<img src="./resources/img/smaller_1-512.png" style="width:30px;height:30px;">
-					<img src="./resources/img/bigger_1-512.png" style="width:30px;height:30px;">
 				</div>
+				<br>
 				<div id="list" align="center"></div>
 				<div id="container" class="container">
 					<div id="gallery">

@@ -12,7 +12,7 @@ var popup = function(resp) {
 	var layer = $("#layer");
 	layer.css("top", Math.max(0, $(window).scrollTop() + 60) + "px");
 	layer.append("<div id='close'>X</div>");
-	layer.append("<img id='pic' src='" + photo["url"] + "' align='center'>");
+	layer.append("<img id='pic' src='" + photo["url"] + "' align='center'><br>");
 	var pic = $("#pic");
 	pic.on("load", function() {
 		if (this.naturalWidth > 1024) {
@@ -20,18 +20,19 @@ var popup = function(resp) {
 			pic.css("height", (this.naturalHeight * 1024 / this.naturalWidth) + "px");
 		}
 	});
-	layer.append("<div>Views: " + photo["views"] + "</div>");
-	layer.append("<div>Tags: </div>");
+	layer.append("<div class='detail' '>▶ Views : " + photo["views"] + "</div><br>");
+	layer.append("<div class='detail' '>▶ Tags : </div><br>");
 	$.each(photo["tags"], function(index, item) {
-		layer.append("<div class='tags'>#" + item + "　</div>");
+		/*layer.append("<div class='tags'>#" + item + "　</div>");*/
+		layer.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
 	});
 	if (photo["latitude"] !== 0) {
-		layer.append("<div>latitude : " + photo["latitude"] + "</div>");
-		layer.append("<div>longitude : " + photo["longitude"] + "</div>");
+		layer.append("<div class='detail'>▶ latitude : " + photo["latitude"] + "</div><br>");
+		layer.append("<div class='detail'>▶ longitude : " + photo["longitude"] + "</div><br>");
 	}
 	if (exif.length > 2) {
-		layer.append("<div>EXIF : </div>");
-		layer.append("<div>" + exif + "</div>");
+		layer.append("<div class='detail'>▶ EXIFs : </div><br>");
+		layer.append("<div class='detail'>" + exif + "</div>");
 	}
 	$("#dim, #close").on("click", function() {
 		layer.remove();
@@ -48,7 +49,7 @@ var detail = function(e) {
 	$("#loading").show();
 	var num = e.target.getAttribute("alt");
 	$("#" + num + " > div").remove();
-	$("#" + num).append("<div>views : " + (varr[num] + 1) + "</div>");
+	$("#" + num).append("<div style='color:black;'>views : " + (varr[num] + 1) + "</div>");
 	varr[num] += 1;
 	$.ajax({
 		  data : {
@@ -77,9 +78,9 @@ var listup = function(resp) {
 	var model = resp["model"];
 	if (model != null) {
 		for (var i in model) {
-			list.append("<br><h3>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
+			list.append("<br><div style='border:3px double;'><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
 			list.append("<img src='" + model[i]["imgUrl"] + "'>");
-			list.append("<div>" + JSON.stringify(model[i]) + "</div><br>");
+			list.append("<div style='color:black;'>" + JSON.stringify(model[i]) + "</div><br>");
 		}
 	}
 	var result = resp["list"];
@@ -93,7 +94,7 @@ var listup = function(resp) {
 		uarr[i] = result[i].squareImageUrl;
 		list.append("<div id='" + i + "' class='frame'></div>");
 		$("#" + i).append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
-		$("#" + i).append("<div>views : " + varr[i] + "</div>");
+		$("#" + i).append("<div style='color:black;'>[views : " + varr[i] + "]</div></div>");
 		if ((i+1)%4 == 0) {
 			list.append("<br>");
 		}

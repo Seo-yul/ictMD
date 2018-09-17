@@ -19,7 +19,6 @@ import com.sesoc.ictmd.api.SearchAPI;
 import com.sesoc.ictmd.function.CreateImg;
 import com.sesoc.ictmd.vo.ComplexPhoto;
 import com.sesoc.ictmd.vo.ModelDetail;
-import com.sesoc.ictmd.vo.SimplePhoto;
 
 /**
  * Handles requests for the application home page.
@@ -38,17 +37,18 @@ public class SearchController {
 	// 검색어를 문자열 배열로 입력받아 검색 후 결과를 반환하는 메소드
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> list(String[] tags, HttpSession ss) {
-		api = new SearchAPI(session);
+		// 검색 API와 리턴 객체를 초기화
+		api = new SearchAPI();
 		Map<String, Object> result = new HashMap<String, Object>();
 		
+		// 분석 데이터로 쓰기 위해 검색어를 세션에 저장
 		ss.removeAttribute("tags");
 		ss.setAttribute("tags", tags);
-
-		ArrayList<SimplePhoto> list = api.search(tags);
-		if (list != null) {
-			result.put("list", list);
-		}
 		
+		// 검색 결과를 리턴 객체에 저장
+		result.put("list", api.search(tags));
+		
+		// 검색어가 카메라 모델명인지 검사
 		HashMap<String, String[]> tagsMap = new HashMap<>();
 		tagsMap.put("tags", tags);
 		ModelDetailDAO mdDAO = session.getMapper(ModelDetailDAO.class);
@@ -63,26 +63,30 @@ public class SearchController {
 	// 임의의 사진 하나를 클릭했을 때 해당 사진에 대한 모든 정보를 가져오는 메소드
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> detail(String id, HttpServletRequest request, HttpSession ss) {
-		api = new SearchAPI(session);
+		// 검색 API와 리턴 객체를 초기화
+		api = new SearchAPI();
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		ComplexPhoto photo = api.getInfo(id);
-		HashMap<String, String> exif = api.getExif(id);
+		// 상세 검색 결과를 요청
+		ComplexPhoto p = api.getInfo(id);
+		HashMap<String, String> e = api.getExif(id);
 		
+		// 검색 결과를 리턴 객체에 저장
+		result.put("photo", p);
+		result.put("exif", e);
+		
+		// 분석 데이터로 쓰기 위한 데이터들을 이미지 생성 객체에 전달
 		String[] tags = (String[]) ss.getAttribute("tags");
 		String make = "";
 		String model = "";
-		if (exif.containsKey("Make")) {
-			make = exif.get("Make");
+		if (e.containsKey("Make")) {
+			make = e.get("Make");
 		}
-		if (exif.containsKey("Model")) {
-			model = exif.get("Model");
+		if (e.containsKey("Model")) {
+			model = e.get("Model");
 		}
-		creatimg = new CreateImg(photo.getUrl(), request, tags, make, model, session);
+		creatimg = new CreateImg(p.getUrl(), request, tags, make, model, session);
 		creatimg.start();
-		
-		result.put("photo", photo);
-		result.put("exif", exif);
 		
 		return result;
 	}
