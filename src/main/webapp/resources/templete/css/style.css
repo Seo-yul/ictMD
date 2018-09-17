@@ -14,7 +14,11 @@ body{
   font-family: 'Raleway', sans-serif;
 }
 .bar {
+<<<<<<< HEAD
   background-color: #337ab7;
+=======
+  background-color: skyblue;
+>>>>>>> ken(jp)
   height: 200%;
   width: 30px;
   position: fixed;
@@ -32,8 +36,8 @@ body{
   text-align: center;
 }
 .canvas{
-   background: rgb(15, 14, 14);
-   color: rgb(136, 136, 136);
+   background: white;
+   color: white;
 }
 
 a.navmenu-brand {
