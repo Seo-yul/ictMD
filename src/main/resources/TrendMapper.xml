@@ -52,16 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 		<!-- and searchdate = to_char(sysdate,'YY/MM/DD') -->
 	</select>
-	
-	<select id="CombinedMakeModelChart" resultType="BasicTrendData">
-		select
-			concat(make,concat('//',model)) as dataName,
-			count(concat(make,concat('//',model))) as dataNum,
-			round(count(concat(make,concat('//',model)))/(select count(*) from analysis where model is not null and make is not null)*100,2) as dataPercentage
-		from analysis
-		group by concat(make,concat('//',model))
-		order by dataNum desc
-	</select>
-	
+
 </mapper>
 

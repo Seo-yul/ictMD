@@ -30,6 +30,47 @@
 	<script src="./resources/js/export-data.js"></script>
 	<script src="./resources/js/wordcloud.js"></script>
 	
+	<style>
+	.dataTable {
+  font-family: sans-serif;
+  font-weight: 100;
+  width: 500px;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #49a09d, #5f2c82);
+}
+.dataTable th,
+.dataTable td {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+.dataTable th {
+  text-align: left;
+}
+.dataTable thead th {
+  background-color: #55608f;
+}
+.dataTable tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.dataTable tbody td {
+  position: relative;
+}
+.dataTable tbody td:hover:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+
+	</style>
+	
 	<script>
 		$(function(){
 			
@@ -123,8 +164,21 @@
 				url:"importBasicMakeData",
 				type:"post",
 				success:function(data){
+					console.log("메이커데이터");
 					console.log(data);
 					basicDataChart(data, "BasicMake", "Maker Trend", "percentage");
+					/* var makeTable = "<tr style='text-align:center'><th>브랜드명</th><th>검색횟수</th><th>검색률</th>";
+					$(data).each(function(index,item){
+						makeTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
+					}); */
+					
+					var makeTable = '<thead><tr><th>브랜드명</th><th>검색횟수</th><th>검색률</th></tr></thead><tbody>';
+					$(data).each(function(index,item){
+						makeTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
+					});
+					makeTable += '</tbody>';
+					$("#MakeAnalysis").html(makeTable);
+					
 					
 				},
 				error:function(data){
@@ -136,9 +190,16 @@
 				url:"importBasicModelData",
 				type:"post",
 				success:function(data){
+					console.log("모델데이터");
 					console.log(data);
 					basicDataChart(data, "BasicModel", "Model Trend Top 10", "percentage");
-					
+					var modelTable = '<thead><tr><th>모델명</th><th>검색횟수</th></tr></thead><tbody>';
+					$(data).each(function(index,item){
+						modelTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td>";
+					});
+					modelTable += '</tbody>';
+					$("#ModelAnalysis").html(modelTable);
+
 				},
 				error:function(data){
 					alert("실패 ㅠ");
@@ -208,8 +269,18 @@
 				<td>
 			<div id="BasicModel" style="display:inline;float:left;width:50%"></div>
 				</td>
+			</tr>
+			<tr>
+			<td>
+			<table class="dataTable" id = "MakeAnalysis" style="width:100%">
+			</table>
+			</td><td style="vertical-align:top;">
+			<table class="dataTable" id = "ModelAnalysis" style="width:100%">
+			</table>
+			</td>
 			<tr>
 		</table>
+		
 	</div>
 	
 	<!-- Bootstrap core JavaScript
