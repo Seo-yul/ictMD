@@ -71,7 +71,7 @@
 		#earth_div{
 			position:absolute;
 			background-image:url('./resources/img/firstCamera2.jpg');
-			top:20%;
+			top:22%;
 			width:-webkit-fill-available;
 			height:-webkit-fill-available;
 			z-index:9996;

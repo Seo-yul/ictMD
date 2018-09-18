@@ -12,7 +12,7 @@
 	right: 0;
 	z-index: 99;
 	
-	background-color: silver;
+	background-color: white;
 	opacity: 0.5;
 	filter: alpha(opacity = 50);
 	/* IE7 & 8 */
@@ -64,32 +64,32 @@
 }
 
 #text{
-	width:600px; 
+	width: 600px; 
 	border-color: skyblue;
 	border-width: 3px;
 }
 
 #searchButton{
-	width:80px; 
+	width: 80px; 
 	border-color: skyblue; 
 	background-color: skyblue;
-	color:white;
-	font-weight:bold;
+	color: white;
+	font-weight: bold;
 	border-width: 3px;
 }
 
 .detail{
-	color : blue;
+	color: #337ab7;
 	font-weight: bold;
 	text-align:left;
 	margin-left:20px;
 }
+
 #taginput{
-	color : blue;
+	color: #337ab7;
 	font-weight: bold;
 	text-align:left;
 	margin-bottom : 10px;
 	border-color: skyblue;
 	border-width: 2px;
 }
-

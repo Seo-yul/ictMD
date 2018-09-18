@@ -3,8 +3,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
@@ -14,27 +14,22 @@
 	<title>사진 검색</title>
 	
 	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet" />
+	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet" />
 	<!-- Custom styles for this template -->
-	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
-	<link href="./resources/templete/css/style.css" rel="stylesheet">
-	<link href="./resources/templete/css/full-slider.css" rel="stylesheet">
+	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet" type="text/css" />
+	<link href="./resources/templete/css/style.css" rel="stylesheet" type="text/css" />
 	<link href="./resources/templete/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
 	<link href="./resources/templete/css/animated-masonry-gallery.css" rel="stylesheet" type="text/css" />
 	<link href="./resources/templete/css/lightbox.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
 	
-	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	
 	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
 	
+	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
 	<style>
     #back {
     	align:center;
@@ -51,7 +46,6 @@
     body {
  		background: white;
 	}
-	
 	
 	.preloader-1 {
 		margin: 100px auto 0;
@@ -127,7 +121,7 @@
 		z-index: 99;
 		text-align: center;
 	}
-    </style> 
+    </style>
 </head>
 <body>
 	<input type="hidden" id="mtotag" value="${mtotag}">
@@ -178,7 +172,7 @@
 	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:#1E90FF;">欲しかったカメラの写真を検索しましょう</h1>
+				<h1 class="blog-post-title text-center" style="color:#337ab7;">欲しかったカメラの写真を検索しましょう</h1>
 				<span class="title-divider"></span>
 				<br>
 				<div id="searchForm" align="center">
@@ -194,19 +188,18 @@
 					</table>
 				</div>
 				<div align="center">
-					<i class="fas fa-camera" style="color:skyblue;">	
+					<i class="fas fa-camera" style="color:gray;">	
 						「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
 					</i>
 				</div>
-				<div id="searchResult" align="center" style="color:skyblue;">
-					<h3 class="fas" style='font-size:15px; color:skyblue;'>　 </h3>
-				</div>
-				<div align="center">
-					<input id="timeasc" type="button" value="업로드시간 순 정렬(최신 먼저)">
-					<input id="timedesc" type="button" value="업로드시간 순 정렬(오래된 것 먼저)">
-				</div>
 				<br>
-				<div id="list" align="center"></div>
+				
+				<div align="center">
+					<div id="modelInfo" align="center"></div>
+					<div id="searchResult" align="center" style="color:gray;"></div>
+					<div id="arrange" align="center"></div>
+					<div id="list"></div>
+				</div>
 				<div id="container" class="container">
 					<div id="gallery">
 						<div id="gallery-content">
@@ -226,7 +219,6 @@
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
-	<!-- <script src="./resources/js/main.js"></script> -->
 	<script src="./resources/templete/js/lightbox.js"></script>
 	<script src="./resources/js/search.js"></script>
 	<script>
