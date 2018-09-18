@@ -72,7 +72,24 @@
 	</style>
 	
 	<script>
+		var init = function() {
+			$(".bar").css("background-color", "#337ab7");
+		    $(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
+		    $(".navbar-toggle").css("background-repeat", "no-repeat");
+		    $(".navmenu-fixed-left").css("background-color", "#80c0e0");
+		    $(".navmenu-nav").css("background-color", "#c0e0ff");
+		    $(".navmenu-nav > li > a").css("color", "#303030");
+		    $(".navmenu-nav > li > a").hover(function() {
+		      $(this).css("color", "#337ab7");
+		      $(this).css("background-color", "#e0e0e0");
+		    }, function() {
+		      $(this).css("color", "#303030");
+		      $(this).css("background-color", "#c0e0ff");
+		    });
+		    $(".copyright-text").css("color", "#202020");
+		}
 		$(function(){
+			init();
 			
 			function wordCloudChart(data, divName, chartTitle){
 				var makeArr = [];
@@ -232,7 +249,8 @@
 			<li><a href="analysis">分析</a></li>
 			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">ログイン</a></li><li><a href="registerPage">会員登録</a></li>
+				<li><a href="loginPage">ログイン</a></li>
+				<li><a href="registerPage">会員登録</a></li>
 			</c:if>
 			<c:if test="${userId != null}">
 				<li><a href="fixPage">登録情報の編集</a></li>
@@ -243,7 +261,7 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/img/logo.png" width="160"></a>
+		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
 		<div class="social">
 			<a href="#"><i class="fa fa-twitter"></i></a>
 			<a href="#"><i class="fa fa-facebook"></i></a>
@@ -290,9 +308,7 @@
 	<script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
-	<script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
 	<!-- <script src="./resources/js/main.js"></script> -->
-	<script src="./resources/templete/js/lightbox.js"></script>
 </body>
 </html>
