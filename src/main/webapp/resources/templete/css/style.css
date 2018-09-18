@@ -14,11 +14,7 @@ body{
   font-family: 'Raleway', sans-serif;
 }
 .bar {
-<<<<<<< HEAD
   background-color: #337ab7;
-=======
-  background-color: skyblue;
->>>>>>> ken(jp)
   height: 200%;
   width: 30px;
   position: fixed;
