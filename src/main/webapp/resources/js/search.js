@@ -151,6 +151,7 @@ var timeasc = function() {
 		detail(e);
 	});
 }
+
 var timedesc = function() {
 	if ($("#list >").length <= 0) {
 		return;
@@ -167,35 +168,27 @@ var timedesc = function() {
 		detail(e);
 	});
 }
-var viewasc = function() {
-	if ($("#list >").length <= 0) {
-		return;
-	}
-	$("#list").off();
-	$("#list >").remove();
-	$("#list").append("<div id='0' class='frame'></div>");
-	$("#0").append("<img alt='0' class='result' src='" + arr[0] + "'>");
-	$("#0").append("<div>views : " + varr[0] + "</div>");
-	for (var i = 1; i < 100; i++) {
-		
-	}
-}
-var viewdesc = function() {
-	if ($("#list >").length <= 0) {
-		return;
-	}
-	$("#list").off();
-	$("#list >").remove();
-	$("#list").append("<div id='0' class='frame'></div>");
-	$("#0").append("<img alt='0' class='result' src='" + arr[0] + "'>");
-	$("#0").append("<div>views : " + varr[0] + "</div>");
-	for (var i = 1; i < 100; i++) {
-		
-	}
+
+var init = function() {
+	$(".bar").css("background-color", "#337ab7");
+    $(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
+    $(".navbar-toggle").css("background-repeat", "no-repeat");
+    $(".navmenu-fixed-left").css("background-color", "#80c0e0");
+    $(".navmenu-nav").css("background-color", "#c0e0ff");
+    $(".navmenu-nav > li > a").css("color", "#303030");
+    $(".navmenu-nav > li > a").hover(function() {
+      $(this).css("color", "#337ab7");
+      $(this).css("background-color", "#e0e0e0");
+    }, function() {
+      $(this).css("color", "#303030");
+      $(this).css("background-color", "#c0e0ff");
+    });
+    $(".copyright-text").css("color", "#202020");
 }
 
 // 1. 검색 이벤트를 본문에 걸어두는 부분.
 $(function() {
+	init();
 	$("#loading").hide();
 	$("#dim").hide();
 	$("#button").on("click", search);
@@ -206,6 +199,4 @@ $(function() {
 	});
 	$("#timeasc").on("click", timeasc);
 	$("#timedesc").on("click", timedesc);
-	$("#viewasc").on("click", viewasc);
-	$("#viewasc").on("click", viewdesc);
 });

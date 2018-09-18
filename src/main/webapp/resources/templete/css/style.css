@@ -14,14 +14,12 @@ body{
   font-family: 'Raleway', sans-serif;
 }
 .bar {
-<<<<<<< HEAD
-  background-color: #337ab7;
-=======
-  background-color: skyblue;
->>>>>>> ken(jp)
-  height: 200%;
-  width: 30px;
   position: fixed;
+  background-color: #337ab7;
+  float:left;
+  left:0;
+  width: 30px;
+  height: 200%;
 }
 
 .canvas.canvas-slid {
@@ -107,7 +105,7 @@ h2.sub-title-home {
 
 .copyright-text {
   text-align: center;
-  color: #999999;
+  color: #000000;
 }
 li.category-item a {
     color: #111111;
@@ -342,9 +340,9 @@ textarea#message {
 @media (min-width: 100px){
   button.navbar-toggle {
     width: 40px;
-    background:url(../img/navicon.jpg);
+    background:url(./resources/img/navicon2.jpg);
     z-index: 9;
-    color: black;
+    color: #337ab7;
     position: fixed;
     top: 50%;
     left: -15px;
