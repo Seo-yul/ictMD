@@ -36,7 +36,7 @@
     /* 	background-image: url("./resources/img/searchImg/camera_black_center.jpg"); */
     	background-size:100%;
     	padding-bottom: 700px;
-    	margin-left : 85px;
+    	margin-left : 100px;
     	margin-right : 150px;
     }
     #bback{
@@ -65,9 +65,9 @@
 	}
 	
 	.preloader-1 .line {
-		width: 1px;
-		height: 12px;
-		background: skyblue;
+		width: 2px;
+		height: 18px;
+		background: #337ab7;
 		margin: 0 1px;
 		display: inline-block;
 		animation: opacity-1 1000ms infinite ease-in-out;
@@ -157,23 +157,23 @@
 	<div id="dim"></div>
 	<!-- loading.. -->
 	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
-			<div style="color:skyblue;">Loading..</div>
-			<span class="line line-1"></span>
-			<span class="line line-2"></span>
-			<span class="line line-3"></span>
-			<span class="line line-4"></span>
-			<span class="line line-5"></span>
-			<span class="line line-6"></span>
-			<span class="line line-7"></span>
-			<span class="line line-8"></span>
-			<span class="line line-9"></span>
+		<h2 style="text-align:center;color:#337ab7;margin-left:-33px;">LOADING</h2>
+		<span class="line line-1"></span>
+		<span class="line line-2"></span>
+		<span class="line line-3"></span>
+		<span class="line line-4"></span>
+		<span class="line line-5"></span>
+		<span class="line line-6"></span>
+		<span class="line line-7"></span>
+		<span class="line line-8"></span>
+		<span class="line line-9"></span>
 	</div>
 	<div class="canvas gallery">
 	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:#337ab7;">欲しかったカメラの写真を検索しましょう</h1>
-				<span class="title-divider"></span>
+				<h1 class="blog-post-title text-center" style="color:#337ab7;text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2)">イメージ検索</h1>
+				<div style="margin:0 auto;width:180px;height:2px;background:linear-gradient(to right, rgba(255, 255, 255, 0), rgba(248, 222, 126, 1), rgba(255, 255, 255, 0))"></div>
 				<br>
 				<div id="searchForm" align="center">
 					<table>
@@ -189,7 +189,7 @@
 				</div>
 				<div align="center">
 					<i class="fas fa-camera" style="color:gray;">	
-						「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
+						検索したいカメラ名やキーワードを入力してください。複数検索は「 , 」を使って出来ます。
 					</i>
 				</div>
 				<br>

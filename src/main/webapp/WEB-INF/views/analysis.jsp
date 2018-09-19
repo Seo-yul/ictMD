@@ -3,8 +3,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
@@ -106,7 +106,7 @@
 				    series: [{
 				        type: 'wordcloud',
 				        data: makeArr,
-				        name: '검색횟수',
+				        name: '検索件数',
 				        point:{
 				              events:{
 				                  click: function (event) {
@@ -116,11 +116,11 @@
 				          }
 				    }],
 				    title: {
-				        text: "☆"+chartTitle+"☆"
+				        text: chartTitle
 				    },
-				    subtitle: {
+				    /* subtitle: {
 				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
-				    }
+				    } */
 				});
 			}
 			
@@ -141,11 +141,11 @@
 				        type: 'pie'
 				    },
 				    title: {
-				        text: "☆"+chartTitle+"☆"
+				        text: chartTitle
 				    },
-				    subtitle: {
+				    /* subtitle: {
 				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
-				    },
+				    }, */
 				    tooltip: {
 				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
 				    },
@@ -261,23 +261,15 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
-		<div class="social">
-			<a href="#"><i class="fa fa-twitter"></i></a>
-			<a href="#"><i class="fa fa-facebook"></i></a>
-			<a href="#"><i class="fa fa-instagram"></i></a>
-			<a href="#"><i class="fa fa-pinterest-p"></i></a>
-			<a href="#"><i class="fa fa-google-plus"></i></a>
-			<a href="#"><i class="fa fa-skype"></i></a>
-		</div>
+		<a class="navmenu-brand" href="main"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	
 	<div class="canvas gallery">
 		<br>
-		<h1 class="blog-post-title text-center">トレンド分析</h1>
-		<span class="title-divider"></span>
-		<br><br>
+		<h1 class="blog-post-title text-center" style="color:#337ab7;text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2)">トレンド分析</h1>
+		<div style="margin:0 auto;width:180px;height:2px;background:linear-gradient(to right, rgba(255, 255, 255, 0), rgba(248, 222, 126, 1), rgba(255, 255, 255, 0))"></div>
+		<br>
 		<div id="BasicTag" style="width:80%; margin:auto"></div>
 		<table style="margin:auto;">
 			<tr>

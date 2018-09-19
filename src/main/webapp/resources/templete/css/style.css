@@ -35,7 +35,7 @@ body{
 }
 .canvas{
    background: white;
-   color: white;
+   color: black;
 }
 
 a.navmenu-brand {
@@ -172,7 +172,7 @@ p.blog-post-sub-title.text-center {
 .title-divider {
   border-top: 2px solid;
   display: block;
-  max-width: 180px;
+  max-width: 120px;
   margin: 0 auto 15px;
   color: rgba(248, 222, 126, 1); /* ｳ�ｷｩﾀﾌｷﾎ ｹﾙｲ翊ﾇ */
 }

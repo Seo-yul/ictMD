@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-    <title>Photo Graphy</title>
+    <title>天気とショッピング</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/geo-location-javascript/0.4.8/geo.js"></script>
 <script src="./resources/js/highcharts.js"></script>
@@ -30,7 +30,25 @@
     <link href="./resources/templete/css/full-slider.css" rel="stylesheet">
     
 <script>
+	var init = function() {
+		$(".bar").css("background-color", "#337ab7");
+	    $(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
+	    $(".navbar-toggle").css("background-repeat", "no-repeat");
+	    $(".navmenu-fixed-left").css("background-color", "#80c0e0");
+	    $(".navmenu-nav").css("background-color", "#c0e0ff");
+	    $(".navmenu-nav > li > a").css("color", "#303030");
+	    $(".navmenu-nav > li > a").hover(function() {
+	      $(this).css("color", "#337ab7");
+	      $(this).css("background-color", "#e0e0e0");
+	    }, function() {
+	      $(this).css("color", "#303030");
+	      $(this).css("background-color", "#c0e0ff");
+	    });
+	    $(".copyright-text").css("color", "#202020");
+	}
 	$(function() {
+		init();
+		
 		/* 홈화면으로 가기. 단 아직 메인을 만들지 않았기때문에 로그인후의 imsi페이지로 가게 만들었습니다. */
 		$("#goHome").on("click",function(){
 			location.href="/ictmd/";
@@ -370,20 +388,21 @@
 </head>
 <body>
 	<div class="bar">
-    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-  	</div>  
-    <div class="navmenu navmenu-default navmenu-fixed-left">
+	</div>
+	<div class="navmenu navmenu-default navmenu-fixed-left">
 		<ul class="nav navmenu-nav">
 			<li><a href="main">メイン</a></li>
 			<li><a href="search">検索</a></li>
 			<li><a href="analysis">分析</a></li>
 			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">ログイン</a></li><li><a href="registerPage">会員登録</a></li>
+				<li><a href="loginPage">ログイン</a></li>
+				<li><a href="registerPage">会員登録</a></li>
 			</c:if>
 			<c:if test="${userId != null}">
 				<li><a href="fixPage">登録情報の編集</a></li>
@@ -394,15 +413,7 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="goHome"><img src="./resources/templete/img/logo.png" width="160"></a>
-		<div class="social">
-			<a href="#"><i class="fa fa-twitter"></i></a>
-			<a href="#"><i class="fa fa-facebook"></i></a>
-			<a href="#"><i class="fa fa-instagram"></i></a>
-			<a href="#"><i class="fa fa-pinterest-p"></i></a>
-			<a href="#"><i class="fa fa-google-plus"></i></a>
-			<a href="#"><i class="fa fa-skype"></i></a>
-		</div>
+		<a class="navmenu-brand" href="main"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 

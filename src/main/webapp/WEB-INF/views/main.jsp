@@ -78,7 +78,7 @@
 		}
     
 		.we-pp-wrapper, .we-pp-tip{
-			background:black;
+			background:white;
 			text-align:center;
 		}
     
@@ -129,8 +129,8 @@
         $("#msg").html("世界の欲しい所にフォーカスしてみましょう。");
         $("#msg").css("color", "#337ab7");
         $("#msg").css("top", "5%");
-        $("#msg").css("margin-left", "-310px");
-        $("#msg").css("text-shadow", "4px 4px 4px #303030");
+        $("#msg").css("margin-left", "-315px");
+        $("#msg").css("text-shadow", " 3px 3px 5px rgba(32, 32, 32, 0.5)");
         $("#firstShowed").hide();
         $("#imgsl").show();
       }
@@ -326,12 +326,12 @@
 	
 	<div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
 		<div class="flash"></div>
-		<h2 id="msg" style="color: white;position: absolute;top: 10%;left: 50%;margin-left: -160px;z-index: 9998;">ク リ ッ ク してください！</h2>
+		<h2 id="msg" style="color: white;font-weight: bold;position: absolute;top: 10%;left: 50%;margin-left: -160px;z-index: 9998;">ク リ ッ ク してください！</h2>
 		<img id="firstShowed" src="./resources/img/firstCamera.jpg">
-		<div  id="earth_div">
+		<div id="earth_div">
 
     <!--start-->
-    <div id="imgsl"style="position:absolute;max-width:300px;margin:0 auto;top:40%;left:18%;">
+    <div id="imgsl"style="position:absolute;max-width:150px;margin:0 auto;top:40%;left:18%;">
         <div style="float:left;">
             <div id="thumbs2">
                 <div class="inner">

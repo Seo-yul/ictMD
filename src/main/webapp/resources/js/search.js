@@ -1,5 +1,6 @@
 var arr;
 var uarr;
+var status = 0;
 
 // 5. 서버로부터 가져온 상세 사진 정보를 화면에 그리는 함수
 var popup = function(resp) {
@@ -17,17 +18,19 @@ var popup = function(resp) {
 			pic.css("height", (this.naturalHeight * 1024 / this.naturalWidth) + "px");
 		}
 	});
-	layer.append("<div class='detail'>▶ Tags : </div><br>");
+	layer.append("<div id='layerFrame' style='margin:20px;'></div>");
+	var lf = $("#layerFrame");
+	lf.append("<div class='detail'>▶ Tags : </div><br>");
 	$.each(photo["tags"], function(index, item) {
-		layer.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
+		lf.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
 	});
 	if (photo["latitude"] !== 0) {
-		layer.append("<div class='detail'>▶ latitude : " + photo["latitude"] + "</div><br>");
-		layer.append("<div class='detail'>▶ longitude : " + photo["longitude"] + "</div><br>");
+		lf.append("<div class='detail'>▶ latitude : " + photo["latitude"] + "</div><br>");
+		lf.append("<div class='detail'>▶ longitude : " + photo["longitude"] + "</div><br>");
 	}
 	if (JSON.stringify(exif).length > 2) {
-		layer.append("<div class='detail'>▶ EXIFs : </div><br>");
-		layer.append("<div id='exifdiv' style='float:center;'></div>");
+		lf.append("<div class='detail'>▶ EXIFs : </div><br>");
+		lf.append("<div id='exifdiv' style='float:center;'></div>");
 		$("#exifdiv").append("<div id='cameradiv' style='display:inline-block;'></div>");
 		var index = 0;
 		$("#cameradiv").append("<img src='./resources/img/exifcamera.png' width='380'>");
@@ -116,7 +119,7 @@ var popup = function(resp) {
 // 4. 검색된 사진 목록에서 임의의 사진 하나를 클릭하면 서버에서 해당 사진에 대한 상세 정보를 가져오는 함수.
 var detail = function(e) {
 	$("#dim").show();
-	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
+	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 240) + "px");
 	$("#loading").show();
 	var num = e.target.getAttribute("alt");
 	$.ajax({
@@ -132,15 +135,21 @@ var detail = function(e) {
 }
 
 var timeasc = function() {
-	if ($("#list >").length <= 0) {
+	if (!$("#list >").length) {
 		return;
 	}
 	var list = $("#list");
 	list.off();
 	$("#list >").remove();
 	for (var i = 0; i < arr.length; i++) {
-		list.append("<div id='" + i + "' class='frame'></div>");
-		$("#" + i).append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
+		list.append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
+	}
+	if (status == 0) {
+		$("#list > img").css("width", "150px");
+		$("#list > img").css("height", "150px");
+	} else {
+		$("#list > img").css("width", "300px");
+		$("#list > img").css("height", "300px");
 	}
 	list.on("click", "img", function(e) {
 		detail(e);
@@ -148,15 +157,21 @@ var timeasc = function() {
 }
 
 var timedesc = function() {
-	if ($("#list >").length <= 0) {
+	if (!$("#list >").length) {
 		return;
 	}
 	var list = $("#list");
 	list.off();
 	$("#list >").remove();
 	for (var i = arr.length; i > 0; i--) {
-		list.append("<div id='" + (i - 1) + "' class='frame'></div>");
-		$("#" + (i - 1)).append("<img alt='" + (i - 1) + "' class='result' src='" + uarr[(i - 1)] + "'>");
+		list.append("<img alt='" + (i - 1) + "' class='result' src='" + uarr[(i - 1)] + "'>");
+	}
+	if (status == 0) {
+		$("#list > img").css("width", "150px");
+		$("#list > img").css("height", "150px");
+	} else {
+		$("#list > img").css("width", "300px");
+		$("#list > img").css("height", "300px");
 	}
 	list.on("click", "img", function(e) {
 		detail(e);
@@ -167,25 +182,38 @@ var timedesc = function() {
 var listup = function(resp) {
 	arr = new Array();
 	uarr = new Array();
-	if ($("#modelInfo").length) {
-		$("#modelInfo >").remove();
+	var modelInfo = $("#modelInfo");
+	if (modelInfo.length) {
+		modelInfo.remove();
 	}
 	var model = resp["model"];
 	if (model != null) {
 		for (var i in model) {
-			$("#modelInfo").append("<br><div style='border:3px double;'><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
-			$("#modelInfo").append("<img src='" + model[i]["imgUrl"] + "'>");
-			$("#modelInfo").append("<div style='color:black;'>" + JSON.stringify(model[i]) + "</div><br>");
+			modelInfo.append("<br><div style='border:3px double;'><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
+			modelInfo.append("<img src='" + model[i]["imgUrl"] + "'>");
+			modelInfo.append("<div style='color:black;'>" + JSON.stringify(model[i]) + "</div><br>");
 		}
 	}
 	var result = resp["list"];
 	$("#searchResult > ").remove();
-	$("#searchResult").append("<h3 style='font-size:15px;'>「<span style='color:#337ab7;font-weight: bold;'>"+ $("#text").val() + "</span>」の検索結果 : <span style='color:#337ab7;font-weight: bold;'>" + result.length + "</span>件の結果があります。</h3>");
+	$("#searchResult").append("<h2 style='font-size:15px;'>「<span style='color:#337ab7;font-weight: bold;'>"+ $("#text").val() + "</span>」の検索結果 : <span style='color:#337ab7;font-weight: bold;'>" + result.length + "</span>件の結果があります。</h2>");
 	if (!$("#arrange >").length) {
 		$("#arrange").append("<input id='timeasc' type='button' value='업로드시간 순 정렬(최신 먼저)'>");
 		$("#timeasc").on("click", timeasc);
 		$("#arrange").append("<input id='timedesc' type='button' value='업로드시간 순 정렬(오래된 것 먼저)'>");
 		$("#timedesc").on("click", timedesc);
+		$("#arrange").append("<input id='bigger' type='button' value='크게'>");
+		$("#bigger").on("click", function() {
+			status = 1;
+			$("#list > img").css("width", "300px");
+			$("#list > img").css("height", "300px");
+		});
+		$("#arrange").append("<input id='smaller' type='button' value='작게'>");
+		$("#smaller").on("click", function() {
+			status = 0;
+			$("#list > img").css("width", "150px");
+			$("#list > img").css("height", "150px");
+		});
 	}
 	var list = $("#list");
 	if ($("#list >").length) {
@@ -195,8 +223,7 @@ var listup = function(resp) {
 	for (var i in result) {
 		arr[i] = result[i].id;
 		uarr[i] = result[i].squareImageUrl;
-		list.append("<div id='" + i + "' class='frame'></div>");
-		$("#" + i).append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
+		list.append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
 	}
 	list.on("click", "img", function(e) {
 		detail(e);
@@ -208,7 +235,7 @@ var listup = function(resp) {
 // 2. 검색 이벤트가 발생할 경우 호출되는 함수. 서버에서 사진 목록을 가져오고, 화면에 그리는 함수를 호출함.
 var search = function() {
 	$("#dim").show();
-	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
+	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 240) + "px");
 	$("#loading").show();
 	var tagstr = $("#text").val().trim();
 	if (tagstr.length <= 0) {
