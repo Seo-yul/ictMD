@@ -270,7 +270,7 @@ var init = function() {
     $(".navmenu-nav > li > a").css("color", "#303030");
     $(".navmenu-nav > li > a").hover(function() {
       $(this).css("color", "#337ab7");
-      $(this).css("background-color", "#e0e0e0");
+      $(this).css("background-color", "#ffffff");
     }, function() {
       $(this).css("color", "#303030");
       $(this).css("background-color", "#c0e0ff");

@@ -23,7 +23,7 @@ html, body {
 @media (min-width: 0) {
   .navbar-toggle {
     display: block; /* force showing the toggle */
-  }"D:/user/Desktop/photography-master/css/navmenu-reveal.css"
+  }
 }
 
 @media (min-width: 992px) {

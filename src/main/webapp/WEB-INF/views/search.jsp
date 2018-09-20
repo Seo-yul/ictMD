@@ -11,7 +11,7 @@
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
 	
-	<title>사진 검색</title>
+	<title>イメージ検索</title>
 	
 	<!-- Bootstrap core CSS -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -66,7 +66,7 @@
 	
 	.preloader-1 .line {
 		width: 2px;
-		height: 18px;
+		height: 22px;
 		background: #337ab7;
 		margin: 0 1px;
 		display: inline-block;
@@ -189,7 +189,7 @@
 				</div>
 				<div align="center">
 					<i class="fas fa-camera" style="color:gray;">	
-						検索したいカメラ名やキーワードを入力してください。複数検索は「 , 」を使って出来ます。
+						検索したいカメラ名やキーワードを入力してください。「 , 」を使って複数検索も出来ます。
 					</i>
 				</div>
 				<br>

@@ -1,53 +1,65 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	
+	<title>メイン</title>
+	
 	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
-	
-	<title>메인</title>
-	
 	<!-- Bootstrap core CSS -->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
-	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet" />
-	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet" type="text/css" href="./resources/templete/dist/css/jasny-bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="./resources/templete/css/bootstrap.min.css" />
 	<!-- Custom styles for this template -->
-	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet" type="text/css" />
-	<link href="./resources/templete/css/style.css" rel="stylesheet" type="text/css" />
-	<link href="./resources/templete/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="./resources/templete/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="./resources/templete/css/navmenu-reveal.css" />
 	
-	<link href="./resources/css/thumbs2.css" rel="stylesheet" type="text/css" />
-	<link href="./resources/css/thumbnail-slider.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="./resources/css/thumbs2.css" />
+	<link rel="stylesheet" type="text/css" href="./resources/css/thumbnail-slider.css" />
 	
-	<script src="./resources/templete/js/jquery.js" type="text/javascript"></script>
-	<script src="./resources/js/thumbnail-slider.js" type="text/javascript"></script>
-	<script src="https://www.webglearth.com/v2/api.js"></script>
+	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
+	<script type="text/javascript" src="./resources/js/thumbnail-slider.js"></script>
+	<script type="text/javascript" src="https://www.webglearth.com/v2/api.js"></script>
 	
 	<style type="text/css">
+		img {
+			float: center;
+		}
+		
 		.bar {
 			background-color: black;
-			z-index:9997;
+			z-index: 9998;
 		}
 		
 		button.navbar-toggle {
-			background:url(./resources/img/navicon.jpg);
+			background: url(./resources/img/navicon.jpg);
 			background-repeat: no-repeat;
 		}
 		
 		.navmenu-fixed-left {
-			background-color: #171717;
+			background-color: #202020;
 		}
 		
 		.navmenu-nav {
-			background-color: #303030;
+			font-size: 110%;
+			font-weight: bold;
+			color: #111111;
+			background-color: #404040;
+		}
+		
+		#memberMenu, #memberMenu > a, #memberMenu > span {
+			color: white;
+			font-size: 90%;
+			
+			text-align: center;
+			margin: 0 auto;
 		}
 		
 		.copyright-text {
@@ -55,97 +67,147 @@
 			color: #999999;
 		}
 		
-		img{
-			float: center;
-		}
-		
-		#firstShowed{
-			position:absolute;
-			top:0;
-			left:30;
-			width:100%;
-			height:100%;
-			z-index:9997;
-		}
-    
-		#earth_div{
-			position:absolute;
-			background-image:url('./resources/img/firstCamera2.jpg');
-			top:22%;
-			width:-webkit-fill-available;
-			height:-webkit-fill-available;
-			z-index:9996;
-		}
-    
-		.we-pp-wrapper, .we-pp-tip{
-			background:white;
-			text-align:center;
-		}
-    
-		.canvas{
-			color:#fff;
-		}
-	
-		.flash{ 
+		.flash {
+			width: 100%;
+			height: 100%;
+			background-color: #ffffff;
+			
 			position:absolute;
 			top:0;
 			left:0;
-			width:100%;
-			height:100%;
-			background-color:#ffffff;
 			z-index:9999;
+		}
+		
+		#myCarousel {
+			background: url(./resources/img/firstCamera2.jpg);
+			left: 30px;
+		}
+		
+		#title {
+			font-size: 330%;
+			font-style: italic;
+			font-weight: bold;
+			color: white;
+			text-shadow: 0px 0px 11px rgba(255, 255, 255, 1);
+			
+			position: absolute;
+			top: 11%;
+			left: 50%;
+			margin-left: -44px;
+			z-index: 9998;
+			
+			animation: titleAnimation 3000ms infinite ease-in-out;
+		}
+		
+		@keyframes titleAnimation { 
+			0% { 
+				opacity: 1;
+			}
+			50% { 
+				opacity: 0.3;
+			}
+			100% { 
+				opacity: 1;
+			}
+		}
+		
+		#firstShowed {
+			width: 100%;
+			height: 100%;
+			
+			position: absolute;
+			top: 0;
+			left: 30;
+			z-index: 9997;
+		}
+		
+		#earth_div {
+			width: -webkit-fill-available;
+			height: -webkit-fill-available;
+			
+			position: absolute;
+			top: 25%;
+			z-index: 9996;
+		}
+		
+		.we-pp-wrapper, .we-pp-tip {
+			background: linear-gradient(to bottom right, #80c0e0, #e0f0ff);
+			text-align: center;
+		}
+		
+		#imgsl {
+			max-width: 150px;
+			
+			position: absolute;
+			top: 40%;
+			left: 18%;
+			margin: 0 auto;
+		}
+		
+		h2 {
+			color: #337ab7;
+			text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.5);
 		}
 	</style>
 	
-	<script>
-      var earth;
-      var options;
+	<script type="text/javascript">
+		var earth;
+		var options;
+		
+		var initCSS = function() {
+			$(".bar").css("background-color", "#337ab7");
+			$(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
+			$(".navbar-toggle").css("background-repeat", "no-repeat");
+			$(".navmenu-fixed-left").css("background-color", "#80c0e0");
+			$(".navmenu-nav > li > a").css("color", "#337ab7");
+			$(".navmenu-nav > li > a").css("background-color", "#e0f0ff");
+			$(".navmenu-nav > li > a").hover(function() {
+				$(this).css("background-color", "#ffffff");
+			}, function() {
+				$(this).css("background-color", "#e0f0ff");
+			});
+			$(".navmenu-brand > img").css("src", "./resources/templete/assets/ico/favicon2.png");
+			$(".copyright-text").css("color", "#202020");
+			
+			$("#title").html("世界の欲しい所にフォーカスしてみましょう。");
+			$("#title").css("color", "#337ab7");
+			$("#title").css("text-shadow", "0px 0px 19px white");
+			$("#title").css("top", "5%");
+			$("#title").css("margin-left", "-439px");
+			$("#title").css("z-index", "9995");
+			$("#title").css("animation", "none");
+		}
+		
+		var flash = function(e) {
+			if ($(".in").length) {
+				return;
+			}
+			
+			$('.flash').show();  //show the hidden div
+			$('.flash').animate({opacity: 0.9}, 300);
+			$('.flash').fadeOut(1000);
+			$('.flash').css({'opacity': 1});
+			
+			initCSS();
+			
+			$("#firstShowed").hide();
+			$("#imgsl").show();
+		}
+		
+		function firstFunction(){
+			$("#imgsl").hide();
+			$('.flash').hide();
+			$("#firstShowed").mouseup(function(e) {
+				flash(e);
+			});
+			initialize();
+		}
       
-      function flash(e){
-        
-    	if ($(".in").length) {
-    	  return;
-    	}
-        $('.flash').show();  //show the hidden div
-        $('.flash').animate({opacity: 0.9}, 300);
-        $('.flash').fadeOut(1000);
-        $('.flash').css({'opacity': 1});
-        
-        $(".bar").css("background-color", "#337ab7");
-        $(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
-        $(".navbar-toggle").css("background-repeat", "no-repeat");
-        $(".navmenu-fixed-left").css("background-color", "#80c0e0");
-        $(".navmenu-nav").css("background-color", "#c0e0ff");
-        $(".navmenu-nav > li > a").css("color", "#303030");
-        $(".navmenu-nav > li > a").hover(function() {
-          $(this).css("color", "#337ab7");
-          $(this).css("background-color", "#e0e0e0");
-        }, function() {
-          $(this).css("color", "#303030");
-          $(this).css("background-color", "#c0e0ff");
-        });
-        $(".copyright-text").css("color", "#202020");
-        
-        $("#msg").html("世界の欲しい所にフォーカスしてみましょう。");
-        $("#msg").css("color", "#337ab7");
-        $("#msg").css("top", "5%");
-        $("#msg").css("margin-left", "-315px");
-        $("#msg").css("text-shadow", " 3px 3px 5px rgba(32, 32, 32, 0.5)");
-        $("#firstShowed").hide();
-        $("#imgsl").show();
-      }
-      function firstFunction(){
-        
-    	$('.flash').hide();
-    	$("#imgsl").hide();
-        $("#firstShowed").mouseup(function(e) { flash(e); });
-        initialize();
-      }
       function initialize() {
         
         options = {atmosphere: false, sky: false, center: [0, 0], zoom: 0, zooming:false};
         earth = new WE.map('earth_div',options);
-        earth.setView([37.511981, 127.058544], 2.2);
+        earth.setView([37.511981, 127.058544], 2.0);
         WE.tileLayer('https://tileserver.maptiler.com/nasa/{z}/{x}/{y}.jpg', {
             minZoom: 2,
             maxZoom: 3,
@@ -279,17 +341,17 @@
       }
 	</script>
 	<script type="text/javascript">
-    $(()=>{
-		"use strict";
-		$.clicksearch = (landmark)=>{
-			var tags = landmark
-			$("#gosearch").attr("action","goClickSearch");
-			$("#gosearch").attr("method","POST");
-			$("#tags").attr("name","tags");
-			$("#tags").val(tags);
-			$("#gosearch").submit();
-		}
-	});
+		$(()=>{
+			"use strict";
+			$.clicksearch = (landmark)=>{
+				var tags = landmark
+				$("#gosearch").attr("action","goClickSearch");
+				$("#gosearch").attr("method","POST");
+				$("#tags").attr("name","tags");
+				$("#tags").val(tags);
+				$("#gosearch").submit();
+			}
+		});
     </script>
 </head>
 
@@ -304,34 +366,44 @@
 	<div class="navmenu navmenu-default navmenu-fixed-left">
 		<ul class="nav navmenu-nav">
 			<li><a href="main">メイン</a></li>
-			<li><a href="search">検索</a></li>
-			<li><a href="analysis">分析</a></li>
-			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
+			<li><a href="search">イメージ検索</a></li>
+			<li><a href="analysis">トレンド分析</a></li>
+			<li><a href="weatherNshopping">天気＆値段</a></li>
+		</ul>
+		<a class="navmenu-brand" href="main">
+			<img src="./resources/templete/assets/ico/favicon.png" width="186px">
+		</a>
+		<div id="memberMenu">
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">ログイン</a></li>
-				<li><a href="registerPage">会員登録</a></li>
+				<a href="loginPage">Login</a>
+				<span> / </span>
+				<a href="registerPage">Sign in</a>
+				<br>
 			</c:if>
 			<c:if test="${userId != null}">
-				<li><a href="fixPage">登録情報の編集</a></li>
-				<li><a href="secesionPage">IDの削除</a></li>
-				<li><a href="logout">ログアウト</a></li>
+				<a href="logout">Logout</a>
+				<br>
+				<a href="fixPage">Edit</a>
+				<span> / </span>
+				<a href="secesionPage">Withdrawal</a>
 				<c:if test="${userId == 'admin'}">
-					<li><a href="admin">管理者ページ</a></li>
+					<span> / </span>
+					<a href="admin">Admin</a>
 				</c:if>	
 			</c:if>
-		</ul>
-		<a class="navmenu-brand" href="main"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
+		</div>
+		<br>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	
+	<div class="flash"></div>
 	<div id="myCarousel" class="canvas carousel slide" data-ride="carousel">
-		<div class="flash"></div>
-		<h2 id="msg" style="color: white;font-weight: bold;position: absolute;top: 10%;left: 50%;margin-left: -160px;z-index: 9998;">ク リ ッ ク してください！</h2>
+		<div id="title">Click!</div>
 		<img id="firstShowed" src="./resources/img/firstCamera.jpg">
 		<div id="earth_div">
 
     <!--start-->
-    <div id="imgsl"style="position:absolute;max-width:150px;margin:0 auto;top:40%;left:18%;">
+    <div id="imgsl">
         <div style="float:left;">
             <div id="thumbs2">
                 <div class="inner">
@@ -416,9 +488,9 @@
         <div style="clear:both;"></div>
     </div>
     <!--end-->
-
 		</div>
 	</div>
+	
 
 	<form id="gosearch">
 		<input type="hidden" id="tags">

@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
-	<title>트렌드 분석</title>
+	<title>トレンド分析</title>
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
@@ -81,7 +81,7 @@
 		    $(".navmenu-nav > li > a").css("color", "#303030");
 		    $(".navmenu-nav > li > a").hover(function() {
 		      $(this).css("color", "#337ab7");
-		      $(this).css("background-color", "#e0e0e0");
+		      $(this).css("background-color", "#ffffff");
 		    }, function() {
 		      $(this).css("color", "#303030");
 		      $(this).css("background-color", "#c0e0ff");
@@ -266,7 +266,6 @@
 	</div>
 	
 	<div class="canvas gallery">
-		<br>
 		<h1 class="blog-post-title text-center" style="color:#337ab7;text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2)">トレンド分析</h1>
 		<div style="margin:0 auto;width:180px;height:2px;background:linear-gradient(to right, rgba(255, 255, 255, 0), rgba(248, 222, 126, 1), rgba(255, 255, 255, 0))"></div>
 		<br>
