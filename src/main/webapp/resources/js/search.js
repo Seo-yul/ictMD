@@ -198,17 +198,17 @@ var listup = function(resp) {
 	$("#searchResult > ").remove();
 	$("#searchResult").append("<h2 style='font-size:15px;'>「<span style='color:#337ab7;font-weight: bold;'>"+ $("#text").val() + "</span>」の検索結果 : <span style='color:#337ab7;font-weight: bold;'>" + result.length + "</span>件の結果があります。</h2>");
 	if (!$("#arrange >").length) {
-		$("#arrange").append("<input id='timeasc' type='button' value='업로드시간 순 정렬(최신 먼저)'>");
+		$("#arrange").append("<input id='timeasc' type='button' value='最新順'>");
 		$("#timeasc").on("click", timeasc);
-		$("#arrange").append("<input id='timedesc' type='button' value='업로드시간 순 정렬(오래된 것 먼저)'>");
+		$("#arrange").append("<input id='timedesc' type='button' value='古い順'>");
 		$("#timedesc").on("click", timedesc);
-		$("#arrange").append("<input id='bigger' type='button' value='크게'>");
+		$("#arrange").append("<input id='bigger' type='button' value='大きく'>");
 		$("#bigger").on("click", function() {
 			status = 1;
 			$("#list > img").css("width", "300px");
 			$("#list > img").css("height", "300px");
 		});
-		$("#arrange").append("<input id='smaller' type='button' value='작게'>");
+		$("#arrange").append("<input id='smaller' type='button' value='小さく'>");
 		$("#smaller").on("click", function() {
 			status = 0;
 			$("#list > img").css("width", "150px");
