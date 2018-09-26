@@ -421,52 +421,72 @@
 		<img id="firstShowed" src="./resources/img/firstCamera.jpg">
 		<div id="earth_div">
 
-    <!--start-->
-    <div id="imgsl">
-        <div style="float:left;">
-            <div id="thumbs2">
-                <div class="inner">
-                    <ul>
-                        <li>
-                            <a href="javascript: $.clicksearch('Gyeongbokgung')">
-                                <span class="thumb" style="background-image:url(https://lh5.googleusercontent.com/proxy/XmnHVngvJ-_FVag6Ma79DoDsi0qverft5987BW75y6GNmBPr_G_mJJptp_TfLztBfDRbZxUOjb4xwd2u-b43X4FtGGhqOrSMN9yRO6ik_GSMCBbgb2uiFuMhSCWuL9iSttVS2afN9fYBZH6bZXZkUDknj0GnMo8=w408-h270-k-no)">
-                                    This slide demonstrates how to link the thumbnail image to another web page.
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/2c6fce4f-e410-4d50-80b6-870bc945b17b.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/bb1fa37e-fd85-43ef-87a6-02387af5dc25.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/e71fd9ad-6027-44f2-93df-b0a284507c74.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/a45acde9-68c5-4871-b49c-0a630890076b.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/db282a05-f160-40b3-8129-035bcd322ccb.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/6b26ad11-44d1-497c-897b-65ae86f67273.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/314a88a3-11a8-43cf-9369-4ce047cd0dfc.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/a0015a10-617f-4077-a734-1d030ed48058.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/baccf057-63ee-4aa5-aab6-f0f1212d8fb7.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/8e410b50-6290-4c99-b92a-4bac3cb8b719.jpg"></a>
-                        </li>
-                        <li>
-                            <a class="thumb" href="https://www.listchallenges.com/f/items/4e76ea71-f275-44df-a98f-0f75f9771a65.jpg"></a>
-                        </li>
+			<!--start-->
+				<div id="imgsl">
+					<div style="float:left;">
+						<div id="thumbs2">
+							<div class="inner">
+								<ul>
+									<li>
+										<a>
+											<img class="thumb" alt="Gyeongbokgung" src="https://lh5.googleusercontent.com/proxy/XmnHVngvJ-_FVag6Ma79DoDsi0qverft5987BW75y6GNmBPr_G_mJJptp_TfLztBfDRbZxUOjb4xwd2u-b43X4FtGGhqOrSMN9yRO6ik_GSMCBbgb2uiFuMhSCWuL9iSttVS2afN9fYBZH6bZXZkUDknj0GnMo8=w408-h270-k-no">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Big Ben" src="https://www.listchallenges.com/f/items/2c6fce4f-e410-4d50-80b6-870bc945b17b.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Leaning Tower of Pisa" src="https://www.listchallenges.com/f/items/bb1fa37e-fd85-43ef-87a6-02387af5dc25.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Colosseum" src="https://www.listchallenges.com/f/items/e71fd9ad-6027-44f2-93df-b0a284507c74.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Statue of Liberty" src="https://www.listchallenges.com/f/items/a45acde9-68c5-4871-b49c-0a630890076b.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Hollywood" src="https://www.listchallenges.com/f/items/db282a05-f160-40b3-8129-035bcd322ccb.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Golden Gate Bridge" src="https://www.listchallenges.com/f/items/6b26ad11-44d1-497c-897b-65ae86f67273.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Tokyo Tower" src="https://www.listchallenges.com/f/items/314a88a3-11a8-43cf-9369-4ce047cd0dfc.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Great Wall" src="https://www.listchallenges.com/f/items/a0015a10-617f-4077-a734-1d030ed48058.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Opera House" src="https://www.listchallenges.com/f/items/baccf057-63ee-4aa5-aab6-f0f1212d8fb7.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="St. Basil's Cathedral" src="https://www.listchallenges.com/f/items/8e410b50-6290-4c99-b92a-4bac3cb8b719.jpg">
+										</a>
+									</li>
+									<li>
+										<a>
+											<img class="thumb" alt="Eiffel Tower" src="https://www.listchallenges.com/f/items/4e76ea71-f275-44df-a98f-0f75f9771a65.jpg">
+										</a>
+									</li>
                         <li>
                             <a class="thumb" href="https://www.listchallenges.com/f/items/a5f9eb7d-71f2-4710-a4c6-7c04a634c319.jpg"></a>
                         </li>
@@ -569,10 +589,28 @@
 						$("#lmImage >").remove();
 						$("#lmImage").append("<img src='" + resp["url"] + "'>");
 					}
-				})
+				});
 				
 				$("#lmInfo").show();
 				$("#lmTitle").html(name);
+			} else if (target.className == "thumb") {
+				var tag = target.getAttribute("alt");
+				
+				$.ajax({
+					  data : {
+						tag : tag
+					}
+					, method : "POST"
+					, url : "brandnew"
+					, success : function(resp) {
+						$("#lmLocation").html("Latitude: " + resp["latitude"] + "<br>Longitude: " + resp["longitude"]);
+						$("#lmImage >").remove();
+						$("#lmImage").append("<img src='" + resp["url"] + "'>");
+					}
+				});
+				
+				$("#lmInfo").show();
+				$("#lmTitle").html(tag);
 			}
 		}
 	</script>

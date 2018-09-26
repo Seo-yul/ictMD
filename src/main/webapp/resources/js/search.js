@@ -184,12 +184,12 @@ var listup = function(resp) {
 	uarr = new Array();
 	var modelInfo = $("#modelInfo");
 	if (modelInfo.length) {
-		modelInfo.remove();
+		$("#modelInfo >").remove();
 	}
 	var model = resp["model"];
 	if (model != null) {
 		for (var i in model) {
-			modelInfo.append("<br><div style='border:3px double;'><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
+			modelInfo.append("<br><div><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
 			modelInfo.append("<img src='" + model[i]["imgUrl"] + "'>");
 			modelInfo.append("<div style='color:black;'>" + JSON.stringify(model[i]) + "</div><br>");
 		}
