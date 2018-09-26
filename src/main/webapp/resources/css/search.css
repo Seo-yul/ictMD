@@ -12,9 +12,9 @@
 	right: 0;
 	z-index: 99;
 	
-	background-color: silver;
-	opacity: 0.5;
-	filter: alpha(opacity = 50);
+	background-color: white;
+	opacity: 0.8;
+	filter: alpha(opacity = 80);
 	/* IE7 & 8 */
 }
 
@@ -56,7 +56,8 @@
 	
 	margin-right: -512px;
 	
-	color: #fff;
+	color: #303030;
+	font-weight: bold;
 }
 
 .tags {
@@ -64,28 +65,29 @@
 }
 
 #text{
-	width:600px; 
+	width: 600px; 
 	border-color: skyblue;
 	border-width: 3px;
 }
 
 #searchButton{
-	width:80px; 
+	width: 80px; 
 	border-color: skyblue; 
 	background-color: skyblue;
-	color:white;
-	font-weight:bold;
+	color: white;
+	font-weight: bold;
 	border-width: 3px;
 }
 
 .detail{
-	color : blue;
+	color: #337ab7;
 	font-weight: bold;
 	text-align:left;
 	margin-left:20px;
 }
+
 #taginput{
-	color : blue;
+	color: #337ab7;
 	font-weight: bold;
 	text-align:left;
 	margin-bottom : 10px;
@@ -93,3 +95,14 @@
 	border-width: 2px;
 }
 
+#list img {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+tr, td {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px; 
+}

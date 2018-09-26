@@ -17,6 +17,7 @@ import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
 import com.flickr4java.flickr.photos.SearchParameters;
 import com.flickr4java.flickr.tags.Tag;
+import com.sesoc.ictmd.vo.BrandNewVO;
 import com.sesoc.ictmd.vo.ComplexPhoto;
 import com.sesoc.ictmd.vo.SimplePhoto;
 
@@ -48,29 +49,29 @@ public class SearchAPI {
 		l.add("Image Height");
 		l.add("Make");
 		l.add("Model");
-		l.add("Orientation");
-		l.add("X-Resolution");
-		l.add("Y-Resolution");
-		l.add("Resolution Unit");
-		l.add("Software");
-		l.add("Date and Time (Modified)");
-		l.add("Copyright");
+		// l.add("Orientation");
+		// l.add("X-Resolution");
+		// l.add("Y-Resolution");
+		// l.add("Resolution Unit");
+		// l.add("Software");
+		// l.add("Date and Time (Modified)");
+		// l.add("Copyright");
 		l.add("Exposure");
 		l.add("Aperture");
-		l.add("Exposure Program");
-		l.add("ISO Speed");
-		l.add("Sensitivity Type");
-		l.add("Exif Version");
+		// l.add("Exposure Program");
+		// l.add("ISO Speed");
+		// l.add("Sensitivity Type");
+		// l.add("Exif Version");
 		l.add("Date and Time (Original)");
-		l.add("Date and Time (Digitized)");
-		l.add("Exposure Bias");
-		l.add("Max Aperture Value");
-		l.add("Metering Mode");
+		// l.add("Date and Time (Digitized)");
+		// l.add("Exposure Bias");
+		// l.add("Max Aperture Value");
+		// l.add("Metering Mode");
 		l.add("Flash");
 		l.add("Focal Length");
-		l.add("Color Space");
-		l.add("Color Tone");
-		l.add("File Source");
+		// l.add("Color Space");
+		// l.add("Color Tone");
+		// l.add("File Source");
 		l.add("Lens");
 		l.add("Compression");
 		l.add("Format");
@@ -93,8 +94,26 @@ public class SearchAPI {
 		p.setExtras(e);
 		p.setHasGeo(true);
 		p.setPrivacyFilter(1);
-		// p.setSafeSearch("2");
+		p.setSafeSearch("2");
 		p.setTags(tags);
+	}
+	
+	// 최신 사진 검색 메소드
+	public BrandNewVO brandnew(String[] tags) {
+		BrandNewVO result = new BrandNewVO();
+		initParam(tags);
+		PhotoList<Photo> l = null;
+		try {
+			l = i.search(p, 1, 0);
+			Photo p = l.get(0);
+			result.setUrl(p.getSquareLargeUrl());
+			result.setLatitude(p.getGeoData().getLatitude());
+			result.setLongitude(p.getGeoData().getLongitude());
+		} catch (FlickrException e) {
+			e.printStackTrace();
+			System.out.println("Unexpected error has been occured when initializing brandnew search result.");
+		}
+		return result;
 	}
 
 	// 사진 검색 메소드
@@ -103,7 +122,7 @@ public class SearchAPI {
 		initParam(tags);
 		PhotoList<Photo> l = null;
 		try {
-			l = i.search(p, 100, 0);
+			l = i.search(p, 100, 10);
 			for (Photo p : l) {
 				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl(), 0, 0, 0));
 			}

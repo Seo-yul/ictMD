@@ -16,8 +16,12 @@ body{
 .bar {
   background-color: #337ab7;
   height: 200%;
-  width: 30px;
   position: fixed;
+  background-color: #337ab7;
+  float:left;
+  left:0;
+  width: 30px;
+  height: 200%;
 }
 
 .canvas.canvas-slid {
@@ -33,11 +37,11 @@ body{
 }
 .canvas{
    background: white;
-   color: white;
+   color: black;
 }
 
 a.navmenu-brand {
-  margin: 51px 0 80px;
+  margin: 60px 0 120px;
 }
 .canvas {
   position: relative;
@@ -103,14 +107,14 @@ h2.sub-title-home {
 
 .copyright-text {
   text-align: center;
-  color: #999999;
+  color: #000000;
 }
-li.category-item a {
+/* li.category-item a {
     color: #111111;
 }
 li.category-item a:hover {
    color: #337ab7;
-}
+} */
 /* ----------------------------------------------------
   Gallery
 ------------------------------------------------------- */
@@ -170,7 +174,7 @@ p.blog-post-sub-title.text-center {
 .title-divider {
   border-top: 2px solid;
   display: block;
-  max-width: 180px;
+  max-width: 120px;
   margin: 0 auto 15px;
   color: rgba(248, 222, 126, 1); /* ｳ�ｷｩﾀﾌｷﾎ ｹﾙｲ翊ﾇ */
 }
@@ -338,9 +342,9 @@ textarea#message {
 @media (min-width: 100px){
   button.navbar-toggle {
     width: 40px;
-    background:url(../img/navicon.jpg);
+    background:url(./resources/img/navicon2.jpg);
     z-index: 9;
-    color: black;
+    color: #337ab7;
     position: fixed;
     top: 50%;
     left: -15px;

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sesoc.ictmd.Interface.ModelDetailDAO;
 import com.sesoc.ictmd.api.SearchAPI;
 import com.sesoc.ictmd.function.CreateImg;
+import com.sesoc.ictmd.vo.BrandNewVO;
 import com.sesoc.ictmd.vo.ComplexPhoto;
 import com.sesoc.ictmd.vo.ModelDetail;
 
@@ -34,6 +35,22 @@ public class SearchController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	// 메인 화면에서 최신 사진 하나를 찾아오는 메소드
+	@RequestMapping(value = "/brandnew", method = RequestMethod.POST)
+	public @ResponseBody Map<String, Object> brandnew(String tag) {
+		api = new SearchAPI();
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		String[] tags = new String[1];
+		tags[0] = tag;
+		BrandNewVO brandnew = api.brandnew(tags);
+		result.put("url", brandnew.getUrl());
+		result.put("latitude", brandnew.getLatitude());
+		result.put("longitude", brandnew.getLongitude());
+		
+		return result;
+	}
+	
 	// 검색어를 문자열 배열로 입력받아 검색 후 결과를 반환하는 메소드
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> list(String[] tags, HttpSession ss) {

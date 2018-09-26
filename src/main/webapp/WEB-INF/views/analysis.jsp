@@ -3,14 +3,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
-	<title>트렌드 분석</title>
+	<title>トレンド分析</title>
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
@@ -72,7 +72,24 @@
 	</style>
 	
 	<script>
+		var init = function() {
+			$(".bar").css("background-color", "#337ab7");
+		    $(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
+		    $(".navbar-toggle").css("background-repeat", "no-repeat");
+		    $(".navmenu-fixed-left").css("background-color", "#80c0e0");
+		    $(".navmenu-nav").css("background-color", "#c0e0ff");
+		    $(".navmenu-nav > li > a").css("color", "#303030");
+		    $(".navmenu-nav > li > a").hover(function() {
+		      $(this).css("color", "#337ab7");
+		      $(this).css("background-color", "#ffffff");
+		    }, function() {
+		      $(this).css("color", "#303030");
+		      $(this).css("background-color", "#c0e0ff");
+		    });
+		    $(".copyright-text").css("color", "#202020");
+		}
 		$(function(){
+			init();
 			
 			function wordCloudChart(data, divName, chartTitle){
 				var makeArr = [];
@@ -89,7 +106,7 @@
 				    series: [{
 				        type: 'wordcloud',
 				        data: makeArr,
-				        name: '검색횟수',
+				        name: '検索件数',
 				        point:{
 				              events:{
 				                  click: function (event) {
@@ -99,11 +116,11 @@
 				          }
 				    }],
 				    title: {
-				        text: "☆"+chartTitle+"☆"
+				        text: chartTitle
 				    },
-				    subtitle: {
+				    /* subtitle: {
 				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
-				    }
+				    } */
 				});
 			}
 			
@@ -124,11 +141,11 @@
 				        type: 'pie'
 				    },
 				    title: {
-				        text: "☆"+chartTitle+"☆"
+				        text: chartTitle
 				    },
-				    subtitle: {
+				    /* subtitle: {
 				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
-				    },
+				    }, */
 				    tooltip: {
 				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
 				    },
@@ -232,7 +249,8 @@
 			<li><a href="analysis">分析</a></li>
 			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">ログイン</a></li><li><a href="registerPage">会員登録</a></li>
+				<li><a href="loginPage">ログイン</a></li>
+				<li><a href="registerPage">会員登録</a></li>
 			</c:if>
 			<c:if test="${userId != null}">
 				<li><a href="fixPage">登録情報の編集</a></li>
@@ -243,23 +261,14 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/img/logo.png" width="160"></a>
-		<div class="social">
-			<a href="#"><i class="fa fa-twitter"></i></a>
-			<a href="#"><i class="fa fa-facebook"></i></a>
-			<a href="#"><i class="fa fa-instagram"></i></a>
-			<a href="#"><i class="fa fa-pinterest-p"></i></a>
-			<a href="#"><i class="fa fa-google-plus"></i></a>
-			<a href="#"><i class="fa fa-skype"></i></a>
-		</div>
+		<a class="navmenu-brand" href="main"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	
 	<div class="canvas gallery">
+		<h1 class="blog-post-title text-center" style="color:#337ab7;text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2)">トレンド分析</h1>
+		<div style="margin:0 auto;width:180px;height:2px;background:linear-gradient(to right, rgba(255, 255, 255, 0), rgba(248, 222, 126, 1), rgba(255, 255, 255, 0))"></div>
 		<br>
-		<h1 class="blog-post-title text-center">トレンド分析</h1>
-		<span class="title-divider"></span>
-		<br><br>
 		<div id="BasicTag" style="width:80%; margin:auto"></div>
 		<table style="margin:auto;">
 			<tr>
@@ -290,9 +299,7 @@
 	<script type="text/javascript" src="./resources/templete/js/jquery-ui-1.10.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
-	<script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
 	<!-- <script src="./resources/js/main.js"></script> -->
-	<script src="./resources/templete/js/lightbox.js"></script>
 </body>
 </html>

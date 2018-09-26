@@ -3,45 +3,40 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
 	
-	<title>사진 검색</title>
+	<title>イメージ検索</title>
 	
 	<!-- Bootstrap core CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet">
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+	<link href="./resources/templete/dist/css/jasny-bootstrap.min.css" rel="stylesheet" />
+	<link href="./resources/templete/css/bootstrap.min.css" rel="stylesheet" />
 	<!-- Custom styles for this template -->
-	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet">
-	<link href="./resources/templete/css/style.css" rel="stylesheet">
-	<link href="./resources/templete/css/full-slider.css" rel="stylesheet">
+	<link href="./resources/templete/css/navmenu-reveal.css" rel="stylesheet" type="text/css" />
+	<link href="./resources/templete/css/style.css" rel="stylesheet" type="text/css" />
 	<link href="./resources/templete/css/Icomoon/style.css" rel="stylesheet" type="text/css" />
 	<link href="./resources/templete/css/animated-masonry-gallery.css" rel="stylesheet" type="text/css" />
 	<link href="./resources/templete/css/lightbox.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	    <![endif]-->
 	
-	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	
 	<script type="text/javascript" src="./resources/templete/js/jquery.js"></script>
 	
+	<link rel="stylesheet" type="text/css" href="./resources/css/search.css">
 	<style>
     #back {
     	align:center;
     /* 	background-image: url("./resources/img/searchImg/camera_black_center.jpg"); */
     	background-size:100%;
     	padding-bottom: 700px;
-    	margin-left : 85px;
+    	margin-left : 100px;
     	margin-right : 150px;
     }
     #bback{
@@ -51,7 +46,6 @@
     body {
  		background: white;
 	}
-	
 	
 	.preloader-1 {
 		margin: 100px auto 0;
@@ -71,9 +65,9 @@
 	}
 	
 	.preloader-1 .line {
-		width: 1px;
-		height: 12px;
-		background: skyblue;
+		width: 2px;
+		height: 22px;
+		background: #337ab7;
 		margin: 0 1px;
 		display: inline-block;
 		animation: opacity-1 1000ms infinite ease-in-out;
@@ -127,25 +121,26 @@
 		z-index: 99;
 		text-align: center;
 	}
-    </style> 
+    </style>
 </head>
 <body>
 	<input type="hidden" id="mtotag" value="${mtotag}">
-	<div class="bar" style="background-color: #337ab7">
+	<div class="bar">
 		<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
 	</div>
-	<div class="navmenu navmenu-default navmenu-fixed-left" style="background-color: #e2e2e2;">
+	<div class="navmenu navmenu-default navmenu-fixed-left">
 		<ul class="nav navmenu-nav">
 			<li><a href="main">メイン</a></li>
 			<li><a href="search">検索</a></li>
 			<li><a href="analysis">分析</a></li>
 			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">ログイン</a></li><li><a href="registerPage">会員登録</a></li>
+				<li><a href="loginPage">ログイン</a></li>
+				<li><a href="registerPage">会員登録</a></li>
 			</c:if>
 			<c:if test="${userId != null}">
 				<li><a href="fixPage">登録情報の編集</a></li>
@@ -156,37 +151,29 @@
 				</c:if>	
 			</c:if>
 		</ul>
-		<a class="navmenu-brand" href="#"><img src="./resources/templete/assets/ico/favicon.png" width="160"></a>
-		<div class="social">
-			<a href="#"><i class="fa fa-twitter"></i></a>
-			<a href="#"><i class="fa fa-facebook"></i></a>
-			<a href="#"><i class="fa fa-instagram"></i></a>
-			<a href="#"><i class="fa fa-pinterest-p"></i></a>
-			<a href="#"><i class="fa fa-google-plus"></i></a>
-			<a href="#"><i class="fa fa-skype"></i></a>
-		</div>
+		<a class="navmenu-brand" href="main"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	<div id="dim"></div>
 	<!-- loading.. -->
 	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
-			<div style="color:skyblue;">Loading..</div>
-			<span class="line line-1"></span>
-			<span class="line line-2"></span>
-			<span class="line line-3"></span>
-			<span class="line line-4"></span>
-			<span class="line line-5"></span>
-			<span class="line line-6"></span>
-			<span class="line line-7"></span>
-			<span class="line line-8"></span>
-			<span class="line line-9"></span>
+		<h2 style="text-align:center;color:#337ab7;margin-left:-33px;">LOADING</h2>
+		<span class="line line-1"></span>
+		<span class="line line-2"></span>
+		<span class="line line-3"></span>
+		<span class="line line-4"></span>
+		<span class="line line-5"></span>
+		<span class="line line-6"></span>
+		<span class="line line-7"></span>
+		<span class="line line-8"></span>
+		<span class="line line-9"></span>
 	</div>
 	<div class="canvas gallery">
 	<br>
 		<div id="bback">
 			<div id="back">
-				<h1 class="blog-post-title text-center" style="color:#1E90FF;">欲しかったカメラの写真を検索しましょう</h1>
-				<span class="title-divider"></span>
+				<h1 class="blog-post-title text-center" style="color:#337ab7;text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2)">イメージ検索</h1>
+				<div style="margin:0 auto;width:180px;height:2px;background:linear-gradient(to right, rgba(255, 255, 255, 0), rgba(248, 222, 126, 1), rgba(255, 255, 255, 0))"></div>
 				<br>
 				<div id="searchForm" align="center">
 					<table>
@@ -201,19 +188,18 @@
 					</table>
 				</div>
 				<div align="center">
-					<i class="fas fa-camera" style="color:skyblue;">	
-						「tag」検索です。複数検索は「 , 」で区分して検索が出来ます。 例) dog,cat,bird,sheep
+					<i class="fas fa-camera" style="color:gray;">	
+						検索したいカメラ名やキーワードを入力してください。「 , 」を使って複数検索も出来ます。
 					</i>
 				</div>
-				<div id="searchResult" align="center" style="color:skyblue;">
-					<h3 class="fas" style='font-size:15px; color:skyblue;'>　 </h3>
-				</div>
-				<div align="center">
-					<input id="timeasc" type="button" value="업로드시간 순 정렬(최신 먼저)">
-					<input id="timedesc" type="button" value="업로드시간 순 정렬(오래된 것 먼저)">
-				</div>
 				<br>
-				<div id="list" align="center"></div>
+				
+				<div align="center">
+					<div id="modelInfo" align="center"></div>
+					<div id="searchResult" align="center" style="color:gray;"></div>
+					<div id="arrange" align="center"></div>
+					<div id="list"></div>
+				</div>
 				<div id="container" class="container">
 					<div id="gallery">
 						<div id="gallery-content">
@@ -233,7 +219,6 @@
 	<script type="text/javascript" src="./resources/templete/js/isotope.js"></script>
 	<script type="text/javascript" src="./resources/templete/js/animated-masonry-gallery.js"></script>
 	<script src="./resources/templete/dist/js/jasny-bootstrap.min.js"></script>
-	<!-- <script src="./resources/js/main.js"></script> -->
 	<script src="./resources/templete/js/lightbox.js"></script>
 	<script src="./resources/js/search.js"></script>
 	<script>
