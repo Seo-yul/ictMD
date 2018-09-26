@@ -189,7 +189,7 @@
 						makeTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
 					}); */
 					
-					var makeTable = '<thead><tr><th>브랜드명</th><th>검색횟수</th><th>검색률</th></tr></thead><tbody>';
+					var makeTable = '<thead><tr><th>メーカー</th><th>検索回数</th><th>検索比率</th></tr></thead><tbody>';
 					$(data).each(function(index,item){
 						makeTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
 					});
@@ -199,7 +199,7 @@
 					
 				},
 				error:function(data){
-					alert("실패 ㅠ");
+					alert("失敗");
 				}
 			});
 			
@@ -210,7 +210,7 @@
 					console.log("모델데이터");
 					console.log(data);
 					basicDataChart(data, "BasicModel", "Model Trend Top 10", "percentage");
-					var modelTable = '<thead><tr><th>모델명</th><th>검색횟수</th></tr></thead><tbody>';
+					var modelTable = '<thead><tr><th>モデル</th><th>検索回数</th></tr></thead><tbody>';
 					$(data).each(function(index,item){
 						modelTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td>";
 					});
@@ -219,7 +219,7 @@
 
 				},
 				error:function(data){
-					alert("실패 ㅠ");
+					alert("失敗");
 				}
 			});
 			
