@@ -215,8 +215,8 @@ var listup = function(resp) {
 		$("#list > img").css("height", "150px");
 	});
 	var list = $("#list");
+	
 	if (result.length) {
-		$("#list >").remove();
 		for (var i in result) {
 			arr[i] = result[i].id;
 			uarr[i] = result[i].squareImageUrl;
@@ -255,6 +255,7 @@ var search = function() {
 		, method : "POST"
 		, url : "list"
 		, success : function(resp) {
+			$("#list > img").remove();
 			listup(resp);
 		}
 	});

@@ -116,7 +116,7 @@ public class ImageRekognition extends Thread {
 		AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
 		for (String tag : creatimg.getTags()) {
 			BasicAnalysisData bad = new BasicAnalysisData();
-			bad.setTags(tag.toUpperCase());
+			bad.setTags(tag.replace(" ", "").toUpperCase());
 			bad.setElements(WDstr.toUpperCase());
 			bad.setMake(creatimg.getMake());
 			bad.setModel(creatimg.getModel());

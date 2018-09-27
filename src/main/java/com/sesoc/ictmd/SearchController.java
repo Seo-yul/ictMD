@@ -52,9 +52,6 @@ public class SearchController {
 		l.add("CASIO");
 		l.add("XIAOMI");
 		l.add("WIKO");
-		l.add("CANON");
-		l.add("CANON");
-		l.add("CANON");
 	}
 
 	/**

@@ -138,7 +138,7 @@
 				        point:{
 				              events:{
 				                  click: function (event) {
-				                      alert(this.name);
+				                      /* alert(this.name); */
 				                  }
 				              }
 				          }
@@ -197,7 +197,7 @@
 				        point:{
 				              events:{
 				                  click: function (event) {
-				                      alert(this.name);
+				                      /* alert(this.name); */
 				                  }
 				              }
 				          }
@@ -211,7 +211,7 @@
 				success:function(data){
 					console.log("메이커데이터");
 					console.log(data);
-					basicDataChart(data, "BasicMake", "Maker Trend", "percentage");
+				basicDataChart(data, "BasicMake", "製造業者順位", "パーセンテージ");
 					/* var makeTable = "<tr style='text-align:center'><th>브랜드명</th><th>검색횟수</th><th>검색률</th>";
 					$(data).each(function(index,item){
 						makeTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
@@ -237,7 +237,7 @@
 				success:function(data){
 					console.log("모델데이터");
 					console.log(data);
-					basicDataChart(data, "BasicModel", "Model Trend Top 10", "percentage");
+				basicDataChart(data, "BasicModel", "TOP10のカメラのモデル名", "パーセンテージ");
 					var modelTable = '<thead><tr><th>モデル</th><th>検索回数</th></tr></thead><tbody>';
 					$(data).each(function(index,item){
 						modelTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td>";
@@ -256,7 +256,7 @@
 				type:"post",
 				success:function(data){
 					console.log(data);
-					wordCloudChart(data, "BasicTag", "Today's Tags TOP 20");
+				wordCloudChart(data, "BasicTag", "TOP20の検索語");
 				}
 			});
 		});
