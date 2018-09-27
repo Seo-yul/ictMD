@@ -31,6 +31,31 @@ public class SearchController {
 	
 	SearchAPI api;
 	CreateImg creatimg;
+	
+	private static final ArrayList<String> l = new ArrayList<>();
+	{
+		l.add("CANON");
+		l.add("NIKON");
+		l.add("SONY");
+		l.add("APPLE");
+		l.add("OLYMPUS");
+		l.add("FUJI");
+		l.add("RICOH");
+		l.add("LG");
+		l.add("SAMSUNG");
+		l.add("HUAWEI");
+		l.add("PENTAX");
+		l.add("PANASONIC");
+		l.add("LEICA");
+		l.add("EPSON");
+		l.add("GOOGLE");
+		l.add("CASIO");
+		l.add("XIAOMI");
+		l.add("WIKO");
+		l.add("CANON");
+		l.add("CANON");
+		l.add("CANON");
+	}
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -59,8 +84,7 @@ public class SearchController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		// 분석 데이터로 쓰기 위해 검색어를 세션에 저장
-		ss.removeAttribute("tags");
-		ss.setAttribute("tags", tags);
+		
 		
 		// 검색 결과를 리턴 객체에 저장
 		result.put("list", api.search(tags));
@@ -72,7 +96,17 @@ public class SearchController {
 		ArrayList<ModelDetail> model = mdDAO.searchModelDetail(tagsMap);
 		if (model != null) {
 			result.put("model", model);
+			ArrayList<ModelDetail> modelList = mdDAO.getModel();
+			for (int i = 0; i < tags.length; i++) {
+				for (ModelDetail temp : modelList) {
+					if (tags[i].replace(" ", "").toUpperCase().contains(temp.getModel().replace(" ", "").toUpperCase())) {
+						tags[i] = temp.getMaker() + " " + temp.getModel();
+					}
+				}
+			}
 		}
+		ss.removeAttribute("tags");
+		ss.setAttribute("tags", tags);
 
 		return result;
 	}
@@ -97,10 +131,21 @@ public class SearchController {
 		String make = "";
 		String model = "";
 		if (e.containsKey("Make")) {
-			make = e.get("Make");
+			make = e.get("Make").toUpperCase();
+			int check = 0;
+			for (String maker : l) {
+				if (make.contains(maker)) {
+					make = maker;
+					check++;
+					break;
+				}
+			}
+			if (check == 0) {
+				make = "etc.";
+			}
 		}
 		if (e.containsKey("Model")) {
-			model = e.get("Model");
+			model = e.get("Model").toUpperCase();
 		}
 		creatimg = new CreateImg(p.getUrl(), request, tags, make, model, session);
 		creatimg.start();

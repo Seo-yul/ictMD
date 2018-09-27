@@ -187,7 +187,7 @@ var listup = function(resp) {
 		$("#modelInfo >").remove();
 	}
 	var model = resp["model"];
-	if (model != null) {
+	if (model.length) {
 		for (var i in model) {
 			modelInfo.append("<br><div><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
 			modelInfo.append("<img src='" + model[i]["imgUrl"] + "'>");
@@ -197,37 +197,36 @@ var listup = function(resp) {
 	var result = resp["list"];
 	$("#searchResult > ").remove();
 	$("#searchResult").append("<h2 style='font-size:15px;'>「<span style='color:#337ab7;font-weight: bold;'>"+ $("#text").val() + "</span>」の検索結果 : <span style='color:#337ab7;font-weight: bold;'>" + result.length + "</span>件の結果があります。</h2>");
-	if (!$("#arrange >").length) {
-		$("#arrange").append("<input id='timeasc' type='button' value='最新順'>");
-		$("#timeasc").on("click", timeasc);
-		$("#arrange").append("<input id='timedesc' type='button' value='古い順'>");
-		$("#timedesc").on("click", timedesc);
-		$("#arrange").append("<input id='bigger' type='button' value='大きく'>");
-		$("#bigger").on("click", function() {
-			status = 1;
-			$("#list > img").css("width", "300px");
-			$("#list > img").css("height", "300px");
-		});
-		$("#arrange").append("<input id='smaller' type='button' value='小さく'>");
-		$("#smaller").on("click", function() {
-			status = 0;
-			$("#list > img").css("width", "150px");
-			$("#list > img").css("height", "150px");
-		});
-	}
-	var list = $("#list");
-	if ($("#list >").length) {
-		list.off();
-		$("#list >").remove();
-	}
-	for (var i in result) {
-		arr[i] = result[i].id;
-		uarr[i] = result[i].squareImageUrl;
-		list.append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
-	}
-	list.on("click", "img", function(e) {
-		detail(e);
+	$("#arrange >").remove();
+	$("#arrange").append("<input id='timeasc' type='button' value='最新順'>");
+	$("#timeasc").on("click", timeasc);
+	$("#arrange").append("<input id='timedesc' type='button' value='古い順'>");
+	$("#timedesc").on("click", timedesc);
+	$("#arrange").append("<input id='bigger' type='button' value='大きく'>");
+	$("#bigger").on("click", function() {
+		status = 1;
+		$("#list > img").css("width", "300px");
+		$("#list > img").css("height", "300px");
 	});
+	$("#arrange").append("<input id='smaller' type='button' value='小さく'>");
+	$("#smaller").on("click", function() {
+		status = 0;
+		$("#list > img").css("width", "150px");
+		$("#list > img").css("height", "150px");
+	});
+	var list = $("#list");
+	if (result.length) {
+		$("#list >").remove();
+		for (var i in result) {
+			arr[i] = result[i].id;
+			uarr[i] = result[i].squareImageUrl;
+			list.append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
+		}
+		list.off();
+		list.on("click", "img", function(e) {
+			detail(e);
+		});
+	}
 	$("#loading").hide();
 	$("#dim").hide();
 }

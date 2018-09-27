@@ -112,38 +112,16 @@ public class ImageRekognition extends Thread {
 		// 이미지 인식 끝
 		
 		// 데이터 가공 후 DB 입력 작업 시작
-		BasicAnalysisData bad = new BasicAnalysisData();
-		String tags = "";
-		for (String t : creatimg.getTags()) {
-			tags += t + ",";
-		}
-		if (tags.length() > 0) {
-			tags = tags.substring(0, tags.length() - 1);
-		}
-		bad.setTags(tags.toUpperCase());
-		/*String elements = "";
-		for (String t : el) {
-			elements += t + ",";
-		}
-		if (elements.length() > 0) {
-			elements = elements.substring(0, elements.length() - 1);
-		}*/
-		bad.setElements(WDstr.toUpperCase());
-		String strMake = creatimg.getMake();
-		bad.setMake(strMake.toUpperCase());
-		String strModel = creatimg.getModel();
-		bad.setModel(strModel.toUpperCase());
-		
-		System.out.println(bad);
 		SqlSession session = creatimg.getSession();
 		AnalysisDAO dao = session.getMapper(AnalysisDAO.class);
-		int result = dao.write(bad);
-		switch (result) {
-		case 0:
-			System.out.println("경고 : 분석 정보를 DB에 저장하는데 실패했습니다.");
-			break;
-		case 1:
-			System.out.println("알림 : 분석 정보를 DB에 저장하는데 성공했습니다.");
+		for (String tag : creatimg.getTags()) {
+			BasicAnalysisData bad = new BasicAnalysisData();
+			bad.setTags(tag.toUpperCase());
+			bad.setElements(WDstr.toUpperCase());
+			bad.setMake(creatimg.getMake());
+			bad.setModel(creatimg.getModel());
+			System.out.println(bad);
+			dao.write(bad);
 		}
 		// DB 입력 작업 끝
 	}

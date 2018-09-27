@@ -31,6 +31,40 @@
 	<script src="./resources/js/wordcloud.js"></script>
 	
 	<style>
+		.bar {
+			background-color: #337ab7;
+			z-index: 9998;
+		}
+		
+		button.navbar-toggle {
+			background: url(./resources/img/navicon2.jpg);
+			background-repeat: no-repeat;
+		}
+		
+		.navmenu-fixed-left {
+			background-color: #80c0e0;
+		}
+		
+		.navmenu-nav {
+			font-size: 110%;
+			font-weight: bold;
+			color: #337ab7;
+		}
+		
+		#memberMenu, #memberMenu > a, #memberMenu > span {
+			color: white;
+			font-size: 90%;
+			
+			text-align: center;
+			margin: 0 auto;
+		}
+		
+		.copyright-text {
+			color: #202020;
+			
+			text-align: center;
+		}
+	
 	.dataTable {
   font-family: sans-serif;
   font-weight: 100;
@@ -73,20 +107,14 @@
 	
 	<script>
 		var init = function() {
-			$(".bar").css("background-color", "#337ab7");
-		    $(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
-		    $(".navbar-toggle").css("background-repeat", "no-repeat");
-		    $(".navmenu-fixed-left").css("background-color", "#80c0e0");
-		    $(".navmenu-nav").css("background-color", "#c0e0ff");
-		    $(".navmenu-nav > li > a").css("color", "#303030");
-		    $(".navmenu-nav > li > a").hover(function() {
-		      $(this).css("color", "#337ab7");
-		      $(this).css("background-color", "#ffffff");
-		    }, function() {
-		      $(this).css("color", "#303030");
-		      $(this).css("background-color", "#c0e0ff");
-		    });
-		    $(".copyright-text").css("color", "#202020");
+			$(".navmenu-nav > li > a").css("color", "#337ab7");
+			$(".navmenu-nav > li > a").css("background-color", "#e0f0ff");
+			$(".navmenu-nav > li > a").hover(function() {
+				$(this).css("background-color", "#ffffff");
+			}, function() {
+				$(this).css("color", "#337ab7");
+				$(this).css("background-color", "#e0f0ff");
+			});
 		}
 		$(function(){
 			init();
@@ -245,23 +273,33 @@
 	<div class="navmenu navmenu-default navmenu-fixed-left">
 		<ul class="nav navmenu-nav">
 			<li><a href="main">メイン</a></li>
-			<li><a href="search">検索</a></li>
-			<li><a href="analysis">分析</a></li>
-			<li><a href="weatherNshopping">天気＆ショッピング</a></li>
+			<li><a href="search">イメージ検索</a></li>
+			<li><a href="analysis">トレンド分析</a></li>
+			<li><a href="weatherNshopping">天気＆値段</a></li>
+		</ul>
+		<a class="navmenu-brand" href="main">
+			<img src="./resources/templete/assets/ico/favicon.png" width="186px">
+		</a>
+		<div id="memberMenu">
 			<c:if test="${userId == null}">
-				<li><a href="loginPage">ログイン</a></li>
-				<li><a href="registerPage">会員登録</a></li>
+				<a href="loginPage">Login</a>
+				<span> / </span>
+				<a href="registerPage">Sign in</a>
+				<br>
 			</c:if>
 			<c:if test="${userId != null}">
-				<li><a href="fixPage">登録情報の編集</a></li>
-				<li><a href="secesionPage">IDの削除</a></li>
-				<li><a href="logout">ログアウト</a></li>
+				<a href="logout">Logout</a>
+				<br>
+				<a href="fixPage">Edit</a>
+				<span> / </span>
+				<a href="secesionPage">Withdrawal</a>
 				<c:if test="${userId == 'admin'}">
-					<li><a href="admin">管理者ページ</a></li>
+					<span> / </span>
+					<a href="admin">Admin</a>
 				</c:if>	
 			</c:if>
-		</ul>
-		<a class="navmenu-brand" href="main"><img src="./resources/templete/assets/ico/favicon.png" width="186px"></a>
+		</div>
+		<br>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
 	
