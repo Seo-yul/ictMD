@@ -89,7 +89,7 @@
 #taginput{
 	color: #337ab7;
 	font-weight: bold;
-	text-align:left;
+	text-align: left;
 	margin-bottom : 10px;
 	border-color: skyblue;
 	border-width: 2px;
@@ -105,4 +105,9 @@ tr, td {
 	padding-right: 5px;
 	padding-top: 3px;
 	padding-bottom: 3px; 
+}
+
+#exifCamera, #exifPicture {
+	border-color: skyblue;
+	border-width: 2px;
 }

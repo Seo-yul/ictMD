@@ -8,7 +8,7 @@ var popup = function(resp) {
 	var exif = resp["exif"];
 	$("body").append("<div id='layer'></div>");
 	var layer = $("#layer");
-	layer.css("top", Math.max(0, $(window).scrollTop() + 60) + "px");
+	layer.css("top", Math.max(0, $(window).scrollTop() + 30) + "px");
 	layer.append("<div id='close'>X</div>");
 	layer.append("<img id='pic' src='" + photo["url"] + "' align='center'><br>");
 	var pic = $("#pic");
@@ -20,55 +20,55 @@ var popup = function(resp) {
 	});
 	layer.append("<div id='layerFrame' style='margin:20px;'></div>");
 	var lf = $("#layerFrame");
-	lf.append("<div class='detail'>▶ Tags : </div><br>");
+	lf.append("<div class='detail'>▶タグ：</div><br>");
 	$.each(photo["tags"], function(index, item) {
 		lf.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
 	});
 	if (photo["latitude"] !== 0) {
-		lf.append("<div class='detail'>▶ latitude : " + photo["latitude"] + "</div><br>");
-		lf.append("<div class='detail'>▶ longitude : " + photo["longitude"] + "</div><br>");
+		lf.append("<div class='detail'>▶緯度：" + photo["latitude"] + "</div><br>");
+		lf.append("<div class='detail'>▶經度：" + photo["longitude"] + "</div><br>");
 	}
 	if (JSON.stringify(exif).length > 2) {
-		lf.append("<div class='detail'>▶ EXIFs : </div><br>");
+		lf.append("<div class='detail'>▶メタデータ：</div><br>");
 		lf.append("<div id='exifdiv' style='float:center;'></div>");
 		$("#exifdiv").append("<div id='cameradiv' style='display:inline-block;'></div>");
 		var index = 0;
 		$("#cameradiv").append("<img src='./resources/img/exifcamera.png' width='380'>");
-		$("#cameradiv").append("<table id='exifCamera' border='1' align='center'></table>");
+		$("#cameradiv").append("<table id='exifCamera' align='center'></table>");
 		var exifCamera = $("#exifCamera");
 		var item = exif["Make"];
 		if (item != null) {
-			exifCamera.append("<tr><td>Maker</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td>製造業者</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Model"];
 		if (item != null) {
-			exifCamera.append("<tr><td>Model</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td>モデル名</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Flash"];
 		if (item != null) {
-			exifCamera.append("<tr><td>Flash</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td>フラッシュ</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Exposure"];
 		if (item != null) {
-			exifCamera.append("<tr><td>Exposure</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td>露光</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Aperture"];
 		if (item != null) {
-			exifCamera.append("<tr><td>Aperture</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td>絞り</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Focal Length"];
 		if (item != null) {
-			exifCamera.append("<tr><td>Focal Length</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td>焦点距離</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Lens"];
 		if (item != null) {
-			exifCamera.append("<tr><td>Lens</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td>レンズ</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		if (index == 0) {
@@ -77,7 +77,7 @@ var popup = function(resp) {
 		$("#exifdiv").append("<div id='picturediv' style='display:inline-block;'></div>");
 		index = 0;
 		$("#picturediv").append("<img src='./resources/img/exifpicture.png' width='380'>");
-		$("#picturediv").append("<table id='exifPicture' border='1' align='center'></table>");
+		$("#picturediv").append("<table id='exifPicture' align='center'></table>");
 		var exifPicture = $("#exifPicture");
 		item = exif["Date and Time (Original)"];
 		if (item != null) {
@@ -119,7 +119,7 @@ var popup = function(resp) {
 // 4. 검색된 사진 목록에서 임의의 사진 하나를 클릭하면 서버에서 해당 사진에 대한 상세 정보를 가져오는 함수.
 var detail = function(e) {
 	$("#dim").show();
-	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 240) + "px");
+	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
 	$("#loading").show();
 	var num = e.target.getAttribute("alt");
 	$.ajax({
@@ -234,7 +234,7 @@ var listup = function(resp) {
 // 2. 검색 이벤트가 발생할 경우 호출되는 함수. 서버에서 사진 목록을 가져오고, 화면에 그리는 함수를 호출함.
 var search = function() {
 	$("#dim").show();
-	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 240) + "px");
+	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
 	$("#loading").show();
 	var tagstr = $("#text").val().trim();
 	if (tagstr.length <= 0) {
@@ -262,20 +262,14 @@ var search = function() {
 }
 
 var init = function() {
-	$(".bar").css("background-color", "#337ab7");
-    $(".navbar-toggle").css("background", "url(./resources/img/navicon2.jpg)");
-    $(".navbar-toggle").css("background-repeat", "no-repeat");
-    $(".navmenu-fixed-left").css("background-color", "#80c0e0");
-    $(".navmenu-nav").css("background-color", "#c0e0ff");
-    $(".navmenu-nav > li > a").css("color", "#303030");
-    $(".navmenu-nav > li > a").hover(function() {
-      $(this).css("color", "#337ab7");
-      $(this).css("background-color", "#ffffff");
-    }, function() {
-      $(this).css("color", "#303030");
-      $(this).css("background-color", "#c0e0ff");
-    });
-    $(".copyright-text").css("color", "#202020");
+	$(".navmenu-nav > li > a").css("color", "#337ab7");
+	$(".navmenu-nav > li > a").css("background-color", "#e0f0ff");
+	$(".navmenu-nav > li > a").hover(function() {
+		$(this).css("background-color", "#ffffff");
+	}, function() {
+		$(this).css("color", "#337ab7");
+		$(this).css("background-color", "#e0f0ff");
+	});
 }
 
 // 1. 검색 이벤트를 본문에 걸어두는 부분.

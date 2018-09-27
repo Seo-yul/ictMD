@@ -55,15 +55,20 @@
 		}
 		
 		#memberMenu, #memberMenu > a, #memberMenu > span {
-			color: white;
-			font-size: 90%;
+			font-weight: bold;
+			color: #999999;
+			text-shadow: 1px 1px 4px #303030;
 			
 			text-align: center;
 			margin: 0 auto;
 		}
 		
 		.copyright-text {
+			font-size: 110%;
+			font-weight: bold;
 			color: #999999;
+			text-shadow: 1px 1px 4px #303030;
+			
 			text-align: center;
 		}
 		
@@ -161,6 +166,10 @@
 			margin-bottom: 18px;
 		}
 		
+		#lmLocation {
+			color: #3f3f3f;
+		}
+		
 		#lmImage > img {
 			width: 200px;
 			height: 200px;
@@ -185,7 +194,8 @@
 				$(this).css("background-color", "#e0f0ff");
 			});
 			/* $(".navmenu-brand > img").css("src", "./resources/templete/assets/ico/favicon2.png"); */
-			$(".copyright-text").css("color", "#202020");
+			$("#memberMenu a, memberMenu, span").css("color", "#ffffff");
+			$(".copyright-text").css("color", "#ffffff");
 			
 			var title = $("#title");
 			title.html("世界の欲しい所にフォーカスしてみましょう。");
@@ -558,7 +568,7 @@
 				<br>
 				<div id="lmImage"></div>
 				<br>
-				<div style="font-size: 80%;font-style: italic;">イメージをクリックして今すぐ検索！</div>
+				<div style="font-size: 90%;font-style: italic;color: #337ab7">イメージをクリックして今すぐ検索！</div>
 			</div>
 		</div>
 	</div>
@@ -594,10 +604,16 @@
 				, url : "brandnew"
 				, success : function(resp) {
 					$("#lmTitle").html(name);
-					$("#lmLocation").html("緯度: " + resp["latitude"] + "<br>經度: " + resp["longitude"]);
+					$("#lmLocation").html("緯度：" + resp["latitude"] + "<br>經度：" + resp["longitude"]);
 					$("#lmSearch").off();
 					$("#lmImage > img").remove();
 					$("#lmImage").append("<img src='" + resp["url"] + "'>");
+					$("#lmImage").off();
+					$("#lmImage").hover(function() {
+						$("#lmImage").css("opacity", "0.8");	
+					}, function() {
+						$("#lmImage").css("opacity", "1");
+					});
 					$("#lmImage").on("click", function() {
 						clicksearch(name);
 					});

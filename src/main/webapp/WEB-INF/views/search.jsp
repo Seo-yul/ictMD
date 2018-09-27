@@ -33,7 +33,6 @@
 	<style>
 		.bar {
 			background-color: #337ab7;
-			z-index: 9998;
 		}
 		
 		button.navbar-toggle {
@@ -52,15 +51,19 @@
 		}
 		
 		#memberMenu, #memberMenu > a, #memberMenu > span {
+			font-weight: bold;
 			color: white;
-			font-size: 90%;
+			text-shadow: 1px 1px 4px #303030;
 			
 			text-align: center;
 			margin: 0 auto;
 		}
 		
 		.copyright-text {
-			color: #202020;
+			font-size: 110%;
+			font-weight: bold;
+			color: #ffffff;
+			text-shadow: 1px 1px 4px #303030;
 			
 			text-align: center;
 		}
@@ -82,9 +85,12 @@
 	}
 	
 	.preloader-1 {
-		margin: 100px auto 0;
-		width: 66px;
-		height: 12px;
+		position: absolute;
+		top: 300px;
+		left: 50%;
+		margin: 0 auto;
+		margin-left: -67px;
+		z-index: 100;
 	}
 	
 	div#loader {
@@ -99,14 +105,15 @@
 	}
 	
 	.preloader-1 .line {
-		width: 2px;
-		height: 22px;
+		width: 3px;
+		height: 30px;
 		background: #337ab7;
-		margin: 0 1px;
+		margin: 0 3px;
 		display: inline-block;
-		animation: opacity-1 1000ms infinite ease-in-out;
+		animation: opacity-2 1000ms infinite ease-in-out;
 	}
 	
+	.preloader-1 .line-0 { animation-delay: 1000ms; }
 	.preloader-1 .line-1 { animation-delay: 800ms; }
 	.preloader-1 .line-2 { animation-delay: 600ms; }
 	.preloader-1 .line-3 { animation-delay: 400ms; }
@@ -115,6 +122,7 @@
 	.preloader-1 .line-7 { animation-delay: 400ms; }
 	.preloader-1 .line-8 { animation-delay: 600ms; }
 	.preloader-1 .line-9 { animation-delay: 800ms; }
+	.preloader-1 .line-10 { animation-delay: 1000ms; }
 	
 	@keyframes opacity-1 { 
 	  0% { 
@@ -129,17 +137,17 @@
 	}
 	
 	@keyframes opacity-2 { 
-	  0% { 
+	  0% {
 	    opacity: 1;
-	    height: 15px;
+	    height: 30px;
 	  }
-	  50% { 
+	  50% {
 	    opacity: 0;
-	    height: 12px;
+	    height: 24px;
 	  }
 	  100% { 
 	    opacity: 1;
-	    height: 15px;
+	    height: 30px;
 	  }  
 	}
 	
@@ -200,8 +208,9 @@
 	</div>
 	<div id="dim"></div>
 	<!-- loading.. -->
-	<div id="loading" class="preloader-1" style="position:absolute;top:0px;left:50%;margin-left:-20px;z-index:100;">
-		<h2 style="text-align:center;color:#337ab7;margin-left:-33px;">LOADING</h2>
+	<div id="loading" class="preloader-1">
+		<h2 style="font-weight:bold;color:#337ab7;text-align:center;margin:0 auto;">LOADING</h2>
+		<span class="line line-0"></span>
 		<span class="line line-1"></span>
 		<span class="line line-2"></span>
 		<span class="line line-3"></span>
@@ -211,6 +220,7 @@
 		<span class="line line-7"></span>
 		<span class="line line-8"></span>
 		<span class="line line-9"></span>
+		<span class="line line-10"></span>
 	</div>
 	<div class="canvas gallery">
 	<br>
@@ -275,14 +285,6 @@
 		 }
 		$(()=>{
 			x();
-			$(".navmenu-nav > li > a").css("color", "#337ab7");
-			$(".navmenu-nav > li > a").css("background-color", "#e0f0ff");
-			$(".navmenu-nav > li > a").hover(function() {
-				$(this).css("background-color", "#ffffff");
-			}, function() {
-				$(this).css("color", "#337ab7");
-				$(this).css("background-color", "#e0f0ff");
-			});
 		});
 	</script>
 </body>

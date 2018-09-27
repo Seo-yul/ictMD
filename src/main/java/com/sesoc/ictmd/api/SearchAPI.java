@@ -122,7 +122,7 @@ public class SearchAPI {
 		initParam(tags);
 		PhotoList<Photo> l = null;
 		try {
-			l = i.search(p, 100, 10);
+			l = i.search(p, 250, 0);
 			for (Photo p : l) {
 				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl(), 0, 0, 0));
 			}

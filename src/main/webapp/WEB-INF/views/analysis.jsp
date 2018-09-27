@@ -33,7 +33,6 @@
 	<style>
 		.bar {
 			background-color: #337ab7;
-			z-index: 9998;
 		}
 		
 		button.navbar-toggle {
@@ -52,15 +51,19 @@
 		}
 		
 		#memberMenu, #memberMenu > a, #memberMenu > span {
+			font-weight: bold;
 			color: white;
-			font-size: 90%;
+			text-shadow: 1px 1px 4px #303030;
 			
 			text-align: center;
 			margin: 0 auto;
 		}
 		
 		.copyright-text {
-			color: #202020;
+			font-size: 110%;
+			font-weight: bold;
+			color: #ffffff;
+			text-shadow: 1px 1px 4px #303030;
 			
 			text-align: center;
 		}
@@ -121,13 +124,19 @@
 			
 			function wordCloudChart(data, divName, chartTitle){
 				var makeArr = [];
-					
-				$(data).each(function(index,item){
+				
+				for (var i = 0; i < 20; i++) {
+					makeArr.push({
+						name:data[i].dataName,
+						weight:parseFloat(data[i].dataNum)
+					});
+				}
+				/* $(data).each(function(index,item){
 					makeArr.push({
 						name:item.dataName,
 						weight:parseFloat(item.dataNum)
 					});
-				});
+				}); */
 				
 				
 				Highcharts.chart(divName, {
@@ -138,13 +147,17 @@
 				        point:{
 				              events:{
 				                  click: function (event) {
-				                      /* alert(this.name); */
+				                      $("#gosearch").attr("action","goClickSearch");
+				          			  $("#gosearch").attr("method","POST");
+				          			  $("#tags").attr("name","tags");
+				          			  $("#tags").val(this.name);
+				          			  $("#gosearch").submit();
 				                  }
 				              }
 				          }
 				    }],
 				    title: {
-				        text: chartTitle
+				        text: "<div style='font-size:140%;font-weight:bold;color:white;text-shadow:1px 1px 5px #337ab7'>" + chartTitle + "</div>"
 				    },
 				    /* subtitle: {
 				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
@@ -169,7 +182,7 @@
 				        type: 'pie'
 				    },
 				    title: {
-				        text: chartTitle
+				        text: "<div style='font-size:140%;font-weight:bold;color:white;text-shadow:1px 1px 5px #337ab7'>" + chartTitle + "</div>"
 				    },
 				    /* subtitle: {
 				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
@@ -329,6 +342,10 @@
 		</table>
 		
 	</div>
+	
+	<form id="gosearch">
+		<input type="hidden" id="tags">
+	</form>
 	
 	<!-- Bootstrap core JavaScript
 	   ================================================== -->
