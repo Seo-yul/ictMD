@@ -107,9 +107,9 @@
 }
 
 		#popup {
-			width: 512px;
+			width: 560px;
 			background-color: white;
-			opacity: 0.8;
+			opacity: 0.9;
 			border: solid 1px #ccc;
 			box-shadow: 0px 10px 20px #333;
 			
@@ -143,7 +143,19 @@
 		}
 		
 		#name {
+			font-weight: bold;
+			color: #337ab7;
+		}
 		
+		#moreDetail tr td {
+			font-family: sans-serif;
+			font-size: 120%;
+			color: #202020;
+			text-shadow:  3px 3px 5px rgba(32, 32, 32, 0.4);
+			padding-top: 3px;
+			padding-bottom: 3px;
+			padding-left: 1px;
+			padding-right: 1px;
 		}
 	</style>
 	
@@ -200,7 +212,7 @@
 				    }],
 				    title: {
 				    	y: 30,
-				    	text: "<div style='font-size:150%;font-weight:bold;color:white;text-shadow:1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;'>" + chartTitle + "</div>"
+				    	text: "<div style='font-size:150%;font-weight:bold;color:white;text-shadow:0px 0px 1px #202020, 0px 0px 6px #337ab7;'>" + chartTitle + "</div>"
 				    },
 				    subtitle: {
 				    	text: "<div style='font-size:110%;color:grey;'>クリックすると検索ページに移動します。</div>"
@@ -226,7 +238,7 @@
 				    },
 				    title: {
 				    	y: 30,
-				    	text: "<div style='font-size:150%;font-weight:bold;color:white;text-shadow:1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;'>" + chartTitle + "</div>"
+				    	text: "<div style='font-size:150%;font-weight:bold;color:white;text-shadow:0px 0px 1px #202020, 0px 0px 6px #337ab7;'>" + chartTitle + "</div>"
 				    },
 				    subtitle: {
 				    	text: "<div style='font-size:110%;color:grey;'>人々が閲覧した写真を分析した結果です。</div>"
@@ -285,11 +297,19 @@
 				                  			$("body").append("<div id='popup'></div>");
 				                  			var popup = $("#popup");
 				                  			popup.append("<div id='close'>X</div>");
-				                  			popup.append("<div id='frame'></div>");
+				                  			popup.append("<div id='frame' align='center'></div>");
 				                  			var frame = $("#frame");
 				                  			frame.append("<div id='title'>" + title + "</div>");
-				                  			for (var i in resp) {
-				                  				frame.append("<div>" + resp[i].name + ", " + resp[i].count + "</div>");
+				                  			frame.append("<table id='moreDetail'></table>");
+				                  			for (var i = 0; i < 10; i++) {
+				                  				if (resp[i] == null) {
+				                  					break;
+				                  				}
+				                  				if (i == 0) {
+				                  					$("#moreDetail").append("<tr><td align='left' style='font-size:200%;font-weight:bold;color:white;text-shadow:0px 0px 1px #202020, 0px 0px 6px #337ab7;'>" + resp[i].name + "</td><td width='10'></td><td align='right' style='font-size:200%;font-weight:bold;color:#337ab7;text-shadow:0px 0px 1px #202020, 0px 0px 6px #337ab7;'>" + resp[i].count + "</td></tr>");
+				                  					continue;
+				                  				}
+				                  				$("#moreDetail").append("<tr><td align='left'>" + resp[i].name + "</td><td width='20'></td><td align='right'>" + resp[i].count + "</td></tr>");
 				                  			}
 				                  			
 				                  			popup.css("top", Math.max(30, $(window).scrollTop() + 120) + "px");
