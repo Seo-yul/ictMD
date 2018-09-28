@@ -224,11 +224,11 @@
 						検索したいカメラ名やキーワードを入力してください。「 , 」を使って複数検索も出来ます。
 					</i>
 				</div>
-				<br>
 				
 				<div align="center">
 					<div id="modelInfo" align="center"></div>
 					<div id="searchResult" align="center" style="color:gray;"></div>
+					<br>
 					<div id="arrange" align="center"></div>
 					<div id="list"></div>
 				</div>

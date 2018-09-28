@@ -47,6 +47,7 @@
 
 .tags {
 	display: inline-block;
+	text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2);
 }
 
 #text{
@@ -81,6 +82,7 @@
 }
 
 #list img {
+	box-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2);
 	margin-top: 20px;
 	margin-left: 20px;
 }
@@ -88,8 +90,12 @@
 tr, td {
 	padding-left: 5px;
 	padding-right: 5px;
-	padding-top: 3px;
-	padding-bottom: 3px; 
+	padding-top: 4px;
+	padding-bottom: 4px; 
+}
+
+#exifCamera, #exifPicture {
+	box-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2);
 }
 
 #exifCamera tr, #exifCamera td, #exifPicture tr, #exifPicture td {
@@ -97,6 +103,46 @@ tr, td {
 }
 
 #timeasc, #timedesc, #bigger, #smaller {
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
+	margin-bottom: 20px;
+}
+
+#timeasc:hover, #timedesc:hover, #bigger:hover, #smaller:hover {
+	opacity: 0.5;
+}
+
+#timeasc:active, #timedesc:active, #bigger:active, #smaller:active {
+	opacity: 0;
+}
+
+#timeasc, #timedesc {
+	position: relative;
+	float: left;
+	left: 125px;
+	margin-left: 10px;
+}
+
+#bigger, #smaller {
+	position: relative;
+	float: right;
+	right: 105px;
+	margin-right: 10px;
+}
+
+#modelInfo {
+	margin-top: 40px;
+	margin-bottom: 90px;
+}
+
+#modelTitle {
+	font-size: 300%;
+	font-style: italic;
+	font-weight: bold;
+	color: white;
+	text-shadow: 0px 0px 1px #303030, 0px 0px 6px #337ab7;
+}
+
+#modelDetail {
+	color: rgba(48, 48, 48, 1);
 }

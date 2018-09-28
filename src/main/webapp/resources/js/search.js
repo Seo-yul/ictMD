@@ -25,7 +25,7 @@ var popup = function(resp) {
 		lf.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
 	});
 	if (photo["latitude"] !== 0) {
-		lf.append("<div class='detail'>▶緯度/經度：" + photo["latitude"] + " / " + photo["longitude"] + "</div>");
+		lf.append("<div class='detail'>▶緯度/經度：" + photo["latitude"] + " / " + photo["longitude"] + "</div><br>");
 	}
 	if (JSON.stringify(exif).length > 2) {
 		lf.append("<div class='detail'>▶メタデータ：</div><br>");
@@ -37,37 +37,37 @@ var popup = function(resp) {
 		var exifCamera = $("#exifCamera");
 		var item = exif["Make"];
 		if (item != null) {
-			exifCamera.append("<tr><td>製造業者</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td width='100' style='font-weight:bold;color:#337ab7;'>ブランド</td><td width='200'>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Model"];
 		if (item != null) {
-			exifCamera.append("<tr><td>モデル名</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td width='100' style='font-weight:bold;color:#337ab7;'>モデル</td><td width='200'>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Flash"];
 		if (item != null) {
-			exifCamera.append("<tr><td>フラッシュ</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td width='100' style='font-weight:bold;color:#337ab7;'>フラッシュ</td><td width='200'>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Exposure"];
 		if (item != null) {
-			exifCamera.append("<tr><td>露光</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td width='100' style='font-weight:bold;color:#337ab7;'>露光</td><td width='200'>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Aperture"];
 		if (item != null) {
-			exifCamera.append("<tr><td>絞り</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td width='100' style='font-weight:bold;color:#337ab7;'>絞り</td><td width='200'>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Focal Length"];
 		if (item != null) {
-			exifCamera.append("<tr><td>焦点距離</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td width='100' style='font-weight:bold;color:#337ab7;'>焦点距離</td><td width='200'>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Lens"];
 		if (item != null) {
-			exifCamera.append("<tr><td>レンズ</td><td>" + item + "</td></tr>");
+			exifCamera.append("<tr><td width='100' style='font-weight:bold;color:#337ab7;'>レンズ</td><td width='200'>" + item + "</td></tr>");
 			index++;
 		}
 		if (index == 0) {
@@ -80,27 +80,27 @@ var popup = function(resp) {
 		var exifPicture = $("#exifPicture");
 		item = exif["Date and Time (Original)"];
 		if (item != null) {
-			exifPicture.append("<tr><td>Date and Time (Original)</td><td>" + item + "</td></tr>");
+			exifPicture.append("<tr><td width='140' style='font-weight:bold;color:#337ab7;'>撮影日</td><td width='140'>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Image Width"];
 		if (item != null) {
-			exifPicture.append("<tr><td>Image Width</td><td>" + item + "</td></tr>");
+			exifPicture.append("<tr><td width='140' style='font-weight:bold;color:#337ab7;'>イメージ幅</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Image Height"];
 		if (item != null) {
-			exifPicture.append("<tr><td>Image Height</td><td>" + item + "</td></tr>");
+			exifPicture.append("<tr><td width='140' style='font-weight:bold;color:#337ab7;'>イメージ高さ</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Compression"];
 		if (item != null) {
-			exifPicture.append("<tr><td>Compression</td><td>" + item + "</td></tr>");
+			exifPicture.append("<tr><td width='140' style='font-weight:bold;color:#337ab7;'>コンプレッション</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		item = exif["Format"];
 		if (item != null) {
-			exifPicture.append("<tr><td>Format</td><td>" + item + "</td></tr>");
+			exifPicture.append("<tr><td width='140' style='font-weight:bold;color:#337ab7;'>フォーマット</td><td>" + item + "</td></tr>");
 			index++;
 		}
 		if (index == 0) {
@@ -190,40 +190,54 @@ var listup = function(resp) {
 	arr = new Array();
 	uarr = new Array();
 	
+	$("#modelInfo").hide();
 	$("#modelInfo >").remove();
 	var model = resp["model"];
-	if (model.length) {
+	if (model != null) {
+		$("#modelInfo").show();
 		for (var i in model) {
-			$("#modelInfo").append("<br><div><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
-			$("#modelInfo").append("<img src='" + model[i]["imgUrl"] + "'>");
-			$("#modelInfo").append("<div>" + model[i]["etc"] + "</div>");
-			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["type"] + "' disabled/>　");
-			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["pixel"] + "' disabled/>　");
-			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["cmos"] + "' disabled/>　");
-			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["sensor"] + "' disabled/>　");
-			if (model[i]["imageprocessor"] != null) {
-				$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["imageprocessor"] + "' disabled/>");
+			$("#modelInfo").append("<div id='modelTitle'>" + model[i]["maker"] + " " + model[i]["model"] + "</div>");
+			$("#modelInfo").append("<img src='" + model[i]["imgUrl"] + "' width='300px' height='300px'><br>");
+			/*$("#modelInfo").append("<div id='modelDetail'>" + model[i]["etc"] + "</div><br>");*/
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["type"] + "'/>　");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["pixel"] + "'/>　");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["cmos"] + "'/>　<br>");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["sensor"] + "'/>　");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["maxISO"] + "'/>　");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["shutterSpeed"] + "'/>　<br>");
+			if (model[i]["imageProcessor"] != null) {
+				$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["imageProcessor"] + "'/>　");
+			}
+			if (model[i]["viewFinder"] != null) {
+				$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["viewFinder"] + "'/>　");
+			}
+			
+			if (model[i]["af"] != null) {
+				$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["af"] + "'/>　");
+			}
+			if (model[i]["flash"] != null) {
+				$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["flash"] + "'/>　");
 			}
 		}
 	}
 	
 	var result = resp["list"];
 	$("#searchResult > ").remove();
-	$("#searchResult").append("<h2 style='font-size:15px;'>「<span style='color:#337ab7;font-weight: bold;'>"+ $("#text").val() + "</span>」の検索結果 : <span style='color:#337ab7;font-weight: bold;'>" + result.length + "</span>件の結果があります。</h2>");
+	$("#searchResult").append("<h2 style='font-size:140%;'>「<span style='color:#337ab7;font-weight: bold;'>"+ $("#text").val() + "</span>」の検索結果 : <span style='color:#337ab7;font-weight: bold;'>" + result.length + "</span>件の結果があります。</h2>");
 	
 	$("#arrange >").off();
 	$("#arrange >").remove();
-	$("#arrange").append("<img id='timeasc' src='./resources/img/button/button1.png'>");
+	$("#arrange").append("<img id='timeasc' src='./resources/img/button/button1.png'>　");
 	$("#timeasc").on("click", timeasc);
-	$("#arrange").append("<img id='timedesc' src='./resources/img/button/button2.png'>");
+	$("#arrange").append("<img id='timedesc' src='./resources/img/button/button2.png'>　");
 	$("#timedesc").on("click", timedesc);
-	$("#arrange").append("<img id='bigger' src='./resources/img/button/button3-1.png'>");
+	$("#arrange").append("<img id='bigger' src='./resources/img/button/button3-1.png'>　");
 	$("#bigger").on("click", function() {
 		status = 1;
 		$("#list > img").css("width", "300px");
 		$("#list > img").css("height", "300px");
 	});
-	$("#arrange").append("<img id='smaller' src='./resources/img/button/button4-1.png'>");
+	$("#arrange").append("<img id='smaller' src='./resources/img/button/button4-1.png'>　");
 	$("#smaller").on("click", function() {
 		status = 0;
 		$("#list > img").css("width", "150px");
