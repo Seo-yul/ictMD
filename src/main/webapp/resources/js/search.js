@@ -8,7 +8,7 @@ var popup = function(resp) {
 	var exif = resp["exif"];
 	$("body").append("<div id='layer'></div>");
 	var layer = $("#layer");
-	layer.css("top", Math.max(0, $(window).scrollTop() + 30) + "px");
+	layer.css("top", Math.max(30, $(window).scrollTop() + 30) + "px");
 	layer.append("<div id='close'>X</div>");
 	layer.append("<img id='pic' src='" + photo["url"] + "' align='center'><br>");
 	var pic = $("#pic");
@@ -25,8 +25,7 @@ var popup = function(resp) {
 		lf.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
 	});
 	if (photo["latitude"] !== 0) {
-		lf.append("<div class='detail'>▶緯度：" + photo["latitude"] + "</div><br>");
-		lf.append("<div class='detail'>▶經度：" + photo["longitude"] + "</div><br>");
+		lf.append("<div class='detail'>▶緯度/經度：" + photo["latitude"] + " / " + photo["longitude"] + "</div>");
 	}
 	if (JSON.stringify(exif).length > 2) {
 		lf.append("<div class='detail'>▶メタデータ：</div><br>");
@@ -108,11 +107,13 @@ var popup = function(resp) {
 			$("#picturediv").remove();
 		}
 	}
+	
 	$("#dim, #close").on("click", function() {
 		layer.remove();
 		$("#dim").off();
 		$("#dim").hide();
 	});
+	
 	$("#loading").hide();
 }
 
@@ -121,10 +122,10 @@ var detail = function(e) {
 	$("#dim").show();
 	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
 	$("#loading").show();
-	var num = e.target.getAttribute("alt");
+	
 	$.ajax({
 		  data : {
-			id : arr[num]
+			id : arr[e.target.getAttribute("alt")]
 		}
 		, method : "POST"
 		, url : "detail"
@@ -138,12 +139,13 @@ var timeasc = function() {
 	if (!$("#list >").length) {
 		return;
 	}
-	var list = $("#list");
-	list.off();
+	
 	$("#list >").remove();
+	var list = $("#list");
 	for (var i = 0; i < arr.length; i++) {
 		list.append("<img alt='" + i + "' class='result' src='" + uarr[i] + "'>");
 	}
+	
 	if (status == 0) {
 		$("#list > img").css("width", "150px");
 		$("#list > img").css("height", "150px");
@@ -151,6 +153,8 @@ var timeasc = function() {
 		$("#list > img").css("width", "300px");
 		$("#list > img").css("height", "300px");
 	}
+	
+	list.off();
 	list.on("click", "img", function(e) {
 		detail(e);
 	});
@@ -160,12 +164,13 @@ var timedesc = function() {
 	if (!$("#list >").length) {
 		return;
 	}
-	var list = $("#list");
-	list.off();
+	
 	$("#list >").remove();
+	var list = $("#list");
 	for (var i = arr.length; i > 0; i--) {
 		list.append("<img alt='" + (i - 1) + "' class='result' src='" + uarr[(i - 1)] + "'>");
 	}
+	
 	if (status == 0) {
 		$("#list > img").css("width", "150px");
 		$("#list > img").css("height", "150px");
@@ -173,6 +178,8 @@ var timedesc = function() {
 		$("#list > img").css("width", "300px");
 		$("#list > img").css("height", "300px");
 	}
+	
+	list.off();
 	list.on("click", "img", function(e) {
 		detail(e);
 	});
@@ -182,40 +189,49 @@ var timedesc = function() {
 var listup = function(resp) {
 	arr = new Array();
 	uarr = new Array();
-	var modelInfo = $("#modelInfo");
-	if (modelInfo.length) {
-		$("#modelInfo >").remove();
-	}
+	
+	$("#modelInfo >").remove();
 	var model = resp["model"];
 	if (model.length) {
 		for (var i in model) {
-			modelInfo.append("<br><div><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
-			modelInfo.append("<img src='" + model[i]["imgUrl"] + "'>");
-			modelInfo.append("<div style='color:black;'>" + JSON.stringify(model[i]) + "</div><br>");
+			$("#modelInfo").append("<br><div><h3 style='color:black; font-weight: bold;'>" + model[i]["maker"] + " " + model[i]["model"] + "</h3>");
+			$("#modelInfo").append("<img src='" + model[i]["imgUrl"] + "'>");
+			$("#modelInfo").append("<div>" + model[i]["etc"] + "</div>");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["type"] + "' disabled/>　");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["pixel"] + "' disabled/>　");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["cmos"] + "' disabled/>　");
+			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["sensor"] + "' disabled/>　");
+			if (model[i]["imageprocessor"] != null) {
+				$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["imageprocessor"] + "' disabled/>");
+			}
 		}
 	}
+	
 	var result = resp["list"];
 	$("#searchResult > ").remove();
 	$("#searchResult").append("<h2 style='font-size:15px;'>「<span style='color:#337ab7;font-weight: bold;'>"+ $("#text").val() + "</span>」の検索結果 : <span style='color:#337ab7;font-weight: bold;'>" + result.length + "</span>件の結果があります。</h2>");
+	
+	$("#arrange >").off();
 	$("#arrange >").remove();
-	$("#arrange").append("<input id='timeasc' type='button' value='最新順'>");
+	$("#arrange").append("<img id='timeasc' src='./resources/img/button/button1.png'>");
 	$("#timeasc").on("click", timeasc);
-	$("#arrange").append("<input id='timedesc' type='button' value='古い順'>");
+	$("#arrange").append("<img id='timedesc' src='./resources/img/button/button2.png'>");
 	$("#timedesc").on("click", timedesc);
-	$("#arrange").append("<input id='bigger' type='button' value='大きく'>");
+	$("#arrange").append("<img id='bigger' src='./resources/img/button/button3-1.png'>");
 	$("#bigger").on("click", function() {
 		status = 1;
 		$("#list > img").css("width", "300px");
 		$("#list > img").css("height", "300px");
 	});
-	$("#arrange").append("<input id='smaller' type='button' value='小さく'>");
+	$("#arrange").append("<img id='smaller' src='./resources/img/button/button4-1.png'>");
 	$("#smaller").on("click", function() {
 		status = 0;
 		$("#list > img").css("width", "150px");
 		$("#list > img").css("height", "150px");
 	});
-	var list = $("#list");
 	
+	$("#list >").remove();
+	var list = $("#list");
 	if (result.length) {
 		for (var i in result) {
 			arr[i] = result[i].id;
@@ -227,6 +243,7 @@ var listup = function(resp) {
 			detail(e);
 		});
 	}
+	
 	$("#loading").hide();
 	$("#dim").hide();
 }
@@ -236,6 +253,7 @@ var search = function() {
 	$("#dim").show();
 	$("#loading").css("top", Math.max(0, $(window).scrollTop() + 300) + "px");
 	$("#loading").show();
+	
 	var tagstr = $("#text").val().trim();
 	if (tagstr.length <= 0) {
 		$("#loading").hide();
@@ -255,7 +273,6 @@ var search = function() {
 		, method : "POST"
 		, url : "list"
 		, success : function(resp) {
-			$("#list > img").remove();
 			listup(resp);
 		}
 	});
@@ -267,7 +284,6 @@ var init = function() {
 	$(".navmenu-nav > li > a").hover(function() {
 		$(this).css("background-color", "#ffffff");
 	}, function() {
-		$(this).css("color", "#337ab7");
 		$(this).css("background-color", "#e0f0ff");
 	});
 }
@@ -275,12 +291,14 @@ var init = function() {
 // 1. 검색 이벤트를 본문에 걸어두는 부분.
 $(function() {
 	init();
+	
 	$("#searchButton").on("click", search);
 	$("#text").keydown(function(key) {
 		if (key.keyCode == 13) {
 			search();
 		}
 	});
+	
 	$("#loading").hide();
 	$("#dim").hide();
 });

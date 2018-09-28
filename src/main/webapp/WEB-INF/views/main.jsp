@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<title>メイン</title>
+	<title>ICT More Detail</title>
 	
 	<link rel="shortcut icon" href="./resources/templete/assets/ico/favicon.png">
 	<!-- Bootstrap core CSS -->

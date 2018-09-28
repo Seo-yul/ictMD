@@ -106,6 +106,45 @@
   z-index: -1;
 }
 
+		#popup {
+			width: 512px;
+			background-color: white;
+			opacity: 0.8;
+			border: solid 1px #ccc;
+			box-shadow: 0px 10px 20px #333;
+			
+			position: absolute;
+			top: 120px;
+			padding: 0;
+			margin: 0 auto;
+			margin-bottom: 30px;
+			text-align: center;
+			z-index: 9999;
+		}
+		
+		#close {
+			font-weight: bold;
+			color: #303030;
+			
+			position: relative;
+			top: -25px;
+			float: right;
+		}
+		
+		#frame {
+			padding: 0;
+			margin: 20px;
+		}
+		
+		#title {
+			font-size: 200%;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		
+		#name {
+		
+		}
 	</style>
 	
 	<script>
@@ -125,7 +164,10 @@
 			function wordCloudChart(data, divName, chartTitle){
 				var makeArr = [];
 				
-				for (var i = 0; i < 20; i++) {
+				for (var i = 0; i < 30; i++) {
+					if (data[i] == null) {
+						break;
+					}
 					makeArr.push({
 						name:data[i].dataName,
 						weight:parseFloat(data[i].dataNum)
@@ -140,28 +182,29 @@
 				
 				
 				Highcharts.chart(divName, {
-				    series: [{
+					series: [{
 				        type: 'wordcloud',
 				        data: makeArr,
 				        name: '検索件数',
-				        point:{
-				              events:{
-				                  click: function (event) {
-				                      $("#gosearch").attr("action","goClickSearch");
-				          			  $("#gosearch").attr("method","POST");
-				          			  $("#tags").attr("name","tags");
-				          			  $("#tags").val(this.name);
-				          			  $("#gosearch").submit();
-				                  }
-				              }
-				          }
+						point:{
+							events:{
+								click: function (event) {
+									$("#gosearch").attr("action","goClickSearch");
+									$("#gosearch").attr("method","POST");
+									$("#tags").attr("name","tags");
+									$("#tags").val(this.name);
+									$("#gosearch").submit();
+								}
+							}
+						}
 				    }],
 				    title: {
-				        text: "<div style='font-size:140%;font-weight:bold;color:white;text-shadow:1px 1px 5px #337ab7'>" + chartTitle + "</div>"
+				    	y: 30,
+				    	text: "<div style='font-size:150%;font-weight:bold;color:white;text-shadow:1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;'>" + chartTitle + "</div>"
 				    },
-				    /* subtitle: {
-				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
-				    } */
+				    subtitle: {
+				    	text: "<div style='font-size:110%;color:grey;'>クリックすると検索ページに移動します。</div>"
+				    }
 				});
 			}
 			
@@ -182,13 +225,14 @@
 				        type: 'pie'
 				    },
 				    title: {
-				        text: "<div style='font-size:140%;font-weight:bold;color:white;text-shadow:1px 1px 5px #337ab7'>" + chartTitle + "</div>"
+				    	y: 30,
+				    	text: "<div style='font-size:150%;font-weight:bold;color:white;text-shadow:1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;'>" + chartTitle + "</div>"
 				    },
-				    /* subtitle: {
-				    	text: "<각 요소 클릭시 해당키워드 검색페이지로 넘어갑니다.>"
-				    }, */
+				    subtitle: {
+				    	text: "<div style='font-size:110%;color:grey;'>人々が閲覧した写真を分析した結果です。</div>"
+				    },
 				    tooltip: {
-				        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				        pointFormat: '<div style="font-weight:bold;">{point.y} %</div>'
 				    },
 				    plotOptions: {
 				        pie: {
@@ -196,7 +240,7 @@
 				            cursor: 'pointer',
 				            dataLabels: {
 				                enabled: true,
-				                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+				                format: '{point.name}',
 				                style: {
 				                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 				                }
@@ -210,7 +254,52 @@
 				        point:{
 				              events:{
 				                  click: function (event) {
-				                      /* alert(this.name); */
+				                	  var word = this.name;
+				                      var url = "";
+				                      if (chartTitle == "トップ１０のブランド") {
+				                    	  url = "selectModelByMake";
+				                      } else if (chartTitle == "トップ１０のモデル") {
+				                    	  url = "selectElementsByModel";
+				                      } else {
+				                    	  return;
+				                      }
+				                      
+				                      $.ajax({
+										  data : {
+				                  			word : word
+				                  		}
+				                  		, method : "POST"
+				                  		, url : url
+				                  		, success : function(resp) {
+				                  			$("#popup").remove();
+				                  			var title = "";
+				                  			var direction = "";
+				                  			if (chartTitle == "トップ１０のブランド") {
+				                  				title = "「<span id='name'>" + word + "</span>」の中でのモデル順位";
+				                  				direction = "right";
+						                    } else if (chartTitle == "トップ１０のモデル") {
+						                    	title = "「<span id='name'>" + word + "</span>」で撮った対象順位";
+						                    	direction = "left";
+						                    }
+				                  			
+				                  			$("body").append("<div id='popup'></div>");
+				                  			var popup = $("#popup");
+				                  			popup.append("<div id='close'>X</div>");
+				                  			popup.append("<div id='frame'></div>");
+				                  			var frame = $("#frame");
+				                  			frame.append("<div id='title'>" + title + "</div>");
+				                  			for (var i in resp) {
+				                  				frame.append("<div>" + resp[i].name + ", " + resp[i].count + "</div>");
+				                  			}
+				                  			
+				                  			popup.css("top", Math.max(30, $(window).scrollTop() + 120) + "px");
+				                  			popup.css(direction, "20%");
+				                  			
+				                  			$("#close").on("click", function() {
+				                  				popup.remove();
+				                  			});
+				                  		}
+				                      });
 				                  }
 				              }
 				          }
@@ -224,13 +313,13 @@
 				success:function(data){
 					console.log("메이커데이터");
 					console.log(data);
-				basicDataChart(data, "BasicMake", "製造業者順位", "パーセンテージ");
+				basicDataChart(data, "BasicMake", "トップ１０のブランド", "パーセンテージ");
 					/* var makeTable = "<tr style='text-align:center'><th>브랜드명</th><th>검색횟수</th><th>검색률</th>";
 					$(data).each(function(index,item){
 						makeTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
 					}); */
 					
-					var makeTable = '<thead><tr><th>メーカー</th><th>検索回数</th><th>検索比率</th></tr></thead><tbody>';
+					var makeTable = '<thead><tr><th>ブランド</th><th>閲覧回数</th><th>閲覧比率</th></tr></thead><tbody>';
 					$(data).each(function(index,item){
 						makeTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
 					});
@@ -250,10 +339,10 @@
 				success:function(data){
 					console.log("모델데이터");
 					console.log(data);
-				basicDataChart(data, "BasicModel", "TOP10のカメラのモデル名", "パーセンテージ");
-					var modelTable = '<thead><tr><th>モデル</th><th>検索回数</th></tr></thead><tbody>';
+				basicDataChart(data, "BasicModel", "トップ１０のモデル", "パーセンテージ");
+					var modelTable = '<thead><tr><th>モデル</th><th>閲覧回数</th><th>閲覧比率</th></tr></thead><tbody>';
 					$(data).each(function(index,item){
-						modelTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td>";
+						modelTable += "<tr><td>"+item.dataName+"</td><td>"+item.dataNum+"</td><td>"+item.dataPercentage+"%</td>";
 					});
 					modelTable += '</tbody>';
 					$("#ModelAnalysis").html(modelTable);
@@ -269,7 +358,7 @@
 				type:"post",
 				success:function(data){
 					console.log(data);
-				wordCloudChart(data, "BasicTag", "TOP20の検索語");
+				wordCloudChart(data, "BasicTag", "トップ３０の検索語");
 				}
 			});
 		});
@@ -317,30 +406,30 @@
 	</div>
 	
 	<div class="canvas gallery">
+		<br>
 		<h1 class="blog-post-title text-center" style="color:#337ab7;text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2)">トレンド分析</h1>
 		<div style="margin:0 auto;width:180px;height:2px;background:linear-gradient(to right, rgba(255, 255, 255, 0), rgba(248, 222, 126, 1), rgba(255, 255, 255, 0))"></div>
-		<br>
+		<br><br><br>
 		<div id="BasicTag" style="width:80%; margin:auto"></div>
+		<br><br><br>
 		<table style="margin:auto;">
 			<tr>
 				<td>
-			<div id="BasicMake" style="display:inline;float:left;width:50%"></div>
+					<div id="BasicMake" style="display:inline;float:left;width:50%"></div>
 				</td>
 				<td>
-			<div id="BasicModel" style="display:inline;float:left;width:50%"></div>
+					<div id="BasicModel" style="display:inline;float:left;width:50%"></div>
 				</td>
 			</tr>
 			<tr>
-			<td>
-			<table class="dataTable" id = "MakeAnalysis" style="width:100%">
-			</table>
-			</td><td style="vertical-align:top;">
-			<table class="dataTable" id = "ModelAnalysis" style="width:100%">
-			</table>
-			</td>
+				<td>
+					<table class="dataTable" id = "MakeAnalysis" style="width:100%"></table>
+				</td>
+				<td style="vertical-align:top;">
+					<table class="dataTable" id = "ModelAnalysis" style="width:100%"></table>
+				</td>
 			<tr>
 		</table>
-		
 	</div>
 	
 	<form id="gosearch">

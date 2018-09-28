@@ -28,6 +28,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="BasicMakeChart" resultType="BasicTrendData">
+	<![CDATA[
+		select * from 
+			(
 		select
 			make as dataName,
 			count(make) as dataNum,
@@ -36,6 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where make is not null
 		group by make
 		order by dataNum desc
+		)
+        where rownum <= 10
+    ]]>
 	</select>
 	
 	<select id="BasicTagChart" resultType="BasicTrendData">

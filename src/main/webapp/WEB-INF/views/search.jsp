@@ -67,103 +67,79 @@
 			
 			text-align: center;
 		}
-	
-    #back {
-    	align:center;
-    /* 	background-image: url("./resources/img/searchImg/camera_black_center.jpg"); */
-    	background-size:100%;
-    	padding-bottom: 700px;
-    	margin-left : 100px;
-    	margin-right : 150px;
-    }
-    #bback{
-    	background-color : white;
-    }
-    
-    body {
- 		background: white;
-	}
-	
-	.preloader-1 {
-		position: absolute;
-		top: 300px;
-		left: 50%;
-		margin: 0 auto;
-		margin-left: -67px;
-		z-index: 100;
-	}
-	
-	div#loader {
-		color: #fff;
-		margin: 5px 0;
-		text-transform: uppercase;
-		text-align: center;
-		font-family: 'Arial', sans-serif;
-		font-size: 10px;
-		letter-spacing: 2px;
-		width: 100%;
-	}
-	
-	.preloader-1 .line {
-		width: 3px;
-		height: 30px;
-		background: #337ab7;
-		margin: 0 3px;
-		display: inline-block;
-		animation: opacity-2 1000ms infinite ease-in-out;
-	}
-	
-	.preloader-1 .line-0 { animation-delay: 1000ms; }
-	.preloader-1 .line-1 { animation-delay: 800ms; }
-	.preloader-1 .line-2 { animation-delay: 600ms; }
-	.preloader-1 .line-3 { animation-delay: 400ms; }
-	.preloader-1 .line-4 { animation-delay: 200ms; }
-	.preloader-1 .line-6 { animation-delay: 200ms; }
-	.preloader-1 .line-7 { animation-delay: 400ms; }
-	.preloader-1 .line-8 { animation-delay: 600ms; }
-	.preloader-1 .line-9 { animation-delay: 800ms; }
-	.preloader-1 .line-10 { animation-delay: 1000ms; }
-	
-	@keyframes opacity-1 { 
-	  0% { 
-	    opacity: 1;
-	  }
-	  50% { 
-	    opacity: 0;
-	  }
-	  100% { 
-	    opacity: 1;
-	  }  
-	}
-	
-	@keyframes opacity-2 { 
-	  0% {
-	    opacity: 1;
-	    height: 30px;
-	  }
-	  50% {
-	    opacity: 0;
-	    height: 24px;
-	  }
-	  100% { 
-	    opacity: 1;
-	    height: 30px;
-	  }  
-	}
-	
-	#waiting {
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		position: fixed;
-		display: block;
-		opacity: 0.8;
-		background: white;
-		z-index: 99;
-		text-align: center;
-	}
-    </style>
+
+		#back {
+			align:center;
+			/* background-image: url("./resources/img/searchImg/camera_black_center.jpg"); */
+			background-size:100%;
+			padding-bottom: 700px;
+			margin-left : 100px;
+			margin-right : 150px;
+		}
+		
+		#bback{
+			background-color : white;
+		}
+ 
+		body {
+			background: white;
+		}
+		
+		.preloader-1 {
+			position: absolute;
+			top: 300px;
+			left: 50%;
+			margin: 0 auto;
+			margin-left: -67px;
+			z-index: 100;
+		}
+		
+		div#loader {
+			color: #fff;
+			margin: 5px 0;
+			text-transform: uppercase;
+			text-align: center;
+			font-family: 'Arial', sans-serif;
+			font-size: 10px;
+			letter-spacing: 2px;
+			width: 100%;
+		}
+		
+		.preloader-1 .line {
+			width: 3px;
+			height: 30px;
+			background: #337ab7;
+			margin: 0 3px;
+			display: inline-block;
+			animation: opacity 1000ms infinite ease-in-out;
+		}
+		
+		.preloader-1 .line-0 { animation-delay: 1000ms; }
+		.preloader-1 .line-1 { animation-delay: 800ms; }
+		.preloader-1 .line-2 { animation-delay: 600ms; }
+		.preloader-1 .line-3 { animation-delay: 400ms; }
+		.preloader-1 .line-4 { animation-delay: 200ms; }
+		.preloader-1 .line-6 { animation-delay: 200ms; }
+		.preloader-1 .line-7 { animation-delay: 400ms; }
+		.preloader-1 .line-8 { animation-delay: 600ms; }
+		.preloader-1 .line-9 { animation-delay: 800ms; }
+		.preloader-1 .line-10 { animation-delay: 1000ms; }
+		
+		@keyframes opacity { 
+			0% {
+				opacity: 1;
+				height: 30px;
+			}
+			50% {
+				opacity: 0;
+				height: 24px;
+			}
+			100% { 
+				opacity: 1;
+				height: 30px;
+			}  
+		}
+	</style>
 </head>
 <body>
 	<input type="hidden" id="mtotag" value="${mtotag}">
@@ -206,6 +182,7 @@
 		<br>
 		<div class="copyright-text">©Copyright #ハンサム 2018</div>
 	</div>
+	
 	<div id="dim"></div>
 	<!-- loading.. -->
 	<div id="loading" class="preloader-1">
@@ -222,8 +199,9 @@
 		<span class="line line-9"></span>
 		<span class="line line-10"></span>
 	</div>
+	
 	<div class="canvas gallery">
-	<br>
+		<br>
 		<div id="bback">
 			<div id="back">
 				<h1 class="blog-post-title text-center" style="color:#337ab7;text-shadow: 3px 3px 5px rgba(32, 32, 32, 0.2)">イメージ検索</h1>

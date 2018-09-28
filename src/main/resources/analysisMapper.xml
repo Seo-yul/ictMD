@@ -55,4 +55,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			id = #{id}
 	</update>
+	
+	<select id="selectModelByMake" parameterType="String" resultType="CAD">
+		SELECT
+			model AS "name", COUNT(model) AS "count"
+		FROM
+			analysis
+		GROUP BY
+			model, make
+		HAVING
+			make = #{word}
+		ORDER BY
+			2 DESC
+	</select>
+	
+	<select id="selectElementsByModel" parameterType="String" resultType="CAD">
+		SELECT
+			elements AS "name", COUNT(elements) AS "count"
+		FROM
+			analysis
+		GROUP BY
+			elements, model
+		HAVING
+			model = #{word}
+		ORDER BY
+			2 DESC
+	</select>
+	
+	<select id="selectModelByElements" parameterType="String" resultType="CAD">
+		SELECT
+			model AS "name", COUNT(model) AS "count"
+		FROM
+			analysis
+		GROUP BY
+			model, elements
+		HAVING
+			elements = #{word}
+		ORDER BY
+			2 DESC
+	</select>
 </mapper>

@@ -18,23 +18,9 @@
 	/* IE7 & 8 */
 }
 
-.frame {
-	width: 150px;
-	height: 150px;
-	margin-left: 20px;
-	margin-bottom: 40px;
-	
-	display: inline-block;
-}
-
-/* .result {
-	width: 300px;
-	height: 300px;
-} */
-
 #layer {
 	position: absolute;
-	top: 260px;
+	top: 30px;
 	left: 50%;
 	z-index: 100;
 	
@@ -49,15 +35,14 @@
 }
 
 #close {
+	color: #303030;
+	font-weight: bold;
+	
 	position: absolute;
 	top: -25px;
 	right: 50%;
-	z-index: 100;
-	
 	margin-right: -512px;
-	
-	color: #303030;
-	font-weight: bold;
+	z-index: 100;
 }
 
 .tags {
@@ -107,7 +92,11 @@ tr, td {
 	padding-bottom: 3px; 
 }
 
-#exifCamera, #exifPicture {
-	border-color: skyblue;
-	border-width: 2px;
+#exifCamera tr, #exifCamera td, #exifPicture tr, #exifPicture td {
+	border: 2px solid skyblue;
+}
+
+#timeasc, #timedesc, #bigger, #smaller {
+	width: 40px;
+	height: 40px;
 }

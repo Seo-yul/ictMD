@@ -1,5 +1,6 @@
 package com.sesoc.ictmd;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sesoc.ictmd.Interface.AnalysisDAO;
 import com.sesoc.ictmd.Interface.TrendDAO;
 import com.sesoc.ictmd.Interface.UserDAO;
 import com.sesoc.ictmd.vo.BasicTrendData;
+import com.sesoc.ictmd.vo.ComplexAnalysisData;
 import com.sesoc.ictmd.vo.UserBase;
 import com.sesoc.ictmd.vo.UserDetail;
 
@@ -58,7 +61,30 @@ public class TrendController {
 		return BasicTagChart;
 	}
 	
+	@RequestMapping(value = "/selectModelByMake", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<ComplexAnalysisData> selectModelByMake(String word) {
+		ArrayList<ComplexAnalysisData> result = new ArrayList<>();
+		AnalysisDAO d = session.getMapper(AnalysisDAO.class);
+		result = d.selectModelByMake(word);
+		
+		return result;
+	}
 	
-
-
+	@RequestMapping(value = "/selectElementsByModel", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<ComplexAnalysisData> selectElementsByModel(String word) {
+		ArrayList<ComplexAnalysisData> result = new ArrayList<>();
+		AnalysisDAO d = session.getMapper(AnalysisDAO.class);
+		result = d.selectElementsByModel(word);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/selectModelByElements", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<ComplexAnalysisData> selectModelByElements(String word) {
+		ArrayList<ComplexAnalysisData> result = new ArrayList<>();
+		AnalysisDAO d = session.getMapper(AnalysisDAO.class);
+		result = d.selectModelByElements(word);
+		
+		return result;
+	}
 }
