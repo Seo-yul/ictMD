@@ -228,8 +228,7 @@
 				<div align="center">
 					<div id="modelInfo" align="center"></div>
 					<div id="searchResult" align="center" style="color:gray;"></div>
-					<br>
-					<div id="arrange" align="center"></div>
+					<div id="arrange" align="right"></div>
 					<div id="list"></div>
 				</div>
 				<div id="container" class="container">

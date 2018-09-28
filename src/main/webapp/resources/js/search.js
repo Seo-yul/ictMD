@@ -24,9 +24,9 @@ var popup = function(resp) {
 	$.each(photo["tags"], function(index, item) {
 		lf.append("<input id='taginput' class='form-control tags' value='#"+item+"'/>　");
 	});
-	if (photo["latitude"] !== 0) {
+	/*if (photo["latitude"] !== 0) {
 		lf.append("<div class='detail'>▶緯度/經度：" + photo["latitude"] + " / " + photo["longitude"] + "</div><br>");
-	}
+	}*/
 	if (JSON.stringify(exif).length > 2) {
 		lf.append("<div class='detail'>▶メタデータ：</div><br>");
 		lf.append("<div id='exifdiv' style='float:center;'></div>");
@@ -198,7 +198,6 @@ var listup = function(resp) {
 		for (var i in model) {
 			$("#modelInfo").append("<div id='modelTitle'>" + model[i]["maker"] + " " + model[i]["model"] + "</div>");
 			$("#modelInfo").append("<img src='" + model[i]["imgUrl"] + "' width='300px' height='300px'><br>");
-			/*$("#modelInfo").append("<div id='modelDetail'>" + model[i]["etc"] + "</div><br>");*/
 			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["type"] + "'/>　");
 			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["pixel"] + "'/>　");
 			$("#modelInfo").append("<input id='taginput' class='form-control tags' value='#" + model[i]["cmos"] + "'/>　<br>");

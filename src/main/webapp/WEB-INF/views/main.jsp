@@ -604,7 +604,7 @@
 				, url : "brandnew"
 				, success : function(resp) {
 					$("#lmTitle").html(name);
-					$("#lmLocation").html("緯度：" + resp["latitude"] + "<br>經度：" + resp["longitude"]);
+					// $("#lmLocation").html("緯度：" + resp["latitude"] + "<br>經度：" + resp["longitude"]);
 					$("#lmSearch").off();
 					$("#lmImage > img").remove();
 					$("#lmImage").append("<img src='" + resp["url"] + "'>");

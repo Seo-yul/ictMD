@@ -11,7 +11,7 @@ import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.Transport;
 import com.flickr4java.flickr.photos.Exif;
-import com.flickr4java.flickr.photos.GeoData;
+// import com.flickr4java.flickr.photos.GeoData;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photos.PhotoList;
 import com.flickr4java.flickr.photos.PhotosInterface;
@@ -92,7 +92,7 @@ public class SearchAPI {
 	private void initParam(String[] tags) {
 		p = new SearchParameters();
 		p.setExtras(e);
-		p.setHasGeo(true);
+		// p.setHasGeo(true);
 		p.setPrivacyFilter(1);
 		p.setSafeSearch("2");
 		p.setTags(tags);
@@ -107,8 +107,8 @@ public class SearchAPI {
 			l = i.search(p, 1, 0);
 			Photo p = l.get(0);
 			result.setUrl(p.getSquareLargeUrl());
-			result.setLatitude(p.getGeoData().getLatitude());
-			result.setLongitude(p.getGeoData().getLongitude());
+			// result.setLatitude(p.getGeoData().getLatitude());
+			// result.setLongitude(p.getGeoData().getLongitude());
 		} catch (FlickrException e) {
 			e.printStackTrace();
 			System.out.println("Unexpected error has been occured when initializing brandnew search result.");
@@ -122,7 +122,7 @@ public class SearchAPI {
 		initParam(tags);
 		PhotoList<Photo> l = null;
 		try {
-			l = i.search(p, 250, 0);
+			l = i.search(p, 100, 0);
 			for (Photo p : l) {
 				result.add(new SimplePhoto(p.getId(), p.getSquareLargeUrl(), 0, 0, 0));
 			}
@@ -154,9 +154,9 @@ public class SearchAPI {
 			result.setTags(l);
 			
 			// 위도 및 경도 정보를 초기화한다.
-			GeoData g = p.getGeoData();
+			/*GeoData g = p.getGeoData();
 			result.setLatitude(g.getLatitude());
-			result.setLongitude(g.getLongitude());
+			result.setLongitude(g.getLongitude());*/
 			
 			// 조회수 정보를 가져오거나 새로 입력한다.
 			/*AnalysisDAO d = s.getMapper(AnalysisDAO.class);
