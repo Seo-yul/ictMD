@@ -114,7 +114,7 @@
 			box-shadow: 0px 10px 20px #333;
 			
 			position: absolute;
-			top: 120px;
+			top: 150px;
 			padding: 0;
 			margin: 0 auto;
 			margin-bottom: 30px;
@@ -312,8 +312,8 @@
 				                  				$("#moreDetail").append("<tr><td align='left'>" + resp[i].name + "</td><td width='20'></td><td align='right'>" + resp[i].count + "</td></tr>");
 				                  			}
 				                  			
-				                  			popup.css("top", Math.max(30, $(window).scrollTop() + 120) + "px");
-				                  			popup.css(direction, "20%");
+				                  			popup.css("top", Math.max(30, $(window).scrollTop() + 150) + "px");
+				                  			popup.css(direction, "15%");
 				                  			
 				                  			$("#close").on("click", function() {
 				                  				popup.remove();

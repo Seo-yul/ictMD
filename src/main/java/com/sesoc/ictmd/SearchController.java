@@ -80,13 +80,10 @@ public class SearchController {
 		api = new SearchAPI();
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		// 분석 데이터로 쓰기 위해 검색어를 세션에 저장
-		
-		
 		// 검색 결과를 리턴 객체에 저장
 		result.put("list", api.search(tags));
 		
-		// 검색어가 카메라 모델명인지 검사
+		// 검색어가 카메라 모델명인지 검사 후 처리
 		HashMap<String, String[]> tagsMap = new HashMap<>();
 		tagsMap.put("tags", tags);
 		ModelDetailDAO mdDAO = session.getMapper(ModelDetailDAO.class);
@@ -102,6 +99,8 @@ public class SearchController {
 				}
 			}
 		}
+		
+		// 분석 데이터로 쓰기 위해 검색어를 세션에 저장
 		ss.removeAttribute("tags");
 		ss.setAttribute("tags", tags);
 

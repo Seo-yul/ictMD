@@ -95,12 +95,13 @@
 }
 
 #arrange {
-	padding-right: 90px;
+	padding-right: 30px;
 }
 
 #timeasc, #timedesc, #bigger, #smaller {
 	width: 25px;
 	height: 25px;
+	margin-right: 3px;
 }
 
 #timeasc:hover, #timedesc:hover, #bigger:hover, #smaller:hover {

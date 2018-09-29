@@ -36,7 +36,7 @@ public class SearchAPI {
 	private static final Set<String> e = new HashSet<>();
 	{
 		e.add("date_upload");
-		e.add("geo");
+		// e.add("geo");
 		e.add("tags");
 		e.add("url_sq");
 		e.add("url_l");
@@ -139,7 +139,6 @@ public class SearchAPI {
 		try {
 			// 사진 고유의 ID를 입력받아 사진 정보를 담은 객체를 가져온다.
 			Photo p = i.getInfo(id, sharedSecret);
-			System.out.println("Original URL of selected post: " + p.getUrl());
 			result.setId(id);
 			
 			// 사진 주소를 초기화한다.

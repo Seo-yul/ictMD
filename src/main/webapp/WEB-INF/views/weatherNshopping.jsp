@@ -473,7 +473,7 @@
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
                 <div class="fill" id = "weatherBg" style="background-image:url('https://33.media.tumblr.com/99d65792681f52fd0b3d8a48dd792213/tumblr_muvd3ytmBw1qztgoio1_500.gif');">
-	                <h2>天気検索</h2>
+	                <div style='font-size:200%;font-weight:bold;color:white;text-shadow:0px 0px 1px #202020, 0px 0px 11px #337ab7'>天気検索</div>
 					<input type="text" id="city" placeholder="都市を入力してください" />
 					<button id="searchWeather">検索</button>
 					<hr>
@@ -487,7 +487,7 @@
             <div class="item">
                 <!-- Set the second background image using inline CSS below. -->
                 <div class="fill" style="background-image:url('https://data.1freewallpapers.com/download/anne-hathaway-at-shopping.jpg');">
-	                <h2>ショッピング検索</h2>
+	                <div style='font-size:200%;font-weight:bold;color:white;text-shadow:0px 0px 1px #202020, 0px 0px 11px #337ab7'>ショッピング検索</div>
 					<input type="text" id="product" placeholder="Cameraモデルを入力"/>
 					<button id="searchProduct">検索</button>
 					<!-- 쇼핑검색결과 출력부분 -->

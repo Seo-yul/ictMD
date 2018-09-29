@@ -226,17 +226,17 @@ var listup = function(resp) {
 	
 	$("#arrange >").off();
 	$("#arrange >").remove();
-	$("#arrange").append("<img id='timeasc' src='./resources/img/button/button1.png'>　");
+	$("#arrange").append("<img id='timeasc' src='./resources/img/button/button1.png'>");
 	$("#timeasc").on("click", timeasc);
-	$("#arrange").append("<img id='timedesc' src='./resources/img/button/button2.png'>　");
+	$("#arrange").append("<img id='timedesc' src='./resources/img/button/button2.png'>");
 	$("#timedesc").on("click", timedesc);
-	$("#arrange").append("<img id='bigger' src='./resources/img/button/button3-1.png'>　");
+	$("#arrange").append("<img id='bigger' src='./resources/img/button/button3-1.png'>");
 	$("#bigger").on("click", function() {
 		status = 1;
 		$("#list > img").css("width", "300px");
 		$("#list > img").css("height", "300px");
 	});
-	$("#arrange").append("<img id='smaller' src='./resources/img/button/button4-1.png'>　");
+	$("#arrange").append("<img id='smaller' src='./resources/img/button/button4-1.png'>");
 	$("#smaller").on("click", function() {
 		status = 0;
 		$("#list > img").css("width", "150px");
